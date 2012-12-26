@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="robindecroon.homeviz.UsageActivity"
+            android:name="robindecroon.homeviz.usage.UsageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_usage"
             android:theme="@style/FullscreenTheme" >
