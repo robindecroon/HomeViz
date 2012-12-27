@@ -9,5 +9,10 @@
     <string name="keyword_hint">HINT</string>
     <string name="keyword_usage">USAGE</string>
     <string name="title_activity_usage">UsageActivity</string>
+    <string name="period_week">This Week</string>
+    <string name="period_month">This Month</string>
+    <string name="period_day">This Day</string>
+    <string name="period_year">This Year</string>
+    <string name="period_custom">Custom Time Period</string>
 
 </resources>

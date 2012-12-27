@@ -15,7 +15,7 @@ import android.widget.TextView;
  * 
  * @see SystemUiHider
  */
-public class HomeScreen extends Activity {
+public class HomeScreen extends FullScreenActivity {
 	
 	/**
 	 * Code om een usage activity aan te geven

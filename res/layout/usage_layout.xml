@@ -25,21 +25,31 @@
             android:layout_alignParentTop="true"
             android:gravity="center"
             android:keepScreenOn="true"
-            android:paddingTop="100dp"
-            android:textColor="#33b5e5"
-            android:textSize="50sp"
+            android:paddingTop="50dp"
+            android:textColor="@color/Black"
+            android:textSize="250sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/usage_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/usage_amount"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="63dp"
-            android:layout_marginLeft="31dp"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Black"
+            android:textSize="50sp" />
 
+        <TextView
+            android:id="@+id/usage_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/usage_location"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Black"
+            android:textSize="40sp" />
     </RelativeLayout>
 
 </FrameLayout>
