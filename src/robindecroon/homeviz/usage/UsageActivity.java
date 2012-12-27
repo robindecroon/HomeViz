@@ -1,17 +1,16 @@
 package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.R.id;
-import robindecroon.homeviz.R.layout;
 import robindecroon.homeviz.util.SystemUiHider;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -24,7 +23,7 @@ public class UsageActivity extends Activity {
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -113,12 +112,12 @@ public class UsageActivity extends Activity {
 				}
 			}
 		});
-
-		// Upon interacting with UI controls, delay any scheduled hide()
-		// operations to prevent the jarring behavior of controls going away
-		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(
-				mDelayHideTouchListener);
+		
+		final TextView usageAmount = (TextView) findViewById(R.id.usage_amount);
+		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
+		
+		usageAmount.setText("€37");
+		usageLocation.setText("Home");
 	}
 
 	@Override
@@ -129,6 +128,13 @@ public class UsageActivity extends Activity {
 		// created, to briefly hint to the user that UI controls
 		// are available.
 		delayedHide(100);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, 0, 0, "Settings");
+		return true;
 	}
 
 	/**

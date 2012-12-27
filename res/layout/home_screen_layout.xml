@@ -2,17 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/White"
     tools:context=".HomeScreen" >
-
-    <LinearLayout
-        android:id="@+id/fullscreen_content_controls"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black_overlay"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent" >
-    </LinearLayout>
 
     <GridLayout
         android:id="@+id/fullscreen_content"
@@ -20,7 +11,6 @@
         android:layout_height="match_parent"
         android:columnCount="2"
         android:gravity="center"
-        android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" >
 
