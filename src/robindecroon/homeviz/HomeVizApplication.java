@@ -3,6 +3,7 @@
  */
 package robindecroon.homeviz;
 
+import robindecroon.homeviz.util.Period;
 import android.app.Application;
 
 /**

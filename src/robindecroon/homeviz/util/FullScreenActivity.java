@@ -1,11 +1,12 @@
 /**
  * 
  */
-package robindecroon.homeviz;
+package robindecroon.homeviz.util;
 
 import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -129,6 +130,13 @@ public class FullScreenActivity extends Activity {
 		float x = event.getX(0) + event.getX(1);
 		float y = event.getY(0) + event.getY(1);
 		point.set(x / 2, y / 2);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
+		return true;
 	}
 
 }

@@ -1,12 +1,11 @@
 package robindecroon.homeviz.usage;
 
-import robindecroon.homeviz.FullScreenActivity;
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.Period;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.util.FullScreenActivity;
+import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.SystemUiHider;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.TextView;
 
 /**
@@ -31,14 +30,7 @@ public class UsageActivity extends FullScreenActivity {
 		usageLocation.setText("Home");
 		Period period = ((HomeVizApplication) getApplicationContext())
 				.getCurrentPeriod();
-		String periodText = period.getCurrentName(this);
+		String periodText = period.getName(this);
 		usagePeriod.setText(periodText);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		menu.add(0, 0, 0, "Settings");
-		return true;
 	}
 }
