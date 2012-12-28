@@ -1,29 +1,11 @@
 package robindecroon.homeviz;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.jar.Attributes;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.usage.UsageActivity;
-import robindecroon.homeviz.util.FullScreenActivity;
 import robindecroon.homeviz.util.SystemUiHider;
-import robindecroon.homeviz.xml.XMLHandler;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -35,7 +17,7 @@ import android.widget.Toast;
  * 
  * @see SystemUiHider
  */
-public class HomeScreen extends FullScreenActivity {
+public class HomeScreen extends Activity {
 
 	/**
 	 * Code om een usage activity aan te geven
@@ -58,7 +40,7 @@ public class HomeScreen extends FullScreenActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen_layout);
-
+		
 		// clicklistener aan usage
 		final TextView usage = (TextView) findViewById(R.id.keyword_usage);
 		usage.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +52,7 @@ public class HomeScreen extends FullScreenActivity {
 			}
 		});
 
-		final TextView you = (TextView) findViewById(R.id.keyword_usage);
+		final TextView you = (TextView) findViewById(R.id.keyword_you);
 		you.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -101,49 +83,7 @@ public class HomeScreen extends FullScreenActivity {
 		}
 
 		if (requestCode == PICKFILE_RESULT_CODE) {
-			parseXML(data.getData());
-		}
-	}
-
-	/**
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	public static void parseXML(Uri uri) {
-		XMLHandler handler = null;
-		try {
-			SAXParserFactory factory = SAXParserFactory.newInstance();
-			SAXParser saxParser = factory.newSAXParser();
-
-			handler = new XMLHandler();
-			
-			File file = new File(uri.getPath());
-
-			saxParser.parse(file, handler);
-		} catch (ParserConfigurationException e) {
-//			Log.e("ParseXML", e.getMessage());
-			e.printStackTrace();
-		} catch (SAXException e) {
-//			Log.e("ParseXML", e.getMessage());
-			e.printStackTrace();
-
-		} catch (IOException e) {
-//			Log.e("ParseXML", e.getMessage());
-			e.printStackTrace();
-
-		} catch (Exception e) {
-//			Log.e("ParseXML", e.getMessage());
-			e.printStackTrace();
-		}
-
-		try {
-			List<Room> rooms = handler.getRooms();
-			for (Room room : rooms) {
-				System.out.println(room.getName());
-			}
-		} catch (Exception e) {
-			
+			((HomeVizApplication) getApplication()).parseXML(data.getData().getPath());
 		}
 	}
 }

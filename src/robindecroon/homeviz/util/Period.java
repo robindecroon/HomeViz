@@ -5,6 +5,7 @@ package robindecroon.homeviz.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.R.string;
@@ -21,7 +22,7 @@ public enum Period {
 	DAY(R.string.period_day) {
 		@Override
 		public Period previous() {
-			return null;
+			return this;
 		}
 
 		@Override
@@ -34,6 +35,11 @@ public enum Period {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.DAY_OF_MONTH, -1);
 			return calendar;
+		}
+
+		@Override
+		public int getMultiplier() {
+			return 1;
 		}
 	},
 	WEEK( R.string.period_week) {
@@ -53,6 +59,11 @@ public enum Period {
 			calendar.add(Calendar.WEEK_OF_MONTH, -1);
 			return calendar;
 		}
+
+		@Override
+		public int getMultiplier() {
+			return 7;
+		}
 	},
 	MONTH( R.string.period_month) {
 		@Override
@@ -71,6 +82,11 @@ public enum Period {
 			calendar.add(Calendar.MONTH, -1);
 			return calendar;
 		}
+
+		@Override
+		public int getMultiplier() {
+			return 30;
+		}
 	},
 	YEAR( R.string.period_year) {
 		@Override
@@ -80,7 +96,7 @@ public enum Period {
 
 		@Override
 		public Period next() {
-			return null;
+			return this;
 		}
 
 		@Override
@@ -88,6 +104,11 @@ public enum Period {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.YEAR, -1);
 			return calendar;
+		}
+
+		@Override
+		public int getMultiplier() {
+			return 365;
 		}
 	},
 	CUSTOM(R.string.period_custom) {
@@ -100,6 +121,11 @@ public enum Period {
 		@Override
 		public Period next() {
 			return WEEK;
+		}
+
+		@Override
+		public int getMultiplier() {
+			return (int)(Math.random() * (366));
 		}
 	};
 
@@ -147,5 +173,7 @@ public enum Period {
 	public GregorianCalendar end() {
 		return end;
 	}
+	
+	public abstract int getMultiplier();
 
 }

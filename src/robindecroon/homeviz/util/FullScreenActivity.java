@@ -3,6 +3,8 @@
  */
 package robindecroon.homeviz.util;
 
+import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.room.Room;
 import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -15,7 +17,11 @@ import android.view.View.OnTouchListener;
  * @author Robin
  * 
  */
-public class FullScreenActivity extends Activity {
+public abstract class FullScreenActivity extends Activity implements
+		ZoomListener, SwypeListener {
+
+	protected Room currentRoom;
+	protected Period currentPeriod;
 
 	/**
 	 * 
@@ -28,6 +34,10 @@ public class FullScreenActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		currentRoom = ((HomeVizApplication) getApplication()).getCurrentRoom();
+		currentPeriod = ((HomeVizApplication) getApplication())
+				.getCurrentPeriod();
+
 		getActionBar().hide();
 		View rootView = getWindow().getDecorView();
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
@@ -38,7 +48,7 @@ public class FullScreenActivity extends Activity {
 			double oldDist = 1d;
 
 			final static int NONE = 0;
-			final static int DRAG = 1;
+			final static int SWYPE = 1;
 			final static int ZOOM = 2;
 			final static int CLICK = 3;
 			int mode = NONE;
@@ -53,7 +63,7 @@ public class FullScreenActivity extends Activity {
 
 				switch (event.getAction() & MotionEvent.ACTION_MASK) {
 				case MotionEvent.ACTION_DOWN:
-					mode = DRAG;
+					mode = SWYPE;
 					start.set(event.getX(), event.getY());
 					break;
 				case MotionEvent.ACTION_POINTER_DOWN:
@@ -64,22 +74,44 @@ public class FullScreenActivity extends Activity {
 					}
 					break;
 				case MotionEvent.ACTION_UP:
-					int xDiff = (int) Math.abs(event.getX() - start.x);
-					int yDiff = (int) Math.abs(event.getY() - start.y);
-					if (xDiff < 8 && yDiff < 8 && mode != ZOOM) {
+					int xDiff = (int) (start.x - event.getX());
+					int yDiff = (int) (start.y - event.getY());
+					if ((int) Math.abs(xDiff) < 8 && (int) Math.abs(yDiff) < 8
+							&& mode != ZOOM) {
 						mode = CLICK;
+					}
+
+					if (mode == SWYPE) {
+						if (xDiff < -80) {
+							onSwypeToLeft();
+							break;
+						} else if (xDiff > 80) {
+							onSwypeToRight();
+							break;
+						}
+						if (yDiff < -80) {
+							onSwypeToUp();
+							break;
+						} else if (yDiff > 80) {
+							onSwypeToDown();
+							break;
+						}
 					}
 					break;
 				case MotionEvent.ACTION_POINTER_UP:
 					mode = NONE;
-					if(lastScale > initialScale) {
-						System.out.println("Zoomed out");
+					if (lastScale > initialScale) {
+						currentPeriod = currentPeriod.next();
+						onZoomOut();
 					} else {
-						System.out.println("Zoomed in");
+						currentPeriod = currentPeriod.previous();
+						onZoomIn();
 					}
+					((HomeVizApplication) getApplication())
+							.setCurrentPeriod(currentPeriod);
 					break;
 				case MotionEvent.ACTION_MOVE:
-					if (mode == DRAG) {
+					if (mode == NONE) {
 						// Drag?
 					} else if (mode == ZOOM) {
 						double newDist = spacing(event);
@@ -104,7 +136,6 @@ public class FullScreenActivity extends Activity {
 						getActionBar().show();
 						rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 						actionBarShown = true;
-
 					}
 					break;
 
@@ -131,12 +162,11 @@ public class FullScreenActivity extends Activity {
 		float y = event.getY(0) + event.getY(1);
 		point.set(x / 2, y / 2);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
 		return true;
 	}
-
 }

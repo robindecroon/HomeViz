@@ -14,5 +14,6 @@
     <string name="period_year">This Year</string>
     <string name="period_custom">Custom Time Period</string>
     <string name="toast_no_file_manager">No File (Manager / Explorer)etc Found In Your Device</string>
+    <string name="toast_wrong_file">Please load the correct file!</string>
 
 </resources>
