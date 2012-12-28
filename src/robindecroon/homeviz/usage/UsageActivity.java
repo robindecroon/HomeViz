@@ -16,15 +16,15 @@ import android.widget.TextView;
  * @see SystemUiHider
  */
 public class UsageActivity extends FullScreenActivity {
-		
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
-		
+
 		setTotalAmount();
 		setPeriod();
-		
+
 		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
 		usageLocation.setText(currentRoom.getName());
 	}
@@ -33,7 +33,7 @@ public class UsageActivity extends FullScreenActivity {
 		final TextView usageAmount = (TextView) findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 	}
-	
+
 	private void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
 		usagePeriod.setText(currentPeriod.getName(this));
@@ -44,8 +44,8 @@ public class UsageActivity extends FullScreenActivity {
 		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
 		Intent intent = new Intent(this, UsageActivity.class);
 		startActivity(intent);
-		overridePendingTransition(R.anim.left_enter,R.anim.left_leave);
-		finish();		
+		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
+		finish();
 	}
 
 	@Override
@@ -53,14 +53,14 @@ public class UsageActivity extends FullScreenActivity {
 		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
 		Intent intent = new Intent(this, UsageActivity.class);
 		startActivity(intent);
-		overridePendingTransition(R.anim.right_enter ,R.anim.right_leave);
+		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
 		finish();
 	}
 
 	@Override
 	public void onSwypeToUp() {
 		System.out.println("Swypt up");
-		
+
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class UsageActivity extends FullScreenActivity {
 	public void onZoomOut() {
 		zoomEvent();
 	}
-	
+
 	private void zoomEvent() {
 		setTotalAmount();
 		setPeriod();

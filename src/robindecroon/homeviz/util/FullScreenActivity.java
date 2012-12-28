@@ -19,38 +19,36 @@ import android.view.View.OnTouchListener;
  */
 public abstract class FullScreenActivity extends Activity implements
 		ZoomListener, SwypeListener {
+	
+	private final static int NONE = 0;
+	private final static int SWYPE = 1;
+	private final static int ZOOM = 2;
+	private final static int CLICK = 3;
 
 	protected Room currentRoom;
 	protected Period currentPeriod;
-
-	/**
-	 * 
-	 */
-	public FullScreenActivity() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// Haal de variabelen uit de applicatie op
 		currentRoom = ((HomeVizApplication) getApplication()).getCurrentRoom();
 		currentPeriod = ((HomeVizApplication) getApplication())
 				.getCurrentPeriod();
 
+		// Volledig scherm
 		getActionBar().hide();
 		View rootView = getWindow().getDecorView();
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		
+		// Touch Listener
 		rootView.setOnTouchListener(new OnTouchListener() {
 
 			PointF start = new PointF();
 			PointF mid = new PointF();
 			double oldDist = 1d;
 
-			final static int NONE = 0;
-			final static int SWYPE = 1;
-			final static int ZOOM = 2;
-			final static int CLICK = 3;
 			int mode = NONE;
 
 			double initialScale = 0;
@@ -111,9 +109,7 @@ public abstract class FullScreenActivity extends Activity implements
 							.setCurrentPeriod(currentPeriod);
 					break;
 				case MotionEvent.ACTION_MOVE:
-					if (mode == NONE) {
-						// Drag?
-					} else if (mode == ZOOM) {
+					if (mode == ZOOM) {
 						double newDist = spacing(event);
 						if (newDist > 200f) {
 							double scale = newDist / oldDist;
@@ -127,16 +123,7 @@ public abstract class FullScreenActivity extends Activity implements
 				}
 				switch (mode) {
 				case CLICK:
-					View rootView = getWindow().getDecorView();
-					if (actionBarShown) {
-						getActionBar().hide();
-						rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-						actionBarShown = false;
-					} else {
-						getActionBar().show();
-						rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-						actionBarShown = true;
-					}
+					togllActionBar();
 					break;
 
 				default:
@@ -144,23 +131,36 @@ public abstract class FullScreenActivity extends Activity implements
 				}
 				return true;
 			}
+
+			private void togllActionBar() {
+				View rootView = getWindow().getDecorView();
+				if (actionBarShown) {
+					getActionBar().hide();
+					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+					actionBarShown = false;
+				} else {
+					getActionBar().show();
+					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+					actionBarShown = true;
+				}
+			}
+			
+			/** Determine the space between the first two fingers */
+			private double spacing(MotionEvent event) {
+				// ...
+				double x = event.getX(0) - event.getX(1);
+				double y = event.getY(0) - event.getY(1);
+				return Math.sqrt(x * x + y * y);
+			}
+
+			/** Calculate the mid point of the first two fingers */
+			private void midPoint(PointF point, MotionEvent event) {
+				// ...
+				float x = event.getX(0) + event.getX(1);
+				float y = event.getY(0) + event.getY(1);
+				point.set(x / 2, y / 2);
+			}
 		});
-	}
-
-	/** Determine the space between the first two fingers */
-	private double spacing(MotionEvent event) {
-		// ...
-		double x = event.getX(0) - event.getX(1);
-		double y = event.getY(0) - event.getY(1);
-		return Math.sqrt(x * x + y * y);
-	}
-
-	/** Calculate the mid point of the first two fingers */
-	private void midPoint(PointF point, MotionEvent event) {
-		// ...
-		float x = event.getX(0) + event.getX(1);
-		float y = event.getY(0) + event.getY(1);
-		point.set(x / 2, y / 2);
 	}
 
 	@Override
