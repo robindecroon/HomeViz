@@ -13,5 +13,6 @@
     <string name="period_day">This Day</string>
     <string name="period_year">This Year</string>
     <string name="period_custom">Custom Time Period</string>
+    <string name="toast_no_file_manager">No File (Manager / Explorer)etc Found In Your Device</string>
 
 </resources>
