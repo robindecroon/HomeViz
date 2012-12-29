@@ -21,6 +21,23 @@ public class UsageActivity extends FullScreenActivity {
 		setContentView(R.layout.usage_layout);
 
 		refreshElements();
+		
+		setAmounts();
+	}
+
+	private void setAmounts() {
+		final TextView light = (TextView) findViewById(R.id.usage_light_price);
+		light.setText(currentRoom.getLight(currentPeriod).toString());
+		final TextView water = (TextView) findViewById(R.id.usage_water_price);
+		water.setText(currentRoom.getWater(currentPeriod).toString());
+		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
+		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+		final TextView appl = (TextView) findViewById(R.id.usage_appliances_price);
+		appl.setText(currentRoom.getAppliances(currentPeriod).toString());
+		final TextView tv = (TextView) findViewById(R.id.usage_tv_price);
+		tv.setText(currentRoom.getTv(currentPeriod).toString());
+		setTotalAmount();
+		
 	}
 
 	private void setTotalAmount() {
@@ -67,7 +84,7 @@ public class UsageActivity extends FullScreenActivity {
 	@Override
 	public void refreshElements() {
 		super.refreshElements();
-		setTotalAmount();
+		setAmounts();
 	}
 
 	@Override

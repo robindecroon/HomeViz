@@ -40,44 +40,117 @@
         android:textColor="@color/Black"
         android:textSize="40sp" />
 
-    <ImageView
-        android:id="@+id/ImageView01"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
-        android:src="@drawable/water_icon" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usage_amount"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/ImageView02"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:layout_alignTop="@+id/ImageView01"
-        android:layout_toRightOf="@+id/ImageView01"
-        android:src="@drawable/heating_icon" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/ImageView03"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:layout_alignTop="@+id/ImageView02"
-        android:layout_toRightOf="@+id/ImageView02"
-        android:src="@drawable/appliances_icon" />
+            <ImageView
+                android:id="@+id/lightView"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:src="@drawable/light_icon" />
 
-    <ImageView
-        android:id="@+id/ImageView04"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:layout_alignTop="@+id/ImageView03"
-        android:layout_toRightOf="@+id/ImageView03"
-        android:src="@drawable/tv_icon" />
+            <TextView
+                android:id="@+id/usage_light_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€30"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/light_icon" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/waterView"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:src="@drawable/water_icon" />
+
+            <TextView
+                android:id="@+id/usage_water_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€30"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/heatingView"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:src="@drawable/heating_icon" />
+
+            <TextView
+                android:id="@+id/usage_heating_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€30"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/appliancesView"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:src="@drawable/appliances_icon" />
+
+            <TextView
+                android:id="@+id/usage_appliances_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€30"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/tvView"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:src="@drawable/tv_icon" />
+
+            <TextView
+                android:id="@+id/usage_tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€30"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
