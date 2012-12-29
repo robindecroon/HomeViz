@@ -22,6 +22,7 @@ public enum Period {
 	DAY(R.string.period_day) {
 		@Override
 		public Period previous() {
+			ToastMessages.noSmallerPeriod();
 			return this;
 		}
 
@@ -96,6 +97,7 @@ public enum Period {
 
 		@Override
 		public Period next() {
+			ToastMessages.noLargerPeriod();
 			return this;
 		}
 

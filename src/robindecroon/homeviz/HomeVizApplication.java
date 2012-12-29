@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.XMLHandler;
 import android.app.Application;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class HomeVizApplication extends Application {
 	 * Laad automatisch de XML in.
 	 */
 	public HomeVizApplication() {
+		ToastMessages.setContext(this);
 		parseXML("/storage/extSdCard/rooms.xml");
 	}
 
@@ -109,11 +111,7 @@ public class HomeVizApplication extends Application {
 
 			saxParser.parse(file, handler);
 		} catch (Exception e) {
-			Toast.makeText(
-					getApplicationContext(),
-					getResources().getString(
-							R.string.toast_wrong_file),
-					Toast.LENGTH_LONG).show();
+			ToastMessages.xmlError();
 			Log.e("ParseXML", e.getMessage());
 		}
 		setRooms(handler.getRooms());

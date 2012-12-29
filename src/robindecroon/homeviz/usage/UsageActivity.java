@@ -3,7 +3,6 @@ package robindecroon.homeviz.usage;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.FullScreenActivity;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.SystemUiHider;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,19 +21,16 @@ public class UsageActivity extends FullScreenActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
 
-		setTotalAmount();
-		setPeriod();
-
-		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
-		usageLocation.setText(currentRoom.getName());
+		refreshElements();
 	}
 
 	private void setTotalAmount() {
 		final TextView usageAmount = (TextView) findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 	}
-
-	private void setPeriod() {
+	
+	@Override
+	public void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
 		usagePeriod.setText(currentPeriod.getName(this));
 	}
@@ -60,26 +56,24 @@ public class UsageActivity extends FullScreenActivity {
 	@Override
 	public void onSwypeToUp() {
 		System.out.println("Swypt up");
-
 	}
 
 	@Override
 	public void onSwypeToDown() {
-		System.out.println("Swypt down");
+		Intent intent = new Intent(this, UsageDetailActivity.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
 	}
 
 	@Override
-	public void onZoomIn() {
-		zoomEvent();
-	}
-
-	@Override
-	public void onZoomOut() {
-		zoomEvent();
-	}
-
-	private void zoomEvent() {
+	public void refreshElements() {
+		super.refreshElements();
 		setTotalAmount();
-		setPeriod();
+	}
+
+	@Override
+	protected void setLocation() {
+		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
+		usageLocation.setText(currentRoom.getName());	
 	}
 }

@@ -15,5 +15,12 @@
     <string name="period_custom">Custom Time Period</string>
     <string name="toast_no_file_manager">No File (Manager / Explorer)etc Found In Your Device</string>
     <string name="toast_wrong_file">Please load the correct file!</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_usaged_d">UsagedDActivity</string>
+    <string name="title_activity_usage_detail">UsageDetailActivity</string>
+    <string name="toast_no_more_detail">No more detail possible!</string>
+    <string name="toast_no_smaller_period">No smaller period possible!</string>
+    <string name="toast_no_larger_period">No larger period possible!</string>
 
 </resources>

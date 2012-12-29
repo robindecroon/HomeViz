@@ -2,6 +2,7 @@ package robindecroon.homeviz;
 
 import robindecroon.homeviz.usage.UsageActivity;
 import robindecroon.homeviz.util.SystemUiHider;
+import robindecroon.homeviz.util.ToastMessages;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -62,11 +63,7 @@ public class HomeScreen extends Activity {
 					intent.setType("file/");
 					startActivityForResult(intent, PICKFILE_RESULT_CODE);
 				} catch (ActivityNotFoundException exp) {
-					Toast.makeText(
-							getApplicationContext(),
-							getResources().getString(
-									R.string.toast_no_file_manager),
-							Toast.LENGTH_LONG).show();
+					ToastMessages.noFileManager();
 					Log.e("HomeScreen", "No filemanger installed!");
 				}
 			}

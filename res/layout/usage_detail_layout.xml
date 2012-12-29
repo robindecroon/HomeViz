@@ -4,23 +4,10 @@
     android:layout_height="match_parent"
     android:background="@color/White"
     android:orientation="vertical"
-    tools:context=".UsageActivity" >
+    tools:context=".UsageDetailActivity" >
 
     <TextView
-        android:id="@+id/usage_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:paddingTop="50dp"
-        android:textColor="@color/Black"
-        android:textSize="150sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/usage_location"
+        android:id="@+id/usage_detail_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -31,11 +18,11 @@
         android:textSize="50sp" />
 
     <TextView
-        android:id="@+id/usage_period"
+        android:id="@+id/usage_detail_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/usage_location"
+        android:layout_below="@id/usage_detail_location"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/Black"
         android:textSize="40sp" />

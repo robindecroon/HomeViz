@@ -169,4 +169,22 @@ public abstract class FullScreenActivity extends Activity implements
 		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
 		return true;
 	}
+	
+	protected abstract void setPeriod();
+	protected abstract void setLocation();
+	
+	@Override
+	public void onZoomIn() {
+		refreshElements();
+	}
+
+	@Override
+	public void onZoomOut() {
+		refreshElements();
+	}
+	
+	public void refreshElements() {
+		setPeriod();
+		setLocation();
+	}
 }
