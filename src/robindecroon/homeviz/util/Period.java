@@ -5,10 +5,7 @@ package robindecroon.homeviz.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Random;
-
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.R.string;
 import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 
 import android.content.Context;

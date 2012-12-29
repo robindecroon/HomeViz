@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="robindecroon.homeviz"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="robindecroon.homeviz"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -28,12 +29,18 @@
             android:name="robindecroon.homeviz.usage.UsageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_usage"
-            android:theme="@style/FullscreenTheme" android:parentActivityName="robindecroon.homeviz.HomeScreen">
+            android:parentActivityName="robindecroon.homeviz.HomeScreen"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.HomeScreen" />
         </activity>
         <activity
             android:name=".usage.UsageDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_usage_detail"
-            android:parentActivityName="robindecroon.homeviz.usage.UsageActivity" >
+            android:parentActivityName="robindecroon.homeviz.usage.UsageActivity"
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.usage.UsageActivity" />

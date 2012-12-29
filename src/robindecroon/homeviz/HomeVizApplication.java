@@ -19,7 +19,6 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.XMLHandler;
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Eigen applicatieklasse om variabelen bij te houden.

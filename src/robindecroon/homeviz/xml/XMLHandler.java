@@ -31,6 +31,7 @@ public class XMLHandler extends DefaultHandler{
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
 	 */
+	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
 		tempVal = "";
@@ -42,6 +43,7 @@ public class XMLHandler extends DefaultHandler{
 	/**
 	 * Lees de waarde tussen tags uit.
 	 */
+	@Override
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
 		tempVal = new String(ch, start, length);
@@ -50,6 +52,7 @@ public class XMLHandler extends DefaultHandler{
 	/**
 	 * Wordt opgeroepen bij het einde van een element.
 	 */
+	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
 		if (qName.equalsIgnoreCase("Room")) {

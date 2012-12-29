@@ -1,7 +1,6 @@
 package robindecroon.homeviz;
 
 import robindecroon.homeviz.usage.UsageActivity;
-import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

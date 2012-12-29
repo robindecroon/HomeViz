@@ -74,7 +74,7 @@ public abstract class FullScreenActivity extends Activity implements
 				case MotionEvent.ACTION_UP:
 					int xDiff = (int) (start.x - event.getX());
 					int yDiff = (int) (start.y - event.getY());
-					if ((int) Math.abs(xDiff) < 8 && (int) Math.abs(yDiff) < 8
+					if (Math.abs(xDiff) < 8 && Math.abs(yDiff) < 8
 							&& mode != ZOOM) {
 						mode = CLICK;
 					}

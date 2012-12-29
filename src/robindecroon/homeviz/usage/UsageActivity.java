@@ -3,7 +3,6 @@ package robindecroon.homeviz.usage;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.FullScreenActivity;
-import robindecroon.homeviz.util.SystemUiHider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
