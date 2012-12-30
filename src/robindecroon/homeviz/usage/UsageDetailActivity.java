@@ -94,7 +94,7 @@ public class UsageDetailActivity extends UsageFullScreenActivity {
 						this,
 						new String[] {
 								""
-										+ currentRoom.getLight(currentPeriod)
+										+ currentRoom.getLightPrice(currentPeriod)
 												.getEuroValue(),
 								""
 										+ currentRoom.getWater(currentPeriod)

@@ -28,7 +28,7 @@ public class UsageActivity extends UsageFullScreenActivity {
 
 	private void setAmounts() {
 		final TextView light = (TextView) findViewById(R.id.usage_light_price);
-		light.setText(currentRoom.getLight(currentPeriod).toString());
+		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
 		light.setOnClickListener(new OnClickListener() {
 
 			@Override

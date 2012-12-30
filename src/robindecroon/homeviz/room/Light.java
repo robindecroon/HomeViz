@@ -1,11 +1,16 @@
 package robindecroon.homeviz.room;
 
+import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.Period;
+
 public class Light {
 	
 	private String id;
+	
+	private Amount price;
 
 	public Light() {
-		// TODO Auto-generated constructor stub
+		this.price = new Amount(Math.random()/3);
 	}
 
 	/**
@@ -20,6 +25,10 @@ public class Light {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Amount getPrice(Period currentPeriod) {
+		return price.multiply(currentPeriod.getMultiplier());
 	}
 
 }

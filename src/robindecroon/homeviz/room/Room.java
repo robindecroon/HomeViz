@@ -62,7 +62,7 @@ public class Room {
 	}
 
 	public CharSequence getTotalPrice(Period p) {
-		Amount total = getLight(p).add(getWater(p)).add(getHeating(p))
+		Amount total = getLightPrice(p).add(getWater(p)).add(getHeating(p))
 				.add(getAppliances(p)).add(getTv(p));
 		return total.toString();
 	}
@@ -70,8 +70,12 @@ public class Room {
 	/**
 	 * @return the light
 	 */
-	public Amount getLight(Period currentPeriod) {
-		return light.multiply(currentPeriod.getMultiplier());
+	public Amount getLightPrice(Period currentPeriod) {
+		Amount total = new Amount(0);
+		for(Light light:lights) {
+			total = total.add(light.getPrice(currentPeriod));
+		}
+		return total;
 	}
 
 	/**
