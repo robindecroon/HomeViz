@@ -7,6 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 
 /**
@@ -25,8 +26,17 @@ public class XMLHandler extends DefaultHandler{
 	 * Variabele om de kamer bij te houden die nu wordt uitgelezen.
 	 */
 	private Room tempRoom;
-
-	List<Room> rooms = new ArrayList<Room>();
+	
+	/**
+	 * Lijst met alle aangemaakte kamers.
+	 */
+	private List<Room> rooms = new ArrayList<Room>();
+	
+	/**
+	 * Variabele om de lamp bij te houden die nu wordt uitgelezen. 
+	 */
+	private Light tempLight;
+	
 
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
@@ -37,6 +47,8 @@ public class XMLHandler extends DefaultHandler{
 		tempVal = "";
 		if (qName.equalsIgnoreCase("Room")) {
 			tempRoom = new Room();
+		} else if(qName.equalsIgnoreCase("Light")) {
+			tempLight = new Light();
 		}
 	}
 
@@ -59,6 +71,9 @@ public class XMLHandler extends DefaultHandler{
 			rooms.add(tempRoom);
 		} else if (qName.equalsIgnoreCase("Name")) {
 			tempRoom.setName(tempVal);
+		} else if (qName.equalsIgnoreCase("Light")) {
+			tempLight.setId(tempVal);
+			tempRoom.addLight(tempLight);
 		}
 	}
 

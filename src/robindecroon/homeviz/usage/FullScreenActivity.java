@@ -1,10 +1,13 @@
 /**
  * 
  */
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.util.HomeVizListener;
+import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.TouchListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -21,6 +24,8 @@ public abstract class FullScreenActivity extends Activity implements
 
 	protected Room currentRoom;
 	protected Period currentPeriod;
+	
+	protected TouchListener  listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,8 @@ public abstract class FullScreenActivity extends Activity implements
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		
 		// Touch Listener
-		rootView.setOnTouchListener(new TouchListener(this));
+		listener = new TouchListener(this);
+		rootView.setOnTouchListener(listener);
 	}
 
 	@Override
@@ -68,6 +74,16 @@ public abstract class FullScreenActivity extends Activity implements
 	@Override
 	public void onZoomOut() {
 		refreshElements();
+	}
+	
+	@Override
+	public void onSwypeToLeft() {
+		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
+	}
+	
+	@Override
+	public void onSwypeToRight() {
+		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
 	}
 	
 	public void refreshElements() {

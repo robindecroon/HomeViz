@@ -27,7 +27,7 @@
         android:textColor="@color/Black"
         android:textSize="40sp" />
 
-    <WebView
+    <robindecroon.homeviz.util.MyWebView
         android:id="@+id/usage_detail_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

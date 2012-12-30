@@ -2,7 +2,6 @@ package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.util.FullScreenActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -53,7 +52,7 @@ public class UsageActivity extends FullScreenActivity {
 
 	@Override
 	public void onSwypeToLeft() {
-		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
+		super.onSwypeToLeft();
 		Intent intent = new Intent(this, UsageActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
@@ -62,7 +61,7 @@ public class UsageActivity extends FullScreenActivity {
 
 	@Override
 	public void onSwypeToRight() {
-		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
+		super.onSwypeToRight();
 		Intent intent = new Intent(this, UsageActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);

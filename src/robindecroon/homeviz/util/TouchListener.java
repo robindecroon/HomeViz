@@ -4,6 +4,7 @@
 package robindecroon.homeviz.util;
 
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.usage.FullScreenActivity;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;

@@ -1,5 +1,9 @@
 package robindecroon.homeviz.room;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 
@@ -21,6 +25,8 @@ public class Room {
 	private Amount heating;
 	private Amount appliances;
 	private Amount tv;
+
+	private List<Light> lights = new ArrayList<Light>();
 
 	/**
 	 * Constructor nodig voor de XML parser
@@ -134,5 +140,26 @@ public class Room {
 	 */
 	public void setTv(Amount tv) {
 		this.tv = tv;
+	}
+
+	public void addLight(Light tempLight) {
+		this.lights.add(tempLight);
+	}
+	
+	public List<Light> getLights() throws NoSuchDevicesInRoom {
+		if(this.lights.size() == 0) {
+			throw new NoSuchDevicesInRoom(this);
+		}
+		return this.lights;
+	}
+
+	public Light getLight(String id) {
+		for (Light light : lights) {
+			if (light.getId().equals(id)) {
+				return light;
+			}
+		}
+		throw new IllegalArgumentException("No light with ID: " + id
+				+ " in room: " + this.getName());
 	}
 }
