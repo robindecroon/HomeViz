@@ -1,10 +1,11 @@
 package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.util.GoogleChartTools;
-import robindecroon.homeviz.util.MyWebView;
+import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.ToastMessages;
-import robindecroon.homeviz.util.TouchListener;
+import robindecroon.homeviz.visualization.GoogleChartTools;
+import robindecroon.homeviz.visualization.GoogleChartType;
+import robindecroon.homeviz.visualization.MyWebView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -108,7 +109,7 @@ public class UsageDetailActivity extends UsageFullScreenActivity {
 								""
 										+ currentRoom.getTv(currentPeriod)
 												.getEuroValue() },
-						chart.getWidth(), chart.getHeight());
+						chart.getWidth(), chart.getHeight(), GoogleChartType.ColumnChart);
 		System.out.println("WITDT: " + chart.getWidth());
 		chart.loadDataWithBaseURL("x-data://base", url, "text/html", "UTF-8",
 				null);

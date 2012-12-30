@@ -1,10 +1,11 @@
 /**
  * 
  */
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.usage.UsageFullScreenActivity;
+import robindecroon.homeviz.util.Period;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;

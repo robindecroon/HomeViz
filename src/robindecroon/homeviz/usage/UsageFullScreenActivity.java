@@ -4,10 +4,10 @@
 package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.listeners.HomeVizListener;
+import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.util.HomeVizListener;
 import robindecroon.homeviz.util.Period;
-import robindecroon.homeviz.util.TouchListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;

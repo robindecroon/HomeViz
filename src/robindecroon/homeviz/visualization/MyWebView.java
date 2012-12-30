@@ -1,5 +1,6 @@
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.visualization;
 
+import robindecroon.homeviz.listeners.TouchListener;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
