@@ -1,9 +1,11 @@
 package robindecroon.homeviz.usage;
 
-import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.util.SystemUiHider;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 /**
@@ -12,7 +14,7 @@ import android.widget.TextView;
  * 
  * @see SystemUiHider
  */
-public class UsageActivity extends FullScreenActivity {
+public class UsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +22,21 @@ public class UsageActivity extends FullScreenActivity {
 		setContentView(R.layout.usage_layout);
 
 		refreshElements();
-		
+
 		setAmounts();
 	}
 
 	private void setAmounts() {
 		final TextView light = (TextView) findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLight(currentPeriod).toString());
+		light.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(UsageActivity.this,LightUsageActivity.class);
+				startActivity(intent);
+			}
+		});
 		final TextView water = (TextView) findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWater(currentPeriod).toString());
 		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
@@ -36,14 +46,14 @@ public class UsageActivity extends FullScreenActivity {
 		final TextView tv = (TextView) findViewById(R.id.usage_tv_price);
 		tv.setText(currentRoom.getTv(currentPeriod).toString());
 		setTotalAmount();
-		
+
 	}
 
 	private void setTotalAmount() {
 		final TextView usageAmount = (TextView) findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 	}
-	
+
 	@Override
 	public void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
@@ -89,6 +99,6 @@ public class UsageActivity extends FullScreenActivity {
 	@Override
 	protected void setLocation() {
 		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
-		usageLocation.setText(currentRoom.getName());	
+		usageLocation.setText(currentRoom.getName());
 	}
 }

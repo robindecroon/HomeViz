@@ -27,5 +27,6 @@
     <string name="content_description_heating_usage">Heating Usage</string>
     <string name="content_description_appliances_usage">Appliances Usage</string>
     <string name="content_description_home_cinema_usage">Home Cinema Usage</string>
+    <string name="title_activity_light_usage">LightUsageActivity</string>
 
 </resources>

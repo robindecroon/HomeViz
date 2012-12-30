@@ -4,7 +4,7 @@
 package robindecroon.homeviz.util;
 
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.usage.FullScreenActivity;
+import robindecroon.homeviz.usage.UsageFullScreenActivity;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -32,13 +32,13 @@ public class TouchListener implements View.OnTouchListener {
 
 	private int mode = NONE;
 
-	private FullScreenActivity context;
+	private UsageFullScreenActivity context;
 	private HomeVizApplication appContext;
 
 	/**
 	 * 
 	 */
-	public TouchListener(FullScreenActivity interestedparty) {
+	public TouchListener(UsageFullScreenActivity interestedparty) {
 		context = interestedparty;
 		try {
 			appContext = (HomeVizApplication) this.context

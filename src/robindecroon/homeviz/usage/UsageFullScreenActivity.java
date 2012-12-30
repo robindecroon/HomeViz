@@ -19,7 +19,7 @@ import android.view.View;
  * @author Robin
  * 
  */
-public abstract class FullScreenActivity extends Activity implements
+public abstract class UsageFullScreenActivity extends Activity implements
 		HomeVizListener {
 
 	protected Room currentRoom;

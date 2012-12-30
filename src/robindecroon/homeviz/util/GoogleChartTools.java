@@ -28,6 +28,7 @@ public abstract class GoogleChartTools {
 		data = data.substring(0, data.length()-1);
 		data += "]";
 		
-		return start + data + mid1 +"title: '" +title +"'" + mid2 + (width-10) + mid3 + (height-10) + end;
+		// De hoogte moet iets kleiner zijn, anders is er een scrollbar
+		return start + data + mid1 +"title: '" +title +"'" + mid2 + (width-10) + mid3 + (height-20) + end;
 	}
 }

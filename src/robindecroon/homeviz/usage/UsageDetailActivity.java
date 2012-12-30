@@ -15,7 +15,7 @@ import android.webkit.WebSettings;
 import android.widget.TextView;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class UsageDetailActivity extends FullScreenActivity {
+public class UsageDetailActivity extends UsageFullScreenActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
