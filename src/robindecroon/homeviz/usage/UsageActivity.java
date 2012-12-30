@@ -20,10 +20,8 @@ public class UsageActivity extends UsageFullScreenActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
-
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		refreshElements();
-
-		setAmounts();
 	}
 
 	private void setAmounts() {

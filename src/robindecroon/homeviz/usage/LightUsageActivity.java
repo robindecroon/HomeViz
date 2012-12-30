@@ -26,56 +26,8 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.light_usage_layout);
-
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		refreshElements();
-
-		LinearLayout lightsLayout = (LinearLayout) findViewById(R.id.lights);
-		try {
-			List<Light> lights = currentRoom.getLights();
-
-			for (int i = 0; i < lights.size(); i++) {
-				
-				Light light = lights.get(i);
-				LinearLayout layout = new LinearLayout(this);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT,1);
-				layout.setLayoutParams(lp);
-				layout.setOrientation(LinearLayout.VERTICAL);
-				
-				ImageView image = new ImageView(this);
-				image.setLayoutParams(new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT));
-
-				String imagename = light.getId().toLowerCase(Locale.US);
-				int picId = getResources().getIdentifier(imagename, "drawable",getPackageName());
-				image.setImageResource(picId);
-				
-				layout.addView(image);
-				
-				TextView text = new TextView(this);
-				text.setTextColor(getResources().getColor(R.color.Black));
-				text.setGravity(Gravity.CENTER);
-				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.MATCH_PARENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT));
-				text.setTextSize(40);
-				text.setText(light.getPrice(currentPeriod).toString());
-				
-				layout.addView(text);
-				
-				lightsLayout.addView(layout);
-			}
-		} catch (NoSuchDevicesInRoom e) {
-			TextView noLights = new TextView(this);
-			noLights.setText(R.string.no_lights);
-			noLights.setTextSize(100);
-			noLights.setTextColor(getResources().getColor(R.color.Black));
-			lightsLayout.addView(noLights);
-
-		}
-
 	}
 
 	@Override
@@ -115,6 +67,66 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	protected void setLocation() {
 		final TextView usageLocation = (TextView) findViewById(R.id.light_location);
 		usageLocation.setText(currentRoom.getName());
+	}
+
+	@Override
+	public void refreshElements() {
+		super.refreshElements();
+		setAmounts();
+	}
+
+	private void setAmounts() {
+		LinearLayout lightsLayout = (LinearLayout) findViewById(R.id.lights);
+		lightsLayout.removeAllViews();
+		try {
+			List<Light> lights = currentRoom.getLights();
+
+			for (int i = 0; i < lights.size(); i++) {
+
+				Light light = lights.get(i);
+				LinearLayout layout = new LinearLayout(this);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.WRAP_CONTENT,
+						LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+				layout.setLayoutParams(lp);
+				layout.setOrientation(LinearLayout.VERTICAL);
+
+				ImageView image = new ImageView(this);
+				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.WRAP_CONTENT,
+						LinearLayout.LayoutParams.WRAP_CONTENT);
+				lp2.gravity = Gravity.CENTER;
+				image.setAdjustViewBounds(true);
+				image.setLayoutParams(lp2);
+
+				String imagename = light.getId().toLowerCase(Locale.US);
+				int picId = getResources().getIdentifier(imagename, "drawable",
+						getPackageName());
+				image.setImageResource(picId);
+
+				layout.addView(image);
+
+				TextView text = new TextView(this);
+				text.setTextColor(getResources().getColor(R.color.Black));
+				text.setGravity(Gravity.CENTER);
+				text.setLayoutParams(new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.MATCH_PARENT,
+						LinearLayout.LayoutParams.WRAP_CONTENT));
+				text.setTextSize(40);
+				text.setText(light.getPrice(currentPeriod).toString());
+
+				layout.addView(text);
+
+				lightsLayout.addView(layout);
+			}
+		} catch (NoSuchDevicesInRoom e) {
+			TextView noLights = new TextView(this);
+			noLights.setText(R.string.no_lights);
+			noLights.setTextSize(100);
+			noLights.setTextColor(getResources().getColor(R.color.Black));
+			lightsLayout.addView(noLights);
+
+		}
 	}
 
 }
