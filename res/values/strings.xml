@@ -22,5 +22,10 @@
     <string name="toast_no_more_detail">No more detail possible!</string>
     <string name="toast_no_smaller_period">No smaller period possible!</string>
     <string name="toast_no_larger_period">No larger period possible!</string>
+    <string name="content_description_light_usage">Light Usage</string>
+    <string name="content_description_water_usage">Water Usage</string>
+    <string name="content_description_heating_usage">Heating Usage</string>
+    <string name="content_description_appliances_usage">Appliances Usage</string>
+    <string name="content_description_home_cinema_usage">Home Cinema Usage</string>
 
 </resources>

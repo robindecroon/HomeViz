@@ -44,18 +44,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/usage_amount"
-        android:layout_marginTop="100dp"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/lightView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_light_usage"
                 android:src="@drawable/light_icon" />
 
             <TextView
@@ -63,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="€30"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
         </LinearLayout>
@@ -71,12 +73,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/waterView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_water_usage"
                 android:src="@drawable/water_icon" />
 
             <TextView
@@ -84,7 +89,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="€30"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
         </LinearLayout>
@@ -92,12 +96,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/heatingView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/content_description_heating_usage"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:src="@drawable/heating_icon" />
 
             <TextView
@@ -105,7 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="€30"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
         </LinearLayout>
@@ -113,12 +119,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/appliancesView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_appliances_usage"
+                android:adjustViewBounds="true"
                 android:src="@drawable/appliances_icon" />
 
             <TextView
@@ -126,7 +135,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="€30"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
         </LinearLayout>
@@ -134,12 +142,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/tvView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_home_cinema_usage"
+                android:adjustViewBounds="true"
                 android:src="@drawable/tv_icon" />
 
             <TextView
@@ -147,7 +158,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="€30"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
         </LinearLayout>

@@ -31,7 +31,7 @@ public class HomeVizApplication extends Application {
 	/**
 	 * De huidige periode.
 	 */
-	private Period currentPeriod = Period.CUSTOM;
+	private Period currentPeriod = Period.WEEK;
 	
 	private int currentRoomIndex;
 
