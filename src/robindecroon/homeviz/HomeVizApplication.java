@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
+import robindecroon.homeviz.visualization.GoogleChartType;
 import robindecroon.homeviz.xml.XMLHandler;
 import android.app.Application;
 import android.util.Log;
@@ -36,6 +37,8 @@ public class HomeVizApplication extends Application {
 	private int currentRoomIndex;
 
 	private List<Room> rooms;
+	
+	private GoogleChartType type;
 	
 	/**
 	 * Constructor om een applicatie aan te maken.
@@ -109,10 +112,25 @@ public class HomeVizApplication extends Application {
 			File file = new File(path);
 
 			saxParser.parse(file, handler);
+			type = handler.getVizType();
 		} catch (Exception e) {
-			ToastMessages.xmlError();
 			Log.e("ParseXML", e.getMessage());
+			// TODO toast gaat nog niet, want er is nog geen context
 		}
 		setRooms(handler.getRooms());
+	}
+
+	/**
+	 * @return the type
+	 */
+	public GoogleChartType getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(GoogleChartType type) {
+		this.type = type;
 	}
 }

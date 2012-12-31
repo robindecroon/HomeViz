@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -27,7 +28,17 @@ public class UsageActivity extends UsageFullScreenActivity {
 	private void setAmounts() {
 		final TextView light = (TextView) findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
+		// TODO clickListener abstractie maken
 		light.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(UsageActivity.this,LightUsageActivity.class);
+				startActivity(intent);
+			}
+		});
+		final ImageView lightImage = (ImageView) findViewById(R.id.lightView);
+		lightImage.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

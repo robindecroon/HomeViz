@@ -7,6 +7,7 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.util.SystemUiHider;
+import robindecroon.homeviz.util.ToastMessages;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,6 +22,8 @@ import android.widget.TextView;
  * @see SystemUiHider
  */
 public class LightUsageActivity extends UsageFullScreenActivity {
+	
+	private boolean lampsPresent = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,13 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	public void onSwypeToDown() {
-		// TODO Auto-generated method stub
+		if (lampsPresent) {
+			Intent intent = new Intent(this, LightUsageDetailActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
+		} else {
+			ToastMessages.noMoreDetail();
+		}
 	}
 
 	@Override
@@ -125,6 +134,8 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 			noLights.setTextSize(100);
 			noLights.setTextColor(getResources().getColor(R.color.Black));
 			lightsLayout.addView(noLights);
+			
+			lampsPresent = false;
 
 		}
 	}

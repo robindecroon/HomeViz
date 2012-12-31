@@ -29,5 +29,10 @@
     <string name="content_description_home_cinema_usage">Home Cinema Usage</string>
     <string name="title_activity_light_usage">LightUsageActivity</string>
     <string name="no_lights">There are no lights in this room!</string>
+    <string name="title_activity_light_usage_detail">LightUsageDetailActivity</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

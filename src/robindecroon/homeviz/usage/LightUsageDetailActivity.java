@@ -4,37 +4,42 @@ import java.util.Map;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.MyWebView;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
- 
+
+/**
+ * An example full-screen activity that shows and hides the system UI (i.e.
+ * status bar and navigation/system bar) with user interaction.
+ * 
+ * @see SystemUiHider
+ */
 @SuppressLint("SetJavaScriptEnabled")
-public class UsageDetailActivity extends UsageDetailFullScreenActivity implements
-ActionBar.OnNavigationListener{
+public class LightUsageDetailActivity extends UsageDetailFullScreenActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.usage_detail_layout);
+		setContentView(R.layout.light_usage_detail_layout);
 	}
-
+	
 	@Override
 	public void onSwypeToLeft() {
 		super.onSwypeToLeft();
-		Intent intent = new Intent(this, UsageDetailActivity.class);
+		Intent intent = new Intent(this, LightUsageDetailActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
 		finish();
 	}
-
+	
 	@Override
 	public void onSwypeToRight() {
 		super.onSwypeToRight();
-		Intent intent = new Intent(this, UsageDetailActivity.class);
+		Intent intent = new Intent(this, LightUsageDetailActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
 		finish();
@@ -42,7 +47,7 @@ ActionBar.OnNavigationListener{
 
 	@Override
 	public void onSwypeToUp() {
-		Intent intent = new Intent(this, UsageActivity.class);
+		Intent intent = new Intent(this, LightUsageActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
 	}
@@ -54,23 +59,23 @@ ActionBar.OnNavigationListener{
 
 	@Override
 	protected void setPeriod() {
-		final TextView usagePeriod = (TextView) findViewById(R.id.usage_detail_period);
+		final TextView usagePeriod = (TextView) findViewById(R.id.light_usage_detail_period);
 		usagePeriod.setText(currentPeriod.getName(this));
 	}
 
 	@Override
 	protected void setLocation() {
-		final TextView usageLocation = (TextView) findViewById(R.id.usage_detail_location);
+		final TextView usageLocation = (TextView) findViewById(R.id.light_usage_detail_location);
 		usageLocation.setText(currentRoom.getName());
 	}
 
 	@Override
 	protected MyWebView getWebView() {
-		return (MyWebView) findViewById(R.id.usage_detail_webview);
+		return (MyWebView) findViewById(R.id.light_usage_detail_webview);
 	}
 
 	@Override
 	protected Map<String, Amount> getPriceMap() {
-		return currentRoom.getPricesMap(currentPeriod);
+		return currentRoom.getLightsMap(currentPeriod);
 	}
 }

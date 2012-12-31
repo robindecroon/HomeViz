@@ -1,7 +1,9 @@
 package robindecroon.homeviz.room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.util.Amount;
@@ -38,6 +40,24 @@ public class Room {
 		this.appliances = new Amount(Math.random());
 		this.tv = new Amount(Math.random());
 	};
+	
+	public Map<String, Amount> getPricesMap(Period period) {
+		Map<String, Amount> map = new HashMap<String, Amount>();
+		map.put("Light", getLightPrice(period));
+		map.put("Water", getWater(period));
+		map.put("Heating", getHeating(period));
+		map.put("Appliances", getAppliances(period));
+		map.put("Home Cinema", getTv(period));
+		return map;
+	}
+	
+	public Map<String, Amount> getLightsMap(Period period) {
+		Map<String, Amount> map = new HashMap<String, Amount>();
+		for(Light light : lights) {
+			map.put(light.getId(), light.getPrice(period));
+		}
+		return map;
+	}
 
 	/**
 	 * Geef de kamer een naam.

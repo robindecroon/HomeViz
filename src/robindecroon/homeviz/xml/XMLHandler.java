@@ -9,13 +9,15 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.visualization.GoogleChartType;
 
 /**
  * Handler om HomeViz XML bestanden te parsen.
+ * 
  * @author Robin
- *
+ * 
  */
-public class XMLHandler extends DefaultHandler{
+public class XMLHandler extends DefaultHandler {
 
 	/**
 	 * Variabele om de huidige waarde bij te houden die nu wordt uitgelezen.
@@ -26,17 +28,18 @@ public class XMLHandler extends DefaultHandler{
 	 * Variabele om de kamer bij te houden die nu wordt uitgelezen.
 	 */
 	private Room tempRoom;
-	
+
 	/**
 	 * Lijst met alle aangemaakte kamers.
 	 */
 	private List<Room> rooms = new ArrayList<Room>();
-	
+
 	/**
-	 * Variabele om de lamp bij te houden die nu wordt uitgelezen. 
+	 * Variabele om de lamp bij te houden die nu wordt uitgelezen.
 	 */
 	private Light tempLight;
-	
+
+	private GoogleChartType type;
 
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
@@ -47,7 +50,7 @@ public class XMLHandler extends DefaultHandler{
 		tempVal = "";
 		if (qName.equalsIgnoreCase("Room")) {
 			tempRoom = new Room();
-		} else if(qName.equalsIgnoreCase("Light")) {
+		} else if (qName.equalsIgnoreCase("Light")) {
 			tempLight = new Light();
 		}
 	}
@@ -74,14 +77,26 @@ public class XMLHandler extends DefaultHandler{
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempLight.setId(tempVal);
 			tempRoom.addLight(tempLight);
+		} else if (qName.equalsIgnoreCase("VizType")) {
+			for (GoogleChartType type1 : GoogleChartType.values()) {
+				if (tempVal.equalsIgnoreCase(type1.toString())) {
+					type = type1;
+					break;
+				}
+			}
 		}
 	}
 
 	/**
 	 * Geef een lijst met de ingelezen kamers terug.
+	 * 
 	 * @return
 	 */
 	public List<Room> getRooms() {
 		return this.rooms;
+	}
+	
+	public GoogleChartType getVizType() {
+		return type;
 	}
 }
