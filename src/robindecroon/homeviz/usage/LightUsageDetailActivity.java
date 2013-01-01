@@ -7,9 +7,9 @@ import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.MyWebView;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -18,7 +18,6 @@ import android.widget.TextView;
  * 
  * @see SystemUiHider
  */
-@SuppressLint("SetJavaScriptEnabled")
 public class LightUsageDetailActivity extends UsageDetailFullScreenActivity {
 
 	@Override
@@ -77,5 +76,10 @@ public class LightUsageDetailActivity extends UsageDetailFullScreenActivity {
 	@Override
 	protected Map<String, Amount> getPriceMap() {
 		return currentRoom.getLightsMap(currentPeriod);
+	}
+
+	@Override
+	protected LinearLayout getBackupView() {
+		return (LinearLayout) findViewById(R.id.light_detail_layout);
 	}
 }

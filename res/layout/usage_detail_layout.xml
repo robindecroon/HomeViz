@@ -27,10 +27,16 @@
         android:textColor="@color/Black"
         android:textSize="40sp" />
 
-    <robindecroon.homeviz.visualization.MyWebView
-        android:id="@+id/usage_detail_webview"
+    <LinearLayout
+        android:id="@+id/usage_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/usage_detail_period" />
+        android:layout_below="@id/usage_detail_period" >
+
+        <robindecroon.homeviz.visualization.MyWebView
+            android:id="@+id/usage_detail_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </RelativeLayout>

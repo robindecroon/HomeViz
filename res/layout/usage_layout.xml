@@ -48,6 +48,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/light_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -71,6 +72,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/water_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,6 +96,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/heating_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -102,9 +105,9 @@
             <ImageView
                 android:id="@+id/heatingView"
                 android:layout_width="wrap_content"
-                android:contentDescription="@string/content_description_heating_usage"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_heating_usage"
                 android:src="@drawable/heating_icon" />
 
             <TextView
@@ -117,6 +120,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/appliances_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -126,8 +130,8 @@
                 android:id="@+id/appliancesView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/content_description_appliances_usage"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_appliances_usage"
                 android:src="@drawable/appliances_icon" />
 
             <TextView
@@ -140,6 +144,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/home_cinema_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -149,8 +154,8 @@
                 android:id="@+id/tvView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/content_description_home_cinema_usage"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_home_cinema_usage"
                 android:src="@drawable/tv_icon" />
 
             <TextView

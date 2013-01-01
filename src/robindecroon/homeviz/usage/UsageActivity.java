@@ -1,12 +1,14 @@
 package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -26,36 +28,24 @@ public class UsageActivity extends UsageFullScreenActivity {
 	}
 
 	private void setAmounts() {
+		final LinearLayout lightLayout = (LinearLayout) findViewById(R.id.light_layout);
+		lightLayout.setOnClickListener(new ClickListener(this, LightUsageActivity.class));
 		final TextView light = (TextView) findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
-		// TODO clickListener abstractie maken
-		light.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(UsageActivity.this,LightUsageActivity.class);
-				startActivity(intent);
-			}
-		});
-		final ImageView lightImage = (ImageView) findViewById(R.id.lightView);
-		lightImage.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(UsageActivity.this,LightUsageActivity.class);
-				startActivity(intent);
-			}
-		});
+		
 		final TextView water = (TextView) findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWater(currentPeriod).toString());
+		
 		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
 		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+		
 		final TextView appl = (TextView) findViewById(R.id.usage_appliances_price);
 		appl.setText(currentRoom.getAppliances(currentPeriod).toString());
+		
 		final TextView tv = (TextView) findViewById(R.id.usage_tv_price);
 		tv.setText(currentRoom.getTv(currentPeriod).toString());
+		
 		setTotalAmount();
-
 	}
 
 	private void setTotalAmount() {

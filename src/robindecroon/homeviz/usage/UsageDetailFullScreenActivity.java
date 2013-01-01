@@ -26,7 +26,7 @@ public abstract class UsageDetailFullScreenActivity extends
 	private GoogleChartType[] types = new GoogleChartType[] {
 			GoogleChartType.BarChart, GoogleChartType.ColumnChart };
 	private GoogleChartType currentType;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public abstract class UsageDetailFullScreenActivity extends
 			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
 					"UTF-8", null);
 		} else {
-			LinearLayout layout = (LinearLayout) findViewById(R.id.light_detail_layout);
+			LinearLayout layout = getBackupView();
 			layout.removeAllViews();
 
 			TextView noLights = new TextView(this);
@@ -81,6 +81,8 @@ public abstract class UsageDetailFullScreenActivity extends
 		}
 
 	}
+
+	protected abstract LinearLayout getBackupView();
 
 	protected void delayedRefresh() {
 		final Handler handler = new Handler();

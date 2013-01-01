@@ -6,13 +6,12 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.MyWebView;
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
  
-@SuppressLint("SetJavaScriptEnabled")
 public class UsageDetailActivity extends UsageDetailFullScreenActivity implements
 ActionBar.OnNavigationListener{
 
@@ -72,5 +71,10 @@ ActionBar.OnNavigationListener{
 	@Override
 	protected Map<String, Amount> getPriceMap() {
 		return currentRoom.getPricesMap(currentPeriod);
+	}
+
+	@Override
+	protected LinearLayout getBackupView() {
+		return (LinearLayout) findViewById(R.id.usage_detail_layout);
 	}
 }
