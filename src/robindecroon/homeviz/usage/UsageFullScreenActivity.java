@@ -8,12 +8,14 @@ import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.views.MyView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @author Robin
@@ -24,8 +26,8 @@ public abstract class UsageFullScreenActivity extends Activity implements
 
 	protected Room currentRoom;
 	protected Period currentPeriod;
-	
-	protected TouchListener  listener;
+
+	protected TouchListener listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,19 @@ public abstract class UsageFullScreenActivity extends Activity implements
 		getActionBar().hide();
 		View rootView = getWindow().getDecorView();
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-		
+
 		// Touch Listener
 		listener = new TouchListener(this);
 		rootView.setOnTouchListener(listener);
 	}
+	
+	@Override
+	protected void onPostCreate (Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		setListeners();
+	}
+
+	protected abstract void setListeners();
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,7 +62,7 @@ public abstract class UsageFullScreenActivity extends Activity implements
 		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -62,10 +72,11 @@ public abstract class UsageFullScreenActivity extends Activity implements
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	protected abstract void setPeriod();
+
 	protected abstract void setLocation();
-	
+
 	@Override
 	public void onZoomIn() {
 		refreshElements();
@@ -75,17 +86,17 @@ public abstract class UsageFullScreenActivity extends Activity implements
 	public void onZoomOut() {
 		refreshElements();
 	}
-	
+
 	@Override
 	public void onSwypeToLeft() {
 		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
 	}
-	
+
 	@Override
 	public void onSwypeToRight() {
 		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
 	}
-	
+
 	public void refreshElements() {
 		setPeriod();
 		setLocation();

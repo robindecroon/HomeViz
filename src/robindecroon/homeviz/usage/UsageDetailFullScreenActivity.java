@@ -6,9 +6,9 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.views.MyWebView;
 import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
-import robindecroon.homeviz.visualization.MyWebView;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.res.Configuration;
@@ -53,12 +53,18 @@ public abstract class UsageDetailFullScreenActivity extends
 	protected abstract MyWebView getWebView();
 
 	protected abstract Map<String, Amount> getPriceMap();
+	
+	@Override
+	protected void setListeners() {
+		MyWebView chart = getWebView();
+		chart.setListener(new TouchListener(this));
+	}
 
 	@Override
 	public void refreshElements() {
 		super.refreshElements();
 		MyWebView chart = getWebView();
-		chart.setListener(new TouchListener(this));
+//		chart.setListener(new TouchListener(this));
 		WebSettings webSettings = chart.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 

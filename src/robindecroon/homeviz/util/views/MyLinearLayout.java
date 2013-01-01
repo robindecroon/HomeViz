@@ -1,30 +1,26 @@
-package robindecroon.homeviz.visualization;
+package robindecroon.homeviz.util.views;
 
 import robindecroon.homeviz.listeners.TouchListener;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.webkit.WebView;
+import android.widget.LinearLayout;
 
-public class MyWebView extends WebView implements OnTouchListener {
+public class MyLinearLayout extends LinearLayout implements MyView {
 
 	private TouchListener listener;
-
-	public MyWebView(Context context) {
+	
+	public MyLinearLayout(Context context) {
 		super(context);
 	}
 
-	public MyWebView(Context context, AttributeSet attrs) {
+	public MyLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	};
 
-	public void setListener(TouchListener listener) {
-		this.listener = listener;
-	}
 	
-	public MyWebView(Context context, AttributeSet attrs, int defStyle) {
+	public MyLinearLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs,defStyle);
 	}
 
@@ -33,6 +29,10 @@ public class MyWebView extends WebView implements OnTouchListener {
 		return listener.onTouch(v, event);
 	}
 
+	@Override
+	public void setListener(TouchListener listener) {
+		this.listener = listener;
+	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		boolean consumed = super.onTouchEvent(event);

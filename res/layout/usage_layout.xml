@@ -47,7 +47,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal" >
 
-        <LinearLayout
+        <robindecroon.homeviz.util.views.MyLinearLayout
             android:id="@+id/light_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,9 +69,9 @@
                 android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
-        </LinearLayout>
+        </robindecroon.homeviz.util.views.MyLinearLayout>
 
-        <LinearLayout
+        <robindecroon.homeviz.util.views.MyLinearLayout
             android:id="@+id/water_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,9 +93,9 @@
                 android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
-        </LinearLayout>
+        </robindecroon.homeviz.util.views.MyLinearLayout>
 
-        <LinearLayout
+        <robindecroon.homeviz.util.views.MyLinearLayout
             android:id="@+id/heating_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,9 +117,9 @@
                 android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
-        </LinearLayout>
+        </robindecroon.homeviz.util.views.MyLinearLayout>
 
-        <LinearLayout
+        <robindecroon.homeviz.util.views.MyLinearLayout
             android:id="@+id/appliances_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,9 +141,9 @@
                 android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
-        </LinearLayout>
+        </robindecroon.homeviz.util.views.MyLinearLayout>
 
-        <LinearLayout
+        <robindecroon.homeviz.util.views.MyLinearLayout
             android:id="@+id/home_cinema_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                 android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="40sp" />
-        </LinearLayout>
+        </robindecroon.homeviz.util.views.MyLinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

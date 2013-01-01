@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/usage_detail_period" >
 
-        <robindecroon.homeviz.visualization.MyWebView
+        <robindecroon.homeviz.util.views.MyWebView
             android:id="@+id/usage_detail_webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

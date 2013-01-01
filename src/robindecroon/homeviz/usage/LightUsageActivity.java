@@ -24,6 +24,8 @@ import android.widget.TextView;
 public class LightUsageActivity extends UsageFullScreenActivity {
 	
 	private boolean lampsPresent = true;
+	
+//	private List<View> view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,12 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 			lampsPresent = false;
 
 		}
+	}
+
+	@Override
+	protected void setListeners() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
