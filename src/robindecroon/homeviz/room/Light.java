@@ -1,5 +1,6 @@
 package robindecroon.homeviz.room;
 
+import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 
@@ -17,6 +18,9 @@ public class Light {
 	 * @return the id
 	 */
 	public String getId() {
+		if(id == null) {
+			throw new ParseXMLException(this);
+		}
 		return id;
 	}
 

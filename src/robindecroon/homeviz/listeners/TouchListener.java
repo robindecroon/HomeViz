@@ -4,7 +4,7 @@
 package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.usage.UsageFullScreenActivity;
+import robindecroon.homeviz.usage.FullScreenActivity;
 import robindecroon.homeviz.util.Period;
 import android.graphics.PointF;
 import android.util.Log;
@@ -33,14 +33,16 @@ public class TouchListener implements View.OnTouchListener {
 
 	private int mode = NONE;
 
-	private UsageFullScreenActivity context;
+	private FullScreenActivity context;
 	private HomeVizApplication appContext;
+
+	private boolean withClick = true;
 
 	/**
 	 * 
 	 */
-	public TouchListener(UsageFullScreenActivity interestedparty) {
-		context = interestedparty;
+	public TouchListener(FullScreenActivity fullScreenActivity) {
+		context = fullScreenActivity;
 		try {
 			appContext = (HomeVizApplication) this.context
 					.getApplicationContext();
@@ -114,7 +116,10 @@ public class TouchListener implements View.OnTouchListener {
 		}
 		switch (mode) {
 		case CLICK:
-			togglActionBar();
+			if (withClick) {
+				System.out.println("TouchListener: " + withClick + "Toggl");
+				togglActionBar();
+			}
 			break;
 		default:
 			break;
@@ -149,5 +154,10 @@ public class TouchListener implements View.OnTouchListener {
 		float x = event.getX(0) + event.getX(1);
 		float y = event.getY(0) + event.getY(1);
 		point.set(x / 2, y / 2);
+	}
+
+	public void setWithClick(boolean withClick) {
+		System.out.println("WithListener: " + withClick);
+		this.withClick = withClick;
 	}
 }

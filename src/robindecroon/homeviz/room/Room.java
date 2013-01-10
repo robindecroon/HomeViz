@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.exceptions.ParseXMLException;
+import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 
@@ -22,7 +24,6 @@ public class Room {
 	 */
 	private String name;
 
-	private Amount light;
 	private Amount water;
 	private Amount heating;
 	private Amount appliances;
@@ -30,17 +31,18 @@ public class Room {
 
 	private List<Light> lights = new ArrayList<Light>();
 
+	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
+
 	/**
 	 * Constructor nodig voor de XML parser
 	 */
 	public Room() {
-		this.light = new Amount(Math.random());
 		this.water = new Amount(Math.random());
 		this.heating = new Amount(Math.random());
 		this.appliances = new Amount(Math.random());
 		this.tv = new Amount(Math.random());
 	};
-	
+
 	public Map<String, Amount> getPricesMap(Period period) {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		map.put("Light", getLightPrice(period));
@@ -50,10 +52,10 @@ public class Room {
 		map.put("Home Cinema", getTv(period));
 		return map;
 	}
-	
+
 	public Map<String, Amount> getLightsMap(Period period) {
 		Map<String, Amount> map = new HashMap<String, Amount>();
-		for(Light light : lights) {
+		for (Light light : lights) {
 			map.put(light.getId(), light.getPrice(period));
 		}
 		return map;
@@ -75,9 +77,9 @@ public class Room {
 	 * @return the name
 	 */
 	public String getName() {
-		if (name == null)
-			// TODO eventueel een exception
-			return "Unknown Room";
+		if (name == null) {
+			throw new ParseXMLException(this);
+		}
 		return name;
 	}
 
@@ -92,18 +94,10 @@ public class Room {
 	 */
 	public Amount getLightPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
-		for(Light light:lights) {
+		for (Light light : lights) {
 			total = total.add(light.getPrice(currentPeriod));
 		}
 		return total;
-	}
-
-	/**
-	 * @param light
-	 *            the light to set
-	 */
-	public void setLight(Amount light) {
-		this.light = light;
 	}
 
 	/**
@@ -169,9 +163,9 @@ public class Room {
 	public void addLight(Light tempLight) {
 		this.lights.add(tempLight);
 	}
-	
+
 	public List<Light> getLights() throws NoSuchDevicesInRoom {
-		if(this.lights.size() == 0) {
+		if (this.lights.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
 		return this.lights;
@@ -185,5 +179,18 @@ public class Room {
 		}
 		throw new IllegalArgumentException("No light with ID: " + id
 				+ " in room: " + this.getName());
+	}
+
+	public void setPercentageForPerson(Person person, int i) {
+		personPercentageMap.put(person, i);
+	}
+
+	public void printPercentages() {
+		System.out.println("Room " + this.getName());
+		System.out.println("----------------------------------------");
+		for (Person person : personPercentageMap.keySet()) {
+			System.out.println(person + " is " + personPercentageMap.get(person)
+					+ "% in " + this.getName());
+		}
 	}
 }

@@ -25,8 +25,6 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	
 	private boolean lampsPresent = true;
 	
-//	private List<View> view;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

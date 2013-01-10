@@ -64,7 +64,6 @@ public abstract class UsageDetailFullScreenActivity extends
 	public void refreshElements() {
 		super.refreshElements();
 		MyWebView chart = getWebView();
-//		chart.setListener(new TouchListener(this));
 		WebSettings webSettings = chart.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 

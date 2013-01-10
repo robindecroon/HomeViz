@@ -7,8 +7,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.visualization.GoogleChartType;
 
 /**
@@ -39,7 +41,12 @@ public class XMLHandler extends DefaultHandler {
 	 */
 	private Light tempLight;
 
+	private Person tempPerson;
+	private String currentUser;
+
 	private GoogleChartType type;
+
+	private List<Person> persons = new ArrayList<Person>();
 
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
@@ -52,7 +59,10 @@ public class XMLHandler extends DefaultHandler {
 			tempRoom = new Room();
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempLight = new Light();
-		}
+		} else if (qName.equalsIgnoreCase("Person")) {
+			tempPerson = new Person();
+		} else if (qName.equalsIgnoreCase("User"))
+			;
 	}
 
 	/**
@@ -72,11 +82,19 @@ public class XMLHandler extends DefaultHandler {
 			throws SAXException {
 		if (qName.equalsIgnoreCase("Room")) {
 			rooms.add(tempRoom);
+			tempRoom = null;
 		} else if (qName.equalsIgnoreCase("Name")) {
-			tempRoom.setName(tempVal);
+			if (tempRoom != null) {
+				tempRoom.setName(tempVal);
+			} else if (tempPerson != null) {
+				tempPerson.setName(tempVal);
+			}
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempLight.setId(tempVal);
 			tempRoom.addLight(tempLight);
+		} else if (qName.equalsIgnoreCase("Person")) {
+			persons.add(tempPerson);
+			tempPerson = null;
 		} else if (qName.equalsIgnoreCase("VizType")) {
 			for (GoogleChartType type1 : GoogleChartType.values()) {
 				if (tempVal.equalsIgnoreCase(type1.toString())) {
@@ -84,6 +102,8 @@ public class XMLHandler extends DefaultHandler {
 					break;
 				}
 			}
+		} else if (qName.equalsIgnoreCase("User")) {
+			currentUser = tempVal;
 		}
 	}
 
@@ -95,8 +115,21 @@ public class XMLHandler extends DefaultHandler {
 	public List<Room> getRooms() {
 		return this.rooms;
 	}
-	
+
+	public List<Person> getPersons() {
+		return this.persons;
+	}
+
 	public GoogleChartType getVizType() {
 		return type;
+	}
+
+	public Person getCurrentUser() {
+		for (Person person : persons) {
+			if (person.getName().equalsIgnoreCase(currentUser)) {
+				return person;
+			}
+		}
+		throw new ParseXMLException(currentUser);
 	}
 }

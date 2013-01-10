@@ -14,10 +14,12 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import robindecroon.homeviz.xml.XMLHandler;
+import robindecroon.stackoverflow.RandomNumberGenerator;
 import android.app.Application;
 import android.util.Log;
 
@@ -38,8 +40,26 @@ public class HomeVizApplication extends Application {
 
 	private List<Room> rooms;
 	
-	private GoogleChartType type;
+	private List<Person> persons;
 	
+	private GoogleChartType type;
+
+	private Person currentUser;
+	
+	/**
+	 * @return the currentUser
+	 */
+	public Person getCurrentUser() {
+		return currentUser;
+	}
+
+	/**
+	 * @param currentUser the currentUser to set
+	 */
+	public void setCurrentUser(Person currentUser) {
+		this.currentUser = currentUser;
+	}
+
 	/**
 	 * Constructor om een applicatie aan te maken.
 	 * Laad automatisch de XML in.
@@ -47,6 +67,9 @@ public class HomeVizApplication extends Application {
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
 		parseXML("/storage/extSdCard/rooms.xml");
+//		Gson gson = new Gson();
+//		String json = gson.toJson(JsonObject.getTestJson());
+//		System.out.println(json);
 	}
 
 	/**
@@ -68,6 +91,10 @@ public class HomeVizApplication extends Application {
 		this.currentPeriod = currentPeriod;
 	}
 
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
+	}
+	
 	/**
 	 * Stel nieuwe kamers in.
 	 * 
@@ -118,6 +145,22 @@ public class HomeVizApplication extends Application {
 			// TODO toast gaat nog niet, want er is nog geen context
 		}
 		setRooms(handler.getRooms());
+		setPersons(handler.getPersons());
+		currentUser = handler.getCurrentUser();
+		Log.i("HomeVizApplication" , "The currentUser is " + currentUser);
+		
+		randomizeLocationsOfPersons();
+	}
+	
+	public void randomizeLocationsOfPersons() {
+		for(Person person: persons) {
+			if(!person.equals(currentUser)) {
+				int[] percantages = RandomNumberGenerator.genNumbers(rooms.size(), 100);
+				for(int i = 0; i < percantages.length; i++) {
+					rooms.get(i).setPercentageForPerson(person, percantages[i]);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,5 +175,9 @@ public class HomeVizApplication extends Application {
 	 */
 	public void setType(GoogleChartType type) {
 		this.type = type;
+	}
+
+	public List<Room> getRooms() {
+		return this.rooms;
 	}
 }

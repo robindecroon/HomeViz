@@ -35,8 +35,13 @@ public class MyWebView extends WebView implements MyView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		boolean consumed = super.onTouchEvent(event);
-		onTouch(this, event);
+		boolean consumed = false;
+		if(event.getAction() == MotionEvent.ACTION_DOWN) {		
+			consumed = super.onTouchEvent(event);
+			listener.setWithClick(!consumed);
+		}
+		consumed = onTouch(this, event);
+		listener.setWithClick(true);
 		return consumed;
 	}
 
