@@ -67,9 +67,6 @@ public class HomeVizApplication extends Application {
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
 		parseXML("/storage/extSdCard/rooms.xml");
-//		Gson gson = new Gson();
-//		String json = gson.toJson(JsonObject.getTestJson());
-//		System.out.println(json);
 	}
 
 	/**

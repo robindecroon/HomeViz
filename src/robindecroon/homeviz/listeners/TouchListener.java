@@ -114,17 +114,17 @@ public class TouchListener implements View.OnTouchListener {
 			}
 			break;
 		}
-		switch (mode) {
-		case CLICK:
-			if (withClick) {
-				System.out.println("TouchListener: " + withClick + "Toggl");
-				togglActionBar();
-			}
-			break;
-		default:
-			break;
-		}
-		return true;
+//		switch (mode) {
+//		case CLICK:
+//			if (withClick) {
+//				System.out.println("TouchListener: " + withClick + "Toggl");
+//				togglActionBar();
+//			}
+//			break;
+//		default:
+//			break;
+//		}
+		return false;
 	}
 
 	private void togglActionBar() {
@@ -156,8 +156,8 @@ public class TouchListener implements View.OnTouchListener {
 		point.set(x / 2, y / 2);
 	}
 
-	public void setWithClick(boolean withClick) {
-		System.out.println("WithListener: " + withClick);
-		this.withClick = withClick;
-	}
+//	public void setWithClick(boolean withClick) {
+//		System.out.println("WithListener: " + withClick);
+//		this.withClick = withClick;
+//	}
 }

@@ -73,8 +73,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="robindecroon.homeviz.YouActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name="robindecroon.homeviz.you.YouActivity"
             android:label="@string/title_activity_you"
             android:parentActivityName="robindecroon.homeviz.HomeScreen"
             android:theme="@style/FullscreenTheme" >

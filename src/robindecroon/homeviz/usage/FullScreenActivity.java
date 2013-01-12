@@ -10,6 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 
 /**
  * Activity die het volledige scherm vult, zonder actionbar en lights out. De
@@ -25,12 +26,15 @@ public abstract class FullScreenActivity extends Activity implements
 	 * De huidige periode waarin HomeViz zich bevindt.
 	 */
 	protected Period currentPeriod;
+	protected boolean actionBarShown = false;
 
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initPeriod();
 		initFullScreen();
+		
 	}
 
 	/**
@@ -39,6 +43,25 @@ public abstract class FullScreenActivity extends Activity implements
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
+		final Activity context = this;
+		final View rootView = getWindow().getDecorView();
+		rootView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				System.out.println("LOOOOOOOONG CLICK");
+				if (actionBarShown ) {
+					context.getActionBar().hide();
+					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+					actionBarShown = false;
+				} else {
+					context.getActionBar().show();
+					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+					actionBarShown = true;
+				}
+				return false;
+			}
+		});
 		setListeners();
 	}
 

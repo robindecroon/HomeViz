@@ -6,7 +6,7 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
-import robindecroon.homeviz.util.views.MyWebView;
+import robindecroon.homeviz.util.webviews.MyWebView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;

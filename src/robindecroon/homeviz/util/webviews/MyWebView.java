@@ -1,6 +1,7 @@
-package robindecroon.homeviz.util.views;
+package robindecroon.homeviz.util.webviews;
 
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.util.views.MyView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -35,13 +36,14 @@ public class MyWebView extends WebView implements MyView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		boolean consumed = false;
-		if(event.getAction() == MotionEvent.ACTION_DOWN) {		
-			consumed = super.onTouchEvent(event);
-			listener.setWithClick(!consumed);
-		}
+		boolean consumed = super.onTouchEvent(event);
 		consumed = onTouch(this, event);
-		listener.setWithClick(true);
+//		if(event.getAction() == MotionEvent.ACTION_DOWN) {		
+//			consumed = super.onTouchEvent(event);
+//			listener.setWithClick(!consumed);
+//		}
+//		consumed = onTouch(this, event);
+//		listener.setWithClick(true);
 		return consumed;
 	}
 

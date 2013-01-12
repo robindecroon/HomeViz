@@ -6,7 +6,7 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.views.MyWebView;
+import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;

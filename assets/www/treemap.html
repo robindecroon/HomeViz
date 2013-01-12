@@ -1,15 +1,13 @@
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Zoomable Treemaps</title>
+<meta name="viewport" content="target-densitydpi=device-dpi" />
+<title>HomeViz Treemap</title>
 <style>
 
-@import url(http://bost.ocks.org/mike/style.css?20120608);
-
-#chart {
-  width: 960px;
-  height: 500px;
-  background: #bbb;
+html, body {
+margin: 0px;
+padding: 0px;
 }
 
 text {
@@ -51,61 +49,63 @@ rect.parent {
 </style>
 
 
-<p id="chart">
+<div id="chart"></div>
 
-<script src="http://d3js.org/d3.v2.min.js?2.9.1"></script>
+<script src="js/d3.js"></script>
 <script>
 
-var margin = {top: 20, right: 0, bottom: 0, left: 0},
-    width = 960,
-    height = 500 - margin.top - margin.bottom,
-    formatNumber = d3.format(",d"),
-	color = d3.scale.category20c(),
-    transitioning;
+function go(string) {
 
-var x = d3.scale.linear()
-    .domain([0, width])
-    .range([0, width]);
+	document.getElementById("chart").innerHTML = "";
+	
+	var margin = {top: 20, right: 0, bottom: 0, left: 0},
+	    width = window.innerWidth,
+	    height = window.innerHeight - margin.top - margin.bottom - 20,
+	    formatNumber = d3.format(",d"),
+		color = d3.scale.category20c(),
+	    transitioning;
+	
+	var x = d3.scale.linear()
+	    .domain([0, width])
+	    .range([0, width]);
+	
+	var y = d3.scale.linear()
+	    .domain([0, height])
+	    .range([0, height]);
+	
+	var treemap = d3.layout.treemap()
+	    .children(function(d, depth) { return depth ? null : d.children; })
+	    .sort(function(a, b) { return a.value - b.value; })
+	    .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
+	    .round(false);
+	
+	var svg = d3.select("#chart").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.bottom + margin.top)
+	    .style("margin-left", -margin.left + "px")
+	    .style("margin.right", -margin.right + "px")
+	  .append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+	    .style("shape-rendering", "crispEdges");
+	
+	var grandparent = svg.append("g")
+	    .attr("class", "grandparent");
+	
+	grandparent.append("rect")
+	    .attr("y", -margin.top)
+	    .attr("width", width)
+	    .attr("height", margin.top);
+	
+	grandparent.append("text")
+	    .attr("x", 6)
+	    .attr("y", 6 - margin.top)
+	    .attr("dy", ".75em");
 
-var y = d3.scale.linear()
-    .domain([0, height])
-    .range([0, height]);
-
-var treemap = d3.layout.treemap()
-    .children(function(d, depth) { return depth ? null : d.children; })
-    .sort(function(a, b) { return a.value - b.value; })
-    .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
-    .round(false);
-
-var svg = d3.select("#chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.bottom + margin.top)
-    .style("margin-left", -margin.left + "px")
-    .style("margin.right", -margin.right + "px")
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .style("shape-rendering", "crispEdges");
-
-var grandparent = svg.append("g")
-    .attr("class", "grandparent");
-
-grandparent.append("rect")
-    .attr("y", -margin.top)
-    .attr("width", width)
-    .attr("height", margin.top);
-
-grandparent.append("text")
-    .attr("x", 6)
-    .attr("y", 6 - margin.top)
-    .attr("dy", ".75em");
-
-function test() {	
-	var root = JSON.parse({"name":"rooms","children":[{"name":"Living Room","children":[{"name":"Porch","children":[{"name":"Marcel","value":4},{"name":"Roosje","value":2},{"name":"Silke","value":5},{"name":"Vienna","value":8},{"name":"Brigitte","value":5}]},{"name":"Kitchen","children":[{"name":"Marcel","value":2},{"name":"Roosje","value":3},{"name":"Silke","value":7},{"name":"Vienna","value":1},{"name":"Brigitte","value":3}]}]}]});
-
-  initialize(root);
-  accumulate(root);
-  layout(root);
-  display(root);
+	var root = JSON.parse(string);
+	initialize(root);
+	accumulate(root);
+	layout(root);
+	display(root);
 
   function initialize(root) {
     root.x = root.y = 0;
@@ -235,6 +235,6 @@ function test() {
         ? name(d.parent) + "." + d.name
         : d.name;
   }
-});
-
+  
+};
 </script>
