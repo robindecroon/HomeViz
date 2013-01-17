@@ -1,6 +1,5 @@
 package robindecroon.homeviz.usage;
 
-import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
@@ -8,8 +7,6 @@ import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.views.MyLinearLayout;
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -26,7 +23,7 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
-
+		setTitle("Usage");
 		refreshElements();
 	}
 

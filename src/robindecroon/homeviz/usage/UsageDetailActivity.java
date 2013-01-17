@@ -20,6 +20,7 @@ ActionBar.OnNavigationListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_detail_layout);
+		setTitle("Usage > Detail");
 	}
 
 	@Override

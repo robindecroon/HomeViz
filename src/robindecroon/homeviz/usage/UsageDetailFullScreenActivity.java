@@ -10,7 +10,6 @@ import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
-import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -18,7 +17,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.webkit.WebSettings;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +33,7 @@ public abstract class UsageDetailFullScreenActivity extends
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		currentType = types[0];
+
 		makeActionBar();
 		delayedRefresh();
 
@@ -42,7 +41,6 @@ public abstract class UsageDetailFullScreenActivity extends
 
 	private void makeActionBar() {
 		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
 		actionBar.setDisplayHomeAsUpEnabled(true);

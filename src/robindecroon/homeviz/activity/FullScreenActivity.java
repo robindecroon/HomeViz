@@ -97,7 +97,7 @@ public abstract class FullScreenActivity extends Activity implements
 	 * Verberg de actionbar en initialiseer de main listener.
 	 */
 	private void initFullScreen() {
-		getActionBar().hide();
+//		getActionBar().hide();
 		View rootView = getWindow().getDecorView();
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		rootView.setOnTouchListener(new TouchListener(this));

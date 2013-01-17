@@ -3,15 +3,18 @@
  */
 package robindecroon.homeviz.usage;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.os.Bundle;
+import java.util.List;
+
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.room.Room;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.util.Log;
 
 /**
  * FullScreenActivity die ook nog de locatie bijhoudt. Een horizontale swype
@@ -22,6 +25,8 @@ import robindecroon.homeviz.room.Room;
  */
 public abstract class UsageFullScreenActivity extends FullScreenActivity
 		implements HomeVizListener, TabListener {
+	
+	public static boolean init = true;
 
 	/**
 	 * De huidige kamer.
@@ -31,6 +36,7 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init = true;
 		initRoom();
 		initActionBar();
 	}
@@ -43,11 +49,18 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		actionBar.addTab(getActionBar().newTab().setText("Testtab1")
-				.setTabListener(this));
-		actionBar.addTab(getActionBar().newTab().setText("Testtab2")
-				.setTabListener(this));
-		// actionBar.setSelectedNavigationItem(app.getTabPosition());
+		fillTabs(actionBar);
+		 actionBar.setSelectedNavigationItem(app.getTabPosition());
+	}
+
+	private void fillTabs(ActionBar actionBar) {
+		HomeVizApplication app = (HomeVizApplication) getApplication();
+		
+		List<Room> rooms = app.getRooms();
+		for(int i = 0; i <rooms.size(); i++) {
+			actionBar.addTab(getActionBar().newTab().setText(rooms.get(i).getName())
+					.setTabListener(this));
+		}
 	}
 
 	void initRoom() {
@@ -73,29 +86,29 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		System.out.println(tab.getPosition());
 		HomeVizApplication app = (HomeVizApplication) getApplication();
-		try {
-			app.setCurrentRoom(tab
-					.getPosition());
-			currentRoom =  app.getCurrentRoom();
-			refreshElements();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!init) {
+			System.out.println(tab.getPosition());
+			try {
+				app.setCurrentRoom(tab.getPosition());
+				currentRoom = app.getCurrentRoom();
+				refreshElements();
+			} catch (Exception e) {
+				Log.i("UsageFullScreenActivity","tabSelectedTooSoon: " + e.getMessage());
+			}
+		} else {
+			init = false;
 		}
-		// Intent intent = new Intent(this, UsageActivity.class);
-		// startActivity(intent);
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
+
+
 
 	}
 
