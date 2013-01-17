@@ -4,6 +4,7 @@ import java.util.Map;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import android.app.ActionBar;
@@ -55,6 +56,7 @@ ActionBar.OnNavigationListener{
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.usage_detail_period);
 		usagePeriod.setText(currentPeriod.getName(this));
+		usagePeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

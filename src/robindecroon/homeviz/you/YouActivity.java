@@ -3,6 +3,7 @@ package robindecroon.homeviz.you;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
@@ -79,6 +80,7 @@ public class YouActivity extends FullScreenActivity {
 	protected void setPeriod() {
 		final TextView youPeriod = (TextView) findViewById(R.id.you_period);
 		youPeriod.setText(currentPeriod.getName(this));
+		youPeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

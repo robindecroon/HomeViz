@@ -3,8 +3,11 @@
  */
 package robindecroon.homeviz.util;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 
@@ -29,7 +32,7 @@ public enum Period {
 		}
 
 		@Override
-		public GregorianCalendar begin() {
+		public GregorianCalendar getBegin() {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.DAY_OF_MONTH, -1);
 			return calendar;
@@ -40,7 +43,7 @@ public enum Period {
 			return 1;
 		}
 	},
-	WEEK( R.string.period_week) {
+	WEEK(R.string.period_week) {
 		@Override
 		public Period previous() {
 			return DAY;
@@ -52,7 +55,7 @@ public enum Period {
 		}
 
 		@Override
-		public GregorianCalendar begin() {
+		public GregorianCalendar getBegin() {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.WEEK_OF_MONTH, -1);
 			return calendar;
@@ -63,7 +66,7 @@ public enum Period {
 			return 7;
 		}
 	},
-	MONTH( R.string.period_month) {
+	MONTH(R.string.period_month) {
 		@Override
 		public Period previous() {
 			return WEEK;
@@ -75,7 +78,7 @@ public enum Period {
 		}
 
 		@Override
-		public GregorianCalendar begin() {
+		public GregorianCalendar getBegin() {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MONTH, -1);
 			return calendar;
@@ -86,7 +89,7 @@ public enum Period {
 			return 30;
 		}
 	},
-	YEAR( R.string.period_year) {
+	YEAR(R.string.period_year) {
 		@Override
 		public Period previous() {
 			return MONTH;
@@ -99,7 +102,7 @@ public enum Period {
 		}
 
 		@Override
-		public GregorianCalendar begin() {
+		public GregorianCalendar getBegin() {
 			GregorianCalendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.YEAR, -1);
 			return calendar;
@@ -124,12 +127,18 @@ public enum Period {
 
 		@Override
 		public int getMultiplier() {
-			return (int) ((end().getTimeInMillis() - begin().getTimeInMillis()) / (86400000));
+			return (int) ((getEnd().getTimeInMillis() - getBegin().getTimeInMillis()) / (86400000));
+		}
+
+		@Override
+		public String getName(Context context) {
+			DateFormat formater = DateFormat.getDateInstance();			
+			return formater.format(getBegin().getTime()) + " - " + formater.format(getEnd().getTime());
 		}
 	};
 
 	private final int nameId;
-	
+
 	private GregorianCalendar begin;
 	private GregorianCalendar end;
 
@@ -144,35 +153,36 @@ public enum Period {
 		this.nameId = nameId;
 		this.end = new GregorianCalendar();
 	}
-	
-	public void setBegin(GregorianCalendar begin) throws IllegalPeriodModification {
-		if(this == CUSTOM) {
-			this.begin = begin;			
+
+	public void setBegin(GregorianCalendar begin)
+			throws IllegalPeriodModification {
+		if (this == CUSTOM) {
+			this.begin = begin;
 		} else {
 			throw new IllegalPeriodModification(this, "begin");
 		}
 	}
-	
+
 	public void setEnd(GregorianCalendar end) throws IllegalPeriodModification {
-		if(this == CUSTOM) {
+		if (this == CUSTOM) {
 			this.end = end;
 		} else {
-			throw new IllegalPeriodModification(this,"end");
+			throw new IllegalPeriodModification(this, "end");
 		}
 	}
 
 	public abstract Period previous();
 
 	public abstract Period next();
-	
-	public GregorianCalendar begin() {
+
+	public GregorianCalendar getBegin() {
 		return begin;
 	}
-	
-	public GregorianCalendar end() {
+
+	public GregorianCalendar getEnd() {
 		return end;
 	}
-	
+
 	public abstract int getMultiplier();
 
 }

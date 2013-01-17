@@ -4,6 +4,7 @@ import java.util.Map;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.util.webviews.MyWebView;
@@ -60,6 +61,7 @@ public class LightUsageDetailActivity extends UsageDetailFullScreenActivity {
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.light_usage_detail_period);
 		usagePeriod.setText(currentPeriod.getName(this));
+		usagePeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

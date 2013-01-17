@@ -6,6 +6,7 @@ import java.util.Locale;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Light;
+import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import android.content.Intent;
@@ -70,6 +71,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.light_period);
 		usagePeriod.setText(currentPeriod.getName(this));
+		usagePeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

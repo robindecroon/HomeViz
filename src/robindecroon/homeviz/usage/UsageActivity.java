@@ -25,8 +25,7 @@ import android.widget.TextView;
  * 
  * @see SystemUiHider
  */
-public class UsageActivity extends UsageFullScreenActivity implements
-		DatePickerListener {
+public class UsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -132,21 +131,5 @@ public class UsageActivity extends UsageFullScreenActivity implements
 		homeCinemaLayout.setListener(listener);
 		// homeCinemaLayout.setOnClickListener(new ClickListener(this,
 		// HomeCineamUsageActivity.class));
-	}
-
-	@Override
-	public void update(GregorianCalendar gregorianCalendar, String tag) {
-		try {
-			currentPeriod = Period.CUSTOM;
-			if (tag.equals(DatePickerFragment.FROM)) {
-				currentPeriod.setBegin(gregorianCalendar);
-			} else if (tag.equals(DatePickerFragment.UNTIL)) {
-				currentPeriod.setEnd(gregorianCalendar);
-				refreshElements();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 }

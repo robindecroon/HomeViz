@@ -1,12 +1,17 @@
 package robindecroon.homeviz.activity;
 
+import java.util.GregorianCalendar;
+
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.util.DatePickerFragment;
+import robindecroon.homeviz.util.DatePickerListener;
 import robindecroon.homeviz.util.Period;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +24,7 @@ import android.view.View;
  * 
  */
 public abstract class FullScreenActivity extends Activity implements
-		HomeVizListener {
+		HomeVizListener, DatePickerListener {
 
 	/**
 	 * De huidige periode waarin HomeViz zich bevindt.
@@ -138,6 +143,21 @@ public abstract class FullScreenActivity extends Activity implements
 	private void initPeriod() {
 		currentPeriod = ((HomeVizApplication) getApplication())
 				.getCurrentPeriod();
+	}
+	
+	@Override
+	public void update(GregorianCalendar gregorianCalendar, String tag) {
+		try {
+			currentPeriod = Period.CUSTOM;
+			if (tag.equals(DatePickerFragment.FROM)) {
+				currentPeriod.setBegin(gregorianCalendar);
+			} else if (tag.equals(DatePickerFragment.UNTIL)) {
+				currentPeriod.setEnd(gregorianCalendar);
+				refreshElements();
+			}
+		} catch (Exception e) {
+			Log.e("FullScreenActivity", e.getMessage());
+		}
 	}
 
 	/**
