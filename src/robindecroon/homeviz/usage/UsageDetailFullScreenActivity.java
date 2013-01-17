@@ -6,11 +6,15 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
+import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,15 +68,29 @@ public abstract class UsageDetailFullScreenActivity extends
 	public void refreshElements() {
 		super.refreshElements();
 		MyWebView chart = getWebView();
-		WebSettings webSettings = chart.getSettings();
-		webSettings.setJavaScriptEnabled(true);
-
 		Map<String, Amount> map = getPriceMap();
+		
+		String data = makeData(currentPeriod, this, map);
+		
+		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
+				this);
+		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
+
+		MyWebViewClient client = new MyWebViewClient(chart, "ChartToolsClient");
+		client.setString(data);
+		chart.setWebViewClient(client);
+
+		chart.getSettings().setJavaScriptEnabled(true);
+		chart.getSettings().setUseWideViewPort(true);
+		chart.getSettings().setLoadWithOverviewMode(true);
+
 
 		if (!map.isEmpty()) {
-			String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
-			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
-					"UTF-8", null);
+//			String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
+//			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
+//					"UTF-8", null);
+			chart.loadUrl("file:///android_asset/www/charttools.html");
+			
 		} else {
 			LinearLayout layout = getBackupView();
 			layout.removeAllViews();
@@ -85,6 +103,28 @@ public abstract class UsageDetailFullScreenActivity extends
 
 		}
 
+	}
+	
+	private static String makeData(Period currentPeriod, Context context,
+			Map<String, Amount> map) {
+		String data = "[['Period',";
+
+		String[] values = new String[map.size()];
+		int i = 0;
+		for (String key : map.keySet()) {
+			data += "'" + key + "',";
+			values[i] = Double.toString(map.get(key).getEuroValue());
+			i++;
+		}
+		data = data.substring(0, data.length() - 1);
+		data += "],['" + currentPeriod.getName(context) + "', ";
+
+		for (String value : values) {
+			data += value + ",";
+		}
+		data = data.substring(0, data.length() - 1);
+		data += "]]";
+		return data;
 	}
 
 	protected abstract LinearLayout getBackupView();

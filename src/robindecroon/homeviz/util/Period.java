@@ -124,7 +124,7 @@ public enum Period {
 
 		@Override
 		public int getMultiplier() {
-			return (int)(Math.random() * (366));
+			return (int) ((end().getTimeInMillis() - begin().getTimeInMillis()) / (86400000));
 		}
 	};
 

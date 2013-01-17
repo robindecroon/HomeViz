@@ -1,8 +1,8 @@
 package robindecroon.homeviz.you;
 
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.TouchListener;
-import robindecroon.homeviz.usage.FullScreenActivity;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;

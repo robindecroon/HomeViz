@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@color/Black"
     tools:context=".HomeScreen" >
 
     <GridLayout
@@ -51,6 +51,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/Blue"
             android:textSize="100sp" />
+
+        <CalendarView
+            android:layout_width="370dp"
+            android:layout_height="299dp"
+            android:layout_gravity="left" />
+
     </GridLayout>
 
 </FrameLayout>

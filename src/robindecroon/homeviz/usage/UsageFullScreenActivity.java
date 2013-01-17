@@ -5,6 +5,7 @@ package robindecroon.homeviz.usage;
 
 import android.os.Bundle;
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.room.Room;
 

@@ -17,23 +17,23 @@ import com.google.gson.Gson;
 public class MyWebViewClient extends WebViewClient {
 	
 	WebView myBrowser;
-	private String json;
+	private String string;
 	private String name;
 	
 	public MyWebViewClient(WebView myBrowser, String name) {
 		this.myBrowser = myBrowser;
 		this.setName(name);
 		Gson gson = new Gson();
-		this.json= "'" + gson.toJson(JsonObject.getTestJson()) + "'";
+		this.string= "'" + gson.toJson(JsonObject.getTestJson()) + "'";
 	}
 	
-	public void setJson(String json) {
-		this.json = json;
+	public void setString(String string) {
+		this.string = string;
 	}
 	
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		myBrowser.loadUrl("javascript:window.setTimeout(go(" + json
+		myBrowser.loadUrl("javascript:window.setTimeout(go(" + string
 				+ "),35)");
 	}
 

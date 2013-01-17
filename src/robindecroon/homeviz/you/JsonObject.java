@@ -37,7 +37,7 @@ public class JsonObject {
 		drie.setChildren(new JsonObject[]{vienna,silke});
 		vier.setChildren(new JsonObject[]{vienna,roosje});
 		
-		JsonObject root = new JsonObject("root",null);
+		JsonObject root = new JsonObject("Home",null);
 		
 		root.setChildren(new JsonObject[]{een,twee,drie,vier});
 		

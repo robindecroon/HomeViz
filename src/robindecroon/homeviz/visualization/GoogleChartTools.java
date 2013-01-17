@@ -29,6 +29,15 @@ public abstract class GoogleChartTools {
 			Context context, Map<String, Amount> map, int width, int height,
 			GoogleChartType type) {
 
+		String data = makeData(currentPeriod, context, map);
+
+		// De hoogte moet iets kleiner zijn, anders is er een scrollbar
+		return startDetail + data + mid1Detail + "title: '" + title + " in euro'" + mid2Detail
+				+ type + mid3 + (width - 10) + mid4 + (height - 20) + end;
+	}
+
+	private static String makeData(Period currentPeriod, Context context,
+			Map<String, Amount> map) {
 		String data = "['Period',";
 
 		String[] values = new String[map.size()];
@@ -46,9 +55,6 @@ public abstract class GoogleChartTools {
 		}
 		data = data.substring(0, data.length() - 1);
 		data += "]";
-
-		// De hoogte moet iets kleiner zijn, anders is er een scrollbar
-		return startDetail + data + mid1Detail + "title: '" + title + " in euro'" + mid2Detail
-				+ type + mid3 + (width - 10) + mid4 + (height - 20) + end;
+		return data;
 	}
 }

@@ -4,9 +4,10 @@
 package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.usage.FullScreenActivity;
+import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.util.Period;
 import android.graphics.PointF;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +21,8 @@ public class TouchListener implements View.OnTouchListener {
 	private final static int NONE = 0;
 	private final static int SWYPE = 1;
 	private final static int ZOOM = 2;
-	private final static int CLICK = 3;
+	private final static int LONG_CLICK = 3;
+	// private final static int CLICK = 3;
 
 	private PointF start = new PointF();
 	private PointF mid = new PointF();
@@ -36,7 +38,7 @@ public class TouchListener implements View.OnTouchListener {
 	private FullScreenActivity context;
 	private HomeVizApplication appContext;
 
-	private boolean withClick = true;
+	private long lastClick;
 
 	/**
 	 * 
@@ -55,6 +57,7 @@ public class TouchListener implements View.OnTouchListener {
 	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
+			lastClick = System.currentTimeMillis();
 			mode = SWYPE;
 			start.set(event.getX(), event.getY());
 			break;
@@ -69,7 +72,8 @@ public class TouchListener implements View.OnTouchListener {
 			int xDiff = (int) (start.x - event.getX());
 			int yDiff = (int) (start.y - event.getY());
 			if (Math.abs(xDiff) < 8 && Math.abs(yDiff) < 8 && mode != ZOOM) {
-				mode = CLICK;
+				if (System.currentTimeMillis() - lastClick > 500)
+					mode = LONG_CLICK;
 			}
 
 			if (mode == SWYPE) {
@@ -114,17 +118,30 @@ public class TouchListener implements View.OnTouchListener {
 			}
 			break;
 		}
-//		switch (mode) {
-//		case CLICK:
-//			if (withClick) {
-//				System.out.println("TouchListener: " + withClick + "Toggl");
-//				togglActionBar();
-//			}
-//			break;
-//		default:
-//			break;
-//		}
-		return false;
+		switch (mode) {
+		case LONG_CLICK:
+			showActionBar();
+			return false;
+		default:
+			break;
+		}
+		return true;
+	}
+
+	private void showActionBar() {
+		final View rootView = context.getWindow().getDecorView();
+		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		context.getActionBar().show();
+		actionBarShown = true;
+
+		final Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				context.getActionBar().hide();
+				rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+			}
+		}, 3000);
 	}
 
 	private void togglActionBar() {
@@ -155,9 +172,4 @@ public class TouchListener implements View.OnTouchListener {
 		float y = event.getY(0) + event.getY(1);
 		point.set(x / 2, y / 2);
 	}
-
-//	public void setWithClick(boolean withClick) {
-//		System.out.println("WithListener: " + withClick);
-//		this.withClick = withClick;
-//	}
 }
