@@ -52,6 +52,10 @@ public class HomeVizApplication extends Application {
 	public Person getCurrentUser() {
 		return currentUser;
 	}
+	
+	public int getTabPosition() {
+		return this.currentRoomIndex;
+	}
 
 	/**
 	 * @param currentUser the currentUser to set
@@ -119,6 +123,10 @@ public class HomeVizApplication extends Application {
 	
 	public Room getCurrentRoom() {
 		return rooms.get(currentRoomIndex);
+	}
+	
+	public void setCurrentRoom(int id) {
+		currentRoomIndex = id;
 	}
 	
 	/**

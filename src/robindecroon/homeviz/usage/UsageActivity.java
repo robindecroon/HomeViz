@@ -1,22 +1,17 @@
 package robindecroon.homeviz.usage;
 
-import java.util.GregorianCalendar;
-
+import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
-import robindecroon.homeviz.util.DatePickerFragment;
-import robindecroon.homeviz.util.DatePickerListener;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.views.MyLinearLayout;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 /**
@@ -25,13 +20,13 @@ import android.widget.TextView;
  * 
  * @see SystemUiHider
  */
-public class UsageActivity extends UsageFullScreenActivity {
+public class UsageActivity extends UsageFullScreenActivity implements ActionBar.TabListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		refreshElements();
 	}
 
@@ -132,4 +127,5 @@ public class UsageActivity extends UsageFullScreenActivity {
 		// homeCinemaLayout.setOnClickListener(new ClickListener(this,
 		// HomeCineamUsageActivity.class));
 	}
+	
 }

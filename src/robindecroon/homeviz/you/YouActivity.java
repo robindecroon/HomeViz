@@ -1,5 +1,6 @@
 package robindecroon.homeviz.you;
 
+import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.TouchListener;
@@ -44,12 +45,13 @@ public class YouActivity extends FullScreenActivity {
 		myBrowser.getSettings().setLoadWithOverviewMode(true);
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
+		TextView user = (TextView) findViewById(R.id.you_current_user);
+		user.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());		
 		refreshElements();
 	}
 
 	@Override
 	public void onSwypeToLeft() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -60,13 +62,11 @@ public class YouActivity extends FullScreenActivity {
 
 	@Override
 	public void onSwypeToUp() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onSwypeToDown() {
-		// TODO Auto-generated method stub
 
 	}
 
