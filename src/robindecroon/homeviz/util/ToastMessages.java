@@ -54,4 +54,10 @@ public class ToastMessages {
 		Toast.LENGTH_LONG).show();
 	}
 
+	public static void swypeDownForDetail() {
+		Toast.makeText(context,context.getResources().getString(
+				R.string.toast_swype_down_for_detail),
+		Toast.LENGTH_LONG).show();
+	}
+
 }

@@ -67,9 +67,7 @@ public abstract class UsageDetailFullScreenActivity extends
 		MyWebView chart = getWebView();
 		Map<String, Amount> map = getPriceMap();
 		
-		String data = makeData(currentPeriod, this, map);
-		System.out.println(data);
-		
+		String data = makeData(currentPeriod, this, map);		
 //		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
 //				this);
 //		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");

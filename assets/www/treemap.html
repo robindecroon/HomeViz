@@ -57,6 +57,8 @@ rect.parent {
 
 function go(string) {
 
+  d3.select("body").style("background-color", "black");
+
 	document.getElementById("chart").innerHTML = "";
 	
 	var margin = {top: 20, right: 0, bottom: 0, left: 0},
@@ -95,7 +97,8 @@ function go(string) {
 	grandparent.append("rect")
 	    .attr("y", -margin.top)
 	    .attr("width", width)
-	    .attr("height", margin.top);
+	    .attr("height", margin.top)
+      .style("background-color", "black");
 	
 	grandparent.append("text")
 	    .attr("x", 6)

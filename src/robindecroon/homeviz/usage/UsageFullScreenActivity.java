@@ -92,7 +92,6 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		HomeVizApplication app = (HomeVizApplication) getApplication();
 		if (!init) {
-			System.out.println(tab.getPosition());
 			try {
 				app.setCurrentRoom(tab.getPosition());
 				currentRoom = app.getCurrentRoom();

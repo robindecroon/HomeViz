@@ -5,6 +5,7 @@ import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
+import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.util.views.MyLinearLayout;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -77,7 +78,7 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 
 	@Override
 	public void onSwypeToUp() {
-		System.out.println("Swypt up");
+		ToastMessages.swypeDownForDetail();
 	}
 
 	@Override

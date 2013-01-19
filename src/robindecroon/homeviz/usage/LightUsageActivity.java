@@ -37,6 +37,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	public void onSwypeToUp() {
+		ToastMessages.swypeDownForDetail();
 	}
 
 	@Override

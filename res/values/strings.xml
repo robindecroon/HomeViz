@@ -34,5 +34,6 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="question_enable_location">Do you want to enable location services?</string>
+    <string name="toast_swype_down_for_detail">Swype down for a more detailed view!</string>
 
 </resources>
