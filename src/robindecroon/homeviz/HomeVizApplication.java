@@ -20,6 +20,7 @@ import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.GoogleChartType;
+import robindecroon.homeviz.xml.Country;
 import robindecroon.homeviz.xml.XMLHandler;
 import robindecroon.stackoverflow.RandomNumberGenerator;
 import android.app.Application;
@@ -51,7 +52,7 @@ public class HomeVizApplication extends Application {
 	private String currentCity;
 	private String currentCountry;
 	
-	private Map<String, Double> coValues;
+	private Map<String, Country> coValues;
 
 	/**
 	 * @return the currentCity
@@ -232,7 +233,7 @@ public class HomeVizApplication extends Application {
 			throw new LocationUnknownException("No location");
 		} else {
 			if(coValues.containsKey(currentCountry)) {
-				return coValues.get(currentCountry);
+				return coValues.get(currentCountry).getCo2Value();
 			} else {
 				throw new LocationUnknownException("No CO2 data");
 			}

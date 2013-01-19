@@ -47,8 +47,7 @@ public class YouActivity extends FullScreenActivity {
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
 		TextView user = (TextView) findViewById(R.id.you_current_user);
-		user.setText(((HomeVizApplication) getApplication()).getCurrentUser()
-				.getName());
+		user.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());
 		refreshElements();
 	}
 

@@ -13,6 +13,7 @@ import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.users.Person;
+import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.visualization.GoogleChartType;
 
 /**
@@ -50,12 +51,12 @@ public class XMLHandler extends DefaultHandler {
 
 	private List<Person> persons = new ArrayList<Person>();
 	
-	private Map<String,Double> coValues = new HashMap<String,Double>();
+	private Map<String,Country> coValues = new HashMap<String,Country>();
 	
 	/**
 	 * @return the coValues
 	 */
-	public Map<String, Double> getCoValues() {
+	public Map<String, Country> getCoValues() {
 		return coValues;
 	}
 
@@ -123,10 +124,12 @@ public class XMLHandler extends DefaultHandler {
 		} else if (qName.equalsIgnoreCase("User")) {
 			currentUser = tempVal;
 		} else if (qName.equalsIgnoreCase("Country")) {
-			coValues.put(tempCountry.getName(), tempCountry.getCo2Value());
+			coValues.put(tempCountry.getName(), tempCountry.clone());
 			tempCountry = null;
 		} else if (qName.equalsIgnoreCase("CO2Value")) {
 			tempCountry.setCo2Value(Double.valueOf(tempVal));
+		} else if (qName.equalsIgnoreCase("kwh")) {
+			tempCountry.setKwh(new Amount(Double.valueOf(tempVal)));
 		}
 	}
 

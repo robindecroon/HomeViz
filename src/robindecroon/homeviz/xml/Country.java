@@ -1,9 +1,21 @@
 package robindecroon.homeviz.xml;
 
+import robindecroon.homeviz.util.Amount;
+
 public class Country {
 	
 	private String name;
 	private double co2Value;
+	
+	private Amount kwh;
+	
+	public Country(String name2, double co2Value2, Amount kwh2) {
+		this.name = name2;
+		this.co2Value = co2Value2;
+		this.kwh = kwh2;
+	}
+	
+	public Country() {}
 	/**
 	 * @return the name
 	 */
@@ -27,6 +39,23 @@ public class Country {
 	 */
 	public void setCo2Value(double co2Value) {
 		this.co2Value = co2Value;
+	}
+	/**
+	 * @return the kwh
+	 */
+	public Amount getKwh() {
+		return kwh;
+	}
+	/**
+	 * @param kwh the kwh to set
+	 */
+	public void setKwh(Amount kwh) {
+		this.kwh = kwh;
+	}
+	
+	@Override
+	public Country clone() {
+		return new Country(name,co2Value,kwh);
 	}
 
 }
