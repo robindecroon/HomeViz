@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".UsageDetailActivity" >
 
@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textSize="50sp" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/usage_detail_location"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textSize="40sp" />
 
     <LinearLayout

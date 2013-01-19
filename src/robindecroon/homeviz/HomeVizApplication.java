@@ -30,7 +30,7 @@ import android.util.Log;
  * 
  */
 public class HomeVizApplication extends Application {
-
+	
 	/**
 	 * De huidige periode.
 	 */
@@ -46,6 +46,37 @@ public class HomeVizApplication extends Application {
 
 	private Person currentUser;
 	
+	private String currentCity;
+	private String currentCountry;
+	
+	/**
+	 * @return the currentCity
+	 */
+	public String getCurrentCity() {
+		return currentCity;
+	}
+
+	/**
+	 * @param currentCity the currentCity to set
+	 */
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
+	}
+
+	/**
+	 * @return the currentCountry
+	 */
+	public String getCurrentCountry() {
+		return currentCountry;
+	}
+
+	/**
+	 * @param currentCountry the currentCountry to set
+	 */
+	public void setCurrentCountry(String currentCountry) {
+		this.currentCountry = currentCountry;
+	}
+		
 	/**
 	 * @return the currentUser
 	 */
@@ -185,4 +216,6 @@ public class HomeVizApplication extends Application {
 	public List<Room> getRooms() {
 		return this.rooms;
 	}
+	
+	
 }

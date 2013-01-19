@@ -2,8 +2,6 @@
 <resources>
 
     <string name="app_name">HomeViz</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="dummy_button">Dummy Button</string>
     <string name="keyword_you">YOU</string>
     <string name="keyword_hint">HINT</string>
     <string name="keyword_usage">USAGE</string>
@@ -15,9 +13,7 @@
     <string name="period_custom">Custom Time Period</string>
     <string name="toast_no_file_manager">No File (Manager / Explorer)etc Found In Your Device</string>
     <string name="toast_wrong_file">Please load the correct file!</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_usaged_d">UsagedDActivity</string>
     <string name="title_activity_usage_detail">UsageDetailActivity</string>
     <string name="toast_no_more_detail">No more detail possible!</string>
     <string name="toast_no_smaller_period">No smaller period possible!</string>
@@ -36,5 +32,12 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_you">YouActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="detail">Details</string>
+    <string name="no_location">Unknown Location</string>
+    <string name="toast_no_location_resource">Please enable your WiFi or GPS for location tracking!</string>
+    <string name="toast_enable_location">Please enable location Services</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="question_enable_location">Do you want to enable location services?</string>
 
 </resources>

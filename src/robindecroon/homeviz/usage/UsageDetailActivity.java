@@ -12,15 +12,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
- 
-public class UsageDetailActivity extends UsageDetailFullScreenActivity implements
-ActionBar.OnNavigationListener{
+
+public class UsageDetailActivity extends UsageDetailFullScreenActivity
+		implements ActionBar.OnNavigationListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_detail_layout);
-		setTitle("Usage > Detail");
+		String usage = getResources().getString(R.string.keyword_usage);
+		String detail = getResources().getString(R.string.detail);
+		setTitle(usage + "  >  " + detail);
 	}
 
 	@Override

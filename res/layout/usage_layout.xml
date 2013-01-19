@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".UsageActivity" >
 
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:keepScreenOn="true"
         android:paddingTop="50dp"
-        android:textColor="@color/Black"
+        android:textColor="@color/WhiteSmoke"
         android:textSize="150sp"
         android:textStyle="bold" />
 
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textSize="50sp" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/usage_location"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textSize="40sp" />
 
     <LinearLayout
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/White"
                 android:textSize="40sp" />
         </robindecroon.homeviz.util.views.MyLinearLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/White"
                 android:textSize="40sp" />
         </robindecroon.homeviz.util.views.MyLinearLayout>
 
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/White"
                 android:textSize="40sp" />
         </robindecroon.homeviz.util.views.MyLinearLayout>
 
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/White"
                 android:textSize="40sp" />
         </robindecroon.homeviz.util.views.MyLinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/White"
                 android:textSize="40sp" />
         </robindecroon.homeviz.util.views.MyLinearLayout>
     </LinearLayout>

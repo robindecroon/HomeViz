@@ -41,5 +41,17 @@ public class ToastMessages {
 				R.string.toast_no_larger_period),
 		Toast.LENGTH_LONG).show();
 	}
+	
+	public static void noLocationResource() {
+		Toast.makeText(context,context.getResources().getString(
+				R.string.toast_no_location_resource),
+		Toast.LENGTH_LONG).show();
+	}
+	
+	public static void enableLocation() {
+		Toast.makeText(context,context.getResources().getString(
+				R.string.toast_enable_location),
+		Toast.LENGTH_LONG).show();
+	}
 
 }

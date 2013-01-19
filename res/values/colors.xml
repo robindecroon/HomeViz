@@ -1,6 +1,8 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="ics_background_start">#ff020202</color>
+    <color name="ics_background_end">#ff272D33</color>
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>

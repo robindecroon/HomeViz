@@ -12,29 +12,35 @@ import com.google.gson.Gson;
 
 /**
  * @author Robin
- *
+ * 
  */
 public class MyWebViewClient extends WebViewClient {
 	
+	public final static String CHART = "Chart";
+	public final static String TREEMAP = "Treemap";
+
 	WebView myBrowser;
 	private String string;
 	private String name;
-	
+
 	public MyWebViewClient(WebView myBrowser, String name) {
 		this.myBrowser = myBrowser;
 		this.setName(name);
 		Gson gson = new Gson();
-		this.string= "'" + gson.toJson(JsonObject.getTestJson()) + "'";
+		this.string = "'" + gson.toJson(JsonObject.getTestJson()) + "'";
 	}
-	
+
 	public void setString(String string) {
 		this.string = string;
 	}
-	
+
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		myBrowser.loadUrl("javascript:window.setTimeout(go(" + string
-				+ "),35)");
+		if(name.equals(TREEMAP)) {
+			myBrowser.loadUrl("javascript:window.setTimeout(go(" + string + "),35)");			
+		} else if(name.equals(CHART)){
+			myBrowser.loadUrl("javascript:go(" + string +")");
+		}
 	}
 
 	@Override
@@ -46,7 +52,8 @@ public class MyWebViewClient extends WebViewClient {
 	@Override
 	public void onReceivedError(WebView view, int errorCode,
 			String description, String failingUrl) {
-		Log.e("WebViewClient", "Error in  " + name + "description: " + description);
+		Log.e("WebViewClient", "Error in  " + name + "description: "
+				+ description);
 	}
 
 	/**
@@ -57,7 +64,8 @@ public class MyWebViewClient extends WebViewClient {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;

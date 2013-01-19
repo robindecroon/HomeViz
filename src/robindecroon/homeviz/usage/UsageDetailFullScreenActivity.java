@@ -7,9 +7,8 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
-import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
-import robindecroon.homeviz.util.webviews.MyWebViewClient;
+import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -69,14 +68,15 @@ public abstract class UsageDetailFullScreenActivity extends
 		Map<String, Amount> map = getPriceMap();
 		
 		String data = makeData(currentPeriod, this, map);
+		System.out.println(data);
 		
-		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
-				this);
-		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
+//		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
+//				this);
+//		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
 
-		MyWebViewClient client = new MyWebViewClient(chart, "ChartToolsClient");
-		client.setString(data);
-		chart.setWebViewClient(client);
+//		MyWebViewClient client = new MyWebViewClient(chart, "ChartToolsClient");
+//		client.setString(data + ",'" + chart.getWidth() + "px','" + chart.getHeight() + "px'");
+//		chart.setWebViewClient(client);
 
 		chart.getSettings().setJavaScriptEnabled(true);
 		chart.getSettings().setUseWideViewPort(true);
@@ -84,10 +84,10 @@ public abstract class UsageDetailFullScreenActivity extends
 
 
 		if (!map.isEmpty()) {
-//			String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
-//			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
-//					"UTF-8", null);
-			chart.loadUrl("file:///android_asset/www/charttools.html");
+			String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
+			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
+					"UTF-8", null);
+//			chart.loadUrl("file:///android_asset/www/charttools.html");
 			
 		} else {
 			LinearLayout layout = getBackupView();

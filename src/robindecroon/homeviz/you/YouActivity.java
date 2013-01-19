@@ -38,7 +38,7 @@ public class YouActivity extends FullScreenActivity {
 				"AndroidFunction");
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				"TreemapClient"));
+				MyWebViewClient.TREEMAP));
 
 		myBrowser.getSettings().setJavaScriptEnabled(true);
 		myBrowser.getSettings().setUseWideViewPort(true);
@@ -46,7 +46,8 @@ public class YouActivity extends FullScreenActivity {
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
 		TextView user = (TextView) findViewById(R.id.you_current_user);
-		user.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());		
+		user.setText(((HomeVizApplication) getApplication()).getCurrentUser()
+				.getName());
 		refreshElements();
 	}
 
