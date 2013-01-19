@@ -147,7 +147,6 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	@Override
 	protected void setListeners() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

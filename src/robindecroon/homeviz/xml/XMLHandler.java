@@ -1,7 +1,9 @@
 package robindecroon.homeviz.xml;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -47,6 +49,17 @@ public class XMLHandler extends DefaultHandler {
 	private GoogleChartType type;
 
 	private List<Person> persons = new ArrayList<Person>();
+	
+	private Map<String,Double> coValues = new HashMap<String,Double>();
+	
+	/**
+	 * @return the coValues
+	 */
+	public Map<String, Double> getCoValues() {
+		return coValues;
+	}
+
+	private Country tempCountry;
 
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
@@ -61,8 +74,11 @@ public class XMLHandler extends DefaultHandler {
 			tempLight = new Light();
 		} else if (qName.equalsIgnoreCase("Person")) {
 			tempPerson = new Person();
-		} else if (qName.equalsIgnoreCase("User"))
-			;
+		} else if (qName.equalsIgnoreCase("User")) {
+			// Do nothing			
+		} else if (qName.equalsIgnoreCase("Country")) {
+			tempCountry = new Country();
+		}
 	}
 
 	/**
@@ -88,6 +104,8 @@ public class XMLHandler extends DefaultHandler {
 				tempRoom.setName(tempVal);
 			} else if (tempPerson != null) {
 				tempPerson.setName(tempVal);
+			} else if (tempCountry != null) {
+				tempCountry.setName(tempVal);
 			}
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempLight.setId(tempVal);
@@ -104,6 +122,11 @@ public class XMLHandler extends DefaultHandler {
 			}
 		} else if (qName.equalsIgnoreCase("User")) {
 			currentUser = tempVal;
+		} else if (qName.equalsIgnoreCase("Country")) {
+			coValues.put(tempCountry.getName(), tempCountry.getCo2Value());
+			tempCountry = null;
+		} else if (qName.equalsIgnoreCase("CO2Value")) {
+			tempCountry.setCo2Value(Double.valueOf(tempVal));
 		}
 	}
 

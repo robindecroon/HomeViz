@@ -40,9 +40,6 @@ public class HomeScreen extends Activity implements LocationListener {
 	private static final int PICKFILE_RESULT_CODE = 1;
 	private static final int LOCATION_SETTINGS = 2;
 
-	// private String currentCountry;
-	// private String currentCity;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

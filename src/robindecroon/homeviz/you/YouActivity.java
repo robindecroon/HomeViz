@@ -3,6 +3,7 @@ package robindecroon.homeviz.you;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
+import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
