@@ -173,7 +173,6 @@ public class HomeScreen extends Activity implements LocationListener {
 							dialogClickListener)
 					.setNegativeButton(getResources().getString(R.string.No),
 							dialogClickListener).show();
-
 		}
 	}
 

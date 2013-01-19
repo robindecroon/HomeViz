@@ -118,7 +118,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				layout.addView(image);
 
 				TextView text = new TextView(this);
-				text.setTextColor(getResources().getColor(R.color.Black));
+				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
 						LinearLayout.LayoutParams.MATCH_PARENT,
@@ -134,7 +134,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 			TextView noLights = new TextView(this);
 			noLights.setText(R.string.no_lights);
 			noLights.setTextSize(100);
-			noLights.setTextColor(getResources().getColor(R.color.Black));
+			noLights.setTextColor(getResources().getColor(R.color.White));
 			lightsLayout.addView(noLights);
 			
 			lampsPresent = false;
