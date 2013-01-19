@@ -24,7 +24,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/you_current_user"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textSize="40sp" />
 
     <LinearLayout

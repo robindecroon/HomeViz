@@ -19,7 +19,7 @@ public abstract class GoogleChartTools {
 	private final static String mid2Detail = "};var chart = new google.visualization.";
 
 	private final static String mid3 = "(document.getElementById('chart_div'));chart.draw(data,"
-			+ " options);}</script> </head> <body> <div id=\"chart_div\" style=\"width:";
+			+ " options);}</script> </head> <body bgcolor=\"black\"> <div id=\"chart_div\" style=\"width:";
 
 	private final static String mid4 = "px; height: ";
 

@@ -6,8 +6,6 @@ package robindecroon.homeviz.util;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 

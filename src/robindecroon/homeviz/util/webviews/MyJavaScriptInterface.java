@@ -1,6 +1,5 @@
 package robindecroon.homeviz.util.webviews;
 
-import robindecroon.homeviz.you.YouActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.Toast;

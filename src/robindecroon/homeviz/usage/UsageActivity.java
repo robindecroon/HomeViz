@@ -23,7 +23,6 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.usage_layout);
-		setTitle("Usage");
 		refreshElements();
 	}
 
@@ -86,6 +85,7 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 		Intent intent = new Intent(this, UsageDetailActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
+		finish();
 	}
 
 	@Override

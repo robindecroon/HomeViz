@@ -25,6 +25,7 @@ public class MyWebView extends WebView implements MyView {
 		super(context, attrs,defStyle);
 	}
 	
+	@Override
 	public void setListener(TouchListener listener) {
 		this.listener = listener;
 	}

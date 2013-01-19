@@ -12,6 +12,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -97,15 +98,15 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				Light light = lights.get(i);
 				LinearLayout layout = new LinearLayout(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+						LayoutParams.WRAP_CONTENT,
+						LayoutParams.WRAP_CONTENT, 1);
 				layout.setLayoutParams(lp);
 				layout.setOrientation(LinearLayout.VERTICAL);
 
 				ImageView image = new ImageView(this);
 				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT,
+						LayoutParams.WRAP_CONTENT);
 				lp2.gravity = Gravity.CENTER;
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
@@ -121,8 +122,8 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.MATCH_PARENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT));
+						LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
 				text.setText(light.getPrice(currentPeriod).toString());
 

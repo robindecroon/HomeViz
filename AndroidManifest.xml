@@ -64,15 +64,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_light_usage_detail"
             android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
-            android:name="robindecroon.homeviz.TestActivity"
-            android:label="@string/title_activity_test" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.LightUsageActivity" />
         </activity>
         <activity
             android:name="robindecroon.homeviz.you.YouActivity"
@@ -82,15 +76,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.HomeScreen" />
-        </activity>
-        <activity
-            android:name="robindecroon.homeviz.MainActivity"
-            android:label="@string/title_activity_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

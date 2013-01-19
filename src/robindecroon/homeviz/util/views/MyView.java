@@ -10,6 +10,7 @@ public interface MyView extends OnTouchListener {
 	
 	public void setListener(TouchListener listener);
 	
+	@Override
 	public boolean onTouch(View v, MotionEvent event);
 
 	public boolean onTouchEvent(MotionEvent event);
