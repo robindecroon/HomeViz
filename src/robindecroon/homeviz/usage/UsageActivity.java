@@ -4,8 +4,8 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.usage.light.LightUsageActivity;
+import robindecroon.homeviz.usage.water.WaterUsageActivity;
 import robindecroon.homeviz.util.PeriodListener;
-import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.util.views.MyLinearLayout;
 import android.app.ActionBar;
@@ -111,8 +111,8 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 				LightUsageActivity.class));
 		final MyLinearLayout waterLayout = (MyLinearLayout) findViewById(R.id.water_layout);
 		waterLayout.setListener(listener);
-		// waterLayout.setOnClickListener(new ClickListener(this,
-		// WaterUsageActivity.class));
+		 waterLayout.setOnClickListener(new ClickListener(this,
+		 WaterUsageActivity.class));
 		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
 		heatingLayout.setListener(listener);
 		// heatingLayout.setOnClickListener(new ClickListener(this,

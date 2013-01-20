@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
@@ -53,7 +54,7 @@ public class HomeVizApplication extends Application {
 	private String currentCity;
 	private String currentCountry;
 	
-	private Map<String, Country> coValues;
+	private Map<String, Country> countryMap;
 
 	/**
 	 * @return the currentCity
@@ -83,7 +84,9 @@ public class HomeVizApplication extends Application {
 	 */
 	public void setCurrentCountry(String currentCountry) {
 		// TODO dirty hack
-		Light.setKwhPrice(coValues.get(currentCountry).getKwh());
+		Country country = countryMap.get(currentCountry);
+		Light.setKwhPrice(country.getKwh());
+		Water.setWaterPrice(country.getLiterPrice());
 		this.currentCountry = currentCountry;
 	}
 
@@ -194,7 +197,7 @@ public class HomeVizApplication extends Application {
 		setRooms(handler.getRooms());
 		setPersons(handler.getPersons());
 		currentUser = handler.getCurrentUser();
-		coValues = handler.getCoValues();
+		countryMap = handler.getCountryMap();
 		Log.i("HomeVizApplication", "The currentUser is " + currentUser);
 		randomizeLocationsOfPersons();
 	}
@@ -234,8 +237,8 @@ public class HomeVizApplication extends Application {
 		if (currentCountry == null) {
 			throw new LocationUnknownException("No location");
 		} else {
-			if(coValues.containsKey(currentCountry)) {
-				return coValues.get(currentCountry).getCo2Value();
+			if(countryMap.containsKey(currentCountry)) {
+				return countryMap.get(currentCountry).getCo2Value();
 			} else {
 				throw new LocationUnknownException("No CO2 data");
 			}

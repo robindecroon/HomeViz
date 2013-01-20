@@ -12,6 +12,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.visualization.GoogleChartType;
@@ -48,6 +49,7 @@ public class XMLHandler extends DefaultHandler {
 	 */
 	private Light tempLight;
 	private Person tempPerson;
+	private Water tempWater;
 	private String currentUserName;
 	private GoogleChartType type;
 	private Country tempCountry;
@@ -69,6 +71,8 @@ public class XMLHandler extends DefaultHandler {
 			// Do nothing			
 		} else if (qName.equalsIgnoreCase("Country")) {
 			tempCountry = new Country();
+		} else if (qName.equalsIgnoreCase("Water")) {
+			tempWater = new Water();
 		}
 	}
 
@@ -91,7 +95,7 @@ public class XMLHandler extends DefaultHandler {
 			rooms.add(tempRoom);
 			tempRoom = null;
 		} else if (qName.equalsIgnoreCase("Name")) {
-			if (tempRoom != null && tempLight == null) {
+			if (tempRoom != null && tempLight == null && tempWater == null) {
 				tempRoom.setName(tempVal);
 			} else if (tempPerson != null) {
 				tempPerson.setName(tempVal);
@@ -99,7 +103,9 @@ public class XMLHandler extends DefaultHandler {
 				tempCountry.setName(tempVal);
 			} else if (tempLight != null) {
 				tempLight.setId(tempVal);
-			} 
+			} else if (tempWater != null) {
+				tempWater.setName(tempVal);
+			}
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempRoom.addLight(tempLight);
 			tempLight = null;
@@ -126,7 +132,14 @@ public class XMLHandler extends DefaultHandler {
 			tempLight.setWatt(Integer.valueOf(tempVal));
 		} else if (qName.equalsIgnoreCase("TimeDay")) {
 			tempLight.setAverageHoursOn(Integer.valueOf(tempVal));
-		}
+		} else if (qName.equalsIgnoreCase("Water")) {
+			tempRoom.addWater(tempWater);
+			tempWater = null;
+		} else if (qName.equalsIgnoreCase("Liter")) {
+			tempWater.setLiter(Double.valueOf(tempVal));
+		} else if (qName.equalsIgnoreCase("LiterPrice")) {
+			tempCountry.setLiterPrice(new Amount(Double.valueOf(tempVal)));
+		} 
 	}
 
 	/**
@@ -158,7 +171,7 @@ public class XMLHandler extends DefaultHandler {
 	/**
 	 * @return the coValues
 	 */
-	public Map<String, Country> getCoValues() {
+	public Map<String, Country> getCountryMap() {
 		return coValues;
 	}
 

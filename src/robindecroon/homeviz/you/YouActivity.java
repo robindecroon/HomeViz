@@ -5,7 +5,6 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.PeriodListener;
-import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;

@@ -6,7 +6,6 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.usage.UsageDetailFullScreenActivity;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.PeriodListener;
-import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import android.content.Intent;

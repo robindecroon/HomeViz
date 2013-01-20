@@ -35,5 +35,8 @@
     <string name="No">No</string>
     <string name="question_enable_location">Do you want to enable location services?</string>
     <string name="toast_swype_down_for_detail">Swype down for a more detailed view!</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_water_usage">Usage > Water</string>
+    <string name="no_water_in_room">There is no water usage in this room!</string>
 
 </resources>

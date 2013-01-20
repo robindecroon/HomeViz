@@ -30,8 +30,10 @@ public class Room {
 	private Amount tv;
 
 	private List<Light> lights = new ArrayList<Light>();
+	private List<Water> waters = new ArrayList<Water>();;
 
 	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
+
 
 	/**
 	 * Constructor nodig voor de XML parser
@@ -192,5 +194,26 @@ public class Room {
 			System.out.println(person + " is " + personPercentageMap.get(person)
 					+ "% in " + this.getName());
 		}
+	}
+
+	public List<Water> getWaters() throws NoSuchDevicesInRoom {
+		if (this.waters.size() == 0) {
+			throw new NoSuchDevicesInRoom(this);
+		}
+		return this.waters;
+	}
+
+	public void addWater(Water tempWater) {
+		this.waters.add(tempWater);
+	}
+	
+	public Water getWater(String name) {
+		for (Water water : waters) {
+			if (water.getName().equals(name)) {
+				return water;
+			}
+		}
+		throw new IllegalArgumentException("No water with name: " + name
+				+ " in room: " + this.getName());
 	}
 }

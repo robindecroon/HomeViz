@@ -3,6 +3,7 @@ package robindecroon.homeviz.room;
 import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import android.util.Log;
 
 public class Light {
 	
@@ -68,6 +69,10 @@ public class Light {
 	 * @return the kwhPrice
 	 */
 	public static Amount getKwhPrice() {
+		if (kwhPrice == null) {
+			Log.e("Light","Belgian prices are used!");
+			return new Amount(0.2289);
+		}
 		return kwhPrice;
 	}
 

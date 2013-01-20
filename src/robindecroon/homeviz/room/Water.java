@@ -1,7 +1,9 @@
 package robindecroon.homeviz.room;
 
+import android.util.Log;
 import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.util.Period;
 
 public class Water {
 	
@@ -46,6 +48,10 @@ public class Water {
 	 * @return the waterPrice
 	 */
 	public static Amount getWaterPrice() {
+		if (waterPrice == null) {
+			Log.e("Light","Belgian prices are used!");
+			return new Amount(0.0014);
+		}
 		return waterPrice;
 	}
 
@@ -54,6 +60,11 @@ public class Water {
 	 */
 	public static void setWaterPrice(Amount waterPrice) {
 		Water.waterPrice = waterPrice;
+	}
+
+	public Amount getPrice(Period currentPeriod) {
+		Amount price = new Amount(getLiter() * getWaterPrice().getEuroValue());
+		return price.multiply(currentPeriod.getMultiplier()); 
 	}
 
 }

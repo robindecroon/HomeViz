@@ -77,6 +77,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.HomeScreen" />
         </activity>
+        <activity
+            android:name="robindecroon.homeviz.usage.water.WaterUsageActivity"
+            android:label="@string/title_activity_water_usage"
+            android:parentActivityName="robindecroon.homeviz.usage.UsageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.UsageActivity" />
+        </activity>
     </application>
 
 </manifest>
