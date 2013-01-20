@@ -7,13 +7,12 @@ import robindecroon.homeviz.util.Period;
 public class Light {
 	
 	private String id;
+		
+	private int watt;
 	
-	private Amount price;
+	private double averageHoursOn;
 	
-	public Light() {
-		this.price = new Amount(Math.random()/3);
-	}
-
+	private static Amount kwhPrice;
 	/**
 	 * @return the id
 	 */
@@ -32,7 +31,51 @@ public class Light {
 	}
 
 	public Amount getPrice(Period currentPeriod) {
-		return price.multiply(currentPeriod.getMultiplier());
+		double power = getWatt() * getAverageHoursOn() / 1000;
+		Amount price = new Amount(power).multiply(getKwhPrice());
+		return price.multiply(currentPeriod.getMultiplier()); 
+	}
+
+	/**
+	 * @return the watt
+	 */
+	public int getWatt() {
+		return watt;
+	}
+
+	/**
+	 * @param watt the watt to set
+	 */
+	public void setWatt(int watt) {
+		this.watt = watt;
+	}
+
+	/**
+	 * @return the averageMinOn
+	 */
+	public double getAverageHoursOn() {
+		return averageHoursOn;
+	}
+
+	/**
+	 * @param averageMinOn the averageMinOn to set
+	 */
+	public void setAverageHoursOn(int averageMinOn) {
+		this.averageHoursOn = (double) averageMinOn / 60;
+	}
+
+	/**
+	 * @return the kwhPrice
+	 */
+	public static Amount getKwhPrice() {
+		return kwhPrice;
+	}
+
+	/**
+	 * @param kwhPrice the kwhPrice to set
+	 */
+	public static void setKwhPrice(Amount kwhPrice) {
+		Light.kwhPrice = kwhPrice;
 	}
 
 }

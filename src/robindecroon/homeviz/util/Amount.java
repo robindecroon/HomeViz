@@ -51,5 +51,7 @@ public class Amount {
 		return new Amount(getEuroValue() * other);
 	}
 	
-
+	public Amount multiply(Amount other) {
+		return new Amount(getEuroValue() * other.getEuroValue());
+	}
 }

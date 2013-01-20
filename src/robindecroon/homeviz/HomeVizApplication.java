@@ -15,6 +15,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
+import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
@@ -81,6 +82,8 @@ public class HomeVizApplication extends Application {
 	 *            the currentCountry to set
 	 */
 	public void setCurrentCountry(String currentCountry) {
+		// TODO dirty hack
+		Light.setKwhPrice(coValues.get(currentCountry).getKwh());
 		this.currentCountry = currentCountry;
 	}
 
@@ -193,7 +196,6 @@ public class HomeVizApplication extends Application {
 		currentUser = handler.getCurrentUser();
 		coValues = handler.getCoValues();
 		Log.i("HomeVizApplication", "The currentUser is " + currentUser);
-
 		randomizeLocationsOfPersons();
 	}
 

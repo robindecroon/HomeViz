@@ -39,27 +39,17 @@ public class XMLHandler extends DefaultHandler {
 	 */
 	private List<Room> rooms = new ArrayList<Room>();
 
-	/**
-	 * Variabele om de lamp bij te houden die nu wordt uitgelezen.
-	 */
-	private Light tempLight;
-
-	private Person tempPerson;
-	private String currentUser;
-
-	private GoogleChartType type;
-
 	private List<Person> persons = new ArrayList<Person>();
 	
 	private Map<String,Country> coValues = new HashMap<String,Country>();
 	
 	/**
-	 * @return the coValues
+	 * Variabele om de lamp bij te houden die nu wordt uitgelezen.
 	 */
-	public Map<String, Country> getCoValues() {
-		return coValues;
-	}
-
+	private Light tempLight;
+	private Person tempPerson;
+	private String currentUserName;
+	private GoogleChartType type;
 	private Country tempCountry;
 
 	/**
@@ -101,16 +91,18 @@ public class XMLHandler extends DefaultHandler {
 			rooms.add(tempRoom);
 			tempRoom = null;
 		} else if (qName.equalsIgnoreCase("Name")) {
-			if (tempRoom != null) {
+			if (tempRoom != null && tempLight == null) {
 				tempRoom.setName(tempVal);
 			} else if (tempPerson != null) {
 				tempPerson.setName(tempVal);
 			} else if (tempCountry != null) {
 				tempCountry.setName(tempVal);
-			}
+			} else if (tempLight != null) {
+				tempLight.setId(tempVal);
+			} 
 		} else if (qName.equalsIgnoreCase("Light")) {
-			tempLight.setId(tempVal);
 			tempRoom.addLight(tempLight);
+			tempLight = null;
 		} else if (qName.equalsIgnoreCase("Person")) {
 			persons.add(tempPerson);
 			tempPerson = null;
@@ -122,7 +114,7 @@ public class XMLHandler extends DefaultHandler {
 				}
 			}
 		} else if (qName.equalsIgnoreCase("User")) {
-			currentUser = tempVal;
+			currentUserName = tempVal;
 		} else if (qName.equalsIgnoreCase("Country")) {
 			coValues.put(tempCountry.getName(), tempCountry.clone());
 			tempCountry = null;
@@ -130,6 +122,10 @@ public class XMLHandler extends DefaultHandler {
 			tempCountry.setCo2Value(Double.valueOf(tempVal));
 		} else if (qName.equalsIgnoreCase("kwh")) {
 			tempCountry.setKwh(new Amount(Double.valueOf(tempVal)));
+		} else if (qName.equalsIgnoreCase("Watt")) {
+			tempLight.setWatt(Integer.valueOf(tempVal));
+		} else if (qName.equalsIgnoreCase("TimeDay")) {
+			tempLight.setAverageHoursOn(Integer.valueOf(tempVal));
 		}
 	}
 
@@ -152,10 +148,18 @@ public class XMLHandler extends DefaultHandler {
 
 	public Person getCurrentUser() {
 		for (Person person : persons) {
-			if (person.getName().equalsIgnoreCase(currentUser)) {
+			if (person.getName().equalsIgnoreCase(currentUserName)) {
 				return person;
 			}
 		}
-		throw new ParseXMLException(currentUser);
+		throw new ParseXMLException(currentUserName); 
 	}
+	
+	/**
+	 * @return the coValues
+	 */
+	public Map<String, Country> getCoValues() {
+		return coValues;
+	}
+
 }
