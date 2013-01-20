@@ -11,7 +11,6 @@ public class Amount {
 		}, DOLLAR {
 			@Override
 			public String toString() {
-				// TODO Auto-generated method stub
 				return "$";
 			}
 		};

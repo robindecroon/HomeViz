@@ -12,6 +12,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -133,10 +134,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				lightsLayout.addView(layout);
 			}
 		} catch (NoSuchDevicesInRoom e) {
-			TextView noLights = new TextView(this);
-			noLights.setText(R.string.no_lights);
-			noLights.setTextSize(100);
-			noLights.setTextColor(getResources().getColor(R.color.White));
+			View noLights = LightActivityUtils.getEmptyRoom(this);
 			lightsLayout.addView(noLights);
 			
 			lampsPresent = false;

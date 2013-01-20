@@ -9,7 +9,7 @@ public class Light {
 	private String id;
 	
 	private Amount price;
-
+	
 	public Light() {
 		this.price = new Amount(Math.random()/3);
 	}

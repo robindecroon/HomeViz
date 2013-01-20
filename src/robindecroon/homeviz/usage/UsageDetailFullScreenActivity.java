@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 @SuppressLint("SetJavaScriptEnabled")
 public abstract class UsageDetailFullScreenActivity extends
@@ -63,11 +62,12 @@ public abstract class UsageDetailFullScreenActivity extends
 
 	@Override
 	public void refreshElements() {
-		super.refreshElements();
-		MyWebView chart = getWebView();
-		Map<String, Amount> map = getPriceMap();
-		
-		String data = makeData(currentPeriod, this, map);		
+		try {
+			super.refreshElements();
+			MyWebView chart = getWebView();
+			Map<String, Amount> map = getPriceMap();
+			
+//			String data = makeData(currentPeriod, this, map);		
 //		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
 //				this);
 //		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
@@ -76,27 +76,24 @@ public abstract class UsageDetailFullScreenActivity extends
 //		client.setString(data + ",'" + chart.getWidth() + "px','" + chart.getHeight() + "px'");
 //		chart.setWebViewClient(client);
 
-		chart.getSettings().setJavaScriptEnabled(true);
-		chart.getSettings().setUseWideViewPort(true);
-		chart.getSettings().setLoadWithOverviewMode(true);
+			chart.getSettings().setJavaScriptEnabled(true);
+			chart.getSettings().setUseWideViewPort(true);
+			chart.getSettings().setLoadWithOverviewMode(true);
 
 
-		if (!map.isEmpty()) {
-			String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
-			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
-					"UTF-8", null);
+			if (!map.isEmpty()) {
+				String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
+				chart.loadDataWithBaseURL("x-data://base", url, "text/html",
+						"UTF-8", null);
 //			chart.loadUrl("file:///android_asset/www/charttools.html");
-			
-		} else {
+				
+			} else {
+				throw new IllegalStateException();
+			}
+		} catch (Exception e) {
 			LinearLayout layout = getBackupView();
 			layout.removeAllViews();
-
-			TextView noLights = new TextView(this);
-			noLights.setText(R.string.no_lights);
-			noLights.setTextSize(100);
-			noLights.setTextColor(getResources().getColor(R.color.Black));
-			layout.addView(noLights);
-
+			layout.addView(LightActivityUtils.getEmptyRoom(this));
 		}
 
 	}
