@@ -1,5 +1,6 @@
 package robindecroon.homeviz.room;
 
+import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
 
 public class Water {
@@ -14,6 +15,9 @@ public class Water {
 	 * @return the name
 	 */
 	public String getName() {
+		if(name == null) {
+			throw new ParseXMLException(this);
+		}
 		return name;
 	}
 

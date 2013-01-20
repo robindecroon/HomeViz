@@ -50,7 +50,7 @@
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
         </activity>
         <activity
-            android:name="robindecroon.homeviz.usage.LightUsageActivity"
+            android:name="robindecroon.homeviz.usage.light.LightUsageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_light_usage"
             android:parentActivityName="robindecroon.homeviz.usage.UsageActivity"
@@ -60,13 +60,13 @@
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
         </activity>
         <activity
-            android:name="robindecroon.homeviz.usage.LightUsageDetailActivity"
+            android:name="robindecroon.homeviz.usage.light.LightUsageDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_light_usage_detail"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="robindecroon.homeviz.usage.LightUsageActivity" />
+                android:value="robindecroon.homeviz.usage.light.LightUsageActivity" />
         </activity>
         <activity
             android:name="robindecroon.homeviz.you.YouActivity"

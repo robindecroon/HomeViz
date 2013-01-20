@@ -3,6 +3,7 @@ package robindecroon.homeviz.usage;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.usage.light.LightUsageActivity;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;

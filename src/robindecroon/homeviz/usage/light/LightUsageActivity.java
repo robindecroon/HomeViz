@@ -1,4 +1,4 @@
-package robindecroon.homeviz.usage;
+package robindecroon.homeviz.usage.light;
 
 import java.util.List;
 import java.util.Locale;
@@ -6,6 +6,7 @@ import java.util.Locale;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Light;
+import robindecroon.homeviz.usage.UsageFullScreenActivity;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;
 import robindecroon.homeviz.util.ToastMessages;

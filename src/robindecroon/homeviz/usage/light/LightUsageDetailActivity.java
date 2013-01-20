@@ -1,8 +1,9 @@
-package robindecroon.homeviz.usage;
+package robindecroon.homeviz.usage.light;
 
 import java.util.Map;
 
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.usage.UsageDetailFullScreenActivity;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.SystemUiHider;

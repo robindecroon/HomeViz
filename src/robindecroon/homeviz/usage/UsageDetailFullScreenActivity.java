@@ -5,6 +5,7 @@ import java.util.Map;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.usage.light.LightActivityUtils;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.webviews.MyWebView;
