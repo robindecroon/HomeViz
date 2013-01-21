@@ -31,9 +31,18 @@ public class Room {
 
 	private List<Light> lights = new ArrayList<Light>();
 	private List<Water> waters = new ArrayList<Water>();;
+	private List<HomeCinema> homeCinemas = new ArrayList<HomeCinema>();
 
 	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
 
+
+
+	/**
+	 * @return the personPercentageMap
+	 */
+	public Map<Person, Integer> getPersonPercentageMap() {
+		return personPercentageMap;
+	}
 
 	/**
 	 * Constructor nodig voor de XML parser
@@ -58,7 +67,7 @@ public class Room {
 	public Map<String, Amount> getLightsMap(Period period) {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		for (Light light : lights) {
-			map.put(light.getId(), light.getPrice(period));
+			map.put(light.getName(), light.getPrice(period));
 		}
 		return map;
 	}
@@ -173,13 +182,13 @@ public class Room {
 		return this.lights;
 	}
 
-	public Light getLight(String id) {
+	public Light getLight(String name) {
 		for (Light light : lights) {
-			if (light.getId().equals(id)) {
+			if (light.getName().equals(name)) {
 				return light;
 			}
 		}
-		throw new IllegalArgumentException("No light with ID: " + id
+		throw new IllegalArgumentException("No light with name: " + name
 				+ " in room: " + this.getName());
 	}
 
@@ -215,5 +224,26 @@ public class Room {
 		}
 		throw new IllegalArgumentException("No water with name: " + name
 				+ " in room: " + this.getName());
+	}
+
+	public void addHomeCinema(HomeCinema tempHomeCinema) {
+		this.homeCinemas .add(tempHomeCinema);
+	}
+	
+	public HomeCinema getHomeCinema(String name) {
+		for (HomeCinema homeCinema : homeCinemas) {
+			if (homeCinema.getName().equals(name)) {
+				return homeCinema;
+			}
+		}
+		throw new IllegalArgumentException("No HomeCinema with name: " + name
+				+ " in room: " + this.getName());
+	}
+	
+	public List<HomeCinema> getHomeCinemas() throws NoSuchDevicesInRoom {
+		if (this.homeCinemas.size() == 0) {
+			throw new NoSuchDevicesInRoom(this);
+		}
+		return this.homeCinemas;
 	}
 }

@@ -38,5 +38,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_water_usage">Usage > Water</string>
     <string name="no_water_in_room">There is no water usage in this room!</string>
+    <string name="title_activity_home_cinema_usage">Usage > Home Cinema</string>
+    <string name="no_home_cinema_in_room">There are no multimedia devices in this room!</string>
 
 </resources>

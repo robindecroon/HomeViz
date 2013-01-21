@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import robindecroon.homeviz.exceptions.ParseXMLException;
+import robindecroon.homeviz.room.HomeCinema;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
@@ -53,6 +54,8 @@ public class XMLHandler extends DefaultHandler {
 	private String currentUserName;
 	private GoogleChartType type;
 	private Country tempCountry;
+	private HomeCinema tempHomeCinema;
+
 
 	/**
 	 * Wordt opgeroepen bij een nieuw element.
@@ -73,6 +76,8 @@ public class XMLHandler extends DefaultHandler {
 			tempCountry = new Country();
 		} else if (qName.equalsIgnoreCase("Water")) {
 			tempWater = new Water();
+		} else if (qName.equalsIgnoreCase("HomeCinema")) {
+			tempHomeCinema = new HomeCinema();
 		}
 	}
 
@@ -95,16 +100,18 @@ public class XMLHandler extends DefaultHandler {
 			rooms.add(tempRoom);
 			tempRoom = null;
 		} else if (qName.equalsIgnoreCase("Name")) {
-			if (tempRoom != null && tempLight == null && tempWater == null) {
+			if (tempRoom != null && tempLight == null && tempWater == null && tempHomeCinema == null) {
 				tempRoom.setName(tempVal);
 			} else if (tempPerson != null) {
 				tempPerson.setName(tempVal);
 			} else if (tempCountry != null) {
 				tempCountry.setName(tempVal);
 			} else if (tempLight != null) {
-				tempLight.setId(tempVal);
+				tempLight.setName(tempVal);
 			} else if (tempWater != null) {
 				tempWater.setName(tempVal);
+			} else if (tempHomeCinema != null) {
+				tempHomeCinema.setName(tempVal);
 			}
 		} else if (qName.equalsIgnoreCase("Light")) {
 			tempRoom.addLight(tempLight);
@@ -128,9 +135,9 @@ public class XMLHandler extends DefaultHandler {
 			tempCountry.setCo2Value(Double.valueOf(tempVal));
 		} else if (qName.equalsIgnoreCase("kwh")) {
 			tempCountry.setKwh(new Amount(Double.valueOf(tempVal)));
-		} else if (qName.equalsIgnoreCase("Watt")) {
+		} else if (qName.equalsIgnoreCase("Watt") && tempLight != null) {
 			tempLight.setWatt(Integer.valueOf(tempVal));
-		} else if (qName.equalsIgnoreCase("TimeDay")) {
+		} else if (qName.equalsIgnoreCase("TimeDay") && tempLight != null) {
 			tempLight.setAverageHoursOn(Integer.valueOf(tempVal));
 		} else if (qName.equalsIgnoreCase("Water")) {
 			tempRoom.addWater(tempWater);
@@ -139,6 +146,13 @@ public class XMLHandler extends DefaultHandler {
 			tempWater.setLiter(Double.valueOf(tempVal));
 		} else if (qName.equalsIgnoreCase("LiterPrice")) {
 			tempCountry.setLiterPrice(new Amount(Double.valueOf(tempVal)));
+		} else if (qName.equalsIgnoreCase("HomeCinema")) {
+			tempRoom.addHomeCinema(tempHomeCinema);
+			tempHomeCinema = null;
+		} else if (qName.equalsIgnoreCase("Watt") && tempHomeCinema != null) {
+			tempHomeCinema.setWatt(Integer.valueOf(tempVal));
+		} else if (qName.equalsIgnoreCase("TimeDay") && tempHomeCinema != null) {
+			tempHomeCinema.setAverageHoursOn(Integer.valueOf(tempVal));
 		} 
 	}
 

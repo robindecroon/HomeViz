@@ -24,6 +24,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import robindecroon.homeviz.xml.Country;
 import robindecroon.homeviz.xml.XMLHandler;
+import robindecroon.homeviz.you.JsonObject;
 import robindecroon.stackoverflow.RandomNumberGenerator;
 import android.app.Application;
 import android.util.Log;
@@ -195,6 +196,7 @@ public class HomeVizApplication extends Application {
 			// Toast gaat nog niet, want er is nog geen context
 		}
 		setRooms(handler.getRooms());
+		JsonObject.setRooms(getRooms());
 		setPersons(handler.getPersons());
 		currentUser = handler.getCurrentUser();
 		countryMap = handler.getCountryMap();

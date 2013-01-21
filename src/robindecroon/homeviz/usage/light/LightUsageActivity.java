@@ -116,7 +116,7 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
 
-				String imagename = light.getId().toLowerCase(Locale.US);
+				String imagename = light.getName().toLowerCase(Locale.US);
 				int picId = getResources().getIdentifier(imagename, "drawable",
 						getPackageName());
 				image.setImageResource(picId);

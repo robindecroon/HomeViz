@@ -3,6 +3,7 @@ package robindecroon.homeviz.usage;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.usage.homecinema.HomeCinemaUsageActivity;
 import robindecroon.homeviz.usage.light.LightUsageActivity;
 import robindecroon.homeviz.usage.water.WaterUsageActivity;
 import robindecroon.homeviz.util.PeriodListener;
@@ -123,8 +124,8 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 		// AppliancesUsageActivity.class));
 		final MyLinearLayout homeCinemaLayout = (MyLinearLayout) findViewById(R.id.home_cinema_layout);
 		homeCinemaLayout.setListener(listener);
-		// homeCinemaLayout.setOnClickListener(new ClickListener(this,
-		// HomeCineamUsageActivity.class));
+		 homeCinemaLayout.setOnClickListener(new ClickListener(this,
+		 HomeCinemaUsageActivity.class));
 	}
 	
 }

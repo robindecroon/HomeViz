@@ -85,6 +85,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
         </activity>
+        <activity
+            android:name="robindecroon.homeviz.usage.homecinema.HomeCinemaUsageActivity"
+            android:label="@string/title_activity_home_cinema_usage"
+            android:parentActivityName="robindecroon.homeviz.usage.UsageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.UsageActivity" />
+        </activity>
     </application>
 
 </manifest>

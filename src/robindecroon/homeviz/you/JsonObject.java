@@ -1,5 +1,11 @@
 package robindecroon.homeviz.you;
 
+import java.util.List;
+import java.util.Map;
+
+import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.users.Person;
+
 
 public class JsonObject {
 	
@@ -8,6 +14,8 @@ public class JsonObject {
 	private String value;
 	
 	private JsonObject[] children;
+	
+	private static List<Room> rooms;
 	
 	public JsonObject(){}
 	
@@ -22,24 +30,42 @@ public class JsonObject {
 	
 	
 	public static JsonObject getTestJson() {
-		JsonObject een = new JsonObject("Keuken", null);
-		JsonObject twee = new JsonObject("Living", null);
-		JsonObject drie = new JsonObject("Berging", null);
-		JsonObject vier = new JsonObject("Porch", null);
-		
-		JsonObject robin = new JsonObject("Robin","5");
-		JsonObject vienna = new JsonObject("Vienna","3");
-		JsonObject silke = new JsonObject("silke", "2");
-		JsonObject roosje = new JsonObject("roosje", "20");
-		
-		een.setChildren(new JsonObject[]{robin, vienna});
-		twee.setChildren(new JsonObject[]{robin,vienna,silke});
-		drie.setChildren(new JsonObject[]{vienna,silke});
-		vier.setChildren(new JsonObject[]{vienna,roosje});
-		
 		JsonObject root = new JsonObject("Home",null);
+
+		JsonObject[] roomsJson = new JsonObject[rooms.size()];
+		int j = 0;
+		for(Room room : rooms) {
+			JsonObject json = new JsonObject(room.getName(),null);
+			Map<Person,Integer> map = room.getPersonPercentageMap();
+			JsonObject[] children = new JsonObject[map.size()];
+			int i = 0;
+			for(Person pers : map.keySet()) {
+				children[i] = new JsonObject(pers.getName(),map.get(pers) + "");
+				i++;
+			}
+			json.setChildren(children);
+			roomsJson[j] = json;
+			j++;
+		}
+		root.setChildren(roomsJson);
 		
-		root.setChildren(new JsonObject[]{een,twee,drie,vier});
+//		JsonObject een = new JsonObject("Keuken", null);
+//		JsonObject twee = new JsonObject("Living", null);
+//		JsonObject drie = new JsonObject("Berging", null);
+//		JsonObject vier = new JsonObject("Porch", null);
+//		
+//		JsonObject robin = new JsonObject("Robin","5");
+//		JsonObject vienna = new JsonObject("Vienna","3");
+//		JsonObject silke = new JsonObject("silke", "2");
+//		JsonObject roosje = new JsonObject("roosje", "20");
+//		
+//		een.setChildren(new JsonObject[]{robin, vienna});
+//		twee.setChildren(new JsonObject[]{robin,vienna,silke});
+//		drie.setChildren(new JsonObject[]{vienna,silke});
+//		vier.setChildren(new JsonObject[]{vienna,roosje});
+//		
+//		
+//		root.setChildren(new JsonObject[]{een,twee,drie,vier});
 		
 		return root;	
 	}
@@ -77,5 +103,19 @@ public class JsonObject {
 	 */
 	public JsonObject[] getChildren() {
 		return children;
+	}
+
+	/**
+	 * @return the rooms
+	 */
+	public static List<Room> getRooms() {
+		return rooms;
+	}
+
+	/**
+	 * @param rooms the rooms to set
+	 */
+	public static void setRooms(List<Room> rooms) {
+		JsonObject.rooms = rooms;
 	}
 }
