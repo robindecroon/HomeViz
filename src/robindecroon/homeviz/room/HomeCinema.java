@@ -8,7 +8,4 @@ package robindecroon.homeviz.room;
  *
  */
 public class HomeCinema extends Electric {
-	
-
-
 }

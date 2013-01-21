@@ -24,14 +24,12 @@ public class Room {
 	 */
 	private String name;
 
-	private Amount water;
 	private Amount heating;
-	private Amount appliances;
-	private Amount tv;
 
 	private List<Light> lights = new ArrayList<Light>();
 	private List<Water> waters = new ArrayList<Water>();;
 	private List<HomeCinema> homeCinemas = new ArrayList<HomeCinema>();
+	private List<Appliance> appliances = new ArrayList<Appliance>();
 
 	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
 
@@ -48,19 +46,16 @@ public class Room {
 	 * Constructor nodig voor de XML parser
 	 */
 	public Room() {
-		this.water = new Amount(Math.random());
 		this.heating = new Amount(Math.random());
-		this.appliances = new Amount(Math.random());
-		this.tv = new Amount(Math.random());
 	};
 
 	public Map<String, Amount> getPricesMap(Period period) {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		map.put("Light", getLightPrice(period));
-		map.put("Water", getWater(period));
+		map.put("Water", getWaterPrice(period));
 		map.put("Heating", getHeating(period));
-		map.put("Appliances", getAppliances(period));
-		map.put("Home Cinema", getTv(period));
+		map.put("Appliances", getAppliancesPrice(period));
+		map.put("Home Cinema", getHomeCinemaPrice(period));
 		return map;
 	}
 
@@ -95,8 +90,8 @@ public class Room {
 	}
 
 	public CharSequence getTotalPrice(Period p) {
-		Amount total = getLightPrice(p).add(getWater(p)).add(getHeating(p))
-				.add(getAppliances(p)).add(getTv(p));
+		Amount total = getLightPrice(p).add(getWaterPrice(p)).add(getHeating(p))
+				.add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p));
 		return total.toString();
 	}
 
@@ -114,16 +109,12 @@ public class Room {
 	/**
 	 * @return the water
 	 */
-	public Amount getWater(Period currentPeriod) {
-		return water.multiply(currentPeriod.getMultiplier());
-	}
-
-	/**
-	 * @param water
-	 *            the water to set
-	 */
-	public void setWater(Amount water) {
-		this.water = water;
+	public Amount getWaterPrice(Period currentPeriod) {
+		Amount total = new Amount(0);
+		for (Water water : waters) {
+			total = total.add(water.getPrice(currentPeriod));
+		}
+		return total;
 	}
 
 	/**
@@ -144,31 +135,23 @@ public class Room {
 	/**
 	 * @return the appliances
 	 */
-	public Amount getAppliances(Period currentPeriod) {
-		return appliances.multiply(currentPeriod.getMultiplier());
-	}
-
-	/**
-	 * @param appliances
-	 *            the appliances to set
-	 */
-	public void setAppliances(Amount appliances) {
-		this.appliances = appliances;
+	public Amount getAppliancesPrice(Period currentPeriod) {
+		Amount total = new Amount(0);
+		for (Appliance appliance : appliances) {
+			total = total.add(appliance.getPrice(currentPeriod));
+		}
+		return total;
 	}
 
 	/**
 	 * @return the tv
 	 */
-	public Amount getTv(Period currentPeriod) {
-		return tv.multiply(currentPeriod.getMultiplier());
-	}
-
-	/**
-	 * @param tv
-	 *            the tv to set
-	 */
-	public void setTv(Amount tv) {
-		this.tv = tv;
+	public Amount getHomeCinemaPrice(Period currentPeriod) {
+		Amount total = new Amount(0);
+		for (HomeCinema homeCinema: homeCinemas) {
+			total = total.add(homeCinema.getPrice(currentPeriod));
+		}
+		return total;
 	}
 
 	public void addLight(Light tempLight) {
@@ -245,5 +228,16 @@ public class Room {
 			throw new NoSuchDevicesInRoom(this);
 		}
 		return this.homeCinemas;
+	}
+	
+	public List<Appliance> getAppliances() throws NoSuchDevicesInRoom {
+		if (this.appliances.size() == 0) {
+			throw new NoSuchDevicesInRoom(this);
+		}
+		return this.appliances;
+	}
+
+	public void addAppliance(Appliance tempAppliance) {
+		this.appliances.add(tempAppliance);
 	}
 }

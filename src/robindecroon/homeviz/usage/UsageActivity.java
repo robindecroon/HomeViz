@@ -3,6 +3,7 @@ package robindecroon.homeviz.usage;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.usage.appliance.ApplianceUsageActivity;
 import robindecroon.homeviz.usage.homecinema.HomeCinemaUsageActivity;
 import robindecroon.homeviz.usage.light.LightUsageActivity;
 import robindecroon.homeviz.usage.water.WaterUsageActivity;
@@ -34,16 +35,16 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
 
 		final TextView water = (TextView) findViewById(R.id.usage_water_price);
-		water.setText(currentRoom.getWater(currentPeriod).toString());
+		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
 
 		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
 		heating.setText(currentRoom.getHeating(currentPeriod).toString());
 
 		final TextView appl = (TextView) findViewById(R.id.usage_appliances_price);
-		appl.setText(currentRoom.getAppliances(currentPeriod).toString());
+		appl.setText(currentRoom.getAppliancesPrice(currentPeriod).toString());
 
 		final TextView tv = (TextView) findViewById(R.id.usage_tv_price);
-		tv.setText(currentRoom.getTv(currentPeriod).toString());
+		tv.setText(currentRoom.getHomeCinemaPrice(currentPeriod).toString());
 
 		setTotalAmount();
 	}
@@ -120,8 +121,7 @@ public class UsageActivity extends UsageFullScreenActivity implements ActionBar.
 		// HeatingUsageActivity.class));
 		final MyLinearLayout appliancesLayout = (MyLinearLayout) findViewById(R.id.appliances_layout);
 		appliancesLayout.setListener(listener);
-		// appliciancesLayout.setOnClickListener(new ClickListener(this,
-		// AppliancesUsageActivity.class));
+		appliancesLayout.setOnClickListener(new ClickListener(this, ApplianceUsageActivity.class));
 		final MyLinearLayout homeCinemaLayout = (MyLinearLayout) findViewById(R.id.home_cinema_layout);
 		homeCinemaLayout.setListener(listener);
 		 homeCinemaLayout.setOnClickListener(new ClickListener(this,
