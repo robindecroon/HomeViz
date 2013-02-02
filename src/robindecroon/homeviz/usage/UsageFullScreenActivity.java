@@ -15,7 +15,6 @@ import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 /**
  * FullScreenActivity die ook nog de locatie bijhoudt. Een horizontale swype

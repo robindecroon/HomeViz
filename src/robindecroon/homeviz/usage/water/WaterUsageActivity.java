@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.usage.UsageFullScreenActivity;

@@ -15,6 +15,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
+import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
@@ -88,8 +89,8 @@ public class HomeVizApplication extends Application {
 	public void setCurrentCountry(String currentCountry) {
 		// TODO dirty hack
 		Country country = countryMap.get(currentCountry);
-		Light.setKwhPrice(country.getKwh());
-		Water.setWaterPrice(country.getLiterPrice());
+		Consumer.setKwhPrice(country.getKwh());
+		Consumer.setWaterPrice(country.getLiterPrice());
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = settings.edit();
