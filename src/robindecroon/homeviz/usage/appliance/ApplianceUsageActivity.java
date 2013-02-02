@@ -4,20 +4,16 @@ import java.util.List;
 import java.util.Locale;
 
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.R.layout;
-import robindecroon.homeviz.R.menu;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Appliance;
-import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.usage.UsageFullScreenActivity;
-import robindecroon.homeviz.usage.water.WaterUsageActivity;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.ToastMessages;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +22,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
 
 public class ApplianceUsageActivity extends UsageFullScreenActivity {
 
@@ -110,7 +105,9 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.appliance_period);
 		usagePeriod.setText(currentPeriod.getName(this));
-		usagePeriod.setOnClickListener(new PeriodListener(this));
+		PeriodListener periodListener = new PeriodListener(this);
+		usagePeriod.setOnClickListener(periodListener);
+		usagePeriod.setOnLongClickListener(periodListener);
 	}
 	
 	@Override

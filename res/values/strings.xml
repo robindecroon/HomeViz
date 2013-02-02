@@ -42,5 +42,8 @@
     <string name="no_home_cinema_in_room">There are no multimedia devices in this room!</string>
     <string name="title_activity_appliance_usage">Usage > Appliance</string>
     <string name="no_appliance_in_room">There are no appliances in this room!</string>
+    <string name="title_activity_heating">Usage > Heating</string>
+    <string name="not_implemented_yet">This feature is not implemented yet! ;-)</string>
+    <string name="long_click_for_time">Long click on this period to set a custom time!</string>
 
 </resources>

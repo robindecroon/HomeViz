@@ -60,4 +60,9 @@ public class ToastMessages {
 		Toast.LENGTH_LONG).show();
 	}
 
+	public static void longClickForTime() {
+		Toast.makeText(context,context.getResources().getString(
+				R.string.long_click_for_time),
+		Toast.LENGTH_LONG).show();
+	}
 }

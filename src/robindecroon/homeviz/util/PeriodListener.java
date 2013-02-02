@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 
-public class PeriodListener implements OnClickListener{
+public class PeriodListener implements OnClickListener, OnLongClickListener{
 	
 	private Activity parentActivity;
 
@@ -15,6 +16,11 @@ public class PeriodListener implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		ToastMessages.longClickForTime();
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
 		DatePickerFragment untilPicker = new DatePickerFragment();
 		Bundle argsTo = new Bundle();
 		argsTo.putString("title", "...Until");
@@ -25,5 +31,8 @@ public class PeriodListener implements OnClickListener{
 		Bundle argsFrom = new Bundle();
 		argsFrom.putString("title", "From...");
 		fromPicker.setArguments(argsFrom);
-		fromPicker.show(parentActivity.getFragmentManager(), DatePickerFragment.FROM);	}
+		fromPicker.show(parentActivity.getFragmentManager(), DatePickerFragment.FROM);
+		
+		return true;
+	}
 }

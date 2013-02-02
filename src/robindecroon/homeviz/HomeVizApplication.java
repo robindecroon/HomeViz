@@ -27,6 +27,8 @@ import robindecroon.homeviz.xml.XMLHandler;
 import robindecroon.homeviz.you.JsonObject;
 import robindecroon.stackoverflow.RandomNumberGenerator;
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -52,32 +54,32 @@ public class HomeVizApplication extends Application {
 
 	private Person currentUser;
 
-	private String currentCity;
-	private String currentCountry;
+//	private String currentCity;
+//	private String currentCountry;
 	
 	private Map<String, Country> countryMap;
 
-	/**
-	 * @return the currentCity
-	 */
-	public String getCurrentCity() {
-		return currentCity;
-	}
+//	/**
+//	 * @return the currentCity
+//	 */
+//	public String getCurrentCity() {
+//		return currentCity;
+//	}
+//
+//	/**
+//	 * @param currentCity
+//	 *            the currentCity to set
+//	 */
+//	public void setCurrentCity(String currentCity) {
+//		this.currentCity = currentCity;
+//	}
 
-	/**
-	 * @param currentCity
-	 *            the currentCity to set
-	 */
-	public void setCurrentCity(String currentCity) {
-		this.currentCity = currentCity;
-	}
-
-	/**
-	 * @return the currentCountry
-	 */
-	public String getCurrentCountry() {
-		return currentCountry;
-	}
+//	/**
+//	 * @return the currentCountry
+//	 */
+//	public String getCurrentCountry() {
+//		return currentCountry;
+//	}
 
 	/**
 	 * @param currentCountry
@@ -88,7 +90,12 @@ public class HomeVizApplication extends Application {
 		Country country = countryMap.get(currentCountry);
 		Light.setKwhPrice(country.getKwh());
 		Water.setWaterPrice(country.getLiterPrice());
-		this.currentCountry = currentCountry;
+		SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString("country", currentCountry);
+		editor.commit();
+//		this.currentCountry = currentCountry;
 	}
 
 	/**
@@ -236,6 +243,9 @@ public class HomeVizApplication extends Application {
 	}
 	
 	public double getCo2Multiplier() throws LocationUnknownException{
+		SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String currentCountry = settings.getString("country", null);
 		if (currentCountry == null) {
 			throw new LocationUnknownException("No location");
 		} else {

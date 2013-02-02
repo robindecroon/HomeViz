@@ -101,6 +101,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
         </activity>
+        <activity
+            android:name=".usage.heating.HeatingUsageActivity"
+            android:label="@string/title_activity_heating"
+            android:parentActivityName="robindecroon.homeviz.usage.UsageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.UsageActivity" />
+        </activity>
     </application>
 
 </manifest>

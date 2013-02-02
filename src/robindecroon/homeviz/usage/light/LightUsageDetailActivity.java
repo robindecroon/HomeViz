@@ -61,7 +61,9 @@ public class LightUsageDetailActivity extends UsageDetailFullScreenActivity {
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.light_usage_detail_period);
 		usagePeriod.setText(currentPeriod.getName(this));
-		usagePeriod.setOnClickListener(new PeriodListener(this));
+		PeriodListener periodListener = new PeriodListener(this);
+		usagePeriod.setOnClickListener(periodListener);
+		usagePeriod.setOnLongClickListener(periodListener);
 	}
 
 	@Override

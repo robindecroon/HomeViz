@@ -39,7 +39,6 @@ public abstract class FullScreenActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		initPeriod();
 		initFullScreen();
-		
 	}
 
 	/**

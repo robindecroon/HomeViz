@@ -219,7 +219,7 @@ public class HomeScreen extends Activity implements LocationListener {
 			currentCountry = getResources().getString(R.string.no_location);
 		}
 
-		((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
+//		((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
 		((HomeVizApplication) getApplication())
 				.setCurrentCountry(currentCountry);
 		Log.i("Homescreen", "Updated location, we are in: " + currentCity + ", "
