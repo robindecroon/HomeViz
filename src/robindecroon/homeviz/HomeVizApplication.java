@@ -16,9 +16,7 @@ import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;

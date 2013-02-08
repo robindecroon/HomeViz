@@ -10,7 +10,6 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.you.YouActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,17 +51,6 @@ public class HomeScreen extends Activity implements LocationListener {
 		// You
 		final TextView you = (TextView) findViewById(R.id.keyword_you);
 		you.setOnClickListener(new ClickListener(this, YouActivity.class));
-		// you.setOnClickListener(new View.OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// for(Room room : ((HomeVizApplication)
-		// getApplicationContext()).getRooms()) {
-		// room.printPercentages();
-		// }
-		// }
-		//
-		// });
 
 		// HINT
 		final TextView hint = (TextView) findViewById(R.id.keyword_hint);
@@ -70,14 +58,18 @@ public class HomeScreen extends Activity implements LocationListener {
 
 			@Override
 			public void onClick(View v) {
-				try {
-					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-					intent.setType("file/");
-					startActivityForResult(intent, PICKFILE_RESULT_CODE);
-				} catch (ActivityNotFoundException exp) {
-					ToastMessages.noFileManager();
-					Log.e("HomeScreen", "No filemanger installed!");
-				}
+				Intent intent = new Intent(HomeScreen.this,LightListActivity.class);
+				startActivity(intent);
+				
+				
+//				try {
+//					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//					intent.setType("file/");
+//					startActivityForResult(intent, PICKFILE_RESULT_CODE);
+//				} catch (ActivityNotFoundException exp) {
+//					ToastMessages.noFileManager();
+//					Log.e("HomeScreen", "No filemanger installed!");
+//				}
 			}
 		});
 

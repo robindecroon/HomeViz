@@ -55,24 +55,6 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 	}
 
 	@Override
-	public void onSwypeToLeft() {
-		super.onSwypeToLeft();
-		Intent intent = new Intent(this, LightUsageActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
-		finish();
-	}
-
-	@Override
-	public void onSwypeToRight() {
-		super.onSwypeToRight();
-		Intent intent = new Intent(this, LightUsageActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
-		finish();
-	}
-
-	@Override
 	protected void setPeriod() {
 		final TextView usagePeriod = (TextView) findViewById(R.id.light_period);
 		usagePeriod.setText(currentPeriod.getName(this));

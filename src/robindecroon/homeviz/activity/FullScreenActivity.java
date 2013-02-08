@@ -8,8 +8,8 @@ import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.DatePickerFragment;
 import robindecroon.homeviz.util.DatePickerListener;
 import robindecroon.homeviz.util.Period;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +23,7 @@ import android.view.View;
  * @author Robin
  * 
  */
-public abstract class FullScreenActivity extends Activity implements
+public abstract class FullScreenActivity extends FragmentActivity implements
 		HomeVizListener, DatePickerListener {
 	
 

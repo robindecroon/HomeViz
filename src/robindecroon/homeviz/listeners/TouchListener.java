@@ -46,8 +46,7 @@ public class TouchListener implements View.OnTouchListener {
 	public TouchListener(FullScreenActivity fullScreenActivity) {
 		context = fullScreenActivity;
 		try {
-			appContext = (HomeVizApplication) this.context
-					.getApplicationContext();
+			appContext = (HomeVizApplication) this.context.getApplicationContext();
 		} catch (ClassCastException e) {
 			Log.e("TouchListener", "Incompatible Actitvity");
 		}
@@ -104,7 +103,8 @@ public class TouchListener implements View.OnTouchListener {
 				context.onZoomIn();
 			}
 			context.setCurrentPeriod(period);
-			break;
+//			break;
+			return true;
 		case MotionEvent.ACTION_MOVE:
 			if (mode == ZOOM) {
 				double newDist = spacing(event);

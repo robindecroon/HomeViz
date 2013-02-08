@@ -6,6 +6,7 @@ package robindecroon.homeviz.usage;
 import java.util.List;
 
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.room.Room;
@@ -13,6 +14,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -66,15 +68,23 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 	void initRoom() {
 		currentRoom = ((HomeVizApplication) getApplication()).getCurrentRoom();
 	}
-
+	
 	@Override
 	public void onSwypeToLeft() {
 		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
+		Intent intent = new Intent(this, getClass());
+		startActivity(intent);
+		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
+		finish();
 	}
 
 	@Override
 	public void onSwypeToRight() {
 		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
+		Intent intent = new Intent(this, getClass());
+		startActivity(intent);
+		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
+		finish();
 	}
 
 	@Override

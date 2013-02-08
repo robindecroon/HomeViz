@@ -113,4 +113,9 @@ public abstract class Consumer {
 
 	public abstract Amount getPrice(Period currentPeriod);
 	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 }

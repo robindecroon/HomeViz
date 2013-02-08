@@ -102,12 +102,36 @@
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
         </activity>
         <activity
-            android:name=".usage.heating.HeatingUsageActivity"
+            android:name="robindecroon.homeviz.usage.heating.HeatingUsageActivity"
             android:label="@string/title_activity_heating"
             android:parentActivityName="robindecroon.homeviz.usage.UsageActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.usage.UsageActivity" />
+        </activity>
+        <activity
+            android:name="robindecroon.homeviz.MetaphorActivity"
+            android:label="@string/title_activity_metaphor"
+            android:parentActivityName="robindecroon.homeviz.usage.light.LightUsageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.light.LightUsageActivity" />
+        </activity>
+        <activity
+            android:name="robindecroon.homeviz.LightListActivity"
+            android:label="@string/title_light_list"
+            android:parentActivityName="robindecroon.homeviz.usage.light.LightUsageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="robindecroon.homeviz.usage.light.LightUsageActivity" />
+        </activity>
+        <activity
+            android:name="robindecroon.homeviz.LightDetailActivity"
+            android:label="@string/title_light_detail"
+            android:parentActivityName=".LightListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LightListActivity" />
         </activity>
     </application>
 

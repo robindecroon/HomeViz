@@ -45,5 +45,8 @@
     <string name="title_activity_heating">Usage > Heating</string>
     <string name="not_implemented_yet">This feature is not implemented yet! ;-)</string>
     <string name="long_click_for_time">Long click on this period to set a custom time!</string>
+    <string name="title_activity_metaphor">Usage > Metaphor</string>
+    <string name="title_light_detail">Light Detail</string>
+    <string name="title_light_list">Lights</string>
 
 </resources>

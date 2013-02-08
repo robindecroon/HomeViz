@@ -65,6 +65,7 @@ public abstract class UsageDetailFullScreenActivity extends
 		try {
 			super.refreshElements();
 			MyWebView chart = getWebView();
+			chart.setBackgroundColor(0x00000000);
 			Map<String, Amount> map = getPriceMap();
 			
 //			String data = makeData(currentPeriod, this, map);		

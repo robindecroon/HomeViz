@@ -23,24 +23,6 @@ public class UsageDetailActivity extends UsageDetailFullScreenActivity
 	}
 
 	@Override
-	public void onSwypeToLeft() {
-		super.onSwypeToLeft();
-		Intent intent = new Intent(this, UsageDetailActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
-		finish();
-	}
-
-	@Override
-	public void onSwypeToRight() {
-		super.onSwypeToRight();
-		Intent intent = new Intent(this, UsageDetailActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
-		finish();
-	}
-
-	@Override
 	public void onSwypeToUp() {
 		Intent intent = new Intent(this, UsageActivity.class);
 		startActivity(intent);

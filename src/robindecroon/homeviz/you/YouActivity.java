@@ -38,6 +38,8 @@ public class YouActivity extends FullScreenActivity {
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
 				MyWebViewClient.TREEMAP));
+		
+		myBrowser.setBackgroundColor(0x00000000);
 
 		myBrowser.getSettings().setJavaScriptEnabled(true);
 		myBrowser.getSettings().setUseWideViewPort(true);

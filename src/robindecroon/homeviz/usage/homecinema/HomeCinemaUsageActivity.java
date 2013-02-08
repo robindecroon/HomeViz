@@ -75,24 +75,6 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 			ToastMessages.noMoreDetail();
 		}
 	}
-	
-	@Override
-	public void onSwypeToLeft() {
-		super.onSwypeToLeft();
-		Intent intent = new Intent(this, HomeCinemaUsageActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
-		finish();
-	}
-
-	@Override
-	public void onSwypeToRight() {
-		super.onSwypeToRight();
-		Intent intent = new Intent(this, HomeCinemaUsageActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
-		finish();
-	}
 
 	@Override
 	protected void setLocation() {
