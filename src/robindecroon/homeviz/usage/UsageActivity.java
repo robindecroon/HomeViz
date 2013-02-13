@@ -4,7 +4,6 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.usage.appliance.ApplianceUsageActivity;
-import robindecroon.homeviz.usage.heating.HeatingUsageActivity;
 import robindecroon.homeviz.usage.homecinema.HomeCinemaUsageActivity;
 import robindecroon.homeviz.usage.light.LightUsageActivity;
 import robindecroon.homeviz.usage.water.WaterUsageActivity;
@@ -24,6 +23,11 @@ import android.widget.TextView;
  */
 public class UsageActivity extends UsageFullScreenActivity implements
 		ActionBar.TabListener {
+	
+	@Override
+	protected boolean hasHouse() {
+		return true;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +43,8 @@ public class UsageActivity extends UsageFullScreenActivity implements
 		final TextView water = (TextView) findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
 
-		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
-		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+//		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
+//		heating.setText(currentRoom.getHeating(currentPeriod).toString());
 
 		final TextView appl = (TextView) findViewById(R.id.usage_appliances_price);
 		appl.setText(currentRoom.getAppliancesPrice(currentPeriod).toString());
@@ -101,10 +105,10 @@ public class UsageActivity extends UsageFullScreenActivity implements
 		waterLayout.setListener(listener);
 		waterLayout.setOnClickListener(new ClickListener(this,
 				WaterUsageActivity.class));
-		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
-		heatingLayout.setListener(listener);
-		heatingLayout.setOnClickListener(new ClickListener(this,
-				HeatingUsageActivity.class));
+//		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
+//		heatingLayout.setListener(listener);
+//		heatingLayout.setOnClickListener(new ClickListener(this,
+//				HeatingUsageActivity.class));
 		final MyLinearLayout appliancesLayout = (MyLinearLayout) findViewById(R.id.appliances_layout);
 		appliancesLayout.setListener(listener);
 		appliancesLayout.setOnClickListener(new ClickListener(this,

@@ -27,7 +27,7 @@ import android.util.Log;
  */
 public abstract class UsageFullScreenActivity extends FullScreenActivity
 		implements HomeVizListener, TabListener {
-	
+
 	public static boolean init = true;
 
 	/**
@@ -43,7 +43,7 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 		initActionBar();
 	}
 
-	private void initActionBar() {
+	protected void initActionBar() {
 		HomeVizApplication app = (HomeVizApplication) getApplication();
 		ActionBar actionBar = getActionBar();
 
@@ -52,23 +52,32 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		fillTabs(actionBar);
-		 actionBar.setSelectedNavigationItem(app.getTabPosition());
+		actionBar.setSelectedNavigationItem(app.getTabPosition());
 	}
 
 	private void fillTabs(ActionBar actionBar) {
 		HomeVizApplication app = (HomeVizApplication) getApplication();
-		
+
 		List<Room> rooms = app.getRooms();
-		for(int i = 0; i <rooms.size(); i++) {
-			actionBar.addTab(getActionBar().newTab().setText(rooms.get(i).getName())
-					.setTabListener(this));
+//		if (hasHouse()) {
+//			app.addHouse();
+//		} else {
+//			app.removeHouse();
+//		}
+		for (int i = 0; i < rooms.size(); i++) {
+			actionBar.addTab(getActionBar().newTab()
+					.setText(rooms.get(i).getName()).setTabListener(this));
 		}
+	}
+
+	protected boolean hasHouse() {
+		return false;
 	}
 
 	void initRoom() {
 		currentRoom = ((HomeVizApplication) getApplication()).getCurrentRoom();
 	}
-	
+
 	@Override
 	public void onSwypeToLeft() {
 		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
@@ -107,7 +116,8 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 				currentRoom = app.getCurrentRoom();
 				refreshElements();
 			} catch (Exception e) {
-				Log.i("UsageFullScreenActivity","tabSelectedTooSoon: " + e.getMessage());
+				Log.i("UsageFullScreenActivity",
+						"tabSelectedTooSoon: " + e.getMessage());
 			}
 		} else {
 			init = false;

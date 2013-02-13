@@ -17,7 +17,7 @@ import robindecroon.homeviz.util.Period;
  * @author Robin
  * 
  */
-public class Room {
+public class Room implements RoomPrices {
 
 	/**
 	 * De naam van de kamer.
@@ -53,7 +53,7 @@ public class Room {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		map.put("Light", getLightPrice(period));
 		map.put("Water", getWaterPrice(period));
-		map.put("Heating", getHeating(period));
+//		map.put("Heating", getHeating(period));
 		map.put("Appliances", getAppliancesPrice(period));
 		map.put("Home Cinema", getHomeCinemaPrice(period));
 		return map;
@@ -95,9 +95,10 @@ public class Room {
 		return total.toString();
 	}
 
-	/**
-	 * @return the light
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.room.RoomPrices#getLightPrice(robindecroon.homeviz.util.Period)
 	 */
+	@Override
 	public Amount getLightPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
 		for (Light light : lights) {
@@ -106,9 +107,10 @@ public class Room {
 		return total;
 	}
 
-	/**
-	 * @return the water
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.room.RoomPrices#getWaterPrice(robindecroon.homeviz.util.Period)
 	 */
+	@Override
 	public Amount getWaterPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
 		for (Water water : waters) {
@@ -132,9 +134,10 @@ public class Room {
 		this.heating = heating;
 	}
 
-	/**
-	 * @return the appliances
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.room.RoomPrices#getAppliancesPrice(robindecroon.homeviz.util.Period)
 	 */
+	@Override
 	public Amount getAppliancesPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
 		for (Appliance appliance : appliances) {
@@ -143,9 +146,10 @@ public class Room {
 		return total;
 	}
 
-	/**
-	 * @return the tv
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.room.RoomPrices#getHomeCinemaPrice(robindecroon.homeviz.util.Period)
 	 */
+	@Override
 	public Amount getHomeCinemaPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
 		for (HomeCinema homeCinema: homeCinemas) {

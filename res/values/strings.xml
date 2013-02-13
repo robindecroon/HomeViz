@@ -3,7 +3,7 @@
 
     <string name="app_name">HomeViz</string>
     <string name="keyword_you">YOU</string>
-    <string name="keyword_hint">HINT</string>
+    <string name="keyword_hint">XML</string>
     <string name="keyword_usage">USAGE</string>
     <string name="title_activity_usage">Usage</string>
     <string name="period_week">This Week</string>
@@ -44,9 +44,9 @@
     <string name="no_appliance_in_room">There are no appliances in this room!</string>
     <string name="title_activity_heating">Usage > Heating</string>
     <string name="not_implemented_yet">This feature is not implemented yet! ;-)</string>
-    <string name="long_click_for_time">Long click on this period to set a custom time!</string>
+    <string name="long_click_for_time">Pinch to change time period. Long click on this period to set a custom time!</string>
     <string name="title_activity_metaphor">Usage > Metaphor</string>
     <string name="title_light_detail">Light Detail</string>
     <string name="title_light_list">Lights</string>
-
+    <string name="house">House</string>
 </resources>

@@ -2,48 +2,85 @@
     android:id="@+id/light_detail"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-     >
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/footprint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="50dp"
+        android:paddingTop="20dp" >
+
+        <ImageView
+            android:id="@+id/footprint_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/content_description_light_usage"
+            android:src="@drawable/footprint" />
+
+        <TextView
+            android:id="@+id/co2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:textSize="40sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-        
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/l2" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="HELLO"
-            android:textAlignment="center"
-            android:textColor="@color/White" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp" >
 
+        <LinearLayout
+            android:id="@+id/hot_meal_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/hot_meal_image"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_light_usage"
+                android:src="@drawable/hotmeal" />
+
+            <TextView
+                android:id="@+id/hot_meal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/car_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/car_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_light_usage"
+                android:src="@drawable/fuelgauge" />
+
+            <TextView
+                android:id="@+id/car"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+        </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </RelativeLayout>
 
 </LinearLayout>

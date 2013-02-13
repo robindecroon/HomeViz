@@ -5,9 +5,11 @@ import java.util.GregorianCalendar;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.listeners.HomeVizListener;
 import robindecroon.homeviz.listeners.TouchListener;
+import robindecroon.homeviz.usage.HouseUsageActivity;
 import robindecroon.homeviz.util.DatePickerFragment;
 import robindecroon.homeviz.util.DatePickerListener;
 import robindecroon.homeviz.util.Period;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -76,6 +78,7 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
+		menu.add(Menu.NONE, 1,Menu.NONE, "House");
 		return true;
 	}
 
@@ -88,7 +91,11 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case 1:
+			Intent intent = new Intent(this, HouseUsageActivity.class);
+			startActivity(intent);
 		}
+			
 		return super.onOptionsItemSelected(item);
 	}
 

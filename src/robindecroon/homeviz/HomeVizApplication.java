@@ -5,6 +5,7 @@ package robindecroon.homeviz;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
+import robindecroon.homeviz.room.House;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Period;
@@ -254,6 +256,31 @@ public class HomeVizApplication extends Application {
 				throw new LocationUnknownException("No CO2 data");
 			}
 		}
+	}
+	
+	private static boolean housePresent = false; 
+
+	public void addHouse() {
+		if(!housePresent) {
+			List<Room> old = getRooms();
+			List<Room> hack = new ArrayList<Room>();
+			for (Room room : old ) {
+				hack.add(room);
+			}
+			rooms.add(0, new House(hack, getResources().getString(R.string.house)));
+			housePresent = true;
+		}
+	}
+	
+	public void removeHouse() {
+		if(housePresent) {
+			rooms.remove(0);
+			housePresent = false;
+		}
+	}
+
+	public Room getHouse() {
+		return new House(getRooms(), getResources().getString(R.string.house));
 	}
 
 }

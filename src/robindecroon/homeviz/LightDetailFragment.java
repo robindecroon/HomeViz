@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A fragment representing a single Light detail screen. This fragment is either
@@ -39,8 +40,12 @@ public class LightDetailFragment extends Fragment {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
-//			light = DummyContent.ITEM_MAP.get(getArguments().getString(
-//					ARG_ITEM_ID));
+			String lightName = (String) getArguments().get(ARG_ITEM_ID);
+			light = ((HomeVizApplication) getActivity().getApplication())
+					.getCurrentRoom().getLight(lightName);
+			
+			// light = DummyContent.ITEM_MAP.get(getArguments().getString(
+			// ARG_ITEM_ID));
 		}
 	}
 
@@ -50,12 +55,20 @@ public class LightDetailFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_light_detail,
 				container, false);
 
+		HomeVizApplication app = (HomeVizApplication) getActivity()
+				.getApplication();
+
 		// Show the dummy content as text in a TextView.
 		if (light != null) {
-//			((Layout) rootView.findViewById(R.id.light_detail))
-//					.setText(mItem.content);
+			double power = light.getPowerUsage(app.getCurrentPeriod());
+			TextView co2 = ((TextView) rootView.findViewById(R.id.co2));
+			co2.setText(String.format("%.5f g", power * app.getCo2Multiplier()));
+			TextView hotmeal = ((TextView) rootView.findViewById(R.id.hot_meal));
+			hotmeal.setText(String.format("%.2f meals", power / 10));
+			TextView car = ((TextView) rootView.findViewById(R.id.car));
+			car.setText(String.format("%.3f liter",power + 0.261));
 		}
-
+		
 		return rootView;
 	}
 }

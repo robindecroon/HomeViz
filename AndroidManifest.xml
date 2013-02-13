@@ -133,6 +133,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LightListActivity" />
         </activity>
+        <activity android:name=".usage.HouseUsageActivity"></activity>
+        <activity android:name=".usage.HouseUsageDetailActivity"></activity>
     </application>
 
 </manifest>

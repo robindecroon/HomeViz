@@ -10,6 +10,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.you.YouActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -58,18 +59,18 @@ public class HomeScreen extends Activity implements LocationListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(HomeScreen.this,LightListActivity.class);
-				startActivity(intent);
+//				Intent intent = new Intent(HomeScreen.this,LightListActivity.class);
+//				startActivity(intent);
 				
 				
-//				try {
-//					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//					intent.setType("file/");
-//					startActivityForResult(intent, PICKFILE_RESULT_CODE);
-//				} catch (ActivityNotFoundException exp) {
-//					ToastMessages.noFileManager();
-//					Log.e("HomeScreen", "No filemanger installed!");
-//				}
+				try {
+					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+					intent.setType("file/");
+					startActivityForResult(intent, PICKFILE_RESULT_CODE);
+				} catch (ActivityNotFoundException exp) {
+					ToastMessages.noFileManager();
+					Log.e("HomeScreen", "No filemanger installed!");
+				}
 			}
 		});
 

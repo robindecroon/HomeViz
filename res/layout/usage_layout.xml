@@ -14,6 +14,7 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:keepScreenOn="true"
+        android:paddingRight="20dp"
         android:paddingTop="50dp"
         android:textColor="@color/WhiteSmoke"
         android:textSize="150sp"
@@ -25,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="50sp" />
@@ -36,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/usage_location"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="40sp" />
@@ -88,30 +91,6 @@
 
             <TextView
                 android:id="@+id/usage_water_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/White"
-                android:textSize="40sp" />
-        </robindecroon.homeviz.util.views.MyLinearLayout>
-
-        <robindecroon.homeviz.util.views.MyLinearLayout
-            android:id="@+id/heating_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/heatingView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_heating_usage"
-                android:src="@drawable/heating_icon" />
-
-            <TextView
-                android:id="@+id/usage_heating_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

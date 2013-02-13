@@ -11,7 +11,6 @@ import robindecroon.homeviz.usage.UsageFullScreenActivity;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.ToastMessages;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Gravity;

@@ -1,7 +1,6 @@
 package robindecroon.homeviz;
 
 import robindecroon.homeviz.usage.UsageFullScreenActivity;
-import robindecroon.homeviz.usage.light.LightUsageActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -47,8 +46,10 @@ public class LightListActivity extends UsageFullScreenActivity implements
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
+
 			((LightListFragment) getSupportFragmentManager().findFragmentById(
 					R.id.light_list)).setActivateOnItemClick(true);
+			// onItemSelected("L1");
 		}
 
 		// TODO: If exposing deep links into your app, handle intents here.
@@ -100,30 +101,30 @@ public class LightListActivity extends UsageFullScreenActivity implements
 	@Override
 	public void onSwypeToUp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSwypeToDown() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void setListeners() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void setPeriod() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void setLocation() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

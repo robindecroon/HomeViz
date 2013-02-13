@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="50sp" />
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/appliance_location"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="40sp" />

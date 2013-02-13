@@ -1,6 +1,6 @@
 package robindecroon.homeviz.exceptions;
 
-public class LocationUnknownException extends Exception {
+public class LocationUnknownException extends RuntimeException {
 
 	public LocationUnknownException(String string) {
 		super(string);

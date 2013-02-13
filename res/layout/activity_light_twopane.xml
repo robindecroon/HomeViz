@@ -20,8 +20,8 @@
         android:id="@+id/light_list"
         android:name="robindecroon.homeviz.LightListFragment"
         android:layout_width="0dp"
-        android:layout_marginLeft="8dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
         android:layout_weight="1"
         tools:layout="@android:layout/list_content" />
 

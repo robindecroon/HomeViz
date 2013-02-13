@@ -9,8 +9,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+
 
 /**
  * A list fragment representing a list of Lights. This fragment also supports
@@ -33,7 +37,13 @@ public class LightListFragment extends ListFragment {
 	 * The fragment's current callback object, which is notified of list item
 	 * clicks.
 	 */
-	private Callbacks mCallbacks = sDummyCallbacks;
+	private Callbacks mCallbacks = new Callbacks() {
+		
+		@Override
+		public void onItemSelected(String id) {
+			setActivatedPosition(0);
+		}
+	};
 
 	/**
 	 * The current activated item position. Only used on tablets.
@@ -74,7 +84,6 @@ public class LightListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		
-		// TODO: replace with a real list adapter.
 		Room room = ((HomeVizApplication) getActivity().getApplication()).getCurrentRoom();
 		try {
 			setListAdapter(new ArrayAdapter<Light>(getActivity(),
@@ -82,22 +91,48 @@ public class LightListFragment extends ListFragment {
 		} catch (NoSuchDevicesInRoom e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-//		setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//				android.R.layout.simple_list_item_activated_1,
-//				android.R.id.text1, DummyContent.ITEMS));
+		}		
+
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		// Restore the previously serialized activated item position.
+//		int position = 0;
+//		getListView().requestFocusFromTouch();
+//		getListView().setSelection(position);
+//		getListView().performItemClick(getListView().getAdapter().getView(position, null, null), position, position);
+//		getListView().performItemClick(null, 0, 0);
+//		getListView().getAdapter().getView(position, null, null).setSelected(true);
+//		 Restore the previously serialized activated item position.
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
 			setActivatedPosition(savedInstanceState
 					.getInt(STATE_ACTIVATED_POSITION));
-		}
+		} 
+//		else {
+//			setActivatedPosition(0);
+//		}
+//		onListItemClick(getListView(), view, position, id)
+		
+//        getListView().clearFocus();
+//        getListView().post(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//
+//                getListView().setSelection(0);
+//            }
+//        });
+//		getListView().requestFocusFromTouch();
+//		getListView().smoothScrollToPosition(0);
+//		getListView().setItemChecked(0, true);
+//		getListView().setSelection(0);
+////		getListView().invalidate();
+//		getListView().se
+//		getListView().requestFocusFromTouch();
+			
 	}
 
 	@Override
@@ -141,7 +176,7 @@ public class LightListFragment extends ListFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (mActivatedPosition != ListView.INVALID_POSITION) {
+		if (mActivatedPosition != AdapterView.INVALID_POSITION) {
 			// Serialize and persist the activated item position.
 			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
 		}
@@ -155,16 +190,16 @@ public class LightListFragment extends ListFragment {
 		// When setting CHOICE_MODE_SINGLE, ListView will automatically
 		// give items the 'activated' state when touched.
 		getListView().setChoiceMode(
-				activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-						: ListView.CHOICE_MODE_NONE);
+				activateOnItemClick ? AbsListView.CHOICE_MODE_SINGLE
+						: AbsListView.CHOICE_MODE_NONE);
 	}
 
 	private void setActivatedPosition(int position) {
-		if (position == ListView.INVALID_POSITION) {
+		if (position == AdapterView.INVALID_POSITION) {
 			getListView().setItemChecked(mActivatedPosition, false);
-		} else {
+		} else {}
 			getListView().setItemChecked(position, true);
-		}
+		
 
 		mActivatedPosition = position;
 	}

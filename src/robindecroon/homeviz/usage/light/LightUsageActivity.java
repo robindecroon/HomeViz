@@ -3,8 +3,11 @@ package robindecroon.homeviz.usage.light;
 import java.util.List;
 import java.util.Locale;
 
+import robindecroon.homeviz.LightListActivity;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.listeners.ClickListener;
+import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.usage.UsageFullScreenActivity;
@@ -119,6 +122,9 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				text.setText(price.toString());
 
 				layout.addView(text);
+				
+				layout.setClickable(true);
+				layout.setOnClickListener(new ClickListener(this,LightListActivity.class));
 
 				lightsLayout.addView(layout);
 			}
@@ -136,7 +142,6 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	protected void setListeners() {
-		// TODO Auto-generated method stub
 	}
 
 }

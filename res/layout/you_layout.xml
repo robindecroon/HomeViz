@@ -13,6 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="50sp" />
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/you_current_user"
+        android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textSize="40sp" />
@@ -36,7 +38,7 @@
         <robindecroon.homeviz.util.webviews.MyWebView
             android:id="@+id/you_webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </RelativeLayout>

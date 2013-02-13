@@ -5,36 +5,36 @@
     android:background="@drawable/gradient_background"
     tools:context=".HomeScreen" >
 
-        <TextView
-            android:id="@+id/keyword_you"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/keyword_you"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/Green"
-            android:textSize="100sp" />
+    <TextView
+        android:id="@+id/keyword_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/keyword_you"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Green"
+        android:textSize="100sp" />
 
-        <TextView
-            android:id="@+id/keyword_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:paddingRight="100dp"
-            android:text="@string/keyword_hint"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/Red"
-            android:textSize="100sp" />
+    <TextView
+        android:id="@+id/keyword_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:paddingRight="150dp"
+        android:text="@string/keyword_hint"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Red"
+        android:textSize="100sp" />
 
-        <TextView
-            android:id="@+id/keyword_usage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:paddingLeft="100dp"
-            android:text="@string/keyword_usage"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/Blue"
-            android:textSize="100sp" />
+    <TextView
+        android:id="@+id/keyword_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:paddingLeft="100dp"
+        android:text="@string/keyword_usage"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Blue"
+        android:textSize="100sp" />
 
 </FrameLayout>
