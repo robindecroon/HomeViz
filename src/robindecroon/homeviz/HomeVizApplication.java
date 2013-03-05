@@ -4,7 +4,9 @@
 package robindecroon.homeviz;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,32 +57,32 @@ public class HomeVizApplication extends Application {
 
 	private Person currentUser;
 
-//	private String currentCity;
-//	private String currentCountry;
-	
+	// private String currentCity;
+	// private String currentCountry;
+
 	private Map<String, Country> countryMap;
 
-//	/**
-//	 * @return the currentCity
-//	 */
-//	public String getCurrentCity() {
-//		return currentCity;
-//	}
-//
-//	/**
-//	 * @param currentCity
-//	 *            the currentCity to set
-//	 */
-//	public void setCurrentCity(String currentCity) {
-//		this.currentCity = currentCity;
-//	}
+	// /**
+	// * @return the currentCity
+	// */
+	// public String getCurrentCity() {
+	// return currentCity;
+	// }
+	//
+	// /**
+	// * @param currentCity
+	// * the currentCity to set
+	// */
+	// public void setCurrentCity(String currentCity) {
+	// this.currentCity = currentCity;
+	// }
 
-//	/**
-//	 * @return the currentCountry
-//	 */
-//	public String getCurrentCountry() {
-//		return currentCountry;
-//	}
+	// /**
+	// * @return the currentCountry
+	// */
+	// public String getCurrentCountry() {
+	// return currentCountry;
+	// }
 
 	/**
 	 * @param currentCountry
@@ -96,7 +98,7 @@ public class HomeVizApplication extends Application {
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString("country", currentCountry);
 		editor.commit();
-//		this.currentCountry = currentCountry;
+		// this.currentCountry = currentCountry;
 	}
 
 	/**
@@ -123,7 +125,21 @@ public class HomeVizApplication extends Application {
 	 */
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
-		parseXML("/storage/extSdCard/rooms.xml");
+		// parseXML("/storage/extSdCard/rooms.xml");
+//		parseXML("file:///android_asset/XML/prototype1.xml");
+
+	}
+
+	private static HomeVizApplication singleton;
+
+	public HomeVizApplication getInstance() {
+		return singleton;
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		singleton = this;
 	}
 
 	/**
@@ -182,6 +198,10 @@ public class HomeVizApplication extends Application {
 	public void setCurrentRoom(int id) {
 		currentRoomIndex = id;
 	}
+	
+	public void parseXML() {
+		parseXML(null);
+	}
 
 	/**
 	 * @throws ParserConfigurationException
@@ -195,12 +215,25 @@ public class HomeVizApplication extends Application {
 			SAXParser saxParser = factory.newSAXParser();
 
 			handler = new XMLHandler();
-			File file = new File(path);
+			// File file = new File(path);
+			InputStream file = null;
+			try {
+				file = getAssets().open("prototype1.xml");
+			} catch (Exception e) {
+				System.out.println("NU ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+			}
+			if (file == null) {
+				System.out.println("GODVERDOMME");
+			} else {
+				System.out.println("mmmmmmmmmm");
+			}
 
-			saxParser.parse(file, handler);
-			type = handler.getVizType();
+			 saxParser.parse(file, handler);
+			 type = handler.getVizType();
 		} catch (Exception e) {
-			Log.e("ParseXML", e.getMessage());
+			System.out.println("FOOOOOUUUUTJEEEE");
+			e.printStackTrace();
+			// Log.e("ParseXML", e.getMessage());
 			// Toast gaat nog niet, want er is nog geen context
 		}
 		setRooms(handler.getRooms());
@@ -242,38 +275,39 @@ public class HomeVizApplication extends Application {
 	public List<Room> getRooms() {
 		return this.rooms;
 	}
-	
-	public double getCo2Multiplier() throws LocationUnknownException{
+
+	public double getCo2Multiplier() throws LocationUnknownException {
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		String currentCountry = settings.getString("country", null);
 		if (currentCountry == null) {
 			throw new LocationUnknownException("No location");
 		} else {
-			if(countryMap.containsKey(currentCountry)) {
+			if (countryMap.containsKey(currentCountry)) {
 				return countryMap.get(currentCountry).getCo2Value();
 			} else {
 				throw new LocationUnknownException("No CO2 data");
 			}
 		}
 	}
-	
-	private static boolean housePresent = false; 
+
+	private static boolean housePresent = false;
 
 	public void addHouse() {
-		if(!housePresent) {
+		if (!housePresent) {
 			List<Room> old = getRooms();
 			List<Room> hack = new ArrayList<Room>();
-			for (Room room : old ) {
+			for (Room room : old) {
 				hack.add(room);
 			}
-			rooms.add(0, new House(hack, getResources().getString(R.string.house)));
+			rooms.add(0,
+					new House(hack, getResources().getString(R.string.house)));
 			housePresent = true;
 		}
 	}
-	
+
 	public void removeHouse() {
-		if(housePresent) {
+		if (housePresent) {
 			rooms.remove(0);
 			housePresent = false;
 		}

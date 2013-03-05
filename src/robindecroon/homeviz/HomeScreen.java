@@ -74,6 +74,8 @@ public class HomeScreen extends Activity implements LocationListener {
 			}
 		});
 
+		
+		((HomeVizApplication) getApplication()).parseXML();
 		initCurrentLocation();
 	}
 

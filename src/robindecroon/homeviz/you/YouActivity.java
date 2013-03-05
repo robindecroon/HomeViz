@@ -1,5 +1,8 @@
 package robindecroon.homeviz.you;
 
+import java.io.File;
+import java.io.FilenameFilter;
+
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
@@ -49,6 +52,27 @@ public class YouActivity extends FullScreenActivity {
 		TextView user = (TextView) findViewById(R.id.you_current_user);
 		user.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());
 		refreshElements();
+		
+		try {
+			File f = new File("http://www.student.kuleuven.be/~s0206928/d3/");
+
+			File[] files = f.listFiles(new FilenameFilter() {
+			    public boolean accept(File dir, String name) {
+			        // Specify the extentions of files to be included.
+			        return name.endsWith(".json") || name.endsWith(".gif");
+			    }
+			});
+
+			if(files == null) return;
+			for (int indx = 0; indx < files.length; indx++) {
+				System.out.println(files[indx].getName());
+			}
+		} catch (Exception e) {
+			System.out.println("MESSSSAAAGGGEEEE");
+//			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.out.println("nnnnnnnnnnnnnnaaaaaaaaaaaaaa");
+		}
 	}
 
 	@Override

@@ -133,8 +133,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LightListActivity" />
         </activity>
-        <activity android:name=".usage.HouseUsageActivity"></activity>
-        <activity android:name=".usage.HouseUsageDetailActivity"></activity>
+        <activity
+            android:name=".usage.HouseUsageActivity"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".usage.HouseUsageDetailActivity"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
     </application>
 
 </manifest>

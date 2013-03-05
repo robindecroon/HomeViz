@@ -7,7 +7,6 @@ import robindecroon.homeviz.LightListActivity;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.listeners.ClickListener;
-import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.usage.UsageFullScreenActivity;

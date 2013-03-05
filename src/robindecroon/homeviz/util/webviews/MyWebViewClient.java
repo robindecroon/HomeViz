@@ -37,7 +37,7 @@ public class MyWebViewClient extends WebViewClient {
 	@Override
 	public void onPageFinished(WebView view, String url) {
 		if(name.equals(TREEMAP)) {
-			myBrowser.loadUrl("javascript:window.setTimeout(go(" + string + "),35)");			
+			myBrowser.loadUrl("javascript:window.setTimeout(go(" + string + "),50)");			
 		} else if(name.equals(CHART)){
 			myBrowser.loadUrl("javascript:go(" + string +")");
 		}
