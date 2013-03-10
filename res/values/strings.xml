@@ -49,4 +49,7 @@
     <string name="title_light_detail">Light Detail</string>
     <string name="title_light_list">Lights</string>
     <string name="house">House</string>
+    <string name="app_id">599565630071463</string>
+    <string name="usage_icon">Usage icon</string>
+    <string name="you_icon">You icon</string>
 </resources>

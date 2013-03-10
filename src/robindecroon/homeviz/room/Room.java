@@ -90,8 +90,7 @@ public class Room implements RoomPrices {
 	}
 
 	public CharSequence getTotalPrice(Period p) {
-		Amount total = getLightPrice(p).add(getWaterPrice(p)).add(getHeating(p))
-				.add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p));
+		Amount total = getLightPrice(p).add(getWaterPrice(p)).add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p));
 		return total.toString();
 	}
 

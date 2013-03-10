@@ -3,8 +3,6 @@
  */
 package robindecroon.homeviz;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -16,6 +14,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
+
+import com.facebook.model.GraphUser;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
@@ -56,6 +56,8 @@ public class HomeVizApplication extends Application {
 	private GoogleChartType type;
 
 	private Person currentUser;
+	
+	private GraphUser facebookUser;
 
 	// private String currentCity;
 	// private String currentCountry;
@@ -209,7 +211,7 @@ public class HomeVizApplication extends Application {
 	 * @throws IOException
 	 */
 	public void parseXML(String path) {
-		XMLHandler handler = null;
+		XMLHandler handler = null; 
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
@@ -220,14 +222,11 @@ public class HomeVizApplication extends Application {
 			try {
 				file = getAssets().open("prototype1.xml");
 			} catch (Exception e) {
-				System.out.println("NU ALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+				Log.e("XML", e.getMessage());
 			}
 			if (file == null) {
-				System.out.println("GODVERDOMME");
-			} else {
-				System.out.println("mmmmmmmmmm");
+				Log.e("XML", "XML file not found!");
 			}
-
 			 saxParser.parse(file, handler);
 			 type = handler.getVizType();
 		} catch (Exception e) {
@@ -315,6 +314,20 @@ public class HomeVizApplication extends Application {
 
 	public Room getHouse() {
 		return new House(getRooms(), getResources().getString(R.string.house));
+	}
+
+	/**
+	 * @return the facebookUser
+	 */
+	public GraphUser getFacebookUser() {
+		return facebookUser;
+	}
+
+	/**
+	 * @param facebookUser the facebookUser to set
+	 */
+	public void setFacebookUser(GraphUser facebookUser) {
+		this.facebookUser = facebookUser;
 	}
 
 }

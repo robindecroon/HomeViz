@@ -3,6 +3,9 @@ package robindecroon.homeviz.you;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import com.facebook.model.GraphUser;
+import com.facebook.widget.ProfilePictureView;
+
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
@@ -13,6 +16,7 @@ import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -49,30 +53,43 @@ public class YouActivity extends FullScreenActivity {
 		myBrowser.getSettings().setLoadWithOverviewMode(true);
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
-		TextView user = (TextView) findViewById(R.id.you_current_user);
-		user.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());
+		TextView userView = (TextView) findViewById(R.id.you_current_user);
+		userView.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());
+		
+		GraphUser user = ((HomeVizApplication) getApplication()).getFacebookUser();
+		if( user != null) {
+			LinearLayout layout = (LinearLayout) findViewById(R.id.you_user_layout);
+			layout.removeAllViews();
+			ProfilePictureView profilePictureView = new ProfilePictureView(this);
+			profilePictureView.setProfileId(user.getId());
+			layout.addView(profilePictureView);
+		}
+		
+		
+		
 		refreshElements();
 		
-		try {
-			File f = new File("http://www.student.kuleuven.be/~s0206928/d3/");
-
-			File[] files = f.listFiles(new FilenameFilter() {
-			    public boolean accept(File dir, String name) {
-			        // Specify the extentions of files to be included.
-			        return name.endsWith(".json") || name.endsWith(".gif");
-			    }
-			});
-
-			if(files == null) return;
-			for (int indx = 0; indx < files.length; indx++) {
-				System.out.println(files[indx].getName());
-			}
-		} catch (Exception e) {
-			System.out.println("MESSSSAAAGGGEEEE");
-//			System.out.println(e.getMessage());
-			e.printStackTrace();
-			System.out.println("nnnnnnnnnnnnnnaaaaaaaaaaaaaa");
-		}
+//		try {
+//			File f = new File("http://www.student.kuleuven.be/~s0206928/d3/");
+//
+//			File[] files = f.listFiles(new FilenameFilter() {
+//			    @Override
+//				public boolean accept(File dir, String name) {
+//			        // Specify the extentions of files to be included.
+//			        return name.endsWith(".json") || name.endsWith(".gif");
+//			    }
+//			});
+//
+//			if(files == null) return;
+//			for (int indx = 0; indx < files.length; indx++) {
+//				System.out.println(files[indx].getName());
+//			}
+//		} catch (Exception e) {
+//			System.out.println("MESSSSAAAGGGEEEE");
+////			System.out.println(e.getMessage());
+//			e.printStackTrace();
+//			System.out.println("nnnnnnnnnnnnnnaaaaaaaaaaaaaa");
+//		}
 	}
 
 	@Override

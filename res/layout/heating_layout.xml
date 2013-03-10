@@ -14,7 +14,6 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:paddingTop="50dp"
         android:textColor="@color/White"
         android:textSize="125sp"
         android:textStyle="bold" />

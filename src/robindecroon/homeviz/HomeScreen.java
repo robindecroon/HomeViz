@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import robindecroon.coverflow.CoverFlow;
+import robindecroon.coverflow.ReflectingImageAdapter;
+import robindecroon.coverflow.ResourceImageAdapter;
 import robindecroon.homeviz.listeners.ClickListener;
 import robindecroon.homeviz.usage.UsageActivity;
 import robindecroon.homeviz.util.ToastMessages;
@@ -23,10 +26,25 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.FacebookAuthorizationException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
+import com.facebook.widget.ProfilePictureView;
 
 /**
  * Startscherm van HomeViz.
@@ -40,17 +58,60 @@ public class HomeScreen extends Activity implements LocationListener {
 	private static final int PICKFILE_RESULT_CODE = 1;
 	private static final int LOCATION_SETTINGS = 2;
 
+	private LoginButton loginButton;
+	private ProfilePictureView profilePictureView;
+	private PendingAction pendingAction = PendingAction.NONE;
+	// private ViewGroup controlsContainer;
+	private GraphUser user;
+
+	private enum PendingAction {
+		NONE, POST_PHOTO, POST_STATUS_UPDATE
+	}
+
+	private UiLifecycleHelper uiHelper;
+
+	private Session.StatusCallback callback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {
+			onSessionStateChange(session, state, exception);
+		}
+	};
+
+	private void onSessionStateChange(Session session, SessionState state,
+			Exception exception) {
+		if (pendingAction != PendingAction.NONE
+				&& (exception instanceof FacebookOperationCanceledException || exception instanceof FacebookAuthorizationException)) {
+			new AlertDialog.Builder(HomeScreen.this)
+					// TODO
+					.setTitle("cancelled").setMessage("permission_not_granted")
+					.setPositiveButton("ok", null).show();
+			pendingAction = PendingAction.NONE;
+		} else if (state == SessionState.OPENED_TOKEN_UPDATED) {
+			handlePendingAction();
+		}
+		updateUI();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen_layout);
 
+		// Deze hack mag hier gebruikt worden, aangezien de main thread juist
+		// geblokt moet worden als we twitter tokens willen toevoegen.
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
+
 		// Usage
-		final TextView usage = (TextView) findViewById(R.id.keyword_usage);
+		final ImageView usage = (ImageView) findViewById(R.id.keyword_usage);
 		usage.setOnClickListener(new ClickListener(this, UsageActivity.class));
 
 		// You
-		final TextView you = (TextView) findViewById(R.id.keyword_you);
+		final ImageView you = (ImageView) findViewById(R.id.keyword_you);
 		you.setOnClickListener(new ClickListener(this, YouActivity.class));
 
 		// HINT
@@ -59,10 +120,10 @@ public class HomeScreen extends Activity implements LocationListener {
 
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(HomeScreen.this,LightListActivity.class);
-//				startActivity(intent);
-				
-				
+				// Intent intent = new
+				// Intent(HomeScreen.this,LightListActivity.class);
+				// startActivity(intent);
+
 				try {
 					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 					intent.setType("file/");
@@ -74,9 +135,113 @@ public class HomeScreen extends Activity implements LocationListener {
 			}
 		});
 
-		
 		((HomeVizApplication) getApplication()).parseXML();
 		initCurrentLocation();
+
+		uiHelper = new UiLifecycleHelper(this, callback);
+		uiHelper.onCreate(savedInstanceState);
+
+		loginButton = (LoginButton) findViewById(R.id.loginButton1);
+		loginButton
+				.setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
+					@Override
+					public void onUserInfoFetched(GraphUser user) {
+						HomeScreen.this.user = user;
+						((HomeVizApplication) getApplication())
+								.setFacebookUser(user);
+						updateUI();
+						// It's possible that we were waiting for this.user to
+						// be populated in order to post a
+						// status update.
+						handlePendingAction();
+					}
+				});
+
+		profilePictureView = (ProfilePictureView) findViewById(R.id.profilePictureView1);
+
+		final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(R.id.coverflowReflect);
+		setupCoverFlow(reflectingCoverFlow, false);
+	}
+
+	/**
+	 * Setup cover flow.
+	 * 
+	 * @param mCoverFlow
+	 *            the m cover flow
+	 * @param reflect
+	 *            the reflect
+	 */
+	private void setupCoverFlow(final CoverFlow mCoverFlow,
+			final boolean reflect) {
+		BaseAdapter coverImageAdapter;
+		if (reflect) {
+			coverImageAdapter = new ReflectingImageAdapter(
+					new ResourceImageAdapter(this));
+		} else {
+			coverImageAdapter = new ResourceImageAdapter(this);
+		}
+		mCoverFlow.setAdapter(coverImageAdapter);
+		mCoverFlow.setSelection(2, true);
+		setupListeners(mCoverFlow);
+	}
+
+	/**
+	 * Sets the up listeners.
+	 * 
+	 * @param mCoverFlow
+	 *            the new up listeners
+	 */
+	private void setupListeners(final CoverFlow mCoverFlow) {
+		mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(final AdapterView<?> parent,
+					final View view, final int position, final long id) {
+				// textView.setText("Item clicked! : " + id);
+			}
+
+		});
+		mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(final AdapterView<?> parent,
+					final View view, final int position, final long id) {
+				// textView.setText("Item selected! : " + id);
+			}
+
+			@Override
+			public void onNothingSelected(final AdapterView<?> parent) {
+				// textView.setText("Nothing clicked!");
+			}
+		});
+	}
+
+	private void updateUI() {
+		Session session = Session.getActiveSession();
+		boolean enableButtons = (session != null && session.isOpened());
+
+		if (enableButtons && user != null) {
+			profilePictureView.setProfileId(user.getId());
+			System.out.println("Facebookname: " + user.getFirstName());
+		} else {
+			profilePictureView.setProfileId(null);
+		}
+	}
+
+	@SuppressWarnings("incomplete-switch")
+	private void handlePendingAction() {
+		PendingAction previouslyPendingAction = pendingAction;
+		// These actions may re-set pendingAction if they are still pending, but
+		// we assume they
+		// will succeed.
+		pendingAction = PendingAction.NONE;
+
+		switch (previouslyPendingAction) {
+		case POST_PHOTO:
+			// postPhoto();
+			break;
+		case POST_STATUS_UPDATE:
+			// postStatusUpdate();
+			break;
+		}
 	}
 
 	@Override
@@ -92,6 +257,7 @@ public class HomeScreen extends Activity implements LocationListener {
 			((HomeVizApplication) getApplication()).parseXML(data.getData()
 					.getPath());
 		}
+		uiHelper.onActivityResult(requestCode, resultCode, data);
 	}
 
 	// ////////////////////////////////////////////////////
@@ -214,11 +380,11 @@ public class HomeScreen extends Activity implements LocationListener {
 			currentCountry = getResources().getString(R.string.no_location);
 		}
 
-//		((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
+		// ((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
 		((HomeVizApplication) getApplication())
 				.setCurrentCountry(currentCountry);
-		Log.i("Homescreen", "Updated location, we are in: " + currentCity + ", "
-				+ currentCountry);
+		Log.i("Homescreen", "Updated location, we are in: " + currentCity
+				+ ", " + currentCountry);
 	}
 
 	@Override
