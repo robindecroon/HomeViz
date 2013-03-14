@@ -50,7 +50,7 @@ public class DownloadLoxoneXMLTask extends AsyncTask<String, Void, List<Entry>> 
 
 			client.connect(urlString);
 			client.enterLocalPassiveMode();
-			client.login("anonymous", "");
+			client.login(Constants.LOXONE_USER, Constants.LOXONE_PASSWORD);
 
 			client.changeWorkingDirectory("pools/A/A0/HomeViz/temp");
 

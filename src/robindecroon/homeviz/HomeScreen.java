@@ -161,7 +161,7 @@ public class HomeScreen extends Activity implements LocationListener {
 		final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(R.id.coverflowReflect);
 		setupCoverFlow(reflectingCoverFlow, false);
 		
-		new DownloadLoxoneXMLTask().execute("192.168.1.102");
+		new DownloadLoxoneXMLTask().execute(Constants.LOXONE_IP);
 	}
 
 	/**
