@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/ADT/adt-bundle-windows-x86_64/sdk/extras/android/support/v4/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="libs/commons-net-3.2-sources.jar"/>
 	<classpathentry kind="lib" path="libs/commons-net-3.2.jar"/>
+	<classpathentry kind="lib" path="libs/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

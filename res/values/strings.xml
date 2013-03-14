@@ -52,4 +52,5 @@
     <string name="app_id">599565630071463</string>
     <string name="usage_icon">Usage icon</string>
     <string name="you_icon">You icon</string>
+    <string name="connection_error">No network connection could be established.</string>
 </resources>

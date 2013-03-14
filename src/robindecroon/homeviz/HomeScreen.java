@@ -26,7 +26,6 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -100,11 +99,11 @@ public class HomeScreen extends Activity implements LocationListener {
 
 		// Deze hack mag hier gebruikt worden, aangezien de main thread juist
 		// geblokt moet worden als we twitter tokens willen toevoegen.
-		if (android.os.Build.VERSION.SDK_INT > 9) {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-					.permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}
+//		if (android.os.Build.VERSION.SDK_INT > 9) {
+//			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+//					.permitAll().build();
+//			StrictMode.setThreadPolicy(policy);
+//		}
 
 		// Usage
 		final ImageView usage = (ImageView) findViewById(R.id.keyword_usage);
@@ -161,6 +160,8 @@ public class HomeScreen extends Activity implements LocationListener {
 
 		final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(R.id.coverflowReflect);
 		setupCoverFlow(reflectingCoverFlow, false);
+		
+		new DownloadLoxoneXMLTask().execute("192.168.1.102");
 	}
 
 	/**

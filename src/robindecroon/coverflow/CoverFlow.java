@@ -156,7 +156,7 @@ public class CoverFlow extends Gallery {
      *            the new image reflection ratio
      */
     public void setImageReflectionRatio(final float imageReflectionRatio) {
-        this.imageReflectionRatio = imageReflectionRatio;
+        CoverFlow.imageReflectionRatio = imageReflectionRatio;
     }
 
     /**

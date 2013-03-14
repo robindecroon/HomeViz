@@ -67,7 +67,6 @@ public abstract class AbstractCoverFlowImageAdapter extends BaseAdapter {
                 return bitmap;
             }
         } else {
-        	System.out.println("Refernece nulllllllllllll");
         }
         Log.v(TAG, "Creating item at position: " + position + ":" + this);
         final Bitmap bitmap = createBitmap(position);

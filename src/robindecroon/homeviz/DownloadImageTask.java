@@ -21,6 +21,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		this.adapter = resourceImageAdapter;
 	}
 
+	@Override
 	protected void onPostExecute(Bitmap result) {
 //		mImageView = result;
 		Log.e("Tast", "New image!");
@@ -39,11 +40,4 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 			return null;
 		}
 	}
-
-//	public Bitmap getBitmap(Context context) {
-//		if(mImageView == null)
-//			return BitmapFactory.decodeResource(context.getResources(),
-//                    R.drawable.l1);
-//		return mImageView;
-//	}
 }

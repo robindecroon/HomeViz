@@ -1,8 +1,5 @@
 package robindecroon.homeviz.you;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 

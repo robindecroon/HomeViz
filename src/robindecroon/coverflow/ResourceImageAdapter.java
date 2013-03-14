@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.DownloadImageTask;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
