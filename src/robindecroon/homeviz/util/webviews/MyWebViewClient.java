@@ -3,6 +3,9 @@
  */
 package robindecroon.homeviz.util.webviews;
 
+import java.util.List;
+
+import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.you.JsonObject;
 import android.util.Log;
 import android.webkit.WebView;
@@ -23,11 +26,11 @@ public class MyWebViewClient extends WebViewClient {
 	private String string;
 	private String name;
 
-	public MyWebViewClient(WebView myBrowser, String name) {
+	public MyWebViewClient(WebView myBrowser, String name, List<Room> rooms) {
 		this.myBrowser = myBrowser;
 		this.setName(name);
 		Gson gson = new Gson();
-		this.string = "'" + gson.toJson(JsonObject.getTestJson()) + "'";
+		this.string = "'" + gson.toJson(JsonObject.getTestJson(rooms)) + "'";
 	}
 
 	public void setString(String string) {

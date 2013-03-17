@@ -6,6 +6,10 @@ import robindecroon.homeviz.util.Period;
 
 public class Electric extends Consumer {
 	
+	public Electric(String name, int watt) {
+		super(name,watt);
+	}
+	
 	@Override
 	public Amount getPrice(Period currentPeriod) {
 		Amount price = new Amount(getPower()).multiply(getKwhPrice());

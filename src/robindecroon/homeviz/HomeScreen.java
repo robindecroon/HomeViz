@@ -8,6 +8,8 @@ import robindecroon.coverflow.CoverFlow;
 import robindecroon.coverflow.ReflectingImageAdapter;
 import robindecroon.coverflow.ResourceImageAdapter;
 import robindecroon.homeviz.listeners.ClickListener;
+import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
+import robindecroon.homeviz.task.InitHomeVizTask;
 import robindecroon.homeviz.usage.UsageActivity;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.you.YouActivity;
@@ -60,7 +62,6 @@ public class HomeScreen extends Activity implements LocationListener {
 	private LoginButton loginButton;
 	private ProfilePictureView profilePictureView;
 	private PendingAction pendingAction = PendingAction.NONE;
-	// private ViewGroup controlsContainer;
 	private GraphUser user;
 
 	private enum PendingAction {
@@ -96,14 +97,9 @@ public class HomeScreen extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen_layout);
-
-		// Deze hack mag hier gebruikt worden, aangezien de main thread juist
-		// geblokt moet worden als we twitter tokens willen toevoegen.
-//		if (android.os.Build.VERSION.SDK_INT > 9) {
-//			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-//					.permitAll().build();
-//			StrictMode.setThreadPolicy(policy);
-//		}
+		
+		// Parse alle xml bestanden
+		startTasks();
 
 		// Usage
 		final ImageView usage = (ImageView) findViewById(R.id.keyword_usage);
@@ -119,10 +115,6 @@ public class HomeScreen extends Activity implements LocationListener {
 
 			@Override
 			public void onClick(View v) {
-				// Intent intent = new
-				// Intent(HomeScreen.this,LightListActivity.class);
-				// startActivity(intent);
-
 				try {
 					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 					intent.setType("file/");
@@ -134,7 +126,6 @@ public class HomeScreen extends Activity implements LocationListener {
 			}
 		});
 
-		((HomeVizApplication) getApplication()).parseXML();
 		initCurrentLocation();
 
 		uiHelper = new UiLifecycleHelper(this, callback);
@@ -160,7 +151,10 @@ public class HomeScreen extends Activity implements LocationListener {
 
 		final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(R.id.coverflowReflect);
 		setupCoverFlow(reflectingCoverFlow, false);
-		
+	}
+	
+	private void startTasks() {
+		new InitHomeVizTask((HomeVizApplication) getApplication()).execute("HomeViz.xml");
 		new DownloadLoxoneXMLTask().execute(Constants.LOXONE_IP);
 	}
 
@@ -304,7 +298,7 @@ public class HomeScreen extends Activity implements LocationListener {
 				ToastMessages.noLocationResource();
 			}
 		} catch (Exception e) {
-			Log.i("Homescreen", "locationServices disabled");
+			Log.i("Homescreen", "locationServices are disabled");
 			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

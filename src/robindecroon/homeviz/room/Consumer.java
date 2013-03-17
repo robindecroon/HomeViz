@@ -17,6 +17,11 @@ public abstract class Consumer {
 	
 	private double liter;
 
+	public Consumer(String name, int watt) {
+		this.name = name;
+		this.watt = watt;
+	}
+
 	/**
 	 * @return the liter
 	 */

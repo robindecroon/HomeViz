@@ -2,7 +2,6 @@ package robindecroon.homeviz.usage;
 
 import java.util.Map;
 
-import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.TouchListener;
 import robindecroon.homeviz.util.Amount;
@@ -142,8 +141,8 @@ public abstract class UsageDetailFullScreenActivity extends
 
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		HomeVizApplication app = (HomeVizApplication) getApplicationContext();
-		app.setType(types[itemPosition]);
+//		HomeVizApplication app = (HomeVizApplication) getApplicationContext();
+//		app.setType(types[itemPosition]);
 		currentType=types[itemPosition];
 		delayedRefresh();
 		return true;

@@ -23,7 +23,6 @@ public class Room implements RoomPrices {
 	 * De naam van de kamer.
 	 */
 	private String name;
-
 	private Amount heating;
 
 	private List<Light> lights = new ArrayList<Light>();
@@ -33,6 +32,10 @@ public class Room implements RoomPrices {
 
 	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
 
+	public Room(String name) {
+		this();
+		this.name = name;
+	}
 
 
 	/**

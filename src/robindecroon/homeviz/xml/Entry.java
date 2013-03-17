@@ -1,4 +1,4 @@
-package robindecroon.homeviz;
+package robindecroon.homeviz.xml;
 
 import java.sql.Date;
 

@@ -14,9 +14,7 @@ public class JsonObject {
 	private String value;
 	
 	private JsonObject[] children;
-	
-	private static List<Room> rooms;
-	
+		
 	public JsonObject(){}
 	
 	public void setChildren(JsonObject[] children) {
@@ -29,7 +27,7 @@ public class JsonObject {
 	}
 	
 	
-	public static JsonObject getTestJson() {
+	public static JsonObject getTestJson(List<Room> rooms) {
 		JsonObject root = new JsonObject("Home",null);
 
 		JsonObject[] roomsJson = new JsonObject[rooms.size()];
@@ -103,19 +101,5 @@ public class JsonObject {
 	 */
 	public JsonObject[] getChildren() {
 		return children;
-	}
-
-	/**
-	 * @return the rooms
-	 */
-	public static List<Room> getRooms() {
-		return rooms;
-	}
-
-	/**
-	 * @param rooms the rooms to set
-	 */
-	public static void setRooms(List<Room> rooms) {
-		JsonObject.rooms = rooms;
 	}
 }

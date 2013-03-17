@@ -8,4 +8,8 @@ package robindecroon.homeviz.room;
  *
  */
 public class HomeCinema extends Electric {
+
+	public HomeCinema(String name, int watt) {
+		super(name, watt);
+	}
 }

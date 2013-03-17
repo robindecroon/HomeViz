@@ -41,7 +41,7 @@ public class YouActivity extends FullScreenActivity {
 				"AndroidFunction");
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				MyWebViewClient.TREEMAP));
+				MyWebViewClient.TREEMAP, ((HomeVizApplication) getApplication()).getRooms()));
 		
 		myBrowser.setBackgroundColor(0x00000000);
 

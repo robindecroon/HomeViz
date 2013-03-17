@@ -5,6 +5,10 @@ import robindecroon.homeviz.util.Period;
 
 public class Appliance extends Consumer {
 
+	public Appliance(String name, int watt) {
+		super(name, watt);
+	}
+
 	@Override
 	public Amount getPrice(Period currentPeriod) {
 		double power = getWatt() * getAverageHoursOn() / 1000;

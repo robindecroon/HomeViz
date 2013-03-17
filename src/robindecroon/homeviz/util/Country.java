@@ -1,6 +1,5 @@
-package robindecroon.homeviz.xml;
+package robindecroon.homeviz.util;
 
-import robindecroon.homeviz.util.Amount;
 
 public class Country {
 	

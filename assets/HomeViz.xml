@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HomeViz>
+	<Settings viztype="barchart" user="Robin"/>
+	
+	<Room name="Living Room">
+		<Light name="l1" watt="60" />
+		<Light name="l2" watt="50" />
+		<Light name="l3" watt="20" />
+		<HomeCinema name="tv1" watt="176" />
+		<HomeCinema name="hifi1" watt="90" />
+		<HomeCinema name="desktop1" watt="200" />
+	</Room>
+	<Room name="Kitchen">
+		<Light name="l4" watt="5" />
+		<Light name="l5" watt="80" />
+		<Light name="l6" watt="10" />
+		<Light name="l7" watt="60" />
+		<Appliance name="dishwasher" watt="1200" />
+		<Appliance name="senseo" watt="1200" />
+		<Appliance name="vacuummini" watt="100" />
+		<HomeCinema name="tv2" watt="100" />
+		<HomeCinema name="radio2" watt="50" />
+		<Water name="kraan1" />
+	</Room>
+	<Room name="Storage">
+		<Light name="l8" watt="5" />
+		<Light name="l9" watt="80" />
+		<Light name="l0" watt="10" />
+		<Appliance name="washer" watt="500" />
+		<Appliance name="dryer" watt="2000" />
+		<Appliance name="vacuum" watt="2000" />
+		<HomeCinema name="router" watt="10" />
+	</Room>
+	<Room name="Bed Room">
+		<Light name="l11" watt="5" />
+		<Light name="l12" watt="80" />
+		<Light name="l13" watt="10" />
+		<Appliance name="dishwasher" watt="1200" />
+		<Appliance name="senseo" watt="1200" />
+		<Appliance name="vacuummini" watt="100" />
+		<HomeCinema name="macbook" watt="100" />
+		<HomeCinema name="radio3" watt="50" />
+		<Water name="kraan2" />
+	</Room>
+	<Room name="Bath Room">
+		<Light name="l14" watt="5" />
+		<Light name="l15" watt="80" />
+		<Appliance name="shaver" watt="15" />
+		<Appliance name="fone" watt="1000" />
+		<Water name="kraan4" />
+		<Water name="kraan7" />
+	</Room>
+
+	<Person firstname="Robin" lastname="De Croon" />
+	<Person firstname="Silke" lastname="De Croon" />
+	<Person firstname="Roosje" lastname="De Croon" />
+	<Person firstname="Vienna" lastname="Delnat" />
+</HomeViz>

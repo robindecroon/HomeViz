@@ -1,4 +1,4 @@
-package robindecroon.homeviz;
+package robindecroon.homeviz.task;
 
 import java.io.IOException;
 import java.io.InputStream;
