@@ -22,8 +22,10 @@ public class LoxoneXMLParser extends XMLParser {
 	private static final String STATISTICS = "Statistics";
 	private static final String DATE_TAG = "S";
 	private static final String DATE_ATTRIBUTE = "T";
+	private static final String NAME_ATTRIBUTE = "Name";
 	private static final String OUTPUTS = "Outputs";
 	
+	private String name;
 	private String output;
 
 	public List<Entry> parse(InputStream in) throws XmlPullParserException,
@@ -46,6 +48,8 @@ public class LoxoneXMLParser extends XMLParser {
 		List<Entry> entries = new ArrayList<Entry>();
 
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
+		
+		name = parser.getAttributeValue(null,NAME_ATTRIBUTE);
 		output = parser.getAttributeValue(null, OUTPUTS);
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -81,7 +85,7 @@ public class LoxoneXMLParser extends XMLParser {
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
-		Entry entry = new Entry(date, value);
+		Entry entry = new Entry(date, value, name, output);
 		return entry;
 	}
 }

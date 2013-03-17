@@ -3,13 +3,31 @@ package robindecroon.homeviz.xml;
 import java.sql.Date;
 
 public class Entry {
-	
-	public final long date;
-	public final boolean value;
 
-	public Entry(long date, boolean value) {
+	private final long date;
+	private final boolean value;
+	private final String name;
+	private final String type;
+
+	public Entry(long date, boolean value, String name, String type) {
 		this.date = date;
 		this.value = value;
+		this.name = name;
+		this.type = type;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
 	}
 
 	/**
@@ -28,6 +46,7 @@ public class Entry {
 
 	@Override
 	public String toString() {
-		return "T=" + new Date(date).toLocaleString() + " Q=" + value;
+		return "T=" + new Date(date).toLocaleString() + " " + getType() + ": "
+				+ value + " in: " + getName();
 	}
 }

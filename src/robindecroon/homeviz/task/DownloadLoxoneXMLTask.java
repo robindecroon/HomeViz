@@ -35,12 +35,14 @@ public class DownloadLoxoneXMLTask extends
 
 	@Override
 	protected void onPostExecute(List<List<Entry>> result) {
-		if (result != null)
+		if (result != null) {
+//			 TODO
 			for (List<Entry> list : result) {
 				System.out.println("New entries:");
 				for (Entry entry : list)
 					System.out.println("Entry: " + entry);
 			}
+		}
 	}
 
 	private List<List<Entry>> loadXmlFromNetwork(String urlString)
