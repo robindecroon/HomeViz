@@ -18,7 +18,7 @@
         android:textSize="150sp"
         android:textStyle="bold" />
 
-    <TextView
+    <!--TextView
         android:id="@+id/usage_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,9 +27,34 @@
         android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
-        android:textSize="50sp" />
+        android:textSize="50sp" /-->
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/topSelector"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="20dp" >
+
+        <nielsbillen.ArrowButton
+            android:id="@+id/topArrowLeft"
+            android:layout_width="40dp"
+            android:layout_height="match_parent" />
+
+        <nielsbillen.OptionSpinner
+            android:id="@+id/topSpinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <nielsbillen.ArrowButton
+            android:id="@+id/topArrowRight"
+            android:layout_width="40dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <!-- TextView
         android:id="@+id/usage_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +63,7 @@
         android:paddingLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
-        android:textSize="40sp" />
+        android:textSize="40sp" /-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +72,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal" >
 
-        <robindecroon.homeviz.util.views.MyLinearLayout
+        <LinearLayout
             android:id="@+id/light_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,9 +94,9 @@
                 android:gravity="center"
                 android:textColor="@color/White"
                 android:textSize="40sp" />
-        </robindecroon.homeviz.util.views.MyLinearLayout>
+        </LinearLayout>
 
-        <robindecroon.homeviz.util.views.MyLinearLayout
+        <LinearLayout
             android:id="@+id/water_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,9 +118,9 @@
                 android:gravity="center"
                 android:textColor="@color/White"
                 android:textSize="40sp" />
-        </robindecroon.homeviz.util.views.MyLinearLayout>
+        </LinearLayout>
 
-        <robindecroon.homeviz.util.views.MyLinearLayout
+        <LinearLayout
             android:id="@+id/appliances_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,9 +142,9 @@
                 android:gravity="center"
                 android:textColor="@color/White"
                 android:textSize="40sp" />
-        </robindecroon.homeviz.util.views.MyLinearLayout>
+        </LinearLayout>
 
-        <robindecroon.homeviz.util.views.MyLinearLayout
+        <LinearLayout
             android:id="@+id/home_cinema_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +166,7 @@
                 android:gravity="center"
                 android:textColor="@color/White"
                 android:textSize="40sp" />
-        </robindecroon.homeviz.util.views.MyLinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

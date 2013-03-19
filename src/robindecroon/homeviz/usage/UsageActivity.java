@@ -62,11 +62,11 @@ public class UsageActivity extends UsageFullScreenActivity implements
 
 	@Override
 	public void setPeriod() {
-		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
-		usagePeriod.setText(currentPeriod.getName(this));
-		PeriodListener periodListener = new PeriodListener(this);
-		usagePeriod.setOnClickListener(periodListener);
-		usagePeriod.setOnLongClickListener(periodListener);
+//		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
+//		usagePeriod.setText(currentPeriod.getName(this));
+//		PeriodListener periodListener = new PeriodListener(this);
+//		usagePeriod.setOnClickListener(periodListener);
+//		usagePeriod.setOnLongClickListener(periodListener);
 	}
 
 	@Override
@@ -90,8 +90,8 @@ public class UsageActivity extends UsageFullScreenActivity implements
 
 	@Override
 	protected void setLocation() {
-		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
-		usageLocation.setText(currentRoom.getName());
+//		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
+//		usageLocation.setText(currentRoom.getName());
 	}
 
 	@Override

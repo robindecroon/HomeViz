@@ -11,9 +11,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
-//	Bitmap mImageView;
-
 	
 	ResourceImageAdapter adapter;
 	

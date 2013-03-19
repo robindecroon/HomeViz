@@ -127,9 +127,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LightListActivity" />
         </activity>
-        <activity android:name=".usage.HouseUsageActivity" >
+        <activity android:name="robindecroon.homeviz.usage.HouseUsageActivity" >
         </activity>
-        <activity android:name=".usage.HouseUsageDetailActivity" >
+        <activity android:name="robindecroon.homeviz.usage.HouseUsageDetailActivity" >
         </activity>
 
         <meta-data
@@ -139,6 +139,16 @@
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="robindecroon.layout.Main"
+            android:theme="@style/Theme.PageIndicatorDefaults"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

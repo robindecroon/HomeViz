@@ -48,6 +48,7 @@ public class HomeVizApplication extends Application {
 	private GraphUser facebookUser;
 
 	private Map<String, Country> countryMap;
+	
 
 	/**
 	 * @param currentCountry

@@ -53,4 +53,40 @@
     <string name="usage_icon">Usage icon</string>
     <string name="you_icon">You icon</string>
     <string name="connection_error">No network connection could be established.</string>
+    <string name="title_activity_main">HomeViz</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string-array name="usage_spinner_data">
+        <item>Usage (icons)</item>
+        <item>Usage (barchart)</item>
+        <item>Usage (columnchart)</item>
+    </string-array>
+    <string-array name="you_spinner_data">
+        <item>Treemap</item>
+        <item>Pie Chart</item>
+    </string-array>
+    <string-array name="metaphor_spinner_data">
+        <item>Metaphor (electricity)</item>
+        <item>Metaphor (heating)</item>
+        <item>Metaphor (water)</item>
+    </string-array>
+    <string-array name="yield_spinner_data">
+        <item>Yield (Solar panels)</item>
+        <item>Yield (Rain water)</item>
+        <item>Yield (Ground water)</item>
+    </string-array>
+
+    <string name="title_activity_test_fragment_buh">TestFragmentBuh</string>
+
+    <string name="total">Total</string>
+
+    <string name="metaphor">Metaphor</string>
+
+    <string name="yield">Yield</string>
+
+    <string name="usage">Usage</string>
+
 </resources>

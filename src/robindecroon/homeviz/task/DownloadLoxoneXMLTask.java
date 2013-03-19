@@ -36,12 +36,12 @@ public class DownloadLoxoneXMLTask extends
 	@Override
 	protected void onPostExecute(List<List<Entry>> result) {
 		if (result != null) {
-//			 TODO
-			for (List<Entry> list : result) {
-				System.out.println("New entries:");
-				for (Entry entry : list)
-					System.out.println("Entry: " + entry);
-			}
+//			 TODO + resetten vorige data
+//			for (List<Entry> list : result) {
+//				System.out.println("New entries:");
+//				for (Entry entry : list)
+//					System.out.println("Entry: " + entry);
+//			}
 		}
 	}
 
