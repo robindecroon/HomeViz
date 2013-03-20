@@ -5,6 +5,12 @@ import android.graphics.Color;
 public class Constants {
 	
 	/*
+	 * Configuration
+	 */
+	public final static String XML_FILE_NAME = "HomeViz.xml";
+	public final static String CO2_DATA_FILE_NAME = "co2.csv";
+	
+	/*
 	 * SharedPreferences
 	 */
 	public final static String CURRENT_USER = "Current User";
@@ -34,5 +40,7 @@ public class Constants {
 	 */
 	public final static String FRAGMENT_BUNDLE_TYPE = "charttype";
 	public static final String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
+
+	public static final String UsageType = "Usage type";
 	
 }

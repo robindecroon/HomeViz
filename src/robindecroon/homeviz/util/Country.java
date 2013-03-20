@@ -10,10 +10,11 @@ public class Country {
 	
 	private Amount literPrice;
 	
-	public Country(String name2, double co2Value2, Amount kwh2) {
+	public Country(String name2, double co2Value2, Amount kwh2, Amount liter) {
 		this.name = name2;
 		this.co2Value = co2Value2;
 		this.kwh = kwh2;
+		this.literPrice = liter;
 	}
 	
 	public Country() {}
@@ -52,11 +53,6 @@ public class Country {
 	 */
 	public void setKwh(Amount kwh) {
 		this.kwh = kwh;
-	}
-	
-	@Override
-	public Country clone() {
-		return new Country(name,co2Value,kwh);
 	}
 
 	public Amount getLiterPrice() {

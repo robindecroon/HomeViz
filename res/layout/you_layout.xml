@@ -20,7 +20,7 @@
             android:paddingLeft="20dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/White"
-            android:textSize="50sp" />
+            android:textSize="30sp" />
     </LinearLayout>
 
     <TextView

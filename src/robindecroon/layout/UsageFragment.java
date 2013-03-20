@@ -1,7 +1,7 @@
 package robindecroon.layout;
 
-import nielsbillen.ArrowButton;
-import nielsbillen.OptionSpinner;
+import libraries.nielsbillen.ArrowButton;
+import libraries.nielsbillen.OptionSpinner;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.room.Room;
@@ -19,41 +19,50 @@ public class UsageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.usage_layout,
-				container, false);
-		
-		Room currentRoom = ((HomeVizApplication) getActivity().getApplication()).getCurrentRoom();
-		Period currentPeriod = ((HomeVizApplication) getActivity().getApplication()).getCurrentPeriod();
+		View rootView = inflater.inflate(R.layout.usage_layout, container,
+				false);
 
-		final TextView light = (TextView) rootView.findViewById(R.id.usage_light_price);
+		Room currentRoom = ((HomeVizApplication) getActivity().getApplication())
+				.getCurrentRoom();
+		Period currentPeriod = ((HomeVizApplication) getActivity()
+				.getApplication()).getCurrentPeriod();
+
+		final TextView light = (TextView) rootView
+				.findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
 
-		final TextView water = (TextView) rootView.findViewById(R.id.usage_water_price);
+		final TextView water = (TextView) rootView
+				.findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
 
-//		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
-//		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+		final TextView heating = (TextView) rootView
+				.findViewById(R.id.usage_heating_price);
+		heating.setText(currentRoom.getHeating(currentPeriod).toString());
 
-		final TextView appl = (TextView) rootView.findViewById(R.id.usage_appliances_price);
+		final TextView appl = (TextView) rootView
+				.findViewById(R.id.usage_appliances_price);
 		appl.setText(currentRoom.getAppliancesPrice(currentPeriod).toString());
 
-		final TextView tv = (TextView) rootView.findViewById(R.id.usage_tv_price);
+		final TextView tv = (TextView) rootView
+				.findViewById(R.id.usage_tv_price);
 		tv.setText(currentRoom.getHomeCinemaPrice(currentPeriod).toString());
-		
-		final TextView usageAmount = (TextView) rootView.findViewById(R.id.usage_amount);
+
+		final TextView usageAmount = (TextView) rootView
+				.findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
-		
+
 		initSpinner(rootView);
 		
-//		final TextView usagePeriod = (TextView) rootView.findViewById(R.id.usage_period);
-//		usagePeriod.setText(currentPeriod.getName(getActivity()));
-//		PeriodListener periodListener = new PeriodListener(getActivity());
-//		usagePeriod.setOnClickListener(periodListener);
-//		usagePeriod.setOnLongClickListener(periodListener);
-		
+		setTotalAmount(rootView, currentRoom, currentPeriod);
+
 		return rootView;
 	}
 	
+	private void setTotalAmount(View v, Room room, Period period) {
+		final TextView usageAmount = (TextView) v.findViewById(R.id.usage_amount);
+		usageAmount.setText(room.getTotalPrice(period));
+	}
+
 	/**
 	 * Initialiseert de spinner.
 	 */
@@ -62,19 +71,17 @@ public class UsageFragment extends Fragment {
 		left.setArrowDirection(ArrowButton.DIRECTION_LEFT);
 		ArrowButton right = (ArrowButton) v.findViewById(R.id.topArrowRight);
 		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
+		PeriodListener periodListener = new PeriodListener(getActivity());
 		OptionSpinner spinner = (OptionSpinner) v.findViewById(R.id.topSpinner);
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
-		spinner.setOptions("Pie chart", "Bar chart", "Timeline", "Map");
+		spinner.setOnClickListener(periodListener);
+		spinner.setOnLongClickListener(periodListener);
+		Period[] periods = Period.values();
+		String[] namePeriods = new String[periods.length];
+		for (int i = 0; i < periods.length; i++) {
+			namePeriods[i] = periods[i].getName(getActivity());
+		}
+		spinner.setOptions(namePeriods);
 	}
-	
-	
-	
-	@Override
-	public String toString() {
-		return "Usage (icons)";
-	}
-	
-
-	
 }

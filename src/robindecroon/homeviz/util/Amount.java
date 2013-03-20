@@ -1,5 +1,11 @@
 package robindecroon.homeviz.util;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
+import android.util.Log;
+
 public class Amount {
 	
 	private enum Currency {
@@ -28,6 +34,18 @@ public class Amount {
 	
 	public Amount(Amount other) {
 		this.valueInEuro = other.getEuroValue();
+	}
+	
+	public Amount(String stringValue) {
+		NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+	    Number number = null;
+		try {
+			number = format.parse(stringValue);
+			double d = number.doubleValue();
+			this.valueInEuro = d;
+		} catch (ParseException e) {
+			Log.e(getClass().getSimpleName(),"Error in country CSV file!");
+		}
 	}
 	
 	public double getEuroValue() {

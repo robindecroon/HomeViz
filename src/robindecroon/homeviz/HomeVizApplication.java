@@ -198,6 +198,10 @@ public class HomeVizApplication extends Application {
 //		randomizeLocationsOfPersons();
 	}
 
+	public void setCountries(Map<String, Country> map) {
+		this.countryMap = map;
+	}
+	
 	public void randomizeLocationsOfPersons() {
 		for (Person person : persons) {
 			if (!person.equals(getCurrentUser())) {

@@ -2,8 +2,6 @@ package robindecroon.layout;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
@@ -46,7 +44,7 @@ public class YouFragment extends Fragment {
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
 		TextView userView = (TextView) rootView.findViewById(R.id.you_current_user);
-		userView.setText(((HomeVizApplication) getActivity().getApplication()).getCurrentUser().getName());
+		userView.setText(R.string.you_text);
 		
 		GraphUser user = ((HomeVizApplication) getActivity().getApplication()).getFacebookUser();
 		if( user != null) {

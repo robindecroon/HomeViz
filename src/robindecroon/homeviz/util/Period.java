@@ -6,10 +6,11 @@ package robindecroon.homeviz.util;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.IllegalPeriodModification;
-
 import android.content.Context;
+import android.util.Log;
 
 /**
  * @author Robin
@@ -125,13 +126,20 @@ public enum Period {
 
 		@Override
 		public int getMultiplier() {
-			return (int) ((getEnd().getTimeInMillis() - getBegin().getTimeInMillis()) / (86400000));
+			return (int) ((getEnd().getTimeInMillis() - getBegin()
+					.getTimeInMillis()) / (86400000));
 		}
 
 		@Override
 		public String getName(Context context) {
-			DateFormat formater = DateFormat.getDateInstance();			
-			return formater.format(getBegin().getTime()) + " - " + formater.format(getEnd().getTime());
+			DateFormat formater = DateFormat.getDateInstance();
+			try {
+				return formater.format(getBegin().getTime()) + " - "
+						+ formater.format(getEnd().getTime());
+			} catch (NullPointerException e) {
+				Log.e(getClass().getSimpleName(),"Nog geen startdatum");
+				return formater.format(getEnd().getTime());
+			}
 		}
 	};
 

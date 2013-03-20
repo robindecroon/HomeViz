@@ -1,4 +1,4 @@
-package nielsbillen;
+package libraries.nielsbillen;
 
 /**
  * Abstract interface representing a class that can have listeners of type T

@@ -1,15 +1,7 @@
 package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.listeners.ClickListener;
-import robindecroon.homeviz.listeners.TouchListener;
-import robindecroon.homeviz.usage.appliance.ApplianceUsageActivity;
-import robindecroon.homeviz.usage.homecinema.HomeCinemaUsageActivity;
-import robindecroon.homeviz.usage.light.LightUsageActivity;
-import robindecroon.homeviz.usage.water.WaterUsageActivity;
-import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.ToastMessages;
-import robindecroon.homeviz.util.views.MyLinearLayout;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,8 +35,8 @@ public class UsageActivity extends UsageFullScreenActivity implements
 		final TextView water = (TextView) findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
 
-//		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
-//		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+		final TextView heating = (TextView) findViewById(R.id.usage_heating_price);
+		heating.setText(currentRoom.getHeating(currentPeriod).toString());
 
 		final TextView appl = (TextView) findViewById(R.id.usage_appliances_price);
 		appl.setText(currentRoom.getAppliancesPrice(currentPeriod).toString());
@@ -96,27 +88,27 @@ public class UsageActivity extends UsageFullScreenActivity implements
 
 	@Override
 	protected void setListeners() {
-		TouchListener listener = new TouchListener(this);
-		final MyLinearLayout lightLayout = (MyLinearLayout) findViewById(R.id.light_layout);
-		lightLayout.setListener(listener);
-		lightLayout.setOnClickListener(new ClickListener(this,
-				LightUsageActivity.class));
-		final MyLinearLayout waterLayout = (MyLinearLayout) findViewById(R.id.water_layout);
-		waterLayout.setListener(listener);
-		waterLayout.setOnClickListener(new ClickListener(this,
-				WaterUsageActivity.class));
-//		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
-//		heatingLayout.setListener(listener);
-//		heatingLayout.setOnClickListener(new ClickListener(this,
-//				HeatingUsageActivity.class));
-		final MyLinearLayout appliancesLayout = (MyLinearLayout) findViewById(R.id.appliances_layout);
-		appliancesLayout.setListener(listener);
-		appliancesLayout.setOnClickListener(new ClickListener(this,
-				ApplianceUsageActivity.class));
-		final MyLinearLayout homeCinemaLayout = (MyLinearLayout) findViewById(R.id.home_cinema_layout);
-		homeCinemaLayout.setListener(listener);
-		homeCinemaLayout.setOnClickListener(new ClickListener(this,
-				HomeCinemaUsageActivity.class));
+//		TouchListener listener = new TouchListener(this);
+//		final MyLinearLayout lightLayout = (MyLinearLayout) findViewById(R.id.light_layout);
+//		lightLayout.setListener(listener);
+//		lightLayout.setOnClickListener(new ClickListener(this,
+//				LightUsageActivity.class));
+//		final MyLinearLayout waterLayout = (MyLinearLayout) findViewById(R.id.water_layout);
+//		waterLayout.setListener(listener);
+//		waterLayout.setOnClickListener(new ClickListener(this,
+//				WaterUsageActivity.class));
+////		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
+////		heatingLayout.setListener(listener);
+////		heatingLayout.setOnClickListener(new ClickListener(this,
+////				HeatingUsageActivity.class));
+//		final MyLinearLayout appliancesLayout = (MyLinearLayout) findViewById(R.id.appliances_layout);
+//		appliancesLayout.setListener(listener);
+//		appliancesLayout.setOnClickListener(new ClickListener(this,
+//				ApplianceUsageActivity.class));
+//		final MyLinearLayout homeCinemaLayout = (MyLinearLayout) findViewById(R.id.home_cinema_layout);
+//		homeCinemaLayout.setListener(listener);
+//		homeCinemaLayout.setOnClickListener(new ClickListener(this,
+//				HomeCinemaUsageActivity.class));
 	}
 
 }

@@ -8,15 +8,17 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
-import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class UsageChartFragment extends Fragment {
 
 	@Override
@@ -30,23 +32,20 @@ public class UsageChartFragment extends Fragment {
 		Period currentPeriod = ((HomeVizApplication) getActivity()
 				.getApplication()).getCurrentPeriod();
 
-		MyWebView chart = (MyWebView) rootView
-				.findViewById(R.id.usage_detail_webview);
-
+		WebView chart = (WebView) rootView.findViewById(R.id.usage_detail_webview);
 		chart.setBackgroundColor(0x00000000);
-		Map<String, Amount> map = currentRoom.getPricesMap(currentPeriod);
-
 		chart.getSettings().setJavaScriptEnabled(true);
 		chart.getSettings().setUseWideViewPort(true);
 		chart.getSettings().setLoadWithOverviewMode(true);
 
+		Map<String, Amount> map = currentRoom.getPricesMap(currentPeriod);
 		if (!map.isEmpty()) {
 			GoogleChartType type;
 			switch (getArguments().getInt(Constants.FRAGMENT_BUNDLE_TYPE)) {
-			case 0:
+			case 1:
 				type = GoogleChartType.BarChart;
 				break;
-			case 1:
+			case 2:
 				type = GoogleChartType.ColumnChart;
 				break;
 			default:

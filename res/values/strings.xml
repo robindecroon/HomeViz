@@ -44,7 +44,7 @@
     <string name="no_appliance_in_room">There are no appliances in this room!</string>
     <string name="title_activity_heating">Usage > Heating</string>
     <string name="not_implemented_yet">This feature is not implemented yet! ;-)</string>
-    <string name="long_click_for_time">Pinch to change time period. Long click on this period to set a custom time!</string>
+    <string name="long_click_for_time">Use the arrows to select another period. Long click on this period to set a custom time!</string>
     <string name="title_activity_metaphor">Usage > Metaphor</string>
     <string name="title_light_detail">Light Detail</string>
     <string name="title_light_list">Lights</string>
@@ -66,7 +66,7 @@
     </string-array>
     <string-array name="you_spinner_data">
         <item>Treemap</item>
-        <item>Pie Chart</item>
+        <item>Bar Chart</item>
     </string-array>
     <string-array name="metaphor_spinner_data">
         <item>Metaphor (electricity)</item>
@@ -88,5 +88,7 @@
     <string name="yield">Yield</string>
 
     <string name="usage">Usage</string>
+
+    <string name="you_text">Which room consumes the most?</string>
 
 </resources>
