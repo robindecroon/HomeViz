@@ -2,7 +2,6 @@ package robindecroon.layout;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.task.InitHomeVizTask;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
@@ -19,17 +18,17 @@ import com.facebook.widget.ProfilePictureView;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class YouFragment extends SpinnerFragment {
-	
+
 	private WebView myBrowser;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.you_layout,
-				container, false);
-		
-		initSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left, R.id.total_arrow_right );
-		
+		View rootView = inflater.inflate(R.layout.you_layout, container, false);
+
+		initSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
+				R.id.total_arrow_right);
+
 		myBrowser = (WebView) rootView.findViewById(R.id.you_webview);
 
 		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
@@ -38,8 +37,9 @@ public class YouFragment extends SpinnerFragment {
 				"AndroidFunction");
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				MyWebViewClient.TREEMAP, ((HomeVizApplication) getActivity().getApplication()).getRooms()));
-		
+				MyWebViewClient.TREEMAP, ((HomeVizApplication) getActivity()
+						.getApplication()).getRooms()));
+
 		myBrowser.setBackgroundColor(0x00000000);
 
 		myBrowser.getSettings().setJavaScriptEnabled(true);
@@ -47,24 +47,28 @@ public class YouFragment extends SpinnerFragment {
 		myBrowser.getSettings().setLoadWithOverviewMode(true);
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
-		TextView userView = (TextView) rootView.findViewById(R.id.you_current_user);
+		TextView userView = (TextView) rootView
+				.findViewById(R.id.you_current_user);
 		userView.setText(R.string.you_text);
-		
-		GraphUser user = ((HomeVizApplication) getActivity().getApplication()).getFacebookUser();
-		if( user != null) {
-			LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.you_user_layout);
+
+		GraphUser user = ((HomeVizApplication) getActivity().getApplication())
+				.getFacebookUser();
+		if (user != null) {
+			LinearLayout layout = (LinearLayout) rootView
+					.findViewById(R.id.you_user_layout);
 			layout.removeAllViews();
-			ProfilePictureView profilePictureView = new ProfilePictureView(getActivity());
+			ProfilePictureView profilePictureView = new ProfilePictureView(
+					getActivity());
 			profilePictureView.setProfileId(user.getId());
 			layout.addView(profilePictureView);
 		}
-		
+
 		myBrowser.loadUrl("javascript:window.location.reload( true )");
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
-		
+
 		return rootView;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Total (treemap)";

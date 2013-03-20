@@ -24,7 +24,7 @@ public class LoxoneXMLParser extends XMLParser {
 	private static final String DATE_ATTRIBUTE = "T";
 	private static final String NAME_ATTRIBUTE = "Name";
 	private static final String OUTPUTS = "Outputs";
-	
+
 	private String name;
 	private String output;
 
@@ -48,8 +48,8 @@ public class LoxoneXMLParser extends XMLParser {
 		List<Entry> entries = new ArrayList<Entry>();
 
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
-		
-		name = parser.getAttributeValue(null,NAME_ATTRIBUTE);
+
+		name = parser.getAttributeValue(null, NAME_ATTRIBUTE);
 		output = parser.getAttributeValue(null, OUTPUTS);
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {

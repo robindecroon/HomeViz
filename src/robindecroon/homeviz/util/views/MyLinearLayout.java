@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 public class MyLinearLayout extends LinearLayout implements MyView {
 
 	private TouchListener listener;
-	
+
 	public MyLinearLayout(Context context) {
 		super(context);
 	}
@@ -19,9 +19,8 @@ public class MyLinearLayout extends LinearLayout implements MyView {
 		super(context, attrs);
 	};
 
-	
 	public MyLinearLayout(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs,defStyle);
+		super(context, attrs, defStyle);
 	}
 
 	@Override
@@ -33,6 +32,7 @@ public class MyLinearLayout extends LinearLayout implements MyView {
 	public void setListener(TouchListener listener) {
 		this.listener = listener;
 	}
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		boolean consumed = super.onTouchEvent(event);

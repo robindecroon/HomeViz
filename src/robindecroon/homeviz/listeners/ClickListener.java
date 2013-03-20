@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 @SuppressWarnings("rawtypes")
-public class ClickListener implements OnClickListener{
+public class ClickListener implements OnClickListener {
 
 	private Context context;
 	private Class toClass;
@@ -15,10 +15,10 @@ public class ClickListener implements OnClickListener{
 		this.context = context;
 		this.toClass = toClass;
 	}
-	
+
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(context,toClass);
+		Intent intent = new Intent(context, toClass);
 		context.startActivity(intent);
 	}
 

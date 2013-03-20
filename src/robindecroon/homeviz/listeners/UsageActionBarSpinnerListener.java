@@ -2,7 +2,6 @@ package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.R;
-import robindecroon.layout.UsageChartFragment;
 import robindecroon.layout.UsageContainerFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

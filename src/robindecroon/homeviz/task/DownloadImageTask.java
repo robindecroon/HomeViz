@@ -11,16 +11,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-	
+
 	ResourceImageAdapter adapter;
-	
+
 	public DownloadImageTask(ResourceImageAdapter resourceImageAdapter) {
 		this.adapter = resourceImageAdapter;
 	}
 
 	@Override
 	protected void onPostExecute(Bitmap result) {
-//		mImageView = result;
+		// mImageView = result;
 		Log.e("Tast", "New image!");
 		adapter.updateBitmap(result);
 	}

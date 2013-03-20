@@ -8,10 +8,10 @@ package robindecroon.homeviz.users;
  * 
  */
 public class Person {
-	
+
 	private String firstName;
 	private String lastName;
-	
+
 	public Person(String firstname, String lastname) {
 		this.firstName = firstname;
 		this.lastName = lastname;
@@ -43,7 +43,9 @@ public class Person {
 		return getName();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -57,7 +59,9 @@ public class Person {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

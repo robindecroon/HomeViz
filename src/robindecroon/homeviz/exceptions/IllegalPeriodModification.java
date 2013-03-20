@@ -7,10 +7,10 @@ import robindecroon.homeviz.util.Period;
 
 /**
  * @author Robin
- *
+ * 
  */
 public class IllegalPeriodModification extends Exception {
-	
+
 	private Period period;
 
 	/**
@@ -21,7 +21,7 @@ public class IllegalPeriodModification extends Exception {
 	/**
 	 * @param detailMessage
 	 */
-	public IllegalPeriodModification(Period period,String method) {
+	public IllegalPeriodModification(Period period, String method) {
 		super("Illegal modification on: " + period + " for method: " + method);
 		this.setPeriod(period);
 	}
@@ -34,7 +34,8 @@ public class IllegalPeriodModification extends Exception {
 	}
 
 	/**
-	 * @param period the period to set
+	 * @param period
+	 *            the period to set
 	 */
 	public void setPeriod(Period period) {
 		this.period = period;

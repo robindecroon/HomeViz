@@ -47,15 +47,17 @@ public class UsageFragment extends SpinnerFragment {
 				.findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 
-		initSpinner(rootView,R.id.topSpinner, R.id.topArrowLeft, R.id.topArrowRight);
-		
+		initSpinner(rootView, R.id.topSpinner, R.id.topArrowLeft,
+				R.id.topArrowRight);
+
 		setTotalAmount(rootView, currentRoom, currentPeriod);
 
 		return rootView;
 	}
-	
+
 	private void setTotalAmount(View v, Room room, Period period) {
-		final TextView usageAmount = (TextView) v.findViewById(R.id.usage_amount);
+		final TextView usageAmount = (TextView) v
+				.findViewById(R.id.usage_amount);
 		usageAmount.setText(room.getTotalPrice(period));
 	}
 }

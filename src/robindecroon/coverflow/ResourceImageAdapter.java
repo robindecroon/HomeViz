@@ -24,96 +24,101 @@ import android.util.Log;
  */
 public class ResourceImageAdapter extends AbstractCoverFlowImageAdapter {
 
-    /** The Constant TAG. */
-    private static final String TAG = ResourceImageAdapter.class.getSimpleName();
+	/** The Constant TAG. */
+	private static final String TAG = ResourceImageAdapter.class
+			.getSimpleName();
 
-    /** The Constant DEFAULT_LIST_SIZE. */
-    private static final int DEFAULT_LIST_SIZE = 20;
+	/** The Constant DEFAULT_LIST_SIZE. */
+	private static final int DEFAULT_LIST_SIZE = 20;
 
-    /** The Constant IMAGE_RESOURCE_IDS. */
-    private static final List<Integer> IMAGE_RESOURCE_IDS = new ArrayList<Integer>(DEFAULT_LIST_SIZE);
+	/** The Constant IMAGE_RESOURCE_IDS. */
+	private static final List<Integer> IMAGE_RESOURCE_IDS = new ArrayList<Integer>(
+			DEFAULT_LIST_SIZE);
 
-    /** The Constant DEFAULT_RESOURCE_LIST. */
-    private static final int[] DEFAULT_RESOURCE_LIST = { R.drawable.l1, R.drawable.l2, R.drawable.l3,
-            R.drawable.l4, R.drawable.l5 };
-    
-    private static Bitmap[] bitmaps = new Bitmap[5];
+	/** The Constant DEFAULT_RESOURCE_LIST. */
+	private static final int[] DEFAULT_RESOURCE_LIST = { R.drawable.l1,
+			R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5 };
 
-    /** The bitmap map. */
-    private final Map<Integer, WeakReference<Bitmap>> bitmapMap = new HashMap<Integer, WeakReference<Bitmap>>();
+	private static Bitmap[] bitmaps = new Bitmap[5];
 
-    private final Context context;
-    
-    public void updateBitmap(Bitmap bitmap) {
-    	bitmapMap.put(0, new WeakReference<Bitmap>(bitmap));
-    }
+	/** The bitmap map. */
+	private final Map<Integer, WeakReference<Bitmap>> bitmapMap = new HashMap<Integer, WeakReference<Bitmap>>();
 
-    /**
-     * Creates the adapter with default set  of resource images.
-     * 
-     * @param context
-     *            context
-     */
-    public ResourceImageAdapter(final Context context) {
-        super();
-        this.context = context;
-        setResources(DEFAULT_RESOURCE_LIST);
-//        notifyDataSetChanged();
+	private final Context context;
 
-    }
+	public void updateBitmap(Bitmap bitmap) {
+		bitmapMap.put(0, new WeakReference<Bitmap>(bitmap));
+	}
 
-    /**
-     * Replaces resources with those specified.
-     * 
-     * @param resourceIds
-     *            array of ids of resources.
-     */
-    public final synchronized void setResources(final int[] resourceIds) {
-        IMAGE_RESOURCE_IDS.clear();
-        for (final int resourceId : resourceIds) {
-            IMAGE_RESOURCE_IDS.add(resourceId);
-        }
-        notifyDataSetChanged();
-    }
+	/**
+	 * Creates the adapter with default set of resource images.
+	 * 
+	 * @param context
+	 *            context
+	 */
+	public ResourceImageAdapter(final Context context) {
+		super();
+		this.context = context;
+		setResources(DEFAULT_RESOURCE_LIST);
+		// notifyDataSetChanged();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see android.widget.Adapter#getCount()
-     */
-    @Override
-    public synchronized int getCount() {
-        return IMAGE_RESOURCE_IDS.size();
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see pl.polidea.coverflow.AbstractCoverFlowImageAdapter#createBitmap(int)
-     */
-    @Override
-    protected Bitmap createBitmap(final int position) {
-        Log.v(TAG, "creating item " + position);
-//        DownloadImageTask task = new DownloadImageTask(this);
-//        task.execute("https://graph.facebook.com/robin.decroon/picture?width=200&height=200");
-////        final Bitmap bitmap = task.getBitmap(context);
-//        		
-////        		getBitmapFromURL("https://graph.facebook.com/robin.decroon/picture?width=200&height=200");
-//        final Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(IMAGE_RESOURCE_IDS.get(position))).getBitmap();
-        final Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.profile)).getBitmap();
-        bitmapMap.put(position, new WeakReference<Bitmap>(bitmap));
-        return bitmap;
-    }
-    
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            InputStream input = url.openStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+	/**
+	 * Replaces resources with those specified.
+	 * 
+	 * @param resourceIds
+	 *            array of ids of resources.
+	 */
+	public final synchronized void setResources(final int[] resourceIds) {
+		IMAGE_RESOURCE_IDS.clear();
+		for (final int resourceId : resourceIds) {
+			IMAGE_RESOURCE_IDS.add(resourceId);
+		}
+		notifyDataSetChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getCount()
+	 */
+	@Override
+	public synchronized int getCount() {
+		return IMAGE_RESOURCE_IDS.size();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see pl.polidea.coverflow.AbstractCoverFlowImageAdapter#createBitmap(int)
+	 */
+	@Override
+	protected Bitmap createBitmap(final int position) {
+		Log.v(TAG, "creating item " + position);
+		// DownloadImageTask task = new DownloadImageTask(this);
+		// task.execute("https://graph.facebook.com/robin.decroon/picture?width=200&height=200");
+		// // final Bitmap bitmap = task.getBitmap(context);
+		//
+		// //
+		// getBitmapFromURL("https://graph.facebook.com/robin.decroon/picture?width=200&height=200");
+		// final Bitmap bitmap = ((BitmapDrawable)
+		// context.getResources().getDrawable(IMAGE_RESOURCE_IDS.get(position))).getBitmap();
+		final Bitmap bitmap = ((BitmapDrawable) context.getResources()
+				.getDrawable(R.drawable.profile)).getBitmap();
+		bitmapMap.put(position, new WeakReference<Bitmap>(bitmap));
+		return bitmap;
+	}
+
+	public static Bitmap getBitmapFromURL(String src) {
+		try {
+			URL url = new URL(src);
+			InputStream input = url.openStream();
+			Bitmap myBitmap = BitmapFactory.decodeStream(input);
+			return myBitmap;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

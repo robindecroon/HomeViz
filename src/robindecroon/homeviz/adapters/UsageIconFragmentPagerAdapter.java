@@ -5,9 +5,11 @@ import robindecroon.layout.UsageFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-public class UsageIconFragmentPagerAdapter extends robindecroon.homeviz.adapters.HomeVizFragmentPagerAdapter {
+public class UsageIconFragmentPagerAdapter extends
+		robindecroon.homeviz.adapters.HomeVizFragmentPagerAdapter {
 
-	public UsageIconFragmentPagerAdapter(FragmentManager fm, HomeVizApplication app) {
+	public UsageIconFragmentPagerAdapter(FragmentManager fm,
+			HomeVizApplication app) {
 		super(fm, app);
 	}
 

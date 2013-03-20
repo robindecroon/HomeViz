@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
-	
+
 	private boolean homeCinemasPresent = true;
 
 	@Override
@@ -67,9 +67,9 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 	public void onSwypeToDown() {
 		if (homeCinemasPresent) {
 			// TODO
-//			Intent intent = new Intent(this, LightUsageDetailActivity.class);
-//			startActivity(intent);
-//			overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
+			// Intent intent = new Intent(this, LightUsageDetailActivity.class);
+			// startActivity(intent);
+			// overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
 		} else {
 			ToastMessages.noMoreDetail();
 		}
@@ -84,7 +84,7 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 	@Override
 	protected void setListeners() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -93,13 +93,13 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 		usagePeriod.setText(currentPeriod.getName(this));
 		usagePeriod.setOnClickListener(new PeriodListener(this));
 	}
-	
+
 	@Override
 	public void refreshElements() {
 		super.refreshElements();
 		setAmounts();
 	}
-	
+
 	private void setAmounts() {
 		LinearLayout homeCinemasLayout = (LinearLayout) findViewById(R.id.home_cinemas);
 		homeCinemasLayout.removeAllViews();
@@ -112,15 +112,13 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 				HomeCinema homeCinema = homeCinemas.get(i);
 				LinearLayout layout = new LinearLayout(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT, 1);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
 				layout.setLayoutParams(lp);
 				layout.setOrientation(LinearLayout.VERTICAL);
 
 				ImageView image = new ImageView(this);
 				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp2.gravity = Gravity.CENTER;
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
@@ -136,8 +134,7 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT,
-						LayoutParams.WRAP_CONTENT));
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
 				Amount price = homeCinema.getPrice(currentPeriod);
 				sum = sum.add(price);
@@ -152,10 +149,10 @@ public class HomeCinemaUsageActivity extends UsageFullScreenActivity {
 		} catch (NoSuchDevicesInRoom e) {
 			View noHomeCinema = UsageActivityUtils.getEmptyRoomHomeCinema(this);
 			homeCinemasLayout.addView(noHomeCinema);
-			
+
 			homeCinemasPresent = false;
 		}
-		
+
 	}
 
 }

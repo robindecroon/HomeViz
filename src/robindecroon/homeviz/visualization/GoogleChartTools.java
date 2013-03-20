@@ -32,8 +32,9 @@ public abstract class GoogleChartTools {
 		String data = makeData(currentPeriod, context, map);
 
 		// De hoogte moet iets kleiner zijn, anders is er een scrollbar
-		return startDetail + data + mid1Detail + "title: '" + title + " in euro'" + mid2Detail
-				+ type + mid3 + (width - 10) + mid4 + (height - 20) + end;
+		return startDetail + data + mid1Detail + "title: '" + title
+				+ " in euro'" + mid2Detail + type + mid3 + (width - 10) + mid4
+				+ (height - 20) + end;
 	}
 
 	private static String makeData(Period currentPeriod, Context context,

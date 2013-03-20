@@ -15,7 +15,7 @@ public class Appliance extends Consumer {
 		Amount price1 = new Amount(power).multiply(getKwhPrice());
 		Amount price2 = new Amount(getLiter() * getWaterPrice().getEuroValue());
 		Amount price = price1.add(price2);
-		
-		return price.multiply(currentPeriod.getMultiplier()); 
+
+		return price.multiply(currentPeriod.getMultiplier());
 	}
 }

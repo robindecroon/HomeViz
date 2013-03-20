@@ -43,7 +43,7 @@ public class LightDetailFragment extends Fragment {
 			String lightName = (String) getArguments().get(ARG_ITEM_ID);
 			light = ((HomeVizApplication) getActivity().getApplication())
 					.getCurrentRoom().getLight(lightName);
-			
+
 			// light = DummyContent.ITEM_MAP.get(getArguments().getString(
 			// ARG_ITEM_ID));
 		}
@@ -66,9 +66,9 @@ public class LightDetailFragment extends Fragment {
 			TextView hotmeal = ((TextView) rootView.findViewById(R.id.hot_meal));
 			hotmeal.setText(String.format("%.2f meals", power / 10));
 			TextView car = ((TextView) rootView.findViewById(R.id.car));
-			car.setText(String.format("%.3f liter",power + 0.261));
+			car.setText(String.format("%.3f liter", power + 0.261));
 		}
-		
+
 		return rootView;
 	}
 }

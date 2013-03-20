@@ -37,7 +37,6 @@ public class Room implements RoomPrices {
 		this.name = name;
 	}
 
-
 	/**
 	 * @return the personPercentageMap
 	 */
@@ -93,12 +92,18 @@ public class Room implements RoomPrices {
 	}
 
 	public CharSequence getTotalPrice(Period p) {
-		Amount total = getLightPrice(p).add(getWaterPrice(p)).add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p)).add(getHeating(p));
+		Amount total = getLightPrice(p).add(getWaterPrice(p))
+				.add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p))
+				.add(getHeating(p));
 		return total.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see robindecroon.homeviz.room.RoomPrices#getLightPrice(robindecroon.homeviz.util.Period)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * robindecroon.homeviz.room.RoomPrices#getLightPrice(robindecroon.homeviz
+	 * .util.Period)
 	 */
 	@Override
 	public Amount getLightPrice(Period currentPeriod) {
@@ -109,8 +114,12 @@ public class Room implements RoomPrices {
 		return total;
 	}
 
-	/* (non-Javadoc)
-	 * @see robindecroon.homeviz.room.RoomPrices#getWaterPrice(robindecroon.homeviz.util.Period)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * robindecroon.homeviz.room.RoomPrices#getWaterPrice(robindecroon.homeviz
+	 * .util.Period)
 	 */
 	@Override
 	public Amount getWaterPrice(Period currentPeriod) {
@@ -136,8 +145,12 @@ public class Room implements RoomPrices {
 		this.heating = heating;
 	}
 
-	/* (non-Javadoc)
-	 * @see robindecroon.homeviz.room.RoomPrices#getAppliancesPrice(robindecroon.homeviz.util.Period)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * robindecroon.homeviz.room.RoomPrices#getAppliancesPrice(robindecroon.
+	 * homeviz.util.Period)
 	 */
 	@Override
 	public Amount getAppliancesPrice(Period currentPeriod) {
@@ -148,13 +161,17 @@ public class Room implements RoomPrices {
 		return total;
 	}
 
-	/* (non-Javadoc)
-	 * @see robindecroon.homeviz.room.RoomPrices#getHomeCinemaPrice(robindecroon.homeviz.util.Period)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * robindecroon.homeviz.room.RoomPrices#getHomeCinemaPrice(robindecroon.
+	 * homeviz.util.Period)
 	 */
 	@Override
 	public Amount getHomeCinemaPrice(Period currentPeriod) {
 		Amount total = new Amount(0);
-		for (HomeCinema homeCinema: homeCinemas) {
+		for (HomeCinema homeCinema : homeCinemas) {
 			total = total.add(homeCinema.getPrice(currentPeriod));
 		}
 		return total;
@@ -189,8 +206,9 @@ public class Room implements RoomPrices {
 		System.out.println("Room " + this.getName());
 		System.out.println("----------------------------------------");
 		for (Person person : personPercentageMap.keySet()) {
-			System.out.println(person + " is " + personPercentageMap.get(person)
-					+ "% in " + this.getName());
+			System.out.println(person + " is "
+					+ personPercentageMap.get(person) + "% in "
+					+ this.getName());
 		}
 	}
 
@@ -204,7 +222,7 @@ public class Room implements RoomPrices {
 	public void addWater(Water tempWater) {
 		this.waters.add(tempWater);
 	}
-	
+
 	public Water getWater(String name) {
 		for (Water water : waters) {
 			if (water.getName().equals(name)) {
@@ -216,9 +234,9 @@ public class Room implements RoomPrices {
 	}
 
 	public void addHomeCinema(HomeCinema tempHomeCinema) {
-		this.homeCinemas .add(tempHomeCinema);
+		this.homeCinemas.add(tempHomeCinema);
 	}
-	
+
 	public HomeCinema getHomeCinema(String name) {
 		for (HomeCinema homeCinema : homeCinemas) {
 			if (homeCinema.getName().equals(name)) {
@@ -228,14 +246,14 @@ public class Room implements RoomPrices {
 		throw new IllegalArgumentException("No HomeCinema with name: " + name
 				+ " in room: " + this.getName());
 	}
-	
+
 	public List<HomeCinema> getHomeCinemas() throws NoSuchDevicesInRoom {
 		if (this.homeCinemas.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
 		return this.homeCinemas;
 	}
-	
+
 	public List<Appliance> getAppliances() throws NoSuchDevicesInRoom {
 		if (this.appliances.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);

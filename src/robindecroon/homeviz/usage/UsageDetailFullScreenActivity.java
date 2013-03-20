@@ -25,7 +25,7 @@ public abstract class UsageDetailFullScreenActivity extends
 	private GoogleChartType[] types = new GoogleChartType[] {
 			GoogleChartType.BarChart, GoogleChartType.ColumnChart };
 	private GoogleChartType currentType;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public abstract class UsageDetailFullScreenActivity extends
 	protected abstract MyWebView getWebView();
 
 	protected abstract Map<String, Amount> getPriceMap();
-	
+
 	@Override
 	protected void setListeners() {
 		MyWebView chart = getWebView();
@@ -66,27 +66,32 @@ public abstract class UsageDetailFullScreenActivity extends
 			MyWebView chart = getWebView();
 			chart.setBackgroundColor(0x00000000);
 			Map<String, Amount> map = getPriceMap();
-			
-//			String data = makeData(currentPeriod, this, map);		
-//		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
-//				this);
-//		chart.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
 
-//		MyWebViewClient client = new MyWebViewClient(chart, "ChartToolsClient");
-//		client.setString(data + ",'" + chart.getWidth() + "px','" + chart.getHeight() + "px'");
-//		chart.setWebViewClient(client);
+			// String data = makeData(currentPeriod, this, map);
+			// final MyJavaScriptInterface myJavaScriptInterface = new
+			// MyJavaScriptInterface(
+			// this);
+			// chart.addJavascriptInterface(myJavaScriptInterface,
+			// "AndroidFunction");
+
+			// MyWebViewClient client = new MyWebViewClient(chart,
+			// "ChartToolsClient");
+			// client.setString(data + ",'" + chart.getWidth() + "px','" +
+			// chart.getHeight() + "px'");
+			// chart.setWebViewClient(client);
 
 			chart.getSettings().setJavaScriptEnabled(true);
 			chart.getSettings().setUseWideViewPort(true);
 			chart.getSettings().setLoadWithOverviewMode(true);
 
-
 			if (!map.isEmpty()) {
-				String url = GoogleChartTools.getUsageViz("Usage details",currentPeriod, this, map, chart.getWidth(),chart.getHeight(), currentType);
+				String url = GoogleChartTools.getUsageViz("Usage details",
+						currentPeriod, this, map, chart.getWidth(),
+						chart.getHeight(), currentType);
 				chart.loadDataWithBaseURL("x-data://base", url, "text/html",
 						"UTF-8", null);
-//			chart.loadUrl("file:///android_asset/www/charttools.html");
-				
+				// chart.loadUrl("file:///android_asset/www/charttools.html");
+
 			} else {
 				throw new IllegalStateException();
 			}
@@ -97,7 +102,7 @@ public abstract class UsageDetailFullScreenActivity extends
 		}
 
 	}
-	
+
 	private static String makeData(Period currentPeriod, Context context,
 			Map<String, Amount> map) {
 		String data = "[['Period',";
@@ -141,9 +146,10 @@ public abstract class UsageDetailFullScreenActivity extends
 
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-//		HomeVizApplication app = (HomeVizApplication) getApplicationContext();
-//		app.setType(types[itemPosition]);
-		currentType=types[itemPosition];
+		// HomeVizApplication app = (HomeVizApplication)
+		// getApplicationContext();
+		// app.setType(types[itemPosition]);
+		currentType = types[itemPosition];
 		delayedRefresh();
 		return true;
 	}

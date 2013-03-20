@@ -16,8 +16,7 @@ public class MyJavaScriptInterface {
 	}
 
 	public void openAndroidDialog() {
-		AlertDialog.Builder myDialog = new AlertDialog.Builder(
-				mContext);
+		AlertDialog.Builder myDialog = new AlertDialog.Builder(mContext);
 		myDialog.setTitle("DANGER!");
 		myDialog.setMessage("You can do what you want!");
 		myDialog.setPositiveButton("ON", null);

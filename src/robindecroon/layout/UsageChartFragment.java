@@ -32,7 +32,8 @@ public class UsageChartFragment extends Fragment {
 		Period currentPeriod = ((HomeVizApplication) getActivity()
 				.getApplication()).getCurrentPeriod();
 
-		WebView chart = (WebView) rootView.findViewById(R.id.usage_detail_webview);
+		WebView chart = (WebView) rootView
+				.findViewById(R.id.usage_detail_webview);
 		chart.setBackgroundColor(0x00000000);
 		chart.getSettings().setJavaScriptEnabled(true);
 		chart.getSettings().setUseWideViewPort(true);
@@ -63,8 +64,7 @@ public class UsageChartFragment extends Fragment {
 
 		return rootView;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Usage (chart)";

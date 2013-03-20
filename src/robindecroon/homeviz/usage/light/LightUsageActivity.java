@@ -29,9 +29,9 @@ import android.widget.TextView;
  * @see SystemUiHider
  */
 public class LightUsageActivity extends UsageFullScreenActivity {
-	
+
 	private boolean lampsPresent = true;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,15 +89,13 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				Light light = lights.get(i);
 				LinearLayout layout = new LinearLayout(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT, 1);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
 				layout.setLayoutParams(lp);
 				layout.setOrientation(LinearLayout.VERTICAL);
 
 				ImageView image = new ImageView(this);
 				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp2.gravity = Gravity.CENTER;
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
@@ -113,17 +111,17 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT,
-						LayoutParams.WRAP_CONTENT));
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
 				Amount price = light.getPrice(currentPeriod);
 				sum = sum.add(price);
 				text.setText(price.toString());
 
 				layout.addView(text);
-				
+
 				layout.setClickable(true);
-				layout.setOnClickListener(new ClickListener(this,LightListActivity.class));
+				layout.setOnClickListener(new ClickListener(this,
+						LightListActivity.class));
 
 				lightsLayout.addView(layout);
 			}
@@ -132,11 +130,11 @@ public class LightUsageActivity extends UsageFullScreenActivity {
 		} catch (NoSuchDevicesInRoom e) {
 			View noLights = UsageActivityUtils.getEmptyRoomLights(this);
 			lightsLayout.addView(noLights);
-			
+
 			lampsPresent = false;
 
 		}
-		
+
 	}
 
 	@Override

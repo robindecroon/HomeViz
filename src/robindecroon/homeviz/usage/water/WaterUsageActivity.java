@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class WaterUsageActivity extends UsageFullScreenActivity {
-	
+
 	private boolean waterPresent;
 
 	@Override
@@ -67,15 +67,15 @@ public class WaterUsageActivity extends UsageFullScreenActivity {
 	@Override
 	public void onSwypeToDown() {
 		// TODO
-//		if (waterPresent) {
-//			Intent intent = new Intent(this, WaterUsageDetailActivity.class);
-//			startActivity(intent);
-//			overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
-//		} else {
-//			ToastMessages.noMoreDetail();
-//		}
+		// if (waterPresent) {
+		// Intent intent = new Intent(this, WaterUsageDetailActivity.class);
+		// startActivity(intent);
+		// overridePendingTransition(R.anim.up_enter, R.anim.up_leave);
+		// } else {
+		// ToastMessages.noMoreDetail();
+		// }
 	}
-	
+
 	@Override
 	public void onSwypeToLeft() {
 		super.onSwypeToLeft();
@@ -103,7 +103,7 @@ public class WaterUsageActivity extends UsageFullScreenActivity {
 	@Override
 	protected void setListeners() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -112,13 +112,13 @@ public class WaterUsageActivity extends UsageFullScreenActivity {
 		usagePeriod.setText(currentPeriod.getName(this));
 		usagePeriod.setOnClickListener(new PeriodListener(this));
 	}
-	
+
 	@Override
 	public void refreshElements() {
 		super.refreshElements();
 		setAmounts();
 	}
-	
+
 	private void setAmounts() {
 		LinearLayout waterLayout = (LinearLayout) findViewById(R.id.waters);
 		waterLayout.removeAllViews();
@@ -131,15 +131,13 @@ public class WaterUsageActivity extends UsageFullScreenActivity {
 				Water water = waters.get(i);
 				LinearLayout layout = new LinearLayout(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT, 1);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
 				layout.setLayoutParams(lp);
 				layout.setOrientation(LinearLayout.VERTICAL);
 
 				ImageView image = new ImageView(this);
 				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp2.gravity = Gravity.CENTER;
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
@@ -155,8 +153,7 @@ public class WaterUsageActivity extends UsageFullScreenActivity {
 				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT,
-						LayoutParams.WRAP_CONTENT));
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
 				Amount price = water.getPrice(currentPeriod);
 				sum = sum.add(price);

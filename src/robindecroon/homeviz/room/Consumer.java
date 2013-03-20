@@ -3,7 +3,6 @@ package robindecroon.homeviz.room;
 import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
-import android.util.Log;
 
 public abstract class Consumer {
 
@@ -11,10 +10,9 @@ public abstract class Consumer {
 	private static Amount kwhPrice;
 	private static Amount waterPrice;
 
-
 	private int watt;
 	private double averageHoursOn;
-		
+
 	private double liter;
 
 	public Consumer(String name, int watt) {
@@ -30,12 +28,13 @@ public abstract class Consumer {
 	}
 
 	/**
-	 * @param liter the liter to set
+	 * @param liter
+	 *            the liter to set
 	 */
 	public void setLiter(double liter) {
 		this.liter = liter;
 	}
-	
+
 	/**
 	 * @return the watt
 	 */
@@ -44,7 +43,8 @@ public abstract class Consumer {
 	}
 
 	/**
-	 * @param watt the watt to set
+	 * @param watt
+	 *            the watt to set
 	 */
 	public void setWatt(int watt) {
 		this.watt = watt;
@@ -58,42 +58,46 @@ public abstract class Consumer {
 	}
 
 	/**
-	 * @param averageMinOn the averageMinOn to set
+	 * @param averageMinOn
+	 *            the averageMinOn to set
 	 */
 	public void setAverageHoursOn(int averageMinOn) {
 		this.averageHoursOn = (double) averageMinOn / 60;
 	}
+
 	/**
 	 * @return the kwhPrice
 	 */
 	public static Amount getKwhPrice() {
 		if (kwhPrice == null) {
-//			Log.e("Light","Belgian prices are used!");
+			// Log.e("Light","Belgian prices are used!");
 			return new Amount(0.2289);
 		}
 		return kwhPrice;
 	}
 
 	/**
-	 * @param kwhPrice the kwhPrice to set
+	 * @param kwhPrice
+	 *            the kwhPrice to set
 	 */
 	public static void setKwhPrice(Amount kwhPrice) {
 		Consumer.kwhPrice = kwhPrice;
 	}
-	
+
 	/**
 	 * @return the waterPrice
 	 */
 	public static Amount getWaterPrice() {
 		if (waterPrice == null) {
-//			Log.e("Light","Belgian prices are used!");
+			// Log.e("Light","Belgian prices are used!");
 			return new Amount(0.0014);
 		}
 		return waterPrice;
 	}
 
 	/**
-	 * @param waterPrice the waterPrice to set
+	 * @param waterPrice
+	 *            the waterPrice to set
 	 */
 	public static void setWaterPrice(Amount waterPrice) {
 		Consumer.waterPrice = waterPrice;
@@ -103,24 +107,25 @@ public abstract class Consumer {
 	 * @return the id
 	 */
 	public String getName() {
-		if(name == null) {
+		if (name == null) {
 			throw new ParseXMLException(this);
 		}
 		return name;
 	}
 
 	/**
-	 * @param name the id to set
+	 * @param name
+	 *            the id to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	public abstract Amount getPrice(Period currentPeriod);
-	
+
 	@Override
 	public String toString() {
 		return getName();
 	}
-	
+
 }

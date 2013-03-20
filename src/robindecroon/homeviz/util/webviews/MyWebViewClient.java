@@ -18,7 +18,7 @@ import com.google.gson.Gson;
  * 
  */
 public class MyWebViewClient extends WebViewClient {
-	
+
 	public final static String CHART = "Chart";
 	public final static String TREEMAP = "Treemap";
 
@@ -39,10 +39,11 @@ public class MyWebViewClient extends WebViewClient {
 
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		if(name.equals(TREEMAP)) {
-			myBrowser.loadUrl("javascript:window.setTimeout(go(" + string + "),50)");			
-		} else if(name.equals(CHART)){
-			myBrowser.loadUrl("javascript:go(" + string +")");
+		if (name.equals(TREEMAP)) {
+			myBrowser.loadUrl("javascript:window.setTimeout(go(" + string
+					+ "),50)");
+		} else if (name.equals(CHART)) {
+			myBrowser.loadUrl("javascript:go(" + string + ")");
 		}
 	}
 

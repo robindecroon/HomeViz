@@ -26,7 +26,6 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 
 	private boolean appliancePresent;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,25 +60,25 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 
 	@Override
 	public void onSwypeToUp() {
-		ToastMessages.swypeDownForDetail();		
+		ToastMessages.swypeDownForDetail();
 	}
 
 	@Override
 	public void onSwypeToDown() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void setLocation() {
 		final TextView usageLocation = (TextView) findViewById(R.id.appliance_location);
-		usageLocation.setText(currentRoom.getName());		
+		usageLocation.setText(currentRoom.getName());
 	}
 
 	@Override
 	protected void setListeners() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -90,13 +89,13 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 		usagePeriod.setOnClickListener(periodListener);
 		usagePeriod.setOnLongClickListener(periodListener);
 	}
-	
+
 	@Override
 	public void refreshElements() {
 		super.refreshElements();
 		setAmounts();
 	}
-	
+
 	private void setAmounts() {
 		LinearLayout applianceLayout = (LinearLayout) findViewById(R.id.appliances);
 		applianceLayout.removeAllViews();
@@ -109,15 +108,13 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 				Appliance appliance = appliances.get(i);
 				LinearLayout layout = new LinearLayout(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT, 1);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
 				layout.setLayoutParams(lp);
 				layout.setOrientation(LinearLayout.VERTICAL);
 
 				ImageView image = new ImageView(this);
 				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp2.gravity = Gravity.CENTER;
 				image.setAdjustViewBounds(true);
 				image.setLayoutParams(lp2);
@@ -133,8 +130,7 @@ public class ApplianceUsageActivity extends UsageFullScreenActivity {
 				text.setTextColor(getResources().getColor(R.color.White));
 				text.setGravity(Gravity.CENTER);
 				text.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT,
-						LayoutParams.WRAP_CONTENT));
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
 				Amount price = appliance.getPrice(currentPeriod);
 				sum = sum.add(price);

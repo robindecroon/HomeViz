@@ -7,10 +7,10 @@ import robindecroon.homeviz.room.Room;
 
 /**
  * @author Robin
- *
+ * 
  */
 public class NoSuchDevicesInRoom extends Exception {
-	
+
 	private Room room;
 
 	public NoSuchDevicesInRoom(Room room) {
@@ -26,7 +26,8 @@ public class NoSuchDevicesInRoom extends Exception {
 	}
 
 	/**
-	 * @param room the room to set
+	 * @param room
+	 *            the room to set
 	 */
 	public void setRoom(Room room) {
 		this.room = room;

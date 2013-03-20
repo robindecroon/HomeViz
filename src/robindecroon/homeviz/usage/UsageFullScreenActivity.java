@@ -59,11 +59,11 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 		HomeVizApplication app = (HomeVizApplication) getApplication();
 
 		List<Room> rooms = app.getRooms();
-//		if (hasHouse()) {
-//			app.addHouse();
-//		} else {
-//			app.removeHouse();
-//		}
+		// if (hasHouse()) {
+		// app.addHouse();
+		// } else {
+		// app.removeHouse();
+		// }
 		for (int i = 0; i < rooms.size(); i++) {
 			actionBar.addTab(getActionBar().newTab()
 					.setText(rooms.get(i).getName()).setTabListener(this));

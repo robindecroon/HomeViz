@@ -25,10 +25,10 @@ public class DownloadLoxoneXMLTask extends
 		try {
 			return loadXmlFromNetwork(urls[0]);
 		} catch (IOException e) {
-			Log.e(getClass().getSimpleName(),"IO error: " + e.getMessage());
+			Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 			return null;
 		} catch (XmlPullParserException e) {
-			Log.e(getClass().getSimpleName(),"XML error: " + e.getMessage());
+			Log.e(getClass().getSimpleName(), "XML error: " + e.getMessage());
 			return null;
 		}
 	}
@@ -36,12 +36,12 @@ public class DownloadLoxoneXMLTask extends
 	@Override
 	protected void onPostExecute(List<List<Entry>> result) {
 		if (result != null) {
-//			 TODO + resetten vorige data
-//			for (List<Entry> list : result) {
-//				System.out.println("New entries:");
-//				for (Entry entry : list)
-//					System.out.println("Entry: " + entry);
-//			}
+			// TODO + resetten vorige data
+			// for (List<Entry> list : result) {
+			// System.out.println("New entries:");
+			// for (Entry entry : list)
+			// System.out.println("Entry: " + entry);
+			// }
 		}
 	}
 
@@ -75,15 +75,17 @@ public class DownloadLoxoneXMLTask extends
 						}
 					}
 				}
-				if(!client.completePendingCommand()) {
-					Log.e(getClass().getSimpleName(),"Pending command not completed!");
+				if (!client.completePendingCommand()) {
+					Log.e(getClass().getSimpleName(),
+							"Pending command not completed!");
 				}
 			}
 		} catch (SocketException e) {
-			Log.e(getClass().getSimpleName(),"Connection error: " + e.getMessage());
+			Log.e(getClass().getSimpleName(),
+					"Connection error: " + e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e(getClass().getSimpleName(),"IO error: " + e.getMessage());
+			Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 		} finally {
 			if (client != null) {
 				client.logout();

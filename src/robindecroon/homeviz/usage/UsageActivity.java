@@ -15,7 +15,7 @@ import android.widget.TextView;
  */
 public class UsageActivity extends UsageFullScreenActivity implements
 		ActionBar.TabListener {
-	
+
 	@Override
 	protected boolean hasHouse() {
 		return true;
@@ -54,11 +54,12 @@ public class UsageActivity extends UsageFullScreenActivity implements
 
 	@Override
 	public void setPeriod() {
-//		final TextView usagePeriod = (TextView) findViewById(R.id.usage_period);
-//		usagePeriod.setText(currentPeriod.getName(this));
-//		PeriodListener periodListener = new PeriodListener(this);
-//		usagePeriod.setOnClickListener(periodListener);
-//		usagePeriod.setOnLongClickListener(periodListener);
+		// final TextView usagePeriod = (TextView)
+		// findViewById(R.id.usage_period);
+		// usagePeriod.setText(currentPeriod.getName(this));
+		// PeriodListener periodListener = new PeriodListener(this);
+		// usagePeriod.setOnClickListener(periodListener);
+		// usagePeriod.setOnLongClickListener(periodListener);
 	}
 
 	@Override
@@ -82,33 +83,39 @@ public class UsageActivity extends UsageFullScreenActivity implements
 
 	@Override
 	protected void setLocation() {
-//		final TextView usageLocation = (TextView) findViewById(R.id.usage_location);
-//		usageLocation.setText(currentRoom.getName());
+		// final TextView usageLocation = (TextView)
+		// findViewById(R.id.usage_location);
+		// usageLocation.setText(currentRoom.getName());
 	}
 
 	@Override
 	protected void setListeners() {
-//		TouchListener listener = new TouchListener(this);
-//		final MyLinearLayout lightLayout = (MyLinearLayout) findViewById(R.id.light_layout);
-//		lightLayout.setListener(listener);
-//		lightLayout.setOnClickListener(new ClickListener(this,
-//				LightUsageActivity.class));
-//		final MyLinearLayout waterLayout = (MyLinearLayout) findViewById(R.id.water_layout);
-//		waterLayout.setListener(listener);
-//		waterLayout.setOnClickListener(new ClickListener(this,
-//				WaterUsageActivity.class));
-////		final MyLinearLayout heatingLayout = (MyLinearLayout) findViewById(R.id.heating_layout);
-////		heatingLayout.setListener(listener);
-////		heatingLayout.setOnClickListener(new ClickListener(this,
-////				HeatingUsageActivity.class));
-//		final MyLinearLayout appliancesLayout = (MyLinearLayout) findViewById(R.id.appliances_layout);
-//		appliancesLayout.setListener(listener);
-//		appliancesLayout.setOnClickListener(new ClickListener(this,
-//				ApplianceUsageActivity.class));
-//		final MyLinearLayout homeCinemaLayout = (MyLinearLayout) findViewById(R.id.home_cinema_layout);
-//		homeCinemaLayout.setListener(listener);
-//		homeCinemaLayout.setOnClickListener(new ClickListener(this,
-//				HomeCinemaUsageActivity.class));
+		// TouchListener listener = new TouchListener(this);
+		// final MyLinearLayout lightLayout = (MyLinearLayout)
+		// findViewById(R.id.light_layout);
+		// lightLayout.setListener(listener);
+		// lightLayout.setOnClickListener(new ClickListener(this,
+		// LightUsageActivity.class));
+		// final MyLinearLayout waterLayout = (MyLinearLayout)
+		// findViewById(R.id.water_layout);
+		// waterLayout.setListener(listener);
+		// waterLayout.setOnClickListener(new ClickListener(this,
+		// WaterUsageActivity.class));
+		// // final MyLinearLayout heatingLayout = (MyLinearLayout)
+		// findViewById(R.id.heating_layout);
+		// // heatingLayout.setListener(listener);
+		// // heatingLayout.setOnClickListener(new ClickListener(this,
+		// // HeatingUsageActivity.class));
+		// final MyLinearLayout appliancesLayout = (MyLinearLayout)
+		// findViewById(R.id.appliances_layout);
+		// appliancesLayout.setListener(listener);
+		// appliancesLayout.setOnClickListener(new ClickListener(this,
+		// ApplianceUsageActivity.class));
+		// final MyLinearLayout homeCinemaLayout = (MyLinearLayout)
+		// findViewById(R.id.home_cinema_layout);
+		// homeCinemaLayout.setListener(listener);
+		// homeCinemaLayout.setOnClickListener(new ClickListener(this,
+		// HomeCinemaUsageActivity.class));
 	}
 
 }

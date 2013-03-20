@@ -13,7 +13,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class InitHomeVizTask extends AsyncTask<String, Void, Boolean> {
-	
+
 	private static boolean done = false;
 
 	private HomeVizApplication context;
@@ -24,7 +24,7 @@ public class InitHomeVizTask extends AsyncTask<String, Void, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(String... paths) {
-		if(!done) {
+		if (!done) {
 			try {
 				InputStream in = null;
 				in = context.getAssets().open(paths[0]);
@@ -49,18 +49,20 @@ public class InitHomeVizTask extends AsyncTask<String, Void, Boolean> {
 
 	@Override
 	protected void onPostExecute(Boolean result) {
-		if(result) {
-			Log.i(getClass().getSimpleName(),"HomeViz initialized successfully");			
+		if (result) {
+			Log.i(getClass().getSimpleName(),
+					"HomeViz initialized successfully");
 		}
 	}
-	
+
 	private void randomizeLocationsOfPersons() {
 		for (Person person : context.getPersons()) {
 			if (!person.equals(context.getCurrentUser())) {
-				int[] percantages = RandomNumberGenerator.genNumbers(
-						context.getRooms().size(), 100);
+				int[] percantages = RandomNumberGenerator.genNumbers(context
+						.getRooms().size(), 100);
 				for (int i = 0; i < percantages.length; i++) {
-					context.getRooms().get(i).setPercentageForPerson(person, percantages[i]);
+					context.getRooms().get(i)
+							.setPercentageForPerson(person, percantages[i]);
 				}
 			}
 		}

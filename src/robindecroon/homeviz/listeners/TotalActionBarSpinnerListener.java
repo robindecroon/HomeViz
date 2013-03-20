@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 public class TotalActionBarSpinnerListener implements
 		AdapterView.OnItemSelectedListener {
-	
+
 	private FragmentActivity context;
-	
+
 	public TotalActionBarSpinnerListener(FragmentActivity context) {
 		this.context = context;
 	}
@@ -29,7 +29,7 @@ public class TotalActionBarSpinnerListener implements
 					.replace(R.id.container, fragment).commit();
 		} else if (position == 1) {
 
-		} 
+		}
 	}
 
 	@Override

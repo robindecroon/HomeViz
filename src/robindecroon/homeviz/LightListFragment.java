@@ -14,8 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-
 /**
  * A list fragment representing a list of Lights. This fragment also supports
  * tablet devices by allowing list items to be given an 'activated' state upon
@@ -38,7 +36,7 @@ public class LightListFragment extends ListFragment {
 	 * clicks.
 	 */
 	private Callbacks mCallbacks = new Callbacks() {
-		
+
 		@Override
 		public void onItemSelected(String id) {
 			setActivatedPosition(0);
@@ -83,15 +81,16 @@ public class LightListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		
-		Room room = ((HomeVizApplication) getActivity().getApplication()).getCurrentRoom();
+		Room room = ((HomeVizApplication) getActivity().getApplication())
+				.getCurrentRoom();
 		try {
 			setListAdapter(new ArrayAdapter<Light>(getActivity(),
-					android.R.layout.simple_list_item_activated_1, room.getLights()));
+					android.R.layout.simple_list_item_activated_1,
+					room.getLights()));
 		} catch (NoSuchDevicesInRoom e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 
 	}
 
@@ -99,40 +98,42 @@ public class LightListFragment extends ListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-//		int position = 0;
-//		getListView().requestFocusFromTouch();
-//		getListView().setSelection(position);
-//		getListView().performItemClick(getListView().getAdapter().getView(position, null, null), position, position);
-//		getListView().performItemClick(null, 0, 0);
-//		getListView().getAdapter().getView(position, null, null).setSelected(true);
-//		 Restore the previously serialized activated item position.
+		// int position = 0;
+		// getListView().requestFocusFromTouch();
+		// getListView().setSelection(position);
+		// getListView().performItemClick(getListView().getAdapter().getView(position,
+		// null, null), position, position);
+		// getListView().performItemClick(null, 0, 0);
+		// getListView().getAdapter().getView(position, null,
+		// null).setSelected(true);
+		// Restore the previously serialized activated item position.
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
 			setActivatedPosition(savedInstanceState
 					.getInt(STATE_ACTIVATED_POSITION));
-		} 
-//		else {
-//			setActivatedPosition(0);
-//		}
-//		onListItemClick(getListView(), view, position, id)
-		
-//        getListView().clearFocus();
-//        getListView().post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//
-//                getListView().setSelection(0);
-//            }
-//        });
-//		getListView().requestFocusFromTouch();
-//		getListView().smoothScrollToPosition(0);
-//		getListView().setItemChecked(0, true);
-//		getListView().setSelection(0);
-////		getListView().invalidate();
-//		getListView().se
-//		getListView().requestFocusFromTouch();
-			
+		}
+		// else {
+		// setActivatedPosition(0);
+		// }
+		// onListItemClick(getListView(), view, position, id)
+
+		// getListView().clearFocus();
+		// getListView().post(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		//
+		// getListView().setSelection(0);
+		// }
+		// });
+		// getListView().requestFocusFromTouch();
+		// getListView().smoothScrollToPosition(0);
+		// getListView().setItemChecked(0, true);
+		// getListView().setSelection(0);
+		// // getListView().invalidate();
+		// getListView().se
+		// getListView().requestFocusFromTouch();
+
 	}
 
 	@Override
@@ -165,7 +166,8 @@ public class LightListFragment extends ListFragment {
 		// fragment is attached to one) that an item has been selected.
 		List<Light> lights = null;
 		try {
-			lights = ((HomeVizApplication) getActivity().getApplication()).getCurrentRoom().getLights();
+			lights = ((HomeVizApplication) getActivity().getApplication())
+					.getCurrentRoom().getLights();
 			mCallbacks.onItemSelected(lights.get(position).toString());
 		} catch (NoSuchDevicesInRoom e) {
 			// TODO Auto-generated catch block
@@ -197,9 +199,9 @@ public class LightListFragment extends ListFragment {
 	private void setActivatedPosition(int position) {
 		if (position == AdapterView.INVALID_POSITION) {
 			getListView().setItemChecked(mActivatedPosition, false);
-		} else {}
-			getListView().setItemChecked(position, true);
-		
+		} else {
+		}
+		getListView().setItemChecked(position, true);
 
 		mActivatedPosition = position;
 	}

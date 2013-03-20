@@ -7,7 +7,6 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.activity.FullScreenActivity;
 import robindecroon.homeviz.listeners.TouchListener;
-import robindecroon.homeviz.util.PeriodListener;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
@@ -41,8 +40,9 @@ public class YouActivity extends FullScreenActivity {
 				"AndroidFunction");
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				MyWebViewClient.TREEMAP, ((HomeVizApplication) getApplication()).getRooms()));
-		
+				MyWebViewClient.TREEMAP,
+				((HomeVizApplication) getApplication()).getRooms()));
+
 		myBrowser.setBackgroundColor(0x00000000);
 
 		myBrowser.getSettings().setJavaScriptEnabled(true);
@@ -51,42 +51,42 @@ public class YouActivity extends FullScreenActivity {
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 
 		TextView userView = (TextView) findViewById(R.id.you_current_user);
-		userView.setText(((HomeVizApplication) getApplication()).getCurrentUser().getName());
-		
-		GraphUser user = ((HomeVizApplication) getApplication()).getFacebookUser();
-		if( user != null) {
+		userView.setText(((HomeVizApplication) getApplication())
+				.getCurrentUser().getName());
+
+		GraphUser user = ((HomeVizApplication) getApplication())
+				.getFacebookUser();
+		if (user != null) {
 			LinearLayout layout = (LinearLayout) findViewById(R.id.you_user_layout);
 			layout.removeAllViews();
 			ProfilePictureView profilePictureView = new ProfilePictureView(this);
 			profilePictureView.setProfileId(user.getId());
 			layout.addView(profilePictureView);
 		}
-		
-		
-		
+
 		refreshElements();
-		
-//		try {
-//			File f = new File("http://www.student.kuleuven.be/~s0206928/d3/");
-//
-//			File[] files = f.listFiles(new FilenameFilter() {
-//			    @Override
-//				public boolean accept(File dir, String name) {
-//			        // Specify the extentions of files to be included.
-//			        return name.endsWith(".json") || name.endsWith(".gif");
-//			    }
-//			});
-//
-//			if(files == null) return;
-//			for (int indx = 0; indx < files.length; indx++) {
-//				System.out.println(files[indx].getName());
-//			}
-//		} catch (Exception e) {
-//			System.out.println("MESSSSAAAGGGEEEE");
-////			System.out.println(e.getMessage());
-//			e.printStackTrace();
-//			System.out.println("nnnnnnnnnnnnnnaaaaaaaaaaaaaa");
-//		}
+
+		// try {
+		// File f = new File("http://www.student.kuleuven.be/~s0206928/d3/");
+		//
+		// File[] files = f.listFiles(new FilenameFilter() {
+		// @Override
+		// public boolean accept(File dir, String name) {
+		// // Specify the extentions of files to be included.
+		// return name.endsWith(".json") || name.endsWith(".gif");
+		// }
+		// });
+		//
+		// if(files == null) return;
+		// for (int indx = 0; indx < files.length; indx++) {
+		// System.out.println(files[indx].getName());
+		// }
+		// } catch (Exception e) {
+		// System.out.println("MESSSSAAAGGGEEEE");
+		// // System.out.println(e.getMessage());
+		// e.printStackTrace();
+		// System.out.println("nnnnnnnnnnnnnnaaaaaaaaaaaaaa");
+		// }
 	}
 
 	@Override
@@ -117,9 +117,9 @@ public class YouActivity extends FullScreenActivity {
 
 	@Override
 	protected void setPeriod() {
-//		final TextView youPeriod = (TextView) findViewById(R.id.you_period);
-//		youPeriod.setText(currentPeriod.getName(this));
-//		youPeriod.setOnClickListener(new PeriodListener(this));
+		// final TextView youPeriod = (TextView) findViewById(R.id.you_period);
+		// youPeriod.setText(currentPeriod.getName(this));
+		// youPeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

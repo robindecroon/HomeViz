@@ -11,7 +11,8 @@ public class UsageChartFragmentPagerAdapter extends HomeVizFragmentPagerAdapter 
 
 	private int type;
 
-	public UsageChartFragmentPagerAdapter(FragmentManager fm, HomeVizApplication app, int type) {
+	public UsageChartFragmentPagerAdapter(FragmentManager fm,
+			HomeVizApplication app, int type) {
 		super(fm, app);
 		this.type = type;
 	}

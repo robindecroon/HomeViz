@@ -1,5 +1,5 @@
-
 package robindecroon.homeviz.activity;
+
 import java.util.GregorianCalendar;
 
 import robindecroon.homeviz.HomeVizApplication;
@@ -27,7 +27,6 @@ import android.view.View;
  */
 public abstract class FullScreenActivity extends FragmentActivity implements
 		HomeVizListener, DatePickerListener {
-	
 
 	/**
 	 * De huidige periode waarin HomeViz zich bevindt.
@@ -35,7 +34,6 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 	protected Period currentPeriod;
 	protected boolean actionBarShown = false;
 
-		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,25 +47,25 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-//		final Activity context = this;
-//		final View rootView = getWindow().getDecorView();
-//		rootView.setOnLongClickListener(new OnLongClickListener() {
-//			
-//			@Override
-//			public boolean onLongClick(View v) {
-//				System.out.println("LOOOOOOOONG CLICK");
-//				if (actionBarShown ) {
-//					context.getActionBar().hide();
-//					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-//					actionBarShown = false;
-//				} else {
-//					context.getActionBar().show();
-//					rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-//					actionBarShown = true;
-//				}
-//				return false;
-//			}
-//		});
+		// final Activity context = this;
+		// final View rootView = getWindow().getDecorView();
+		// rootView.setOnLongClickListener(new OnLongClickListener() {
+		//
+		// @Override
+		// public boolean onLongClick(View v) {
+		// System.out.println("LOOOOOOOONG CLICK");
+		// if (actionBarShown ) {
+		// context.getActionBar().hide();
+		// rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		// actionBarShown = false;
+		// } else {
+		// context.getActionBar().show();
+		// rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		// actionBarShown = true;
+		// }
+		// return false;
+		// }
+		// });
 		setListeners();
 	}
 
@@ -78,7 +76,7 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, 0, Menu.NONE, "Settings");
-		menu.add(Menu.NONE, 1,Menu.NONE, "House");
+		menu.add(Menu.NONE, 1, Menu.NONE, "House");
 		return true;
 	}
 
@@ -95,7 +93,7 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 			Intent intent = new Intent(this, HouseUsageActivity.class);
 			startActivity(intent);
 		}
-			
+
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -103,13 +101,11 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 	 * Verberg de actionbar en initialiseer de main listener.
 	 */
 	private void initFullScreen() {
-//		getActionBar().hide();
+		// getActionBar().hide();
 		View rootView = getWindow().getDecorView();
 		rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		rootView.setOnTouchListener(new TouchListener(this));
 	}
-
-
 
 	/**
 	 * Verwerk een zoom in evenement.
@@ -136,6 +132,7 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 
 	/**
 	 * Stel de huidige periode in. Ook in de applicatie!
+	 * 
 	 * @param period
 	 */
 	public void setCurrentPeriod(Period period) {
@@ -143,7 +140,7 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 		this.currentPeriod = period;
 		refreshElements();
 	}
-	
+
 	/**
 	 * Stel de periode in. Haal deze op uit de applicatie.
 	 */
@@ -151,13 +148,14 @@ public abstract class FullScreenActivity extends FragmentActivity implements
 		currentPeriod = ((HomeVizApplication) getApplication())
 				.getCurrentPeriod();
 	}
-	
+
 	@Override
 	public void update(GregorianCalendar gregorianCalendar, String tag) {
 		try {
-			((HomeVizApplication) getApplicationContext()).setCurrentPeriod(Period.CUSTOM);
+			((HomeVizApplication) getApplicationContext())
+					.setCurrentPeriod(Period.CUSTOM);
 			this.currentPeriod = Period.CUSTOM;
-			
+
 			if (tag.equals(DatePickerFragment.FROM)) {
 				currentPeriod.setBegin(gregorianCalendar);
 			} else if (tag.equals(DatePickerFragment.UNTIL)) {

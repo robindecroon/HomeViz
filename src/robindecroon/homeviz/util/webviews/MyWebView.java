@@ -20,11 +20,10 @@ public class MyWebView extends WebView implements MyView {
 		super(context, attrs);
 	};
 
-	
 	public MyWebView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs,defStyle);
+		super(context, attrs, defStyle);
 	}
-	
+
 	@Override
 	public void setListener(TouchListener listener) {
 		this.listener = listener;

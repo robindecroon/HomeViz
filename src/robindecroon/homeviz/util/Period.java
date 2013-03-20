@@ -137,7 +137,7 @@ public enum Period {
 				return formater.format(getBegin().getTime()) + " - "
 						+ formater.format(getEnd().getTime());
 			} catch (NullPointerException e) {
-				Log.e(getClass().getSimpleName(),"Nog geen startdatum");
+				Log.e(getClass().getSimpleName(), "Nog geen startdatum");
 				return formater.format(getEnd().getTime());
 			}
 		}

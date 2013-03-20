@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -35,10 +34,12 @@ public class UsageContainerFragment extends Fragment {
 		if (args != null) {
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
-				adapter = new UsageChartFragmentPagerAdapter(manager, app, args.getInt(Constants.FRAGMENT_BUNDLE_TYPE));
+				adapter = new UsageChartFragmentPagerAdapter(manager, app,
+						args.getInt(Constants.FRAGMENT_BUNDLE_TYPE));
 				break;
 			case 2:
-				adapter = new UsageChartFragmentPagerAdapter(manager, app, args.getInt(Constants.FRAGMENT_BUNDLE_TYPE));
+				adapter = new UsageChartFragmentPagerAdapter(manager, app,
+						args.getInt(Constants.FRAGMENT_BUNDLE_TYPE));
 				break;
 			default:
 				adapter = new UsageIconFragmentPagerAdapter(manager, app);

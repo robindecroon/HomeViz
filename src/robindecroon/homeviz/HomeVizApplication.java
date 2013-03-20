@@ -44,11 +44,10 @@ public class HomeVizApplication extends Application {
 
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Person> persons = new ArrayList<Person>();
-	
+
 	private GraphUser facebookUser;
 
 	private Map<String, Country> countryMap;
-	
 
 	/**
 	 * @param currentCountry
@@ -72,8 +71,8 @@ public class HomeVizApplication extends Application {
 	public Person getCurrentUser() throws IllegalStateException {
 		SharedPreferences pref = getSharedPreferences(Constants.PREF_NAME, 0);
 		String name = pref.getString(Constants.CURRENT_USER, null);
-		for (Person person: getPersons()) {
-			if(person.getFirstName().equalsIgnoreCase(name))
+		for (Person person : getPersons()) {
+			if (person.getFirstName().equalsIgnoreCase(name))
 				return person;
 		}
 		throw new IllegalStateException("No current user found!");
@@ -112,7 +111,7 @@ public class HomeVizApplication extends Application {
 	public void setCurrentPeriod(Period currentPeriod) {
 		this.currentPeriod = currentPeriod;
 	}
-	
+
 	public void addPerson(Person person) {
 		this.persons.add(person);
 	}
@@ -126,7 +125,7 @@ public class HomeVizApplication extends Application {
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
-	
+
 	public void addRoom(Room room) {
 		this.rooms.add(room);
 	}
@@ -154,7 +153,7 @@ public class HomeVizApplication extends Application {
 	public void setCurrentRoom(int id) {
 		currentRoomIndex = id;
 	}
-	
+
 	public void parseXML() {
 		parseXML(null);
 	}
@@ -165,43 +164,43 @@ public class HomeVizApplication extends Application {
 	 * @throws IOException
 	 */
 	public void parseXML(String path) {
-//		XMLHandler handler = null; 
-//		try {
-//			SAXParserFactory factory = SAXParserFactory.newInstance();
-//			SAXParser saxParser = factory.newSAXParser();
-//
-//			handler = new XMLHandler();
-//			InputStream file = null;
-//			try {
-//				file = getAssets().open("prototype1.xml");
-//			} catch (Exception e) {
-//				Log.e("XML", e.getMessage());
-//			}
-//			if (file == null) {
-//				Log.e("XML", "XML file not found!");
-//			}
-//			 saxParser.parse(file, handler);
-////			 type = handler.getVizType();
-//		} catch (Exception e) {
-//			System.out.println("FOOOOOUUUUTJEEEE");
-//			e.printStackTrace();
-//			// Log.e("ParseXML", e.getMessage());
-//			// Toast gaat nog niet, want er is nog geen context
-//		}
-//		setRooms(handler.getRooms());
-//		setPersons(handler.getPersons());
-//		currentUser = handler.getCurrentUser();
-//		countryMap = handler.getCountryMap();
-//		Log.i("HomeVizApplication", "The currentUser is " + currentUser);
+		// XMLHandler handler = null;
+		// try {
+		// SAXParserFactory factory = SAXParserFactory.newInstance();
+		// SAXParser saxParser = factory.newSAXParser();
+		//
+		// handler = new XMLHandler();
+		// InputStream file = null;
+		// try {
+		// file = getAssets().open("prototype1.xml");
+		// } catch (Exception e) {
+		// Log.e("XML", e.getMessage());
+		// }
+		// if (file == null) {
+		// Log.e("XML", "XML file not found!");
+		// }
+		// saxParser.parse(file, handler);
+		// // type = handler.getVizType();
+		// } catch (Exception e) {
+		// System.out.println("FOOOOOUUUUTJEEEE");
+		// e.printStackTrace();
+		// // Log.e("ParseXML", e.getMessage());
+		// // Toast gaat nog niet, want er is nog geen context
+		// }
+		// setRooms(handler.getRooms());
+		// setPersons(handler.getPersons());
+		// currentUser = handler.getCurrentUser();
+		// countryMap = handler.getCountryMap();
+		// Log.i("HomeVizApplication", "The currentUser is " + currentUser);
 
 		// TODO
-//		randomizeLocationsOfPersons();
+		// randomizeLocationsOfPersons();
 	}
 
 	public void setCountries(Map<String, Country> map) {
 		this.countryMap = map;
 	}
-	
+
 	public void randomizeLocationsOfPersons() {
 		for (Person person : persons) {
 			if (!person.equals(getCurrentUser())) {
@@ -267,7 +266,8 @@ public class HomeVizApplication extends Application {
 	}
 
 	/**
-	 * @param facebookUser the facebookUser to set
+	 * @param facebookUser
+	 *            the facebookUser to set
 	 */
 	public void setFacebookUser(GraphUser facebookUser) {
 		this.facebookUser = facebookUser;
