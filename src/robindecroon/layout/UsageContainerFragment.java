@@ -33,7 +33,7 @@ public class UsageContainerFragment extends Fragment {
 		FragmentStatePagerAdapter adapter = null;
 		Bundle args = getArguments();
 		if (args != null) {
-			switch (args.getInt(Constants.UsageType)) {
+			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
 				adapter = new UsageChartFragmentPagerAdapter(manager, app, args.getInt(Constants.FRAGMENT_BUNDLE_TYPE));
 				break;

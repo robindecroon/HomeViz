@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -21,11 +22,24 @@ import robindecroon.homeviz.listeners.UsageActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.YieldActionBarSpinnerListener;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
+import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
 import robindecroon.stackoverflow.NoDefaultSpinner;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -34,7 +48,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-public class Main extends FragmentActivity {
+public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +57,7 @@ public class Main extends FragmentActivity {
 
 		// read the configuration XML file
 		readHomeVizXML();
-		
+
 		// read CO2 data
 		readCO2Data();
 
@@ -52,7 +66,7 @@ public class Main extends FragmentActivity {
 
 		// initial fragment
 		Bundle args = new Bundle();
-		args.putInt(Constants.UsageType, 0);
+		args.putInt(Constants.USAGE_TYPE, 0);
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
@@ -112,13 +126,14 @@ public class Main extends FragmentActivity {
 
 	private void readHomeVizXML() {
 		try {
+			HomeVizApplication app = (HomeVizApplication) getApplication();
+			app.reset();
 			InputStream in = null;
 			in = getAssets().open(Constants.XML_FILE_NAME);
 			HomeVizXMLParser parser = new HomeVizXMLParser(
 					(HomeVizApplication) getApplication());
 			parser.parse(in);
-			((HomeVizApplication) getApplication())
-					.randomizeLocationsOfPersons();
+			app.randomizeLocationsOfPersons();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (XmlPullParserException e) {
@@ -133,8 +148,8 @@ public class Main extends FragmentActivity {
 			String[] keys = in.readLine().split(";");
 			String line = null;
 			Map<String, Country> countries = new HashMap<String, Country>();
-			
-			 NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+
+			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
 			try {
 				while ((line = in.readLine()) != null) {
 					String[] values = line.split(";");
@@ -145,10 +160,11 @@ public class Main extends FragmentActivity {
 					double co2 = co2number.doubleValue();
 					double kwh = kwhnumber.doubleValue();
 					double liter = liternumber.doubleValue();
-					countries.put(values[0],new Country(values[0],co2, new Amount(kwh), new Amount(liter)));
+					countries.put(values[0], new Country(values[0], co2,
+							new Amount(kwh), new Amount(liter)));
 				}
 			} catch (ParseException e) {
-				Log.e(getClass().getSimpleName(),"Error in country CSV file!");
+				Log.e(getClass().getSimpleName(), "Error in country CSV file!");
 			}
 			((HomeVizApplication) getApplication()).setCountries(countries);
 		} catch (IOException e) {
@@ -177,5 +193,149 @@ public class Main extends FragmentActivity {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	// ////////////////////////////////////////////////////
+	// / Locatie ///
+	// ////////////////////////////////////////////////////
+
+	/**
+	 * Deze methode initialiseert het opzoeken van de locatie.
+	 * 
+	 * De primaire methode is het bepalen van de locatie via Netwerkgegevens.
+	 * Als dit niet lukt, wordt er gebruikgemaakt van de GPS (als deze
+	 * aanstaat). Is er geen internetverbinding en staat de GPS af, dan wordt de
+	 * locatie niet opgezocht.
+	 */
+	private void initCurrentLocation() {
+		LocationManager locationManager;
+		String provider;
+		try {
+			String svcName = Context.LOCATION_SERVICE;
+			locationManager = (LocationManager) getSystemService(svcName);
+
+			provider = null;
+			boolean gpsEnabled = locationManager
+					.isProviderEnabled(LocationManager.GPS_PROVIDER);
+			boolean internetEnabled = isNetworkConnected();
+
+			if (internetEnabled) {
+				Log.i("Homescreen", "Tracking location through internet");
+				Criteria criteria = new Criteria();
+				criteria.setAccuracy(Criteria.ACCURACY_FINE);
+				criteria.setPowerRequirement(Criteria.POWER_LOW);
+				criteria.setAltitudeRequired(false);
+				criteria.setBearingRequired(false);
+				criteria.setSpeedRequired(false);
+				criteria.setCostAllowed(true);
+				provider = locationManager.getBestProvider(criteria, true);
+				locationManager.requestSingleUpdate(provider, this, null);
+			} else if (gpsEnabled) {
+				Log.i("Homescreen", "Tracking location through GPS");
+				provider = LocationManager.GPS_PROVIDER;
+				locationManager.requestSingleUpdate(provider, this, null);
+			} else {
+				ToastMessages.noLocationResource();
+			}
+		} catch (Exception e) {
+			Log.i("Homescreen", "locationServices are disabled");
+			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which) {
+					case DialogInterface.BUTTON_POSITIVE:
+						ToastMessages.enableLocation();
+						Intent myIntent = new Intent(
+								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+						Main.this.startActivity(myIntent);
+						break;
+
+					case DialogInterface.BUTTON_NEGATIVE:
+						// No button clicked
+						break;
+					}
+				}
+			};
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+			builder.setMessage(
+					getResources().getString(R.string.question_enable_location))
+					.setPositiveButton(getResources().getString(R.string.Yes),
+							dialogClickListener)
+					.setNegativeButton(getResources().getString(R.string.No),
+							dialogClickListener).show();
+		}
+	}
+
+	/**
+	 * Methode die nagaat of de gebruiker met internet verbonden is.
+	 * 
+	 * @return True als de gebruiker met internet verbonden is.
+	 */
+	private boolean isNetworkConnected() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		if (networkInfo != null) {
+			// Geen actieve netwerken
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Methode die de currentCity en currentCountry variable invult, gebaseerd
+	 * op het meegegeven Location object.
+	 * 
+	 * @param currentLocation
+	 *            De huidige locatie.
+	 */
+	private void setLocation(Location currentLocation) {
+		double lat = currentLocation.getLatitude();
+		double lng = currentLocation.getLongitude();
+
+		String currentCity = null;
+		String currentCountry = null;
+
+		Geocoder geocoder = new Geocoder(getApplicationContext(),
+				Locale.getDefault());
+		List<Address> addresses;
+		try {
+			if (isNetworkConnected()) {
+				addresses = geocoder.getFromLocation(lat, lng, 1);
+				Address first = addresses.get(0);
+				currentCity = first.getLocality();
+				currentCountry = first.getCountryName();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			currentCity = getResources().getString(R.string.no_location);
+			currentCountry = getResources().getString(R.string.no_location);
+		}
+
+		// ((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
+		((HomeVizApplication) getApplication())
+				.setCurrentCountry(currentCountry);
+		Log.i("Homescreen", "Updated location, we are in: " + currentCity
+				+ ", " + currentCountry);
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		setLocation(location);
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		Log.i("HomeScreen", "Tracking location through: " + provider);
+		initCurrentLocation();
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 }

@@ -28,7 +28,7 @@ public class UsageActionBarSpinnerListener implements
 
 		Fragment fragment = new UsageContainerFragment();
 		Bundle args = new Bundle();
-		args.putInt(Constants.UsageType, position);
+		args.putInt(Constants.USAGE_TYPE, position);
 		args.putInt(Constants.FRAGMENT_BUNDLE_TYPE, position);
 		fragment.setArguments(args);
 		context.getSupportFragmentManager().beginTransaction()

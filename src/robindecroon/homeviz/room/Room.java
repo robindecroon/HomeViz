@@ -56,7 +56,7 @@ public class Room implements RoomPrices {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		map.put("Light", getLightPrice(period));
 		map.put("Water", getWaterPrice(period));
-//		map.put("Heating", getHeating(period));
+		map.put("Heating", getHeating(period));
 		map.put("Appliances", getAppliancesPrice(period));
 		map.put("Home Cinema", getHomeCinemaPrice(period));
 		return map;

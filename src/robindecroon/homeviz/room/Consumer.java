@@ -14,7 +14,7 @@ public abstract class Consumer {
 
 	private int watt;
 	private double averageHoursOn;
-	
+		
 	private double liter;
 
 	public Consumer(String name, int watt) {
@@ -68,7 +68,7 @@ public abstract class Consumer {
 	 */
 	public static Amount getKwhPrice() {
 		if (kwhPrice == null) {
-			Log.e("Light","Belgian prices are used!");
+//			Log.e("Light","Belgian prices are used!");
 			return new Amount(0.2289);
 		}
 		return kwhPrice;
@@ -86,7 +86,7 @@ public abstract class Consumer {
 	 */
 	public static Amount getWaterPrice() {
 		if (waterPrice == null) {
-			Log.e("Light","Belgian prices are used!");
+//			Log.e("Light","Belgian prices are used!");
 			return new Amount(0.0014);
 		}
 		return waterPrice;

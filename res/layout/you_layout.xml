@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,44 +6,57 @@
     android:orientation="vertical"
     tools:context=".UsageDetailActivity" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/you_user_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true" >
+
+            <libraries.nielsbillen.ArrowButton
+                android:id="@+id/total_arrow_left"
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <libraries.nielsbillen.OptionSpinner
+                android:id="@+id/total_spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <libraries.nielsbillen.ArrowButton
+                android:id="@+id/total_arrow_right"
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/you_current_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:paddingLeft="20dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/White"
+            android:textIsSelectable="false"
             android:textSize="30sp" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/you_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/you_user_layout"
-        android:paddingLeft="20dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textSize="40sp" />
+        <com.facebook.widget.ProfilePictureView
+            android:id="@+id/profilePictureView1"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" >
+        </com.facebook.widget.ProfilePictureView>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/you_layout"
+    <WebView
+        android:id="@+id/you_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/you_period" >
+        android:layout_height="match_parent" />
 
-        <robindecroon.homeviz.util.webviews.MyWebView
-            android:id="@+id/you_webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

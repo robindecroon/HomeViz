@@ -117,9 +117,9 @@ public class YouActivity extends FullScreenActivity {
 
 	@Override
 	protected void setPeriod() {
-		final TextView youPeriod = (TextView) findViewById(R.id.you_period);
-		youPeriod.setText(currentPeriod.getName(this));
-		youPeriod.setOnClickListener(new PeriodListener(this));
+//		final TextView youPeriod = (TextView) findViewById(R.id.you_period);
+//		youPeriod.setText(currentPeriod.getName(this));
+//		youPeriod.setOnClickListener(new PeriodListener(this));
 	}
 
 	@Override

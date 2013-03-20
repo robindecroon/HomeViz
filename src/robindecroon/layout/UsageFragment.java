@@ -1,20 +1,16 @@
 package robindecroon.layout;
 
-import libraries.nielsbillen.ArrowButton;
-import libraries.nielsbillen.OptionSpinner;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
-import robindecroon.homeviz.util.PeriodListener;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class UsageFragment extends Fragment {
+public class UsageFragment extends SpinnerFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +47,7 @@ public class UsageFragment extends Fragment {
 				.findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 
-		initSpinner(rootView);
+		initSpinner(rootView,R.id.topSpinner, R.id.topArrowLeft, R.id.topArrowRight);
 		
 		setTotalAmount(rootView, currentRoom, currentPeriod);
 
@@ -61,27 +57,5 @@ public class UsageFragment extends Fragment {
 	private void setTotalAmount(View v, Room room, Period period) {
 		final TextView usageAmount = (TextView) v.findViewById(R.id.usage_amount);
 		usageAmount.setText(room.getTotalPrice(period));
-	}
-
-	/**
-	 * Initialiseert de spinner.
-	 */
-	private void initSpinner(View v) {
-		ArrowButton left = (ArrowButton) v.findViewById(R.id.topArrowLeft);
-		left.setArrowDirection(ArrowButton.DIRECTION_LEFT);
-		ArrowButton right = (ArrowButton) v.findViewById(R.id.topArrowRight);
-		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
-		PeriodListener periodListener = new PeriodListener(getActivity());
-		OptionSpinner spinner = (OptionSpinner) v.findViewById(R.id.topSpinner);
-		spinner.setLeftButton(left);
-		spinner.setRightButton(right);
-		spinner.setOnClickListener(periodListener);
-		spinner.setOnLongClickListener(periodListener);
-		Period[] periods = Period.values();
-		String[] namePeriods = new String[periods.length];
-		for (int i = 0; i < periods.length; i++) {
-			namePeriods[i] = periods[i].getName(getActivity());
-		}
-		spinner.setOptions(namePeriods);
 	}
 }

@@ -41,6 +41,6 @@ public class Constants {
 	public final static String FRAGMENT_BUNDLE_TYPE = "charttype";
 	public static final String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
 
-	public static final String UsageType = "Usage type";
+	public static final String USAGE_TYPE = "Usage type";
 	
 }

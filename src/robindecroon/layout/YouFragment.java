@@ -2,31 +2,35 @@ package robindecroon.layout;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.task.InitHomeVizTask;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
-import robindecroon.homeviz.util.webviews.MyWebView;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 
-public class YouFragment extends Fragment {
+@SuppressLint("SetJavaScriptEnabled")
+public class YouFragment extends SpinnerFragment {
 	
-	private MyWebView myBrowser;
+	private WebView myBrowser;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.you_layout,
 				container, false);
-
-		myBrowser = (MyWebView) rootView.findViewById(R.id.you_webview);
+		
+		initSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left, R.id.total_arrow_right );
+		
+		myBrowser = (WebView) rootView.findViewById(R.id.you_webview);
 
 		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
 				getActivity());

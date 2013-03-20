@@ -273,4 +273,16 @@ public class HomeVizApplication extends Application {
 		this.facebookUser = facebookUser;
 	}
 
+	public void reset() {
+		try {
+			countryMap.clear();
+			currentPeriod = Period.WEEK;
+			currentRoomIndex = 0;
+			facebookUser = null;
+			persons.clear();
+			rooms.clear();
+		} catch (Exception e) {
+			// nothing to clear
+		}
+	}
 }

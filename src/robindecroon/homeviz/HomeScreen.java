@@ -97,7 +97,7 @@ public class HomeScreen extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen_layout);
-		
+
 		// Parse alle xml bestanden
 		startTasks();
 
@@ -152,9 +152,10 @@ public class HomeScreen extends Activity implements LocationListener {
 		final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(R.id.coverflowReflect);
 		setupCoverFlow(reflectingCoverFlow, false);
 	}
-	
+
 	private void startTasks() {
-		new InitHomeVizTask((HomeVizApplication) getApplication()).execute("HomeViz.xml");
+		new InitHomeVizTask((HomeVizApplication) getApplication())
+				.execute("HomeViz.xml");
 		new DownloadLoxoneXMLTask().execute(Constants.LOXONE_IP);
 	}
 
