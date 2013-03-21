@@ -26,7 +26,7 @@ public class YouFragment extends OptionSpinnerFragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.you_layout, container, false);
 
-		initSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
+		initOptionSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
 				R.id.total_arrow_right);
 
 		myBrowser = (WebView) rootView.findViewById(R.id.you_webview);

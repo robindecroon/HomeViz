@@ -3,7 +3,7 @@ package robindecroon.layout;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.adapters.LightFragmentPagerAdapter;
+import robindecroon.homeviz.adapters.ConsumerFragmentPagerAdapter;
 import robindecroon.homeviz.adapters.UsageChartFragmentPagerAdapter;
 import robindecroon.homeviz.adapters.UsageIconFragmentPagerAdapter;
 import android.os.Bundle;
@@ -46,7 +46,19 @@ public class UsageContainerFragment extends Fragment {
 				adapter = new UsageChartFragmentPagerAdapter(manager, app, 2);
 				break;
 			case 11:
-				adapter = new LightFragmentPagerAdapter(manager, app);
+				adapter = new ConsumerFragmentPagerAdapter(manager, app,11);
+				break;
+			case 12:
+				adapter = new ConsumerFragmentPagerAdapter(manager, app,12);
+				break;
+			case 13:
+				adapter = new ConsumerFragmentPagerAdapter(manager, app,13);
+				break;
+			case 14:
+				adapter = new ConsumerFragmentPagerAdapter(manager, app,14);
+				break;
+			case 15:
+				adapter = new ConsumerFragmentPagerAdapter(manager, app,15);
 				break;
 			default:
 				adapter = new UsageIconFragmentPagerAdapter(manager, app);

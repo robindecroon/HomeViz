@@ -3,17 +3,15 @@ package robindecroon.layout;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.listeners.ConsumerOnClickListener;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class UsageFragment extends OptionSpinnerFragment {
@@ -39,56 +37,62 @@ public class UsageFragment extends OptionSpinnerFragment {
 
 		Period currentPeriod = app.getCurrentPeriod();
 
-		final TextView light = (TextView) rootView
+		// Lights
+		LinearLayout lights = (LinearLayout) rootView
+				.findViewById(R.id.light_layout);
+		lights.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
+				getActivity(), Constants.LIGHT));
+		TextView light = (TextView) rootView
 				.findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
-		light.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Fragment fragment = new UsageContainerFragment();
-				Bundle args = new Bundle();
-				args.putInt(Constants.USAGE_TYPE, 11);
-				args.putInt("room", finalRoomIndex);
-				fragment.setArguments(args);
-				FragmentManager fm = getActivity().getSupportFragmentManager();
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.setCustomAnimations(R.anim.up_enter, R.anim.up_leave);
-				ft.replace(R.id.container, fragment).commit();
-			}
-		});
-
-		final TextView water = (TextView) rootView
+		// Water
+		LinearLayout waters = (LinearLayout) rootView
+				.findViewById(R.id.water_layout);
+		waters.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
+				getActivity(), Constants.WATER));
+		TextView water = (TextView) rootView
 				.findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
 
-		final TextView heating = (TextView) rootView
+		// Heating
+		LinearLayout heatings = (LinearLayout) rootView
+				.findViewById(R.id.heating_layout);
+		heatings.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
+				getActivity(), Constants.HEATING));
+		TextView heating = (TextView) rootView
 				.findViewById(R.id.usage_heating_price);
 		heating.setText(currentRoom.getHeating(currentPeriod).toString());
 
-		final TextView appl = (TextView) rootView
+		// Appliances
+		LinearLayout appliances = (LinearLayout) rootView
+				.findViewById(R.id.appliances_layout);
+		appliances.setOnClickListener(new ConsumerOnClickListener(
+				finalRoomIndex, getActivity(), Constants.APPLIANCE));
+		TextView appliance = (TextView) rootView
 				.findViewById(R.id.usage_appliances_price);
-		appl.setText(currentRoom.getAppliancesPrice(currentPeriod).toString());
+		appliance.setText(currentRoom.getAppliancesPrice(currentPeriod)
+				.toString());
 
-		final TextView tv = (TextView) rootView
+		// Home Cinema
+		LinearLayout homeCinemas = (LinearLayout) rootView
+				.findViewById(R.id.home_cinema_layout);
+		homeCinemas.setOnClickListener(new ConsumerOnClickListener(
+				finalRoomIndex, getActivity(), Constants.HOMECINEMA));
+		TextView homeCinema = (TextView) rootView
 				.findViewById(R.id.usage_tv_price);
-		tv.setText(currentRoom.getHomeCinemaPrice(currentPeriod).toString());
+		homeCinema.setText(currentRoom.getHomeCinemaPrice(currentPeriod)
+				.toString());
 
+		// Total
 		final TextView usageAmount = (TextView) rootView
 				.findViewById(R.id.usage_amount);
 		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
 
-		initSpinner(rootView, R.id.topSpinner, R.id.topArrowLeft,
+		// Time
+		initOptionSpinner(rootView, R.id.topSpinner, R.id.topArrowLeft,
 				R.id.topArrowRight);
 
-		setTotalAmount(rootView, currentRoom, currentPeriod);
-
 		return rootView;
-	}
-
-	private void setTotalAmount(View v, Room room, Period period) {
-		final TextView usageAmount = (TextView) v
-				.findViewById(R.id.usage_amount);
-		 usageAmount.setText(room.getTotalPrice(period));
 	}
 }

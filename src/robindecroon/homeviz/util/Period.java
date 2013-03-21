@@ -19,6 +19,7 @@ import android.util.Log;
 public enum Period {
 
 	DAY(R.string.period_day) {
+		@Override
 		public int getId() {
 			return 0;
 		}
@@ -47,6 +48,7 @@ public enum Period {
 		}
 	},
 	WEEK(R.string.period_week) {
+		@Override
 		public int getId() {
 			return 1;
 		}
@@ -74,6 +76,7 @@ public enum Period {
 		}
 	},
 	MONTH(R.string.period_month) {
+		@Override
 		public int getId() {
 			return 2;
 		}
@@ -101,6 +104,7 @@ public enum Period {
 		}
 	},
 	YEAR(R.string.period_year) {
+		@Override
 		public int getId() {
 			return 3;
 		}
@@ -129,6 +133,7 @@ public enum Period {
 		}
 	},
 	CUSTOM(R.string.period_custom) {
+		@Override
 		public int getId() {
 			return -1;
 		}

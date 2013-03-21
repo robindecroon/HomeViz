@@ -29,6 +29,11 @@ public class Room implements RoomPrices {
 	private List<Water> waters = new ArrayList<Water>();;
 	private List<HomeCinema> homeCinemas = new ArrayList<HomeCinema>();
 	private List<Appliance> appliances = new ArrayList<Appliance>();
+	private List<Heating> heatings = new ArrayList<Heating>();
+	
+	public List<Heating> getHeatings() {
+		return this.heatings;
+	}
 
 	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
 

@@ -49,5 +49,13 @@ public class Constants {
 	public final static String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
 
 	public final static String USAGE_TYPE = "Usage type";
-
+	
+	/*
+	 * Consumers
+	 */
+	public final static int LIGHT = 11;
+	public final static int APPLIANCE = 12;
+	public final static int HOMECINEMA = 13;
+	public final static int WATER = 14;
+	public final static int HEATING = 15;
 }
