@@ -2,6 +2,7 @@ package robindecroon.homeviz.adapters;
 
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.layout.UsageFragment;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -15,8 +16,11 @@ public class UsageIconFragmentPagerAdapter extends
 
 	@Override
 	public Fragment getItem(int arg0) {
-		app.setCurrentRoom(arg0);
-		return new UsageFragment();
+		Bundle args = new Bundle();
+		args.putInt("room", arg0);
+		Fragment fragment = new UsageFragment();
+		fragment.setArguments(args);
+		return fragment;
 	}
 
 }

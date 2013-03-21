@@ -52,13 +52,15 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	public static int lastCatergory;
 	public static int lastPosition;
-	
+
 	private static boolean INIT = true;
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
 	private NoDefaultSpinner yieldActionBarSpinner;
+
+	public static int page;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			// read CO2 data
 			readCO2Data();
 
-			startUsageContainerFragment(0);
+			// start with Usage (icons)
+			startUsageContainerFragment(0, 0);
 
 			INIT = false;
 		} else {
@@ -86,7 +89,8 @@ public class Main extends FragmentActivity implements LocationListener {
 				int category = extras.getInt(Constants.CATEGORY);
 				switch (category) {
 				case Constants.USAGE:
-					startUsageContainerFragment(selection);
+					startUsageContainerFragment(selection,
+							extras.getInt("room"));
 					break;
 				case Constants.TOTAL:
 					startTotalFragment(selection);
@@ -113,11 +117,12 @@ public class Main extends FragmentActivity implements LocationListener {
 				.replace(R.id.container, fragment2).commit();
 	}
 
-	private void startUsageContainerFragment(int selection) {
+	private void startUsageContainerFragment(int selection, int roomIndex) {
 		usageActionBarSpinner.setSelection(selection);
 		lastCatergory = Constants.USAGE;
 		Bundle args = new Bundle();
 		args.putInt(Constants.USAGE_TYPE, selection);
+		args.putInt("room", UsageContainerFragment.currentPageNumber);
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()

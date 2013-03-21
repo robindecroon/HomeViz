@@ -13,6 +13,7 @@ import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,20 @@ public class UsageChartFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.usage_detail_layout,
 				container, false);
 
-		Room currentRoom = ((HomeVizApplication) getActivity().getApplication())
-				.getCurrentRoom();
-		Period currentPeriod = ((HomeVizApplication) getActivity()
-				.getApplication()).getCurrentPeriod();
+		HomeVizApplication app = (HomeVizApplication) getActivity()
+				.getApplication();
+
+		Room currentRoom = null;
+		if (getArguments() != null) {
+			int roomIndex = getArguments().getInt("room");
+			currentRoom = app.getRooms().get(roomIndex);
+			// app.setCurrentRoom(roomIndex);
+		} else {
+			Log.e(getClass().getSimpleName(), "No room arguments");
+			// currentRoom = app.getCurrentRoom();
+		}
+
+		Period currentPeriod = app.getCurrentPeriod();
 
 		WebView chart = (WebView) rootView
 				.findViewById(R.id.usage_detail_webview);

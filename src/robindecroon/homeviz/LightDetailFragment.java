@@ -41,8 +41,8 @@ public class LightDetailFragment extends Fragment {
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
 			String lightName = (String) getArguments().get(ARG_ITEM_ID);
-			light = ((HomeVizApplication) getActivity().getApplication())
-					.getCurrentRoom().getLight(lightName);
+			// light = ((HomeVizApplication) getActivity().getApplication())
+			// .getCurrentRoom().getLight(lightName);
 
 			// light = DummyContent.ITEM_MAP.get(getArguments().getString(
 			// ARG_ITEM_ID));

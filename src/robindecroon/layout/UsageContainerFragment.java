@@ -21,6 +21,8 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class UsageContainerFragment extends Fragment {
 
+	public static int currentPageNumber;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class UsageContainerFragment extends Fragment {
 		FragmentStatePagerAdapter adapter = null;
 		Bundle args = getArguments();
 		if (args != null) {
+			currentPageNumber = args.getInt("room");
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
 				adapter = new UsageChartFragmentPagerAdapter(manager, app, 1);
@@ -57,6 +60,7 @@ public class UsageContainerFragment extends Fragment {
 		TabPageIndicator indicator = (TabPageIndicator) rootView
 				.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
+		indicator.setCurrentItem(currentPageNumber);
 
 		return rootView;
 	}

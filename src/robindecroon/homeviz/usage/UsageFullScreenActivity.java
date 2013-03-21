@@ -16,7 +16,6 @@ import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * FullScreenActivity die ook nog de locatie bijhoudt. Een horizontale swype
@@ -52,7 +51,7 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		fillTabs(actionBar);
-		actionBar.setSelectedNavigationItem(app.getTabPosition());
+		// actionBar.setSelectedNavigationItem(app.getTabPosition());
 	}
 
 	private void fillTabs(ActionBar actionBar) {
@@ -75,12 +74,13 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 	}
 
 	void initRoom() {
-		currentRoom = ((HomeVizApplication) getApplication()).getCurrentRoom();
+		// currentRoom = ((HomeVizApplication)
+		// getApplication()).getCurrentRoom();
 	}
 
 	@Override
 	public void onSwypeToLeft() {
-		currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
+		// currentRoom = ((HomeVizApplication) getApplication()).previousRoom();
 		Intent intent = new Intent(this, getClass());
 		startActivity(intent);
 		overridePendingTransition(R.anim.left_enter, R.anim.left_leave);
@@ -89,7 +89,7 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 
 	@Override
 	public void onSwypeToRight() {
-		currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
+		// currentRoom = ((HomeVizApplication) getApplication()).nextRoom();
 		Intent intent = new Intent(this, getClass());
 		startActivity(intent);
 		overridePendingTransition(R.anim.right_enter, R.anim.right_leave);
@@ -109,19 +109,19 @@ public abstract class UsageFullScreenActivity extends FullScreenActivity
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		HomeVizApplication app = (HomeVizApplication) getApplication();
-		if (!init) {
-			try {
-				app.setCurrentRoom(tab.getPosition());
-				currentRoom = app.getCurrentRoom();
-				refreshElements();
-			} catch (Exception e) {
-				Log.i("UsageFullScreenActivity",
-						"tabSelectedTooSoon: " + e.getMessage());
-			}
-		} else {
-			init = false;
-		}
+		// HomeVizApplication app = (HomeVizApplication) getApplication();
+		// if (!init) {
+		// try {
+		// app.setCurrentRoom(tab.getPosition());
+		// currentRoom = app.getCurrentRoom();
+		// refreshElements();
+		// } catch (Exception e) {
+		// Log.i("UsageFullScreenActivity",
+		// "tabSelectedTooSoon: " + e.getMessage());
+		// }
+		// } else {
+		// init = false;
+		// }
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +22,20 @@ public class UsageFragment extends OptionSpinnerFragment {
 		View rootView = inflater.inflate(R.layout.usage_layout, container,
 				false);
 
-		Room currentRoom = ((HomeVizApplication) getActivity().getApplication())
-				.getCurrentRoom();
-		Period currentPeriod = ((HomeVizApplication) getActivity()
-				.getApplication()).getCurrentPeriod();
+		HomeVizApplication app = (HomeVizApplication) getActivity()
+				.getApplication();
+
+		Room currentRoom = null;
+		int roomIndex = 0;
+		if (getArguments() != null) {
+			roomIndex = getArguments().getInt("room");
+			currentRoom = app.getRooms().get(roomIndex);
+		} else {
+			Log.e(getClass().getSimpleName(), "No room arguments");
+		}
+		final int finalRoomIndex = roomIndex;
+
+		Period currentPeriod = app.getCurrentPeriod();
 
 		final TextView light = (TextView) rootView
 				.findViewById(R.id.usage_light_price);
@@ -36,6 +47,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				Fragment fragment = new UsageContainerFragment();
 				Bundle args = new Bundle();
 				args.putInt(Constants.USAGE_TYPE, 11);
+				args.putInt("room", finalRoomIndex);
 				fragment.setArguments(args);
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.replace(R.id.container, fragment).commit();
@@ -73,6 +85,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 	private void setTotalAmount(View v, Room room, Period period) {
 		final TextView usageAmount = (TextView) v
 				.findViewById(R.id.usage_amount);
-		usageAmount.setText(room.getTotalPrice(period));
+		// usageAmount.setText(room.getTotalPrice(period));
+		usageAmount.setText(room.getName());
 	}
 }

@@ -13,6 +13,7 @@ import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +31,20 @@ public class UsageSubFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.light_usage_layout,
 				container, false);
 
-		Room currentRoom = ((HomeVizApplication) getActivity().getApplication())
-				.getCurrentRoom();
-		Period currentPeriod = ((HomeVizApplication) getActivity()
-				.getApplication()).getCurrentPeriod();
+		HomeVizApplication app = (HomeVizApplication) getActivity()
+				.getApplication();
+
+		Room currentRoom = null;
+		if (getArguments() != null) {
+			int roomIndex = getArguments().getInt("room");
+			currentRoom = app.getRooms().get(roomIndex);
+			// app.setCurrentRoom(roomIndex);
+		} else {
+			Log.e(getClass().getSimpleName(), "No room arguments");
+			// currentRoom = app.getCurrentRoom();
+		}
+
+		Period currentPeriod = app.getCurrentPeriod();
 
 		setAmounts(rootView, currentRoom, currentPeriod);
 

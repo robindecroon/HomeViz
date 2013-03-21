@@ -40,7 +40,7 @@ public class HomeVizApplication extends Application {
 	 */
 	private Period currentPeriod = Period.WEEK;
 
-	private int currentRoomIndex;
+	// private int currentRoomIndex;
 
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Person> persons = new ArrayList<Person>();
@@ -82,9 +82,9 @@ public class HomeVizApplication extends Application {
 		return this.persons;
 	}
 
-	public int getTabPosition() {
-		return this.currentRoomIndex;
-	}
+	// public int getTabPosition() {
+	// return this.currentRoomIndex;
+	// }
 
 	/**
 	 * Constructor om een applicatie aan te maken. Laad automatisch de XML in.
@@ -130,33 +130,37 @@ public class HomeVizApplication extends Application {
 		this.rooms.add(room);
 	}
 
-	public Room nextRoom() {
-		currentRoomIndex++;
-		if (currentRoomIndex >= rooms.size()) {
-			currentRoomIndex = 0;
-		}
-		return rooms.get(currentRoomIndex);
-	}
+	// public Room nextRoom() {
+	// currentRoomIndex++;
+	// if (currentRoomIndex >= rooms.size()) {
+	// currentRoomIndex = 0;
+	// }
+	// return rooms.get(currentRoomIndex);
+	// }
+	//
+	// public Room previousRoom() {
+	// currentRoomIndex--;
+	// if (currentRoomIndex < 0) {
+	// currentRoomIndex = rooms.size() - 1;
+	// }
+	// return rooms.get(currentRoomIndex);
+	// }
 
-	public Room previousRoom() {
-		currentRoomIndex--;
-		if (currentRoomIndex < 0) {
-			currentRoomIndex = rooms.size() - 1;
-		}
-		return rooms.get(currentRoomIndex);
-	}
+	// public Room getCurrentRoom() {
+	// return rooms.get(currentRoomIndex);
+	// }
+	//
+	// public void setCurrentRoom(int id) {
+	// currentRoomIndex = id;
+	// }
+	//
+	// public int getCurrentRoomIndex() {
+	// return currentRoomIndex;
+	// }
 
-	public Room getCurrentRoom() {
-		return rooms.get(currentRoomIndex);
-	}
-
-	public void setCurrentRoom(int id) {
-		currentRoomIndex = id;
-	}
-
-	public void parseXML() {
-		parseXML(null);
-	}
+	// public void parseXML() {
+	// parseXML(null);
+	// }
 
 	/**
 	 * @throws ParserConfigurationException
@@ -277,7 +281,7 @@ public class HomeVizApplication extends Application {
 		try {
 			countryMap.clear();
 			currentPeriod = Period.WEEK;
-			currentRoomIndex = 0;
+			// currentRoomIndex = 0;
 			facebookUser = null;
 			persons.clear();
 			rooms.clear();
