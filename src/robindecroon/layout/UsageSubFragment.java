@@ -48,12 +48,10 @@ public class UsageSubFragment extends OptionSpinnerFragment {
 		if (getArguments() != null) {
 			int roomIndex = getArguments().getInt("room");
 			currentRoom = app.getRooms().get(roomIndex);
-			// app.setCurrentRoom(roomIndex);
 		} else {
 			Log.e(getClass().getSimpleName(), "No room arguments");
-			// currentRoom = app.getCurrentRoom();
 		}
-
+ 
 		Period currentPeriod = app.getCurrentPeriod();
 
 		initOptionSpinner(rootView, R.id.sub_spinner, R.id.sub_arrow_left,

@@ -14,7 +14,7 @@ public abstract class GoogleChartTools {
 			+ "setOnLoadCallback(drawChart);function drawChart() {var data = google.visualization."
 			+ "arrayToDataTable([";
 
-	private final static String mid1Detail = "]);var options = {backgroundColor: 'black', legend: {textStyle: {color: 'white', fontSize: 16}}, titleTextStyle: {color: 'white'}, hAxis: {textStyle: {color: 'white'}}, vAxis: {textStyle: {color: 'white'}}, ";
+	private final static String mid1Detail = "]);var options = {backgroundColor: { fill: 'none' }, legend: {position: 'top', textStyle: {color: 'white', fontSize: 16}}, titleTextStyle: {color: 'white'}, hAxis: {textStyle: {color: 'white'}}, vAxis: {textStyle: {color: 'white'}}, ";
 
 	private final static String mid2Detail = "};var chart = new google.visualization.";
 

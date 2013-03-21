@@ -1,43 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Black"
     android:orientation="vertical"
-    tools:context=".UsageDetailActivity" >
+    tools:context=".UsageChartFragment" >
 
-    <TextView
-        android:id="@+id/usage_detail_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="20dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textSize="50sp" />
-
-    <TextView
-        android:id="@+id/usage_detail_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/usage_detail_location"
-        android:paddingLeft="20dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textSize="40sp" />
-
-    <LinearLayout
-        android:id="@+id/usage_detail_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/usage_detail_period" >
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingTop="15dp" >
 
-        <WebView
-            android:id="@+id/usage_detail_webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true" >
 
-</RelativeLayout>
+            <libraries.nielsbillen.ArrowButton
+                android:id="@+id/chart_arraw_left"
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <libraries.nielsbillen.OptionSpinner
+                android:id="@+id/chart_spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <libraries.nielsbillen.ArrowButton
+                android:id="@+id/chart_arrow_right"
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/usage_detail_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

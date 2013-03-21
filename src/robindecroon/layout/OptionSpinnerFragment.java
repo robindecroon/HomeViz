@@ -4,13 +4,11 @@ import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.PeriodListener;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 
@@ -58,10 +56,4 @@ public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 			Log.e(getClass().getSimpleName(), "User scrolled the optionspinner too fast");
 		}
 	}
-	
-	private void setTotalAmount(View v, int amountID, Room room, Period period) {
-		final TextView usageAmount = (TextView) v.findViewById(amountID);
-		usageAmount.setText(room.getTotalPrice(period));
-	}
-
 }
