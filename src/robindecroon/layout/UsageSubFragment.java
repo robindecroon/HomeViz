@@ -30,6 +30,8 @@ public class UsageSubFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.light_usage_layout,
 				container, false);
+		
+		getActivity().getActionBar().setHomeButtonEnabled(true);
 
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();

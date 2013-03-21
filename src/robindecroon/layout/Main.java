@@ -122,7 +122,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		lastCatergory = Constants.USAGE;
 		Bundle args = new Bundle();
 		args.putInt(Constants.USAGE_TYPE, selection);
-		args.putInt("room", UsageContainerFragment.currentPageNumber);
+		args.putInt("room", UsageContainerFragment.getCurrentSelection());
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()

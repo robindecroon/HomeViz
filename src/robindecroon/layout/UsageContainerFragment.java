@@ -23,6 +23,8 @@ public class UsageContainerFragment extends Fragment {
 
 	public static int currentPageNumber;
 
+	private static ViewPager pager;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class UsageContainerFragment extends Fragment {
 			Log.e(getClass().getSimpleName(), "No arguments were supplied!");
 			adapter = new UsageIconFragmentPagerAdapter(manager, app);
 		}
-		ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);
+		pager = (ViewPager) rootView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
 		TabPageIndicator indicator = (TabPageIndicator) rootView
@@ -63,6 +65,13 @@ public class UsageContainerFragment extends Fragment {
 		indicator.setCurrentItem(currentPageNumber);
 
 		return rootView;
+	}
+
+	public static int getCurrentSelection() {
+		if (pager != null)
+			return pager.getCurrentItem();
+		else
+			return 0;
 	}
 
 }
