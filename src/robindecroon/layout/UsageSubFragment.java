@@ -11,6 +11,7 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,8 +31,10 @@ public class UsageSubFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.light_usage_layout,
 				container, false);
+		ActionBar ab = getActivity().getActionBar();
+		ab.setHomeButtonEnabled(true);
+		ab.setIcon(R.drawable.up_arrow);
 		
-		getActivity().getActionBar().setHomeButtonEnabled(true);
 
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();

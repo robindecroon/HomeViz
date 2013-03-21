@@ -26,6 +26,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
 import robindecroon.stackoverflow.NoDefaultSpinner;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,6 +46,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -244,6 +246,27 @@ public class Main extends FragmentActivity implements LocationListener {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    if (item.getItemId() == android.R.id.home) {
+	    	Bundle extras = getIntent().getExtras();
+	    	int selection = 0;
+			if (extras != null) {
+				selection = extras.getInt(Constants.SELECTION);
+			}
+			Intent intent = new Intent(this, Main.class);
+			intent.putExtra(Constants.CATEGORY, Constants.USAGE);
+			intent.putExtra(Constants.SELECTION, selection);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+			overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
+	    	getActionBar().setHomeButtonEnabled(false);
+	    	getActionBar().setIcon(R.drawable.icon);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 	// ////////////////////////////////////////////////////

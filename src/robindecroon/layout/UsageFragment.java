@@ -7,6 +7,8 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +51,10 @@ public class UsageFragment extends OptionSpinnerFragment {
 				args.putInt(Constants.USAGE_TYPE, 11);
 				args.putInt("room", finalRoomIndex);
 				fragment.setArguments(args);
-				getActivity().getSupportFragmentManager().beginTransaction()
-						.replace(R.id.container, fragment).commit();
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				FragmentTransaction ft = fm.beginTransaction();
+				ft.setCustomAnimations(R.anim.up_enter, R.anim.up_leave);
+				ft.replace(R.id.container, fragment).commit();
 			}
 		});
 
@@ -85,7 +89,6 @@ public class UsageFragment extends OptionSpinnerFragment {
 	private void setTotalAmount(View v, Room room, Period period) {
 		final TextView usageAmount = (TextView) v
 				.findViewById(R.id.usage_amount);
-		// usageAmount.setText(room.getTotalPrice(period));
-		usageAmount.setText(room.getName());
+		 usageAmount.setText(room.getTotalPrice(period));
 	}
 }
