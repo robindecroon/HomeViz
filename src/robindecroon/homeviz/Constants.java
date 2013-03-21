@@ -58,4 +58,5 @@ public class Constants {
 	public final static int HOMECINEMA = 13;
 	public final static int WATER = 14;
 	public final static int HEATING = 15;
+	public static final int IMAGE_SCALE = 350;
 }
