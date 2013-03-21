@@ -17,7 +17,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class YouFragment extends OptionSpinnerFragment {
+public class TreeMapFragment extends OptionSpinnerFragment {
 
 	private WebView myBrowser;
 

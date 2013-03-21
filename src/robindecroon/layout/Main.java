@@ -113,7 +113,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	private void startTotalFragment(int selection) {
 		lastCatergory = Constants.TOTAL;
 		totalActionBarSpinner.setSelection(selection);
-		Fragment fragment2 = new YouFragment();
+		Fragment fragment2 = new TreeMapFragment();
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment2).commit();
 	}

@@ -50,6 +50,7 @@ public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 				@Override
 				public void run() {
 					UsageContainerFragment.resetViews();
+					
 				}
 			});
 		} catch (Exception e) {
