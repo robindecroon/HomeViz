@@ -15,6 +15,12 @@ public abstract class HomeVizFragmentPagerAdapter extends
 		super(fm);
 		this.app = app;
 	}
+	
+	// TODO
+	@Override
+	public int getItemPosition(Object object) {
+	    return POSITION_NONE;
+	}
 
 	@Override
 	public int getCount() {

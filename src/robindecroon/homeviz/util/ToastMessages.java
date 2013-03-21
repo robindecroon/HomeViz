@@ -84,4 +84,10 @@ public class ToastMessages {
 				context.getResources().getString(R.string.connection_error),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void notTooFast() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.too_fast),
+				Toast.LENGTH_LONG).show();
+	}
 }

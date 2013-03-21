@@ -185,7 +185,6 @@ public class ArrowButton extends View implements
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		Log.i("ArrowButton", "Touched");
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			notifyDown();
 			return true;

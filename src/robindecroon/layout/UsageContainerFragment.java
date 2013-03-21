@@ -73,5 +73,9 @@ public class UsageContainerFragment extends Fragment {
 		else
 			return 0;
 	}
+	
+	public static void resetViews() {
+		pager.getAdapter().notifyDataSetChanged();
+	}
 
 }

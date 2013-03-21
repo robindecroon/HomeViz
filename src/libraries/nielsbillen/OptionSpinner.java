@@ -80,6 +80,17 @@ public class OptionSpinner extends View implements
 		setOptions(options);
 		initialize();
 	}
+	
+	public OptionSpinner(Context context,
+			ListenerContainer<ButtonListener> left,
+			ListenerContainer<ButtonListener> right, int index, String... options) {
+		this(context, left, right, options);
+		this.index = index;
+	}
+	
+	public void setIndex(int index) {
+		this.index = index;
+	}
 
 	/**
 	 * 
@@ -196,7 +207,6 @@ public class OptionSpinner extends View implements
 	 * 
 	 */
 	private void moveToPrevious() {
-		Log.i("OptionSpinner", "Previous");
 		if (animationStack.size() > 0
 				|| (thread != null && !thread.isFinished())) {
 			animationStack.add(AnimationThread.LEFT);
@@ -210,7 +220,6 @@ public class OptionSpinner extends View implements
 	 * 
 	 */
 	private void moveToNext() {
-		Log.i("OptionSpinner", "Next");
 		if (animationStack.size() > 0
 				|| (thread != null && !thread.isFinished())) {
 			animationStack.add(AnimationThread.RIGHT);
@@ -330,7 +339,6 @@ public class OptionSpinner extends View implements
 
 			// Check the animation stack
 			if (animationStack.size() > 0) {
-				Log.i("From stack", "From stack");
 				thread = new AnimationThread(animationStack.remove(0),
 						animation_duration);
 				thread.start();

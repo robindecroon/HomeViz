@@ -2,12 +2,16 @@ package robindecroon.layout;
 
 import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
+import libraries.nielsbillen.SpinnerListener;
+import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.PeriodListener;
+import robindecroon.homeviz.util.ToastMessages;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
-public class OptionSpinnerFragment extends Fragment {
+public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 
 	/**
 	 * Initialiseert de spinner.
@@ -19,6 +23,8 @@ public class OptionSpinnerFragment extends Fragment {
 		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
 		PeriodListener periodListener = new PeriodListener(getActivity());
 		OptionSpinner spinner = (OptionSpinner) v.findViewById(id);
+		spinner.setIndex(((HomeVizApplication) getActivity().getApplication())
+				.getCurrentPeriod().getId());
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
 		spinner.setOnClickListener(periodListener);
@@ -31,6 +37,25 @@ public class OptionSpinnerFragment extends Fragment {
 				namePeriods[i] = period.getName(getActivity());
 		}
 		spinner.setOptions(namePeriods);
+		spinner.addListener(this);
+	}
+
+	@Override
+	public void optionChanged(int index, String name) {
+		try {
+			((HomeVizApplication) getActivity().getApplication())
+					.setCurrentPeriod(Period.values()[index]);
+			Log.i(getClass().getSimpleName(), "Current period: "
+					+ Period.values()[index]);
+			getActivity().runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					UsageContainerFragment.resetViews();
+				}
+			});
+		} catch (Exception e) {
+			Log.e(getClass().getSimpleName(), "User scrolled the optionspinner too fast");
+		}
 	}
 
 }

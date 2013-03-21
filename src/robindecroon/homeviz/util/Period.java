@@ -19,6 +19,10 @@ import android.util.Log;
 public enum Period {
 
 	DAY(R.string.period_day) {
+		public int getId() {
+			return 0;
+		}
+		
 		@Override
 		public Period previous() {
 			ToastMessages.noSmallerPeriod();
@@ -43,6 +47,10 @@ public enum Period {
 		}
 	},
 	WEEK(R.string.period_week) {
+		public int getId() {
+			return 1;
+		}
+		
 		@Override
 		public Period previous() {
 			return DAY;
@@ -66,6 +74,10 @@ public enum Period {
 		}
 	},
 	MONTH(R.string.period_month) {
+		public int getId() {
+			return 2;
+		}
+		
 		@Override
 		public Period previous() {
 			return WEEK;
@@ -89,6 +101,10 @@ public enum Period {
 		}
 	},
 	YEAR(R.string.period_year) {
+		public int getId() {
+			return 3;
+		}
+		
 		@Override
 		public Period previous() {
 			return MONTH;
@@ -113,7 +129,10 @@ public enum Period {
 		}
 	},
 	CUSTOM(R.string.period_custom) {
-
+		public int getId() {
+			return -1;
+		}
+		
 		@Override
 		public Period previous() {
 			return WEEK;
@@ -190,5 +209,7 @@ public enum Period {
 	}
 
 	public abstract int getMultiplier();
+	
+	public abstract int getId();
 
 }
