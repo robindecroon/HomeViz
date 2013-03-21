@@ -69,40 +69,39 @@ public class UsageSubFragment extends OptionSpinnerFragment {
 				.findViewById(R.id.sub_container);
 		subLayout.removeAllViews();
 		Amount sum = new Amount(0);
+		List<Consumer> consumers = new ArrayList<Consumer>();
+		Bundle args = getArguments();
 		try {
-			List<Consumer> consumers = new ArrayList<Consumer>();
-			Bundle args = getArguments();
 			switch (args.getInt(Constants.USAGE_TYPE)) {
-			case 11:
+			case Constants.LIGHT:
 				for (Light light : currentRoom.getLights()) {
 					System.out.println("new light");
 					consumers.add(light);
 				}
 				break;
-			case 12:
+			case Constants.APPLIANCE:
 				for (Appliance appliance : currentRoom.getAppliances()) {
 					consumers.add(appliance);
 				}
 				break;
-			case 13:
+			case Constants.HOMECINEMA:
 				for (HomeCinema homeCinema : currentRoom.getHomeCinemas()) {
 					consumers.add(homeCinema);
 				}
 				break;
-			case 14:
+			case Constants.WATER:
 				for (Water water : currentRoom.getWaters()) {
 					consumers.add(water);
 				}
 				break;
-			case 15:
+			case Constants.HEATING:
 				for (Heating heating : currentRoom.getHeatings()) {
-					consumers.add( heating);
+					consumers.add(heating);
 				}
 				break;
 			default:
 				break;
 			}
-			args.get(Constants.USAGE_TYPE);
 
 			for (int i = 0; i < consumers.size(); i++) {
 
@@ -144,8 +143,31 @@ public class UsageSubFragment extends OptionSpinnerFragment {
 			TextView amount = (TextView) v.findViewById(R.id.sub_amount);
 			amount.setText(sum.toString());
 		} catch (NoSuchDevicesInRoom e) {
-			View noConsumer = UsageActivityUtils
-					.getEmptyRoomLights(getActivity());
+			View noConsumer = null;
+			switch (args.getInt(Constants.USAGE_TYPE)) {
+			case Constants.LIGHT:
+				noConsumer = UsageActivityUtils
+						.getEmptyRoomLights(getActivity());
+				break;
+			case Constants.APPLIANCE:
+				noConsumer = UsageActivityUtils
+						.getEmptyRoomAppliance(getActivity());
+				break;
+			case Constants.HOMECINEMA:
+				noConsumer = UsageActivityUtils
+						.getEmptyRoomHomeCinema(getActivity());
+				break;
+			case Constants.WATER:
+				noConsumer = UsageActivityUtils
+						.getEmptyRoomWater(getActivity());
+				break;
+			case Constants.HEATING:
+				noConsumer = UsageActivityUtils
+						.getEmptyRoomHeating(getActivity());
+				break;
+			default:
+				break;
+			}
 			subLayout.addView(noConsumer);
 		}
 

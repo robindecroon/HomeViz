@@ -2,6 +2,7 @@ package robindecroon.homeviz.usage;
 
 import robindecroon.homeviz.R;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -79,6 +80,19 @@ public abstract class UsageActivityUtils {
 		text.setTextSize(40);
 		text.setText(context.getResources().getString(
 				R.string.no_appliance_in_room));
+
+		return text;
+	}
+
+	public static View getEmptyRoomHeating(Context context) {
+		TextView text = new TextView(context);
+		text.setTextColor(context.getResources().getColor(R.color.White));
+		text.setGravity(Gravity.CENTER);
+		text.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		text.setTextSize(40);
+		text.setText(context.getResources().getString(
+				R.string.no_heating_in_room));
 
 		return text;
 	}
