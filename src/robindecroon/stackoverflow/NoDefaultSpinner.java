@@ -4,16 +4,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.R;
-import robindecroon.homeviz.listeners.ActionBarSpinnerListener;
-import robindecroon.layout.UsageContainerFragment;
-import robindecroon.layout.YouFragment;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,60 +26,17 @@ import android.widget.TextView;
  */
 public class NoDefaultSpinner extends Spinner {
 
-	private ActionBarSpinnerListener listener;
-
-	private int lastPostion;
-	
-	private Context context;
-
 	public NoDefaultSpinner(Context context) {
 		super(context);
-		this.context = context;
 	}
 
 	public NoDefaultSpinner(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		this.context = context;
 
 	}
 
 	public NoDefaultSpinner(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		this.context = context;
-	}
-
-//	@Override
-//	public void setSelection(int position) {
-//		super.setSelection(position);
-//		if (position == lastPostion && listener != null) {
-//			switch (listener.getType()) {
-//			case USAGE:
-//				Fragment fragment = new UsageContainerFragment();
-//				Bundle args = new Bundle();
-//				args.putInt(Constants.USAGE_TYPE, position);
-//				args.putInt(Constants.FRAGMENT_BUNDLE_TYPE, position);
-//				fragment.setArguments(args);
-//				((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-//						.replace(R.id.container, fragment).commit();
-//				break;
-//			case TOTAL:
-//				Fragment fragment2 = new YouFragment();
-//				((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-//						.replace(R.id.container, fragment2).commit();
-//				break;
-//			default:
-//				break;
-//			}
-//
-//		}
-//		lastPostion = position;
-////		 if (listener != null)
-////		listener.onItemSelected(null, null, position, 0);
-//	}
-
-	public void setReSelectListener (
-			ActionBarSpinnerListener listener) {
-		this.listener = listener;
 	}
 
 	@Override
@@ -113,7 +62,8 @@ public class NoDefaultSpinner extends Spinner {
 	}
 
 	protected SpinnerAdapter newProxy(SpinnerAdapter obj) {
-		if (obj == null) return null;
+		if (obj == null)
+			return null;
 		return (SpinnerAdapter) java.lang.reflect.Proxy.newProxyInstance(obj
 				.getClass().getClassLoader(),
 				new Class[] { SpinnerAdapter.class }, new SpinnerAdapterProxy(

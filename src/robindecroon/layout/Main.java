@@ -16,11 +16,10 @@ import org.xmlpull.v1.XmlPullParserException;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.listeners.ActionBarSpinnerListener;
-import robindecroon.homeviz.listeners.MetaphorActionBarSpinnerListener;
-import robindecroon.homeviz.listeners.TotalActionBarSpinnerListener;
-import robindecroon.homeviz.listeners.UsageActionBarSpinnerListener;
-import robindecroon.homeviz.listeners.YieldActionBarSpinnerListener;
+import robindecroon.homeviz.listeners.actionbarlisteners.MetaphorActionBarSpinnerListener;
+import robindecroon.homeviz.listeners.actionbarlisteners.TotalActionBarSpinnerListener;
+import robindecroon.homeviz.listeners.actionbarlisteners.UsageActionBarSpinnerListener;
+import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerListener;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.ToastMessages;
@@ -51,10 +50,15 @@ import android.widget.ArrayAdapter;
 
 public class Main extends FragmentActivity implements LocationListener {
 
-	public static boolean INIT = true;
+	public static int lastCatergory;
+	public static int lastPosition;
+	
+	private static boolean INIT = true;
 
-	public static int lastCatergory = 1;
-	public static int lastPosition = 0;
+	private NoDefaultSpinner usageActionBarSpinner;
+	private NoDefaultSpinner totalActionBarSpinner;
+	private NoDefaultSpinner metaphorActionBarSpinner;
+	private NoDefaultSpinner yieldActionBarSpinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,7 @@ public class Main extends FragmentActivity implements LocationListener {
 			readCO2Data();
 
 			startUsageContainerFragment(0);
-			
+
 			INIT = false;
 		} else {
 			Bundle extras = getIntent().getExtras();
@@ -117,7 +121,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-		        .replace(R.id.container, fragment).commit();
+				.replace(R.id.container, fragment).commit();
 	}
 
 	private boolean setupActionBar() {
@@ -137,25 +141,16 @@ public class Main extends FragmentActivity implements LocationListener {
 		return true;
 	}
 
-	NoDefaultSpinner usageActionBarSpinner;
-	NoDefaultSpinner totalActionBarSpinner;
-	NoDefaultSpinner metaphorActionBarSpinner;
-	NoDefaultSpinner yieldActionBarSpinner;
-
 	public void initSpinners(View v) {
-
-		ActionBarSpinnerListener us = new UsageActionBarSpinnerListener(this);
-		ActionBarSpinnerListener to = new TotalActionBarSpinnerListener(this);
-		ActionBarSpinnerListener me = new MetaphorActionBarSpinnerListener(this);
-		ActionBarSpinnerListener yi = new YieldActionBarSpinnerListener(this);
 
 		usageActionBarSpinner = (NoDefaultSpinner) v
 				.findViewById(R.id.usage_spinner);
 		usageActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.usage_spinner_data,
 				android.R.layout.simple_spinner_dropdown_item));
-		usageActionBarSpinner.setOnItemSelectedListener(us);
-		usageActionBarSpinner.setReSelectListener(us);
+		usageActionBarSpinner
+				.setOnItemSelectedListener(new UsageActionBarSpinnerListener(
+						this));
 		usageActionBarSpinner.setSaveEnabled(false);
 
 		totalActionBarSpinner = (NoDefaultSpinner) v
@@ -163,8 +158,9 @@ public class Main extends FragmentActivity implements LocationListener {
 		totalActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.you_spinner_data,
 				android.R.layout.simple_spinner_dropdown_item));
-		totalActionBarSpinner.setOnItemSelectedListener(to);
-		totalActionBarSpinner.setReSelectListener(to);
+		totalActionBarSpinner
+				.setOnItemSelectedListener(new TotalActionBarSpinnerListener(
+						this));
 		totalActionBarSpinner.setSaveEnabled(false);
 
 		metaphorActionBarSpinner = (NoDefaultSpinner) v
@@ -172,8 +168,9 @@ public class Main extends FragmentActivity implements LocationListener {
 		metaphorActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(
 				this, R.array.metaphor_spinner_data,
 				android.R.layout.simple_spinner_dropdown_item));
-		metaphorActionBarSpinner.setOnItemSelectedListener(me);
-		metaphorActionBarSpinner.setReSelectListener(me);
+		metaphorActionBarSpinner
+				.setOnItemSelectedListener(new MetaphorActionBarSpinnerListener(
+						this));
 		metaphorActionBarSpinner.setSaveEnabled(false);
 
 		yieldActionBarSpinner = (NoDefaultSpinner) v
@@ -181,30 +178,11 @@ public class Main extends FragmentActivity implements LocationListener {
 		yieldActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.yield_spinner_data,
 				android.R.layout.simple_spinner_dropdown_item));
-		yieldActionBarSpinner.setOnItemSelectedListener(yi);
-		yieldActionBarSpinner.setReSelectListener(yi);
+		yieldActionBarSpinner
+				.setOnItemSelectedListener(new YieldActionBarSpinnerListener(
+						this));
 		yieldActionBarSpinner.setSaveEnabled(false);
 
-		// if (listener != null) {
-		// switch (listener.getType()) {
-		// case USAGE:
-		// usageActionBarSpinner.setSelection(selection);
-		// break;
-		// case TOTAL:
-		// totalActionBarSpinner.setSelection(selection);
-		// break;
-		// case METAPHOR:
-		// metaphorActionBarSpinner.setSelection(selection);
-		// break;
-		// case YIELD:
-		// yieldActionBarSpinner.setSelection(selection);
-		// break;
-		// default:
-		// usageActionBarSpinner.setSelection(0);
-		// break;
-		// }
-		// } else {
-		// }
 	}
 
 	private void readHomeVizXML() {
@@ -254,22 +232,6 @@ public class Main extends FragmentActivity implements LocationListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		// Restore the previously serialized current dropdown position.
-		// if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
-		// getActionBar().setSelectedNavigationItem(
-		// savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
-		// }
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		// Serialize the current dropdown position.
-		// outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getActionBar()
-		// .getSelectedNavigationIndex());
 	}
 
 	@Override
@@ -397,7 +359,6 @@ public class Main extends FragmentActivity implements LocationListener {
 			currentCountry = getResources().getString(R.string.no_location);
 		}
 
-		// ((HomeVizApplication) getApplication()).setCurrentCity(currentCity);
 		((HomeVizApplication) getApplication())
 				.setCurrentCountry(currentCountry);
 		Log.i("Homescreen", "Updated location, we are in: " + currentCity

@@ -35,10 +35,10 @@ public class UsageContainerFragment extends Fragment {
 		if (args != null) {
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
-				adapter = new UsageChartFragmentPagerAdapter(manager, app,1);
+				adapter = new UsageChartFragmentPagerAdapter(manager, app, 1);
 				break;
 			case 2:
-				adapter = new UsageChartFragmentPagerAdapter(manager, app,2);
+				adapter = new UsageChartFragmentPagerAdapter(manager, app, 2);
 				break;
 			case 11:
 				adapter = new LightFragmentPagerAdapter(manager, app);

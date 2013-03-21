@@ -23,11 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class UsageSubFragment extends Fragment {
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.light_usage_layout, container, false);
+		View rootView = inflater.inflate(R.layout.light_usage_layout,
+				container, false);
 
 		Room currentRoom = ((HomeVizApplication) getActivity().getApplication())
 				.getCurrentRoom();
@@ -40,13 +41,13 @@ public class UsageSubFragment extends Fragment {
 
 		return rootView;
 	}
-	
+
 	private void setTotalAmount(View v, Room room, Period period) {
 		final TextView usageAmount = (TextView) v
 				.findViewById(R.id.light_amount);
 		usageAmount.setText(room.getLightPrice(period).toString());
 	}
-	
+
 	private void setAmounts(View v, Room currentRoom, Period currentPeriod) {
 		LinearLayout lightsLayout = (LinearLayout) v.findViewById(R.id.lights);
 		lightsLayout.removeAllViews();
@@ -71,7 +72,8 @@ public class UsageSubFragment extends Fragment {
 				image.setLayoutParams(lp2);
 
 				String imagename = light.getName().toLowerCase(Locale.US);
-				int picId = getResources().getIdentifier(imagename, "drawable",getActivity().getPackageName());
+				int picId = getResources().getIdentifier(imagename, "drawable",
+						getActivity().getPackageName());
 				image.setImageResource(picId);
 
 				layout.addView(image);
@@ -88,16 +90,17 @@ public class UsageSubFragment extends Fragment {
 
 				layout.addView(text);
 
-//				layout.setClickable(true);
-//				layout.setOnClickListener(new ClickListener(this,
-//						LightListActivity.class));
+				// layout.setClickable(true);
+				// layout.setOnClickListener(new ClickListener(this,
+				// LightListActivity.class));
 
 				lightsLayout.addView(layout);
 			}
 			TextView amount = (TextView) v.findViewById(R.id.light_amount);
 			amount.setText(sum.toString());
 		} catch (NoSuchDevicesInRoom e) {
-			View noLights = UsageActivityUtils.getEmptyRoomLights(getActivity());
+			View noLights = UsageActivityUtils
+					.getEmptyRoomLights(getActivity());
 			lightsLayout.addView(noLights);
 		}
 

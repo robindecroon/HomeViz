@@ -13,7 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class UsageFragment extends SpinnerFragment {
+public class UsageFragment extends OptionSpinnerFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

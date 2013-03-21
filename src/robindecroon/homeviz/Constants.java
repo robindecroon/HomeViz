@@ -34,7 +34,7 @@ public class Constants {
 	 * Action Bar
 	 */
 	public final static int SPINNER_TEXT_COLOR = Color.WHITE;
-	
+
 	public final static String CATEGORY = "category";
 	public final static String SELECTION = "selection";
 	public final static int USAGE = 1;
@@ -46,8 +46,8 @@ public class Constants {
 	 * UsageChartFragment
 	 */
 	public final static String FRAGMENT_BUNDLE_TYPE = "charttype";
-	public static final String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
+	public final static String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
 
-	public static final String USAGE_TYPE = "Usage type";
+	public final static String USAGE_TYPE = "Usage type";
 
 }

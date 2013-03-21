@@ -7,8 +7,7 @@ import android.support.v4.app.FragmentManager;
 
 public class LightFragmentPagerAdapter extends HomeVizFragmentPagerAdapter {
 
-	public LightFragmentPagerAdapter(FragmentManager fm,
-			HomeVizApplication app) {
+	public LightFragmentPagerAdapter(FragmentManager fm, HomeVizApplication app) {
 		super(fm, app);
 	}
 
@@ -18,5 +17,5 @@ public class LightFragmentPagerAdapter extends HomeVizFragmentPagerAdapter {
 		Fragment fragment = new UsageSubFragment();
 		return fragment;
 	}
-	
+
 }
