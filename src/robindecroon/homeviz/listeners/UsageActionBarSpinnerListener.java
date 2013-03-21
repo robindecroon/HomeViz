@@ -1,42 +1,44 @@
 package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.R;
-import robindecroon.layout.UsageContainerFragment;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import robindecroon.layout.Main;
+import robindecroon.layout.SpinnerEnum;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
-public class UsageActionBarSpinnerListener implements
-		AdapterView.OnItemSelectedListener {
+public class UsageActionBarSpinnerListener extends ActionBarSpinnerListener {
 
-	private FragmentActivity context;
-
-	public UsageActionBarSpinnerListener(FragmentActivity context) {
-		this.context = context;
+	public UsageActionBarSpinnerListener(Main context) {
+		super(context);
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> parentView,
 			View selectedItemView, int position, long id) {
-		((TextView) parentView.getChildAt(0))
-				.setTextColor(Constants.SPINNER_TEXT_COLOR);
+		
+		super.onItemSelected(parentView, selectedItemView, position, id);
+				
+		startIntent(position, Constants.USAGE);
 
-		Fragment fragment = new UsageContainerFragment();
-		Bundle args = new Bundle();
-		args.putInt(Constants.USAGE_TYPE, position);
-		args.putInt(Constants.FRAGMENT_BUNDLE_TYPE, position);
-		fragment.setArguments(args);
-		context.getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, fragment).commit();
+		
+//		Fragment fragment = new UsageContainerFragment();
+//		Bundle args = new Bundle();
+//		args.putInt(Constants.USAGE_TYPE, position);
+//		args.putInt(Constants.FRAGMENT_BUNDLE_TYPE, position);
+//		fragment.setArguments(args);
+//		context.getSupportFragmentManager().beginTransaction()
+//				.replace(R.id.container, fragment).commit();
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 
+	}
+
+	@Override
+	public SpinnerEnum getType() {
+		return SpinnerEnum.USAGE;
 	}
 
 }

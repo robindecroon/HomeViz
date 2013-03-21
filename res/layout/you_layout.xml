@@ -14,25 +14,36 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical" >
 
-            <libraries.nielsbillen.ArrowButton
-                android:id="@+id/total_arrow_left"
-                android:layout_width="40dp"
-                android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" >
+            </LinearLayout>
 
-            <libraries.nielsbillen.OptionSpinner
-                android:id="@+id/total_spinner"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="50dp" >
 
-            <libraries.nielsbillen.ArrowButton
-                android:id="@+id/total_arrow_right"
-                android:layout_width="40dp"
-                android:layout_height="match_parent" />
+                <libraries.nielsbillen.ArrowButton
+                    android:id="@+id/total_arrow_left"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+
+                <libraries.nielsbillen.OptionSpinner
+                    android:id="@+id/total_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <libraries.nielsbillen.ArrowButton
+                    android:id="@+id/total_arrow_right"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -49,8 +60,8 @@
         <com.facebook.widget.ProfilePictureView
             android:id="@+id/profilePictureView1"
             android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
         </com.facebook.widget.ProfilePictureView>
     </RelativeLayout>
 

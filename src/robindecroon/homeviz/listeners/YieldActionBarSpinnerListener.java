@@ -1,29 +1,32 @@
 package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.Constants;
-import android.support.v4.app.FragmentActivity;
+import robindecroon.layout.Main;
+import robindecroon.layout.SpinnerEnum;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
-public class YieldActionBarSpinnerListener implements
-		AdapterView.OnItemSelectedListener {
+public class YieldActionBarSpinnerListener extends ActionBarSpinnerListener {
 
-	private FragmentActivity context;
 
-	public YieldActionBarSpinnerListener(FragmentActivity context) {
-		this.context = context;
+	public YieldActionBarSpinnerListener(Main context) {
+		super(context);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> parentView,
 			View selectedItemView, int position, long id) {
-		((TextView) parentView.getChildAt(0))
-				.setTextColor(Constants.SPINNER_TEXT_COLOR);
+		
+		super.onItemSelected(parentView, selectedItemView, position, id);
+		
+		startIntent(position, Constants.YIELD);
+
 	}
 
 	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
+	public SpinnerEnum getType() {
+		return SpinnerEnum.YIELD;
 	}
 
 }

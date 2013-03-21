@@ -34,6 +34,13 @@ public class Constants {
 	 * Action Bar
 	 */
 	public final static int SPINNER_TEXT_COLOR = Color.WHITE;
+	
+	public final static String CATEGORY = "category";
+	public final static String SELECTION = "selection";
+	public final static int USAGE = 1;
+	public final static int TOTAL = 2;
+	public final static int METAPHOR = 3;
+	public final static int YIELD = 4;
 
 	/*
 	 * UsageChartFragment

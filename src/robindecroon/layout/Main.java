@@ -16,6 +16,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.listeners.ActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.MetaphorActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.TotalActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.UsageActionBarSpinnerListener;
@@ -50,27 +51,73 @@ import android.widget.ArrayAdapter;
 
 public class Main extends FragmentActivity implements LocationListener {
 
+	public static boolean INIT = true;
+
+	public static int lastCatergory = 1;
+	public static int lastPosition = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
 
-		// read the configuration XML file
-		readHomeVizXML();
-
-		// read CO2 data
-		readCO2Data();
-
 		// init the actionbar and spinners
 		setupActionBar();
 
-		// initial fragment
+		if (savedInstanceState == null && INIT) {
+			// read the configuration XML file
+			readHomeVizXML();
+
+			// read CO2 data
+			readCO2Data();
+
+			startUsageContainerFragment(0);
+			
+			INIT = false;
+		} else {
+			Bundle extras = getIntent().getExtras();
+			if (extras != null) {
+				int selection = extras.getInt(Constants.SELECTION);
+				lastPosition = selection;
+				int category = extras.getInt(Constants.CATEGORY);
+				switch (category) {
+				case Constants.USAGE:
+					startUsageContainerFragment(selection);
+					break;
+				case Constants.TOTAL:
+					startTotalFragment(selection);
+					break;
+				case Constants.METAPHOR:
+					lastCatergory = Constants.METAPHOR;
+					metaphorActionBarSpinner.setSelection(selection);
+					break;
+				case Constants.YIELD:
+					lastCatergory = Constants.YIELD;
+					yieldActionBarSpinner.setSelection(selection);
+					break;
+				}
+
+			}
+		}
+	}
+
+	private void startTotalFragment(int selection) {
+		lastCatergory = Constants.TOTAL;
+		totalActionBarSpinner.setSelection(selection);
+		Fragment fragment2 = new YouFragment();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, fragment2).commit();
+	}
+
+	private void startUsageContainerFragment(int selection) {
+		usageActionBarSpinner.setSelection(selection);
+		lastCatergory = Constants.USAGE;
 		Bundle args = new Bundle();
-		args.putInt(Constants.USAGE_TYPE, 0);
+		args.putInt(Constants.USAGE_TYPE, selection);
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, fragment).commit();
+		        .replace(R.id.container, fragment).commit();
 	}
 
 	private boolean setupActionBar() {
@@ -83,45 +130,81 @@ public class Main extends FragmentActivity implements LocationListener {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflator.inflate(R.layout.action_bar_title, null);
 
-		final NoDefaultSpinner usageActionBarSpinner = (NoDefaultSpinner) v
-				.findViewById(R.id.usage_spinner);
-		usageActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.usage_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		usageActionBarSpinner
-				.setOnItemSelectedListener(new UsageActionBarSpinnerListener(
-						this));
-
-		NoDefaultSpinner totalActionBarSpinner = (NoDefaultSpinner) v
-				.findViewById(R.id.you_spinner);
-		totalActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.you_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		totalActionBarSpinner
-				.setOnItemSelectedListener(new TotalActionBarSpinnerListener(
-						this));
-
-		NoDefaultSpinner metaphorActionBarSpinner = (NoDefaultSpinner) v
-				.findViewById(R.id.metaphor_spinner);
-		metaphorActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(
-				this, R.array.metaphor_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		metaphorActionBarSpinner
-				.setOnItemSelectedListener(new MetaphorActionBarSpinnerListener(
-						this));
-
-		NoDefaultSpinner yieldActionBarSpinner = (NoDefaultSpinner) v
-				.findViewById(R.id.yield_spinner);
-		yieldActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.yield_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		yieldActionBarSpinner
-				.setOnItemSelectedListener(new YieldActionBarSpinnerListener(
-						this));
+		initSpinners(v);
 
 		ab.setCustomView(v);
 
 		return true;
+	}
+
+	NoDefaultSpinner usageActionBarSpinner;
+	NoDefaultSpinner totalActionBarSpinner;
+	NoDefaultSpinner metaphorActionBarSpinner;
+	NoDefaultSpinner yieldActionBarSpinner;
+
+	public void initSpinners(View v) {
+
+		ActionBarSpinnerListener us = new UsageActionBarSpinnerListener(this);
+		ActionBarSpinnerListener to = new TotalActionBarSpinnerListener(this);
+		ActionBarSpinnerListener me = new MetaphorActionBarSpinnerListener(this);
+		ActionBarSpinnerListener yi = new YieldActionBarSpinnerListener(this);
+
+		usageActionBarSpinner = (NoDefaultSpinner) v
+				.findViewById(R.id.usage_spinner);
+		usageActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+				R.array.usage_spinner_data,
+				android.R.layout.simple_spinner_dropdown_item));
+		usageActionBarSpinner.setOnItemSelectedListener(us);
+		usageActionBarSpinner.setReSelectListener(us);
+		usageActionBarSpinner.setSaveEnabled(false);
+
+		totalActionBarSpinner = (NoDefaultSpinner) v
+				.findViewById(R.id.you_spinner);
+		totalActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+				R.array.you_spinner_data,
+				android.R.layout.simple_spinner_dropdown_item));
+		totalActionBarSpinner.setOnItemSelectedListener(to);
+		totalActionBarSpinner.setReSelectListener(to);
+		totalActionBarSpinner.setSaveEnabled(false);
+
+		metaphorActionBarSpinner = (NoDefaultSpinner) v
+				.findViewById(R.id.metaphor_spinner);
+		metaphorActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(
+				this, R.array.metaphor_spinner_data,
+				android.R.layout.simple_spinner_dropdown_item));
+		metaphorActionBarSpinner.setOnItemSelectedListener(me);
+		metaphorActionBarSpinner.setReSelectListener(me);
+		metaphorActionBarSpinner.setSaveEnabled(false);
+
+		yieldActionBarSpinner = (NoDefaultSpinner) v
+				.findViewById(R.id.yield_spinner);
+		yieldActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+				R.array.yield_spinner_data,
+				android.R.layout.simple_spinner_dropdown_item));
+		yieldActionBarSpinner.setOnItemSelectedListener(yi);
+		yieldActionBarSpinner.setReSelectListener(yi);
+		yieldActionBarSpinner.setSaveEnabled(false);
+
+		// if (listener != null) {
+		// switch (listener.getType()) {
+		// case USAGE:
+		// usageActionBarSpinner.setSelection(selection);
+		// break;
+		// case TOTAL:
+		// totalActionBarSpinner.setSelection(selection);
+		// break;
+		// case METAPHOR:
+		// metaphorActionBarSpinner.setSelection(selection);
+		// break;
+		// case YIELD:
+		// yieldActionBarSpinner.setSelection(selection);
+		// break;
+		// default:
+		// usageActionBarSpinner.setSelection(0);
+		// break;
+		// }
+		// } else {
+		// }
 	}
 
 	private void readHomeVizXML() {
@@ -145,12 +228,13 @@ public class Main extends FragmentActivity implements LocationListener {
 		try {
 			InputStream input = getAssets().open(Constants.CO2_DATA_FILE_NAME);
 			BufferedReader in = new BufferedReader(new InputStreamReader(input));
-			String[] keys = in.readLine().split(";");
 			String line = null;
 			Map<String, Country> countries = new HashMap<String, Country>();
 
 			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
 			try {
+				// The headers
+				in.readLine();
 				while ((line = in.readLine()) != null) {
 					String[] values = line.split(";");
 					Number co2number = format.parse(values[1]);

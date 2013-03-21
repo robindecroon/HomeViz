@@ -1,12 +1,15 @@
 package robindecroon.layout;
 
+import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -26,6 +29,18 @@ public class UsageFragment extends SpinnerFragment {
 		final TextView light = (TextView) rootView
 				.findViewById(R.id.usage_light_price);
 		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
+		light.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new UsageContainerFragment();
+				Bundle args = new Bundle();
+				args.putInt(Constants.USAGE_TYPE, 11);
+				fragment.setArguments(args);
+				getActivity().getSupportFragmentManager().beginTransaction()
+						.replace(R.id.container, fragment).commit();
+			}
+		});
 
 		final TextView water = (TextView) rootView
 				.findViewById(R.id.usage_water_price);
