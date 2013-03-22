@@ -87,7 +87,11 @@ public class Main extends FragmentActivity implements LocationListener {
 			readCO2Data();
 
 			// start with Usage (icons)
-			startUsageContainerFragment(0, 0);
+//			startUsageContainerFragment(0, 0);
+			
+			Fragment fragment2 = new MetaphorExpandableListFragment();
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.container, fragment2).commit();
 
 			INIT = false;
 		} else {

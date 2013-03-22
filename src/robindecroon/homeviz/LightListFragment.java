@@ -2,13 +2,16 @@ package robindecroon.homeviz;
 
 import java.util.List;
 
+import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Light;
+import robindecroon.homeviz.room.Room;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -78,17 +81,9 @@ public class LightListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Room room = ((HomeVizApplication) getActivity().getApplication())
-		// .getCurrentRoom();
-		// try {
-		// setListAdapter(new ArrayAdapter<Light>(getActivity(),
-		// android.R.layout.simple_list_item_activated_1,
-		// room.getLights()));
-		// } catch (NoSuchDevicesInRoom e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
+//		setListAdapter(new ArrayAdapter<Light>(getActivity(),
+//					android.R.layout.simple_list_item_activated_1,
+//					room.getLights()));
 	}
 
 	@Override

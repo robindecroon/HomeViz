@@ -19,6 +19,14 @@ import robindecroon.homeviz.util.Period;
  */
 public class Room implements RoomPrices {
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getName().toUpperCase();
+	}
+
 	/**
 	 * De naam van de kamer.
 	 */
