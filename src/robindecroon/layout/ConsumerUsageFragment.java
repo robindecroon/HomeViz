@@ -19,6 +19,7 @@ import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import android.app.ActionBar;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -34,17 +35,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class UsageSubFragment extends OptionSpinnerFragment {
+public class ConsumerUsageFragment extends OptionSpinnerFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.sub_usage_layout, container,
 				false);
-		ActionBar ab = getActivity().getActionBar();
-		ab.setHomeButtonEnabled(true);
-		ab.setIcon(R.drawable.up_arrow);
-
+//		ActionBar ab = getActivity().getActionBar();
+//		ab.setHomeButtonEnabled(true);
+		
+		
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();
 

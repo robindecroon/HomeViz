@@ -34,10 +34,8 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 		if (getArguments() != null) {
 			int roomIndex = getArguments().getInt("room");
 			currentRoom = app.getRooms().get(roomIndex);
-			// app.setCurrentRoom(roomIndex);
 		} else {
 			Log.e(getClass().getSimpleName(), "No room arguments");
-			// currentRoom = app.getCurrentRoom();
 		}
 
 		Period currentPeriod = app.getCurrentPeriod();

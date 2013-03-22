@@ -2,12 +2,16 @@ package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.R;
+import robindecroon.layout.Main;
 import robindecroon.layout.UsageContainerFragment;
+import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -26,6 +30,21 @@ public class ConsumerOnClickListener implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		
+		ActionBar ab = context.getActionBar();
+		ab.setDisplayShowCustomEnabled(true);
+		ab.setDisplayHomeAsUpEnabled(true);
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setIcon(R.drawable.up_arrow);
+
+		LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View abv = inflator.inflate(R.layout.action_bar_title, null);
+
+		((Main) context).initSpinners(abv);
+		((Main) context).setUsageIconsSelection(0);
+
+		ab.setCustomView(abv);
+		
 		Fragment fragment = new UsageContainerFragment();
 		Bundle args = new Bundle();
 		args.putInt(Constants.USAGE_TYPE, consumerType);

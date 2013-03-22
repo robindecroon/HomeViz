@@ -2,7 +2,7 @@ package robindecroon.homeviz.adapters;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.layout.UsageSubFragment;
+import robindecroon.layout.ConsumerUsageFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +21,7 @@ public class ConsumerFragmentPagerAdapter extends HomeVizFragmentPagerAdapter {
 		Bundle args = new Bundle();
 		args.putInt("room", arg0);
 		args.putInt(Constants.USAGE_TYPE, consumer);
-		Fragment fragment = new UsageSubFragment();
+		Fragment fragment = new ConsumerUsageFragment();
 		fragment.setArguments(args);
 		return fragment;
 	}

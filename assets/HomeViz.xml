@@ -25,7 +25,7 @@
 	<Room name="Storage">
 		<Light name="l8" watt="5" />
 		<Light name="l9" watt="80" />
-		<Light name="ll0" watt="10" />
+		<Light name="l10" watt="10" />
 		<Appliance name="washer" watt="500" />
 		<Appliance name="dryer" watt="2000" />
 		<Appliance name="vacuum" watt="2000" />

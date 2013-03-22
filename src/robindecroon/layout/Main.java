@@ -62,7 +62,15 @@ public class Main extends FragmentActivity implements LocationListener {
 	private NoDefaultSpinner yieldActionBarSpinner;
 
 	public static int page;
-
+	
+	
+	public void disableSpinners() {
+		usageActionBarSpinner.setEnabled(false);
+		totalActionBarSpinner.setEnabled(false);
+		metaphorActionBarSpinner.setEnabled(false);
+		yieldActionBarSpinner.setEnabled(false);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,6 +153,10 @@ public class Main extends FragmentActivity implements LocationListener {
 		ab.setCustomView(v);
 
 		return true;
+	}
+	
+	public void setUsageIconsSelection(int selection) {
+		usageActionBarSpinner.setSelection(selection);
 	}
 
 	public void initSpinners(View v) {
