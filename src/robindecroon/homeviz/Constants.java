@@ -49,7 +49,7 @@ public class Constants {
 	public final static String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
 
 	public final static String USAGE_TYPE = "Usage type";
-	
+
 	/*
 	 * Consumers
 	 */

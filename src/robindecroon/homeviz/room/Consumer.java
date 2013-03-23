@@ -1,6 +1,5 @@
 package robindecroon.homeviz.room;
 
-import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 
@@ -108,7 +107,7 @@ public abstract class Consumer {
 	 */
 	public String getName() {
 		if (name == null) {
-			throw new ParseXMLException(this);
+			throw new IllegalStateException("A consumer without name");
 		}
 		return name;
 	}

@@ -136,7 +136,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="robindecroon.layout.Main"
+            android:name="robindecroon.homeviz.Main"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.PageIndicatorDefaults" >
             <intent-filter>

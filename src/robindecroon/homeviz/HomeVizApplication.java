@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import libraries.stackoverflow.RandomNumberGenerator;
+
 import org.xml.sax.SAXException;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
@@ -20,7 +22,6 @@ import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
-import robindecroon.stackoverflow.RandomNumberGenerator;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;

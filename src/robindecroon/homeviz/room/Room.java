@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.exceptions.ParseXMLException;
 import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
@@ -19,7 +18,9 @@ import robindecroon.homeviz.util.Period;
  */
 public class Room implements RoomPrices {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -38,7 +39,7 @@ public class Room implements RoomPrices {
 	private List<HomeCinema> homeCinemas = new ArrayList<HomeCinema>();
 	private List<Appliance> appliances = new ArrayList<Appliance>();
 	private List<Heating> heatings = new ArrayList<Heating>();
-	
+
 	public List<Heating> getHeatings() {
 		return this.heatings;
 	}
@@ -99,7 +100,7 @@ public class Room implements RoomPrices {
 	 */
 	public String getName() {
 		if (name == null) {
-			throw new ParseXMLException(this);
+			throw new IllegalStateException("A room without name");
 		}
 		return name;
 	}
@@ -276,5 +277,29 @@ public class Room implements RoomPrices {
 
 	public void addAppliance(Appliance tempAppliance) {
 		this.appliances.add(tempAppliance);
+	}
+
+	public List<Consumer> getElectrics() throws NoSuchDevicesInRoom {
+		List<Consumer> list = new ArrayList<Consumer>();
+		try {
+			list.addAll(getLights());
+		} catch (NoSuchDevicesInRoom e) {
+
+		}
+		try {
+			list.addAll(getHomeCinemas());
+		} catch (NoSuchDevicesInRoom e) {
+
+		}
+		try {
+			list.addAll(getAppliances());
+		} catch (NoSuchDevicesInRoom e) {
+
+		}
+		if (list.isEmpty()) {
+			throw new NoSuchDevicesInRoom(this);
+		} else {
+			return list;
+		}
 	}
 }

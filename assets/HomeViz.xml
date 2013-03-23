@@ -31,7 +31,7 @@
 		<Appliance name="vacuum" watt="2000" />
 		<HomeCinema name="router" watt="10" />
 	</Room>
-	<Room name="Bed Room">
+	<Room name="Bedroom">
 		<Light name="l11" watt="5" />
 		<Light name="l12" watt="80" />
 		<Light name="l13" watt="10" />
@@ -42,7 +42,7 @@
 		<HomeCinema name="radio3" watt="50" />
 		<Water name="kraan2" />
 	</Room>
-	<Room name="Bath Room">
+	<Room name="Bathroom">
 		<Light name="l14" watt="5" />
 		<Light name="l15" watt="80" />
 		<Appliance name="shaver" watt="15" />

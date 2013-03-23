@@ -23,7 +23,7 @@ public enum Period {
 		public int getId() {
 			return 0;
 		}
-		
+
 		@Override
 		public Period previous() {
 			ToastMessages.noSmallerPeriod();
@@ -52,7 +52,7 @@ public enum Period {
 		public int getId() {
 			return 1;
 		}
-		
+
 		@Override
 		public Period previous() {
 			return DAY;
@@ -80,7 +80,7 @@ public enum Period {
 		public int getId() {
 			return 2;
 		}
-		
+
 		@Override
 		public Period previous() {
 			return WEEK;
@@ -108,7 +108,7 @@ public enum Period {
 		public int getId() {
 			return 3;
 		}
-		
+
 		@Override
 		public Period previous() {
 			return MONTH;
@@ -137,7 +137,7 @@ public enum Period {
 		public int getId() {
 			return -1;
 		}
-		
+
 		@Override
 		public Period previous() {
 			return WEEK;
@@ -214,7 +214,7 @@ public enum Period {
 	}
 
 	public abstract int getMultiplier();
-	
+
 	public abstract int getId();
 
 }

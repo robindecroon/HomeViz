@@ -79,14 +79,15 @@ public class OptionSpinner extends View implements
 		setOptions(options);
 		initialize();
 	}
-	
+
 	public OptionSpinner(Context context,
 			ListenerContainer<ButtonListener> left,
-			ListenerContainer<ButtonListener> right, int index, String... options) {
+			ListenerContainer<ButtonListener> right, int index,
+			String... options) {
 		this(context, left, right, options);
 		this.index = index;
 	}
-	
+
 	public void setIndex(int index) {
 		this.index = index;
 	}

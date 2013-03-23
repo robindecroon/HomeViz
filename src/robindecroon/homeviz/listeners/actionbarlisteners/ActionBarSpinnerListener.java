@@ -1,7 +1,7 @@
 package robindecroon.homeviz.listeners.actionbarlisteners;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.layout.Main;
+import robindecroon.homeviz.Main;
 import android.content.Intent;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
