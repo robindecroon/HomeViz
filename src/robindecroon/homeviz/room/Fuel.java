@@ -25,13 +25,13 @@ public class Fuel {
 	public double getLiter() {
 		return liter;
 	}
-	
+
 	/**
 	 * @return the liter
 	 */
 	public double getLiter(FuelKind kind) {
-		if(kind != this.kind) {
-			return liter * kind.getMultiplier();			
+		if (kind != this.kind) {
+			return liter * kind.getMultiplier();
 		} else {
 			return liter;
 		}
@@ -43,7 +43,7 @@ public class Fuel {
 	public FuelKind getKind() {
 		return kind;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%.2f", liter) + " " + kind.toString();

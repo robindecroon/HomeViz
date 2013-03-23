@@ -15,11 +15,12 @@ public class CO2 {
 				* (other.getValue() * other.getUnit().getMultiplier()),
 				WeightUnit.GRAM);
 	}
-	
+
 	public CO2 convertTo(WeightUnit unit) {
 		return new CO2(value * unit.getMultiplier(), unit);
 	}
-	
+
+	@Override
 	public String toString() {
 		return String.format("%.2f", value) + " " + unit.toString();
 	}

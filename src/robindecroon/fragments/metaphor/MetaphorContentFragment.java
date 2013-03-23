@@ -1,5 +1,7 @@
 package robindecroon.fragments.metaphor;
 
+import java.util.Locale;
+
 import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
@@ -11,10 +13,15 @@ import robindecroon.homeviz.room.Fuel;
 import robindecroon.homeviz.room.FuelKind;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.WeightUnit;
+import robindecroon.homeviz.util.ImageScaler;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MetaphorContentFragment extends OptionSpinnerFragment {
@@ -40,7 +47,22 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 			String value = null;
 			if (consumerArg) {
 				value = args.getString(Constants.METAPHOR_VALUE);
-				title.setText(args.getString(Constants.METAPHOR_CONSUMER_NAME));
+				String consumerName = args
+						.getString(Constants.METAPHOR_CONSUMER_NAME);
+				title.setText(consumerName);
+				String imagename = consumerName.toLowerCase(Locale.US);
+				int id = getResources().getIdentifier(imagename, "drawable",
+						getActivity().getPackageName());
+				ImageView consumerImage = (ImageView) fragmentView
+						.findViewById(R.id.metaphor_consumer_image);
+				LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				lp2.gravity = Gravity.CENTER;
+				consumerImage.setAdjustViewBounds(true);
+				consumerImage.setLayoutParams(lp2);
+				consumerImage.setImageResource(id);
+				ImageScaler.scaleImage(consumerImage, 100);
+
 			} else {
 				for (Room room : ((HomeVizApplication) getActivity()
 						.getApplication()).getRooms()) {
@@ -55,9 +77,11 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							title.setText(R.string.metaphor_co2);
 							break;
 						case Constants.METAPHOR_TYPE_FUEL:
-							Fuel fuelSum = new Fuel(Math.random() * 10, FuelKind.DIESEL);
+							Fuel fuelSum = new Fuel(Math.random() * 10,
+									FuelKind.DIESEL);
 							for (Consumer consumer : room.getHeatings()) {
-								fuelSum = fuelSum.add(consumer.getFuel(), FuelKind.DIESEL);
+								fuelSum = fuelSum.add(consumer.getFuel(),
+										FuelKind.DIESEL);
 								System.out.println("FuelSum: " + fuelSum);
 							}
 							value = fuelSum.toString();
@@ -68,7 +92,9 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							for (Consumer consumer : room.getWaters()) {
 								waterSum += consumer.getLiter();
 							}
-							value = Math.round(waterSum/Constants.BOTTLE_CONTENT) + Constants.METAPHOR_WATER_TEXT;
+							value = Math.round(waterSum
+									/ Constants.BOTTLE_CONTENT)
+									+ Constants.METAPHOR_WATER_TEXT;
 							title.setText("Bottles of water");
 							break;
 						}
@@ -105,5 +131,4 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 		value.setText(text);
 		value.invalidate();
 	}
-
 }

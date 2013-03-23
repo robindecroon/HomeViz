@@ -3,6 +3,7 @@ package robindecroon.fragments;
 import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
+import robindecroon.fragments.metaphor.MetaphorContainerFragment;
 import robindecroon.fragments.usage.UsageContainerFragment;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.listeners.PeriodListener;
@@ -51,9 +52,14 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					// TODO
-					UsageContainerFragment.resetViews();
-
+					try {
+						UsageContainerFragment.resetViews();
+					} catch (Exception e) {
+					}
+					try {
+						MetaphorContainerFragment.resetViews();
+					} catch (Exception e) {
+					}
 				}
 			});
 		} catch (Exception e) {

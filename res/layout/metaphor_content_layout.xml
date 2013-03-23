@@ -33,16 +33,28 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/metaphor_title"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:paddingRight="20dp"
-            android:textColor="@color/WhiteSmoke"
-            android:textIsSelectable="false"
-            android:textSize="50sp" />
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/metaphor_consumer_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/consumer_image" />
+
+            <TextView
+                android:id="@+id/metaphor_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingRight="20dp"
+                android:textColor="@color/WhiteSmoke"
+                android:textIsSelectable="false"
+                android:textSize="50sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <TextView
@@ -50,10 +62,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="9"
-        android:textColor="@color/WhiteSmoke"
+        android:drawableTop="@drawable/footprint"
         android:gravity="center"
-        android:textSize="60sp"
+        android:textColor="@color/WhiteSmoke"
         android:textIsSelectable="false"
-        android:drawableTop="@drawable/footprint" />
+        android:textSize="60sp" />
 
 </LinearLayout>

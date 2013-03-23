@@ -9,14 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class ImageScaler {
-	
+
 	private static Context context;
 
 	public static void setContext(Context c) {
 		context = c;
 	}
-	
-	
+
 	public static void scaleImage(ImageView view, int boundBoxInDp) {
 		// Get the ImageView and its bitmap
 		Drawable drawing = view.getDrawable();

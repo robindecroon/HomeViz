@@ -111,7 +111,6 @@ public class HomeVizApplication extends Application {
 		this.rooms.add(room);
 	}
 
-
 	public void setCountries(Map<String, Country> map) {
 		this.countryMap = map;
 	}

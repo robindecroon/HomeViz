@@ -130,14 +130,14 @@ public abstract class Consumer {
 
 	public static void setCO2Value(double co2Value) {
 		Consumer.co2Value = co2Value;
-		
+
 	}
-	
+
 	public double getKWH() {
 		// TODO
 		return Math.random() * 10;
 	}
-	
+
 	public CO2 getCO2Value() {
 		return new CO2(getKWH() * co2Value, WeightUnit.GRAM);
 	}

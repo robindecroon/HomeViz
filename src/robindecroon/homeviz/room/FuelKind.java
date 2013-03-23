@@ -1,24 +1,25 @@
 package robindecroon.homeviz.room;
 
 public enum FuelKind {
-	
+
 	DIESEL {
 		@Override
 		public double getMultiplier() {
-			return 1/11.1;
+			return 1 / 11.1;
 		}
 
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
 			return "l diesel fuel";
-		}		
-	}, GAS {
+		}
+	},
+	GAS {
 
 		@Override
 		public double getMultiplier() {
 			// TODO Auto-generated method stub
-			return 1/11.4;
+			return 1 / 11.4;
 		}
 
 		@Override
@@ -26,13 +27,14 @@ public enum FuelKind {
 			// TODO Auto-generated method stub
 			return "l gas oil";
 		}
-		
-	}, OIL {
+
+	},
+	OIL {
 
 		@Override
 		public double getMultiplier() {
 			// TODO Auto-generated method stub
-			return 1/12.2;
+			return 1 / 12.2;
 		}
 
 		@Override
@@ -40,13 +42,14 @@ public enum FuelKind {
 			// TODO Auto-generated method stub
 			return "l fuel oil";
 		}
-		
-	}, GASOLINE {
+
+	},
+	GASOLINE {
 
 		@Override
 		public double getMultiplier() {
 			// TODO Auto-generated method stub
-			return 1/9.4;
+			return 1 / 9.4;
 		}
 
 		@Override
@@ -54,12 +57,12 @@ public enum FuelKind {
 			// TODO Auto-generated method stub
 			return "l gasoline";
 		}
-		
+
 	};
-	
+
 	public abstract double getMultiplier();
-	
+
+	@Override
 	public abstract String toString();
-	
 
 }

@@ -87,8 +87,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			// read CO2 data
 			readCO2Data();
 
-//			 start with Usage (icons)
-			 startUsageContainerFragment(0, 0);
+			// start with Usage (icons)
+			startUsageContainerFragment(0, 0);
 
 			INIT = false;
 		} else {
@@ -125,7 +125,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment2).commit();
 	}
-	
+
 	private void startMetaphorFragment(int selection) {
 		lastCatergory = Constants.METAPHOR;
 		metaphorActionBarSpinner.setSelection(selection);
