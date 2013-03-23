@@ -133,8 +133,17 @@ public abstract class Consumer {
 		
 	}
 	
+	public double getKWH() {
+		// TODO
+		return Math.random() * 10;
+	}
+	
 	public CO2 getCO2Value() {
-		return new CO2(getWatt() * co2Value, WeightUnit.GRAM);
+		return new CO2(getKWH() * co2Value, WeightUnit.GRAM);
+	}
+
+	public Fuel getFuel() {
+		return new Fuel(getKWH(), FuelKind.DIESEL);
 	}
 
 }

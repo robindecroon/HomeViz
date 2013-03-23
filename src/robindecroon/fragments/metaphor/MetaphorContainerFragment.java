@@ -16,10 +16,12 @@ public class MetaphorContainerFragment extends Fragment {
 				false);
 
 		Fragment fragment = new MetaphorExpandableListFragment();
+		fragment.setArguments(getArguments());
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.metaphor_list, fragment).commit();
-
+		
 		Fragment fragment2 = new MetaphorContentFragment();
+		fragment2.setArguments(getArguments());
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.metaphor_content, fragment2).commit();
 

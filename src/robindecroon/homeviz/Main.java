@@ -87,12 +87,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			// read CO2 data
 			readCO2Data();
 
-			// start with Usage (icons)
-			// startUsageContainerFragment(0, 0);
-
-			Fragment fragment2 = new MetaphorContainerFragment();
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, fragment2).commit();
+//			 start with Usage (icons)
+			 startUsageContainerFragment(0, 0);
 
 			INIT = false;
 		} else {
@@ -110,8 +106,7 @@ public class Main extends FragmentActivity implements LocationListener {
 					startTotalFragment(selection);
 					break;
 				case Constants.METAPHOR:
-					lastCatergory = Constants.METAPHOR;
-					metaphorActionBarSpinner.setSelection(selection);
+					startMetaphorFragment(selection);
 					break;
 				case Constants.YIELD:
 					lastCatergory = Constants.YIELD;
@@ -129,6 +124,18 @@ public class Main extends FragmentActivity implements LocationListener {
 		Fragment fragment2 = new TotalTreeMapFragment();
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment2).commit();
+	}
+	
+	private void startMetaphorFragment(int selection) {
+		lastCatergory = Constants.METAPHOR;
+		metaphorActionBarSpinner.setSelection(selection);
+		Fragment metaphorFragment = new MetaphorContainerFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(Constants.METAPHOR_CONSUMER, false);
+		args.putInt(Constants.METAPHOR_TYPE, selection);
+		metaphorFragment.setArguments(args);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, metaphorFragment).commit();
 	}
 
 	private void startUsageContainerFragment(int selection, int roomIndex) {

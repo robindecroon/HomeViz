@@ -59,9 +59,17 @@ public class Constants {
 	public final static int WATER = 14;
 	public final static int HEATING = 15;
 	public final static int IMAGE_SCALE = 350;
-	
+
 	/*
 	 * Metaphors
 	 */
-	public static final String CO2_KEY = "value";
+	public final static String METAPHOR_VALUE = "metavalue";
+	public final static String METAPHOR_TYPE = "metatype";
+	public final static int METAPHOR_TYPE_CO2 = 0;
+	public final static int METAPHOR_TYPE_FUEL = 1;
+	public final static int METAPHOR_TYPE_WATER = 2;
+	public final static String METAPHOR_CONSUMER = "metaphorTotal";
+	public final static double BOTTLE_CONTENT = 1.5;
+	public static final String METAPHOR_WATER_TEXT = " bottles of water";
+	public static final String METAPHOR_CONSUMER_NAME = "consumerName";
 }
