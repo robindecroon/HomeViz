@@ -17,11 +17,11 @@ public class MetaphorContainerFragment extends Fragment {
 
 		Fragment fragment = new MetaphorExpandableListFragment();
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.add(R.id.metaphor_list, fragment).commit();
+				.replace(R.id.metaphor_list, fragment).commit();
 
-		Fragment fragment2 = new MetaphorExpandableListFragment();
+		Fragment fragment2 = new MetaphorContentFragment();
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.add(R.id.metaphor_content, fragment2).commit();
+				.replace(R.id.metaphor_content, fragment2).commit();
 
 		return rootView;
 	}

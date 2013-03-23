@@ -59,4 +59,9 @@ public class Constants {
 	public final static int WATER = 14;
 	public final static int HEATING = 15;
 	public final static int IMAGE_SCALE = 350;
+	
+	/*
+	 * Metaphors
+	 */
+	public static final String CO2_KEY = "value";
 }

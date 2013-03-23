@@ -233,14 +233,15 @@ public class Main extends FragmentActivity implements LocationListener {
 			Map<String, Country> countries = new HashMap<String, Country>();
 
 			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+			NumberFormat dotFormat = NumberFormat.getInstance(Locale.US);
 			try {
 				// The headers
 				in.readLine();
 				while ((line = in.readLine()) != null) {
 					String[] values = line.split(";");
 					Number co2number = format.parse(values[1]);
-					Number kwhnumber = format.parse(values[2]);
-					Number liternumber = format.parse(values[3]);
+					Number kwhnumber = dotFormat.parse(values[2]);
+					Number liternumber = dotFormat.parse(values[3]);
 
 					double co2 = co2number.doubleValue();
 					double kwh = kwhnumber.doubleValue();
@@ -249,6 +250,7 @@ public class Main extends FragmentActivity implements LocationListener {
 							new Amount(kwh), new Amount(liter)));
 				}
 			} catch (ParseException e) {
+				e.printStackTrace();
 				Log.e(getClass().getSimpleName(), "Error in country CSV file!");
 			}
 			((HomeVizApplication) getApplication()).setCountries(countries);

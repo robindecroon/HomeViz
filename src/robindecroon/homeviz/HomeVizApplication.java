@@ -3,22 +3,16 @@
  */
 package robindecroon.homeviz;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import libraries.stackoverflow.RandomNumberGenerator;
-
-import org.xml.sax.SAXException;
-
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.House;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Country;
+import robindecroon.homeviz.util.ImageScaler;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.Person;
 import robindecroon.homeviz.util.ToastMessages;
@@ -41,8 +35,6 @@ public class HomeVizApplication extends Application {
 	 */
 	private Period currentPeriod = Period.WEEK;
 
-	// private int currentRoomIndex;
-
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Person> persons = new ArrayList<Person>();
 
@@ -57,6 +49,7 @@ public class HomeVizApplication extends Application {
 	public void setCurrentCountry(String currentCountry) {
 		// TODO dirty hack
 		Country country = countryMap.get(currentCountry);
+		Consumer.setCO2Value(country.getCo2Value());
 		Consumer.setKwhPrice(country.getKwh());
 		Consumer.setWaterPrice(country.getLiterPrice());
 		SharedPreferences settings = PreferenceManager
@@ -83,15 +76,12 @@ public class HomeVizApplication extends Application {
 		return this.persons;
 	}
 
-	// public int getTabPosition() {
-	// return this.currentRoomIndex;
-	// }
-
 	/**
 	 * Constructor om een applicatie aan te maken. Laad automatisch de XML in.
 	 */
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
+		ImageScaler.setContext(this);
 	}
 
 	/**
@@ -117,90 +107,10 @@ public class HomeVizApplication extends Application {
 		this.persons.add(person);
 	}
 
-	/**
-	 * Stel nieuwe kamers in.
-	 * 
-	 * @param rooms
-	 *            the rooms to set
-	 */
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
-
 	public void addRoom(Room room) {
 		this.rooms.add(room);
 	}
 
-	// public Room nextRoom() {
-	// currentRoomIndex++;
-	// if (currentRoomIndex >= rooms.size()) {
-	// currentRoomIndex = 0;
-	// }
-	// return rooms.get(currentRoomIndex);
-	// }
-	//
-	// public Room previousRoom() {
-	// currentRoomIndex--;
-	// if (currentRoomIndex < 0) {
-	// currentRoomIndex = rooms.size() - 1;
-	// }
-	// return rooms.get(currentRoomIndex);
-	// }
-
-	// public Room getCurrentRoom() {
-	// return rooms.get(currentRoomIndex);
-	// }
-	//
-	// public void setCurrentRoom(int id) {
-	// currentRoomIndex = id;
-	// }
-	//
-	// public int getCurrentRoomIndex() {
-	// return currentRoomIndex;
-	// }
-
-	// public void parseXML() {
-	// parseXML(null);
-	// }
-
-	/**
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	public void parseXML(String path) {
-		// XMLHandler handler = null;
-		// try {
-		// SAXParserFactory factory = SAXParserFactory.newInstance();
-		// SAXParser saxParser = factory.newSAXParser();
-		//
-		// handler = new XMLHandler();
-		// InputStream file = null;
-		// try {
-		// file = getAssets().open("prototype1.xml");
-		// } catch (Exception e) {
-		// Log.e("XML", e.getMessage());
-		// }
-		// if (file == null) {
-		// Log.e("XML", "XML file not found!");
-		// }
-		// saxParser.parse(file, handler);
-		// // type = handler.getVizType();
-		// } catch (Exception e) {
-		// System.out.println("FOOOOOUUUUTJEEEE");
-		// e.printStackTrace();
-		// // Log.e("ParseXML", e.getMessage());
-		// // Toast gaat nog niet, want er is nog geen context
-		// }
-		// setRooms(handler.getRooms());
-		// setPersons(handler.getPersons());
-		// currentUser = handler.getCurrentUser();
-		// countryMap = handler.getCountryMap();
-		// Log.i("HomeVizApplication", "The currentUser is " + currentUser);
-
-		// TODO
-		// randomizeLocationsOfPersons();
-	}
 
 	public void setCountries(Map<String, Country> map) {
 		this.countryMap = map;
@@ -235,32 +145,6 @@ public class HomeVizApplication extends Application {
 				throw new LocationUnknownException("No CO2 data");
 			}
 		}
-	}
-
-	private static boolean housePresent = false;
-
-	public void addHouse() {
-		if (!housePresent) {
-			List<Room> old = getRooms();
-			List<Room> hack = new ArrayList<Room>();
-			for (Room room : old) {
-				hack.add(room);
-			}
-			rooms.add(0,
-					new House(hack, getResources().getString(R.string.house)));
-			housePresent = true;
-		}
-	}
-
-	public void removeHouse() {
-		if (housePresent) {
-			rooms.remove(0);
-			housePresent = false;
-		}
-	}
-
-	public Room getHouse() {
-		return new House(getRooms(), getResources().getString(R.string.house));
 	}
 
 	/**

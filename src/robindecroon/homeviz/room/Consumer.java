@@ -8,6 +8,7 @@ public abstract class Consumer {
 	private String name;
 	private static Amount kwhPrice;
 	private static Amount waterPrice;
+	private static double co2Value;
 
 	private int watt;
 	private double averageHoursOn;
@@ -125,6 +126,15 @@ public abstract class Consumer {
 	@Override
 	public String toString() {
 		return getName();
+	}
+
+	public static void setCO2Value(double co2Value) {
+		Consumer.co2Value = co2Value;
+		
+	}
+	
+	public CO2 getCO2Value() {
+		return new CO2(getWatt() * co2Value, WeightUnit.GRAM);
 	}
 
 }

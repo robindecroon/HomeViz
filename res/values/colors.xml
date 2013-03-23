@@ -1,5 +1,7 @@
 <resources>
 
+    <color name="roboto">#177BBD</color>
+    <color name="honest">#33B5E5</color>
     <color name="black_overlay">#66000000</color>
     <color name="ics_background_start">#ff020202</color>
     <color name="ics_background_end">#ff272D33</color>

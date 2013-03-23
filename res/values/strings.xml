@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">HomeViz</string>
+    <string name="metaphor_co2">Carbon Footprint</string>
     <string name="keyword_you">YOU</string>
     <string name="keyword_hint">XML</string>
     <string name="keyword_usage">USAGE</string>
@@ -92,5 +93,7 @@
     <string name="usage">Usage</string>
 
     <string name="you_text">Which room consumes the most?</string>
+
+    <string name="metaphor_image">Metaphor image</string>
 
 </resources>

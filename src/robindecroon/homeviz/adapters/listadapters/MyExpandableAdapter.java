@@ -3,6 +3,7 @@ package robindecroon.homeviz.adapters.listadapters;
 import java.util.List;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Electric;
 import robindecroon.homeviz.room.Heating;
 import robindecroon.homeviz.room.Room;
@@ -30,7 +31,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public Object getChild(int arg0, int arg1) {
+	public Consumer getChild(int arg0, int arg1) {
 		try {
 			if (consumerClass == Water.class) {
 				return groups.get(arg0).getWaters().get(arg1);
@@ -44,7 +45,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 			}
 		} catch (NoSuchDevicesInRoom e) {
 			Log.i(getClass().getSimpleName(), "No consumers in this room");
-			return 0;
+			return null;
 		}
 	}
 
@@ -95,7 +96,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public Object getGroup(int groupPosition) {
+	public Room getGroup(int groupPosition) {
 		return groups.get(groupPosition);
 	}
 

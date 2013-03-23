@@ -2,24 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10"
-    android:orientation="horizontal"
-    android:baselineAligned="false"
     android:background="@drawable/gradient_background"
-    tools:context=".MetaphorActivity" >
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:weightSum="15"
+    tools:context=".MetaphorContainerFragment" >
 
     <FrameLayout
         android:id="@+id/metaphor_list"
         android:layout_width="0dip"
-        android:layout_weight="2"
         android:layout_height="match_parent"
-        android:text="@string/hello_world" />
+        android:layout_weight="3" />
 
     <FrameLayout
         android:id="@+id/metaphor_content"
-        android:layout_weight="8"
         android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:text="@string/hello_world" />
+        android:layout_weight="12" />
 
 </LinearLayout>

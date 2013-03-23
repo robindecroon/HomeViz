@@ -11,7 +11,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 
-public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
+public abstract class OptionSpinnerFragment extends Fragment implements
+		SpinnerListener {
 
 	/**
 	 * Initialiseert de spinner.
@@ -50,6 +51,7 @@ public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
+					// TODO
 					UsageContainerFragment.resetViews();
 
 				}
@@ -59,4 +61,5 @@ public class OptionSpinnerFragment extends Fragment implements SpinnerListener {
 					"User scrolled the optionspinner too fast");
 		}
 	}
+
 }
