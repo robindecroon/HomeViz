@@ -1,4 +1,4 @@
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.listeners;
 
 import java.util.GregorianCalendar;
 

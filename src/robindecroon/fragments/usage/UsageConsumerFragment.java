@@ -16,9 +16,9 @@ import robindecroon.homeviz.room.HomeCinema;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
-import robindecroon.homeviz.usage.UsageActivityUtils;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.usage.UsageActivityUtils;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -39,7 +39,7 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.sub_usage_layout, container,
+		View rootView = inflater.inflate(R.layout.usage_consumer_layout, container,
 				false);
 		// ActionBar ab = getActivity().getActionBar();
 		// ab.setHomeButtonEnabled(true);

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package robindecroon.homeviz.users;
+package robindecroon.homeviz.util;
 
 /**
  * @author Robin

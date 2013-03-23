@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.users.Person;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.Person;
 
 /**
  * Klasse die een kamer voorstelt.

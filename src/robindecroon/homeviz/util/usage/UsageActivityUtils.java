@@ -1,4 +1,4 @@
-package robindecroon.homeviz.usage;
+package robindecroon.homeviz.util.usage;
 
 import robindecroon.homeviz.R;
 import android.content.Context;

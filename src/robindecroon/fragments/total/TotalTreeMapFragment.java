@@ -25,7 +25,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.you_layout, container, false);
+		View rootView = inflater.inflate(R.layout.total_treemap_layout, container, false);
 
 		initOptionSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
 				R.id.total_arrow_right);

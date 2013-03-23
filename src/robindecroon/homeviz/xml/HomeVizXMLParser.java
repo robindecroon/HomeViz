@@ -13,7 +13,7 @@ import robindecroon.homeviz.room.HomeCinema;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
-import robindecroon.homeviz.users.Person;
+import robindecroon.homeviz.util.Person;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Xml;

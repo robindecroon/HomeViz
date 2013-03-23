@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.users.Person;
+import robindecroon.homeviz.util.Person;
 
 public class JsonObject {
 
