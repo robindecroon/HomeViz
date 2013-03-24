@@ -1,10 +1,10 @@
 package robindecroon.homeviz.listeners;
 
-import robindecroon.fragments.metaphor.MetaphorContainerFragment;
-import robindecroon.fragments.metaphor.MetaphorContentFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.adapters.listadapters.MyExpandableAdapter;
+import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
+import robindecroon.homeviz.fragments.metaphor.MetaphorContentFragment;
 import robindecroon.homeviz.room.Consumer;
 import android.graphics.Color;
 import android.os.Bundle;

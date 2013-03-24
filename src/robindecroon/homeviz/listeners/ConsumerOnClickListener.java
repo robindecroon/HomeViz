@@ -1,9 +1,9 @@
 package robindecroon.homeviz.listeners;
 
-import robindecroon.fragments.usage.UsageContainerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;

@@ -1,11 +1,11 @@
-package robindecroon.fragments.usage;
+package robindecroon.homeviz.fragments.usage;
 
 import java.util.Map;
 
-import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;

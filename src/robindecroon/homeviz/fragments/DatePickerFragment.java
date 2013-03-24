@@ -1,4 +1,4 @@
-package robindecroon.fragments;
+package robindecroon.homeviz.fragments;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import robindecroon.homeviz.listeners.DatePickerListener;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

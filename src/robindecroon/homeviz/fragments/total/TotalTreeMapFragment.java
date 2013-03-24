@@ -1,8 +1,8 @@
-package robindecroon.fragments.total;
+package robindecroon.homeviz.fragments.total;
 
-import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;

@@ -1,14 +1,14 @@
-package robindecroon.fragments.usage;
+package robindecroon.homeviz.fragments.usage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.room.Appliance;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Heating;

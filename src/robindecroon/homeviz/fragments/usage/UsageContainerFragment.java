@@ -1,4 +1,4 @@
-package robindecroon.fragments.usage;
+package robindecroon.homeviz.fragments.usage;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;

@@ -1,12 +1,12 @@
-package robindecroon.fragments.metaphor;
+package robindecroon.homeviz.fragments.metaphor;
 
 import java.util.Locale;
 
-import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.room.CO2;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Fuel;

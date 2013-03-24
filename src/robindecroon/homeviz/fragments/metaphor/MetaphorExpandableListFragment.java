@@ -1,4 +1,4 @@
-package robindecroon.fragments.metaphor;
+package robindecroon.homeviz.fragments.metaphor;
 
 import libraries.stackoverflow.ExpandableListFragment;
 import robindecroon.homeviz.Constants;

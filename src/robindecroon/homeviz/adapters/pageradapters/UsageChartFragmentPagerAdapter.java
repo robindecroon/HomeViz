@@ -1,8 +1,8 @@
 package robindecroon.homeviz.adapters.pageradapters;
 
-import robindecroon.fragments.usage.UsageChartFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.fragments.usage.UsageChartFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,9 +1,9 @@
-package robindecroon.fragments.usage;
+package robindecroon.homeviz.fragments.usage;
 
-import robindecroon.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.listeners.ConsumerOnClickListener;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Period;

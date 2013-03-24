@@ -1,12 +1,12 @@
-package robindecroon.fragments;
+package robindecroon.homeviz.fragments;
 
 import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
-import robindecroon.fragments.metaphor.MetaphorContainerFragment;
-import robindecroon.fragments.total.TotalTreeMapFragment;
-import robindecroon.fragments.usage.UsageContainerFragment;
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
+import robindecroon.homeviz.fragments.total.TotalTreeMapFragment;
+import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
 import robindecroon.homeviz.listeners.PeriodListener;
 import robindecroon.homeviz.util.Period;
 import android.support.v4.app.Fragment;

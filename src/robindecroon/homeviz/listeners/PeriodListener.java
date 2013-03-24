@@ -1,6 +1,6 @@
 package robindecroon.homeviz.listeners;
 
-import robindecroon.fragments.DatePickerFragment;
+import robindecroon.homeviz.fragments.DatePickerFragment;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package robindecroon.fragments.metaphor;
+package robindecroon.homeviz.fragments.metaphor;
 
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.listeners.MetaphorListChildListener;
