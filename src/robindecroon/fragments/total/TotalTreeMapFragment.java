@@ -7,6 +7,7 @@ import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,9 @@ import com.facebook.widget.ProfilePictureView;
 @SuppressLint("SetJavaScriptEnabled")
 public class TotalTreeMapFragment extends OptionSpinnerFragment {
 
-	private WebView myBrowser;
+	private static View lastView;
+
+	private static FragmentActivity context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,26 +31,13 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment {
 		View rootView = inflater.inflate(R.layout.total_treemap_layout,
 				container, false);
 
+		context = getActivity();
+		lastView = rootView;
+
 		initOptionSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
 				R.id.total_arrow_right);
 
-		myBrowser = (WebView) rootView.findViewById(R.id.you_webview);
-
-		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
-				getActivity());
-		myBrowser.addJavascriptInterface(myJavaScriptInterface,
-				"AndroidFunction");
-
-		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				MyWebViewClient.TREEMAP, ((HomeVizApplication) getActivity()
-						.getApplication()).getRooms()));
-
-		myBrowser.setBackgroundColor(0x00000000);
-
-		myBrowser.getSettings().setJavaScriptEnabled(true);
-		myBrowser.getSettings().setUseWideViewPort(true);
-		myBrowser.getSettings().setLoadWithOverviewMode(true);
-		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
+		loadTreemap(rootView);
 
 		TextView userView = (TextView) rootView
 				.findViewById(R.id.you_current_user);
@@ -65,15 +55,32 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment {
 			layout.addView(profilePictureView);
 		}
 
-		myBrowser.loadUrl("javascript:window.location.reload( true )");
-		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
-
 		return rootView;
 	}
 
-	@Override
-	public String toString() {
-		return "Total (treemap)";
+	private static void loadTreemap(View rootView) {
+		WebView myBrowser = (WebView) rootView.findViewById(R.id.you_webview);
+
+		final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(
+				context);
+		myBrowser.addJavascriptInterface(myJavaScriptInterface,
+				"AndroidFunction");
+
+		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
+				MyWebViewClient.TREEMAP, ((HomeVizApplication) context
+						.getApplication()).getRooms()));
+
+		myBrowser.setBackgroundColor(0x00000000);
+
+		myBrowser.getSettings().setJavaScriptEnabled(true);
+		myBrowser.getSettings().setUseWideViewPort(true);
+		myBrowser.getSettings().setLoadWithOverviewMode(true);
+
+		myBrowser.loadUrl("javascript:window.location.reload( true )");
+		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
 	}
 
+	public static void resetViews() {
+		loadTreemap(lastView);
+	}
 }
