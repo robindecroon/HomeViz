@@ -25,10 +25,14 @@ public class Constants {
 	/*
 	 * Loxone
 	 */
-	public final static String LOXONE_IP = "192.168.1.102";
-	public final static String LOXONE_USER = "anonymous";
-	public final static String LOXONE_PASSWORD = "";
-	public final static String WORKING_DIRECTORY = "pools/A/A0/HomeViz/temp";
+	// public final static String LOXONE_IP = "192.168.1.102";
+	// public final static String LOXONE_USER = "anonymous";
+	// public final static String LOXONE_PASSWORD = "";
+	// public final static String WORKING_DIRECTORY = "pools/A/A0/HomeViz/temp";
+	public final static String LOXONE_IP = "192.168.1.200";
+	public final static String LOXONE_USER = "admin";
+	public final static String LOXONE_PASSWORD = "admin";
+	public final static String WORKING_DIRECTORY = "stats/";
 
 	/*
 	 * Action Bar
@@ -47,7 +51,6 @@ public class Constants {
 	 */
 	public final static String FRAGMENT_BUNDLE_TYPE = "charttype";
 	public final static String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
-
 	public final static String USAGE_TYPE = "Usage type";
 
 	/*

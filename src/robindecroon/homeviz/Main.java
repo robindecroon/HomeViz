@@ -22,6 +22,7 @@ import robindecroon.homeviz.listeners.actionbarlisteners.MetaphorActionBarSpinne
 import robindecroon.homeviz.listeners.actionbarlisteners.TotalActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.actionbarlisteners.UsageActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerListener;
+import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.ToastMessages;
@@ -79,6 +80,9 @@ public class Main extends FragmentActivity implements LocationListener {
 		// init the actionbar and spinners
 		setupActionBar();
 
+		// TODO
+		yieldActionBarSpinner.setEnabled(false);
+
 		if (savedInstanceState == null && INIT) {
 			// read the configuration XML file
 			readHomeVizXML();
@@ -115,6 +119,10 @@ public class Main extends FragmentActivity implements LocationListener {
 
 			}
 		}
+
+		new DownloadLoxoneXMLTask(
+				((HomeVizApplication) getApplication()).getRooms())
+				.execute(Constants.LOXONE_IP);
 	}
 
 	private void startTotalFragment(int selection) {
@@ -268,7 +276,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
@@ -289,6 +297,9 @@ public class Main extends FragmentActivity implements LocationListener {
 			getActionBar().setHomeButtonEnabled(false);
 			getActionBar().setIcon(R.drawable.icon);
 			return true;
+		} else if (item.getItemId() == R.id.menu_settings) {
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}

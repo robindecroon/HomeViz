@@ -61,7 +61,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 				consumerImage.setAdjustViewBounds(true);
 				consumerImage.setLayoutParams(lp2);
 				consumerImage.setImageResource(id);
-				ImageScaler.scaleImage(consumerImage, 80);
+				ImageScaler.scaleImage(consumerImage, 120);
 
 			} else {
 				for (Room room : ((HomeVizApplication) getActivity()

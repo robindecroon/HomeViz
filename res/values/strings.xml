@@ -56,7 +56,6 @@
     <string name="you_icon">You icon</string>
     <string name="connection_error">No network connection could be established.</string>
     <string name="title_activity_main">HomeViz</string>
-    <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -69,7 +68,6 @@
     </string-array>
     <string-array name="you_spinner_data">
         <item>Treemap</item>
-        <item>Bar Chart</item>
     </string-array>
     <string-array name="metaphor_spinner_data">
         <item>Metaphor (electricity)</item>
@@ -83,19 +81,12 @@
     </string-array>
 
     <string name="title_activity_test_fragment_buh">TestFragmentBuh</string>
-
     <string name="total">Total</string>
-
     <string name="metaphor">Metaphor</string>
-
     <string name="yield">Yield</string>
-
     <string name="usage">Usage</string>
-
     <string name="you_text">Which room consumes the most?</string>
-
     <string name="metaphor_image">Metaphor image</string>
-
     <string name="consumer_image">consumer image</string>
 
 </resources>

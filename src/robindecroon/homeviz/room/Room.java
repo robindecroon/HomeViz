@@ -302,4 +302,18 @@ public class Room implements RoomPrices {
 			return list;
 		}
 	}
+	
+	public Consumer getConsumerWithName(String name) throws NoSuchDevicesInRoom {
+		List<Consumer> consumers = new ArrayList<Consumer>();
+		consumers.addAll(appliances);
+		consumers.addAll(heatings);
+		consumers.addAll(waters);
+		consumers.addAll(homeCinemas);
+		consumers.addAll(lights);
+		for(Consumer cons: consumers) {
+			if (cons.getName().equalsIgnoreCase(name))
+				return cons;
+		}
+		throw new NoSuchDevicesInRoom(this);
+	}
 }

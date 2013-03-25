@@ -1,7 +1,11 @@
 package robindecroon.homeviz.room;
 
+import java.util.List;
+
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.xml.Entry;
+import robindecroon.homeviz.xml.IEntry;
 
 public abstract class Consumer {
 
@@ -14,6 +18,7 @@ public abstract class Consumer {
 	private double averageHoursOn;
 
 	private double liter;
+	private List<IEntry> entries;
 
 	public Consumer(String name, int watt) {
 		this.name = name;
@@ -54,7 +59,23 @@ public abstract class Consumer {
 	 * @return the averageMinOn
 	 */
 	public double getAverageHoursOn() {
-		return averageHoursOn;
+		try {
+			long totalMillisOn = 0;
+			long first = entries.get(0).getDate();
+			boolean on = false;
+			for(int i = 1; i < entries.size(); i++) {
+				if (on) {
+					long date = entries.get(i).getDate();
+					totalMillisOn += date - first;
+					on = false;
+				} else {
+					on = true;
+				}
+			}
+			return totalMillisOn /3600000;
+		} catch (Exception e) {
+			return averageHoursOn;
+		}
 	}
 
 	/**
@@ -144,6 +165,10 @@ public abstract class Consumer {
 
 	public Fuel getFuel() {
 		return new Fuel(getKWH(), FuelKind.DIESEL);
+	}
+
+	public void putEntries(List<IEntry> list) {
+		this.entries = list;
 	}
 
 }

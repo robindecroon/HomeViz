@@ -39,21 +39,23 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/metaphor_consumer_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/consumer_image" />
-
             <TextView
                 android:id="@+id/metaphor_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingRight="20dp"
+                android:layout_gravity="center"
                 android:textColor="@color/WhiteSmoke"
                 android:textIsSelectable="false"
-                android:textSize="50sp" />
+                android:textSize="40sp" />
+
+            <ImageView
+                android:id="@+id/metaphor_consumer_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:contentDescription="@string/consumer_image"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" />
         </LinearLayout>
     </RelativeLayout>
 

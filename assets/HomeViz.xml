@@ -12,9 +12,9 @@
 	</Room>
 	<Room name="Kitchen">
 		<Light name="l4" watt="5" />
-		<Light name="l5" watt="80" />
+		<Light name="l5" watt="40" />
 		<Light name="l6" watt="10" />
-		<Light name="l7" watt="60" />
+		<Light name="l7" watt="30" />
 		<Appliance name="dishwasher" watt="1200" />
 		<Appliance name="senseo" watt="1200" />
 		<Appliance name="vacuummini" watt="100" />
@@ -35,7 +35,6 @@
 		<Light name="l11" watt="5" />
 		<Light name="l12" watt="80" />
 		<Light name="l13" watt="10" />
-		<Appliance name="dishwasher" watt="1200" />
 		<Appliance name="senseo" watt="1200" />
 		<Appliance name="vacuummini" watt="100" />
 		<HomeCinema name="macbook" watt="100" />
@@ -50,6 +49,13 @@
 		<Water name="kraan4" />
 		<Water name="kraan7" />
 	</Room>
+	<Room name="Loxone">
+		<Light name="drukknopi7" watt="100" />
+		<Light name="drukknopalarm" watt="100" />
+		<Appliance name="drukknopi2" watt="100" />
+		<Appliance name="drukknopi3" watt="100" />
+	</Room>
+	
 
 	<Person firstname="Robin" lastname="De Croon" />
 	<Person firstname="Silke" lastname="De Croon" />

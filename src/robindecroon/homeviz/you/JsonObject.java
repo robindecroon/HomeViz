@@ -1,10 +1,12 @@
 package robindecroon.homeviz.you;
 
 import java.util.List;
-import java.util.Map;
 
+import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.room.Consumer;
+import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.util.Person;
+import android.util.Log;
 
 public class JsonObject {
 
@@ -32,37 +34,34 @@ public class JsonObject {
 		JsonObject[] roomsJson = new JsonObject[rooms.size()];
 		int j = 0;
 		for (Room room : rooms) {
-			JsonObject json = new JsonObject(room.getName(), null);
-			Map<Person, Integer> map = room.getPersonPercentageMap();
-			JsonObject[] children = new JsonObject[map.size()];
-			int i = 0;
-			for (Person pers : map.keySet()) {
-				children[i] = new JsonObject(pers.getName(), map.get(pers) + "");
-				i++;
+			List<Light> elecs = null;
+			try {
+				elecs = room.getLights();
+				double totalWatt = 0;
+				for (Consumer cons : elecs) {
+					totalWatt += cons.getWatt();
+				}
+				// TODO Y U NO WORK
+				JsonObject json = new JsonObject(room.getName(), null);
+				JsonObject[] children;
+				children = new JsonObject[elecs.size()];
+				int i = 0;
+				for (Light elec : elecs) {
+					children[i] = new JsonObject(
+							elec.getName(),
+							""
+									+ Integer.valueOf((int) ((elec.getWatt() / totalWatt) * 100)));
+					i++;
+				}
+				json.setChildren(children);
+				roomsJson[j] = json;
+			} catch (NoSuchDevicesInRoom e) {
+				Log.i("JSONObject", "No lights in " + room.getName());
+			} finally {
+				j++;
 			}
-			json.setChildren(children);
-			roomsJson[j] = json;
-			j++;
 		}
 		root.setChildren(roomsJson);
-
-		// JsonObject een = new JsonObject("Keuken", null);
-		// JsonObject twee = new JsonObject("Living", null);
-		// JsonObject drie = new JsonObject("Berging", null);
-		// JsonObject vier = new JsonObject("Porch", null);
-		//
-		// JsonObject robin = new JsonObject("Robin","5");
-		// JsonObject vienna = new JsonObject("Vienna","3");
-		// JsonObject silke = new JsonObject("silke", "2");
-		// JsonObject roosje = new JsonObject("roosje", "20");
-		//
-		// een.setChildren(new JsonObject[]{robin, vienna});
-		// twee.setChildren(new JsonObject[]{robin,vienna,silke});
-		// drie.setChildren(new JsonObject[]{vienna,silke});
-		// vier.setChildren(new JsonObject[]{vienna,roosje});
-		//
-		//
-		// root.setChildren(new JsonObject[]{een,twee,drie,vier});
 
 		return root;
 	}

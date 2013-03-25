@@ -28,35 +28,35 @@ public class LoxoneXMLParser extends XMLParser {
 	private String name;
 	private String output;
 
-	public List<Entry> parse(InputStream in) throws XmlPullParserException,
+	public XMLReturnObject parse(InputStream stream) throws XmlPullParserException,
 			IOException {
-		Log.i(getClass().getSimpleName(), "Parsing Loxone XML");
 		try {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-			parser.setInput(in, null);
+			parser.setInput(stream, null);
 			parser.nextTag();
-			return readStatistics(parser);
+			List<IEntry> entries = readStatistics(parser);
+			return new XMLReturnObject(name, entries);
 
 		} finally {
-			in.close();
+			stream.close();
 		}
 	}
 
-	private List<Entry> readStatistics(XmlPullParser parser)
+	private List<IEntry> readStatistics(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
-		List<Entry> entries = new ArrayList<Entry>();
+		List<IEntry> entries = new ArrayList<IEntry>();
 
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
 
-		name = parser.getAttributeValue(null, NAME_ATTRIBUTE);
+		String tempName = parser.getAttributeValue(null, NAME_ATTRIBUTE);
+		name = tempName.toLowerCase().replaceAll(" ", "");
 		output = parser.getAttributeValue(null, OUTPUTS);
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
-			// Starts by looking for the entry tag
 			if (name.equals(DATE_TAG)) {
 				entries.add(readS(parser));
 			} else {
@@ -65,9 +65,12 @@ public class LoxoneXMLParser extends XMLParser {
 		}
 		return entries;
 	}
+	
+	private long idCounter;
+	private boolean switcher;
 
 	@SuppressLint("SimpleDateFormat")
-	private Entry readS(XmlPullParser parser) throws IOException,
+	private IEntry readS(XmlPullParser parser) throws IOException,
 			XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, DATE_TAG);
 
@@ -79,13 +82,21 @@ public class LoxoneXMLParser extends XMLParser {
 		try {
 			date = df.parse(time).getTime();
 		} catch (ParseException e) {
-			Log.e(getClass().getSimpleName(), "Parsen datum mislukt");
+			Log.e(getClass().getSimpleName(),
+					"Parsing date failed: " + e.getMessage());
 		}
-		boolean value = valueString.equals("1.000");
-
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
-		Entry entry = new Entry(date, value, name, output);
+		IEntry entry = null;
+		if(output.equals("Q")) {
+			if (switcher) {
+				entry = new PressureEntry(date, idCounter);
+				idCounter++;
+			}
+			switcher = !switcher;
+		} else {
+			entry = new Entry(date, valueString, output);			
+		}
 		return entry;
 	}
 }

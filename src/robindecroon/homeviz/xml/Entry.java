@@ -2,26 +2,26 @@ package robindecroon.homeviz.xml;
 
 import java.sql.Date;
 
-public class Entry {
+public class Entry implements IEntry {
 
 	private final long date;
-	private final boolean value;
-	private final String name;
+	private final String value;
+//	private final String name;
 	private final String type;
 
-	public Entry(long date, boolean value, String name, String type) {
+	public Entry(long date, String value, String type) {
 		this.date = date;
 		this.value = value;
-		this.name = name;
+//		this.name = name;
 		this.type = type;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+//	/**
+//	 * @return the name
+//	 */
+//	public String getName() {
+//		return name;
+//	}
 
 	/**
 	 * @return the type
@@ -33,6 +33,7 @@ public class Entry {
 	/**
 	 * @return the date
 	 */
+	@Override
 	public long getDate() {
 		return date;
 	}
@@ -40,13 +41,17 @@ public class Entry {
 	/**
 	 * @return the value
 	 */
-	public boolean isValue() {
+	public String getValue() {
 		return value;
+	}
+
+	public boolean getBoolean() {
+		return value.equals("1.000");
 	}
 
 	@Override
 	public String toString() {
 		return "T=" + new Date(date).toLocaleString() + " " + getType() + ": "
-				+ value + " in: " + getName();
+				+ value;
 	}
 }

@@ -118,10 +118,10 @@ public class HomeVizApplication extends Application {
 	public void randomizeLocationsOfPersons() {
 		for (Person person : persons) {
 			if (!person.equals(getCurrentUser())) {
-				int[] percantages = RandomNumberGenerator.genNumbers(
+				int[] percentages = RandomNumberGenerator.genNumbers(
 						rooms.size(), 100);
-				for (int i = 0; i < percantages.length; i++) {
-					rooms.get(i).setPercentageForPerson(person, percantages[i]);
+				for (int i = 0; i < percentages.length; i++) {
+					rooms.get(i).setPercentageForPerson(person, percentages[i]);
 				}
 			}
 		}

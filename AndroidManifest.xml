@@ -145,6 +145,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="robindecroon.homeviz.SettingsActivity"
+            android:label="@string/title_activity_settings" 
+            android:theme="@android:style/Theme.DeviceDefault">
+        </activity>
     </application>
 
 </manifest>
