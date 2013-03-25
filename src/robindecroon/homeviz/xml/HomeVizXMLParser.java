@@ -146,7 +146,7 @@ public class HomeVizXMLParser extends XMLParser {
 		String lightName = parser.getAttributeValue(null, "name");
 		int watt = Integer.parseInt(parser.getAttributeValue(null, "watt"));
 
-		Light light = new Light(lightName, watt);
+		Light light = new Light(lightName, watt, app);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, LIGHT_TAG);
@@ -160,7 +160,7 @@ public class HomeVizXMLParser extends XMLParser {
 		String name = parser.getAttributeValue(null, "name");
 		int watt = Integer.parseInt(parser.getAttributeValue(null, "watt"));
 
-		HomeCinema homeCinema = new HomeCinema(name, watt);
+		HomeCinema homeCinema = new HomeCinema(name, watt,app);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, HOMECINEMA_TAG);
@@ -174,7 +174,7 @@ public class HomeVizXMLParser extends XMLParser {
 		String name = parser.getAttributeValue(null, "name");
 		int watt = Integer.parseInt(parser.getAttributeValue(null, "watt"));
 
-		Appliance appliance = new Appliance(name, watt);
+		Appliance appliance = new Appliance(name, watt, app);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, APPLIANCE_TAG);
@@ -186,7 +186,7 @@ public class HomeVizXMLParser extends XMLParser {
 		parser.require(XmlPullParser.START_TAG, ns, WATER_TAG);
 
 		String name = parser.getAttributeValue(null, "name");
-		Water water = new Water(name);
+		Water water = new Water(name, app);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, WATER_TAG);

@@ -73,7 +73,6 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case Constants.LIGHT:
 				for (Light light : currentRoom.getLights()) {
-					System.out.println("new light");
 					consumers.add(light);
 				}
 				break;

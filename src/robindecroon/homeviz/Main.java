@@ -64,6 +64,8 @@ public class Main extends FragmentActivity implements LocationListener {
 	private NoDefaultSpinner yieldActionBarSpinner;
 
 	public static int page;
+	
+	public static boolean downloaded = false;
 
 	public void disableSpinners() {
 		usageActionBarSpinner.setEnabled(false);
@@ -119,10 +121,17 @@ public class Main extends FragmentActivity implements LocationListener {
 
 			}
 		}
+		if(!downloaded) {
+			downloadStatistics();
+			downloaded = true;
+		}
+	}
 
+	private void downloadStatistics() {
 		new DownloadLoxoneXMLTask(
-				((HomeVizApplication) getApplication()).getRooms())
+				((HomeVizApplication) getApplication()).getRooms(), this)
 				.execute(Constants.LOXONE_IP);
+		downloaded = true;
 	}
 
 	private void startTotalFragment(int selection) {
@@ -300,6 +309,8 @@ public class Main extends FragmentActivity implements LocationListener {
 		} else if (item.getItemId() == R.id.menu_settings) {
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
+		} else if (item.getItemId() == R.id.menu_refresh) {
+			downloadStatistics(); 
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -445,5 +456,10 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
+	}
+	
+	@Override
+	public void onBackPressed() {
+	    //
 	}
 }

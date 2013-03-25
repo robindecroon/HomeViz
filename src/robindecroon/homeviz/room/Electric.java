@@ -2,11 +2,13 @@ package robindecroon.homeviz.room;
 
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import android.content.Context;
+import android.util.Log;
 
 public class Electric extends Consumer {
 
-	public Electric(String name, int watt) {
-		super(name, watt);
+	public Electric(String name, int watt, Context context) {
+		super(name, watt, context);
 	}
 
 	@Override

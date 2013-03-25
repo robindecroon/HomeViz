@@ -14,4 +14,9 @@ public class PressureEntry implements IEntry {
 	public long getDate() {
 		return this.date;
 	}
+	
+	@Override
+	public String toString() {
+		return "entry: " + getDate();
+	}
 }

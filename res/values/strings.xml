@@ -88,5 +88,12 @@
     <string name="you_text">Which room consumes the most?</string>
     <string name="metaphor_image">Metaphor image</string>
     <string name="consumer_image">consumer image</string>
+    <string name="loxone_user">admin</string>
+    <string name="loxone_password">admin</string>
+    <string name="data_loaded">Statistics were successfully synchronized!</string>
+    <string name="menu_refresh">Resync statistics</string>
+    <string name="loxone_demo_multiplier">Loxone demo multiplier</string>
+    <string name="multiply_all_prices_with_your_multiplier">Multiply all prices with your multiplier</string>
+    <string name="demo_mode">Demo Mode</string>
 
 </resources>

@@ -21,21 +21,27 @@ import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.xml.Entry;
+import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.IEntry;
 import robindecroon.homeviz.xml.LoxoneXMLParser;
 import robindecroon.homeviz.xml.XMLReturnObject;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
 public class DownloadLoxoneXMLTask extends
 		AsyncTask<String, Void, Map<String, List<IEntry>>> {
-	
+
 	private List<Room> rooms;
-	
-	public DownloadLoxoneXMLTask(List<Room> rooms) {
+
+	private Context context;
+
+	public DownloadLoxoneXMLTask(List<Room> rooms, Context context) {
 		this.rooms = rooms;
+		this.context = context;
 	}
 
 	@Override
@@ -55,9 +61,9 @@ public class DownloadLoxoneXMLTask extends
 	@Override
 	protected void onPostExecute(Map<String, List<IEntry>> result) {
 		if (result != null) {
-			
+
 			for (String name : result.keySet()) {
-				for(Room room : rooms) {
+				for (Room room : rooms) {
 					try {
 						Consumer cons = room.getConsumerWithName(name);
 						cons.putEntries(result.get(name));
@@ -66,6 +72,8 @@ public class DownloadLoxoneXMLTask extends
 					}
 				}
 			}
+			ToastMessages.dataLoaded();
+			Log.i(getClass().getSimpleName(), "Downloading Statistics 100%!");
 		}
 	}
 
@@ -79,7 +87,13 @@ public class DownloadLoxoneXMLTask extends
 
 			client.connect(urlString);
 			client.enterLocalPassiveMode();
-			client.login(Constants.LOXONE_USER, Constants.LOXONE_PASSWORD);
+
+			SharedPreferences sp = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			String user = sp.getString("loxone_user", "admin");
+			;
+			String password = sp.getString("loxone_password", "admin");
+			client.login(user, password);
 			client.changeWorkingDirectory(Constants.WORKING_DIRECTORY);
 
 			FTPFile[] ftpFiles = client.listFiles();
@@ -96,8 +110,7 @@ public class DownloadLoxoneXMLTask extends
 					url = new URL("http://" + Constants.LOXONE_IP + "/stats/"
 							+ fileName + ".xml");
 					URLConnection httpConn = url.openConnection();
-					byte[] auth = (Constants.LOXONE_USER + ":" + Constants.LOXONE_PASSWORD)
-							.getBytes();
+					byte[] auth = (user + ":" + password).getBytes();
 					String basic = Base64.encodeToString(auth, Base64.NO_WRAP);
 					httpConn.setRequestProperty("Authorization", "Basic "
 							+ basic);
@@ -109,7 +122,7 @@ public class DownloadLoxoneXMLTask extends
 								+ fileName);
 						XMLReturnObject XMLResult = loxoneXMLParser.parse(in);
 						list.put(XMLResult.getName(), XMLResult.getEntries());
-//						list.add(loxoneXMLParser.parse(in));
+						// list.add(loxoneXMLParser.parse(in));
 					} else {
 						Log.e(getClass().getSimpleName(), "No inputstream for "
 								+ fileName);

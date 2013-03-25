@@ -44,6 +44,23 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
+    
+     <string-array name="pref_sync_demo_titles">
+        <item>x 10</item>
+        <item>x 20</item>
+        <item>x 30</item>
+        <item>x 50</item>
+        <item>x 100</item>
+        <item>Normal values</item>
+    </string-array>
+    <string-array name="pref_sync_demo_values">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>50</item>
+        <item>100</item>
+        <item>1</item>
+    </string-array>
 
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>

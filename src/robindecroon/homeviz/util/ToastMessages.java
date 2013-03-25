@@ -90,4 +90,10 @@ public class ToastMessages {
 				context.getResources().getString(R.string.too_fast),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void dataLoaded() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.data_loaded),
+				Toast.LENGTH_LONG).show();
+	}
 }

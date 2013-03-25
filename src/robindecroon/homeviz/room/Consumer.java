@@ -6,6 +6,10 @@ import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.xml.Entry;
 import robindecroon.homeviz.xml.IEntry;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 public abstract class Consumer {
 
@@ -19,10 +23,13 @@ public abstract class Consumer {
 
 	private double liter;
 	private List<IEntry> entries;
+	private Context context;
 
-	public Consumer(String name, int watt) {
+	public Consumer(String name, int watt, Context context) {
 		this.name = name;
 		this.watt = watt;
+		this.context = context;
+		
 	}
 
 	/**
@@ -61,18 +68,25 @@ public abstract class Consumer {
 	public double getAverageHoursOn() {
 		try {
 			long totalMillisOn = 0;
-			long first = entries.get(0).getDate();
-			boolean on = false;
+			long start = entries.get(0).getDate();
+			boolean on = true;
 			for(int i = 1; i < entries.size(); i++) {
-				if (on) {
-					long date = entries.get(i).getDate();
-					totalMillisOn += date - first;
+				IEntry entry = entries.get(i);
+				Log.i(getClass().getSimpleName(), entry.toString() + "with start: " + start + " and total: " + totalMillisOn); 
+				if(on) {
+					totalMillisOn += entry.getDate() - start;
 					on = false;
 				} else {
+					start = entry.getDate();
 					on = true;
 				}
+				
 			}
-			return totalMillisOn /3600000;
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+			int multiplier = Integer.valueOf(sp.getString("demo_multiplier", "1"));
+			double result = ((totalMillisOn * multiplier) /3600000);
+			Log.i(getClass().getSimpleName(), "Result for " + getName() +" : " + result);
+			return result;
 		} catch (Exception e) {
 			return averageHoursOn;
 		}
@@ -168,6 +182,15 @@ public abstract class Consumer {
 	}
 
 	public void putEntries(List<IEntry> list) {
+		int i = 0;
+		for(IEntry entry : list) {
+			if(entry == null)
+			{
+				System.out.println(i);
+			} else {
+				System.out.println("entry: " + entry.toString());				
+			}
+		}
 		this.entries = list;
 	}
 

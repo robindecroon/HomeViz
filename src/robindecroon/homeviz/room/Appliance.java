@@ -2,11 +2,12 @@ package robindecroon.homeviz.room;
 
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import android.content.Context;
 
 public class Appliance extends Consumer {
 
-	public Appliance(String name, int watt) {
-		super(name, watt);
+	public Appliance(String name, int watt, Context context) {
+		super(name, watt, context);
 	}
 
 	@Override

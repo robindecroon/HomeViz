@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -28,8 +29,8 @@ public class LoxoneXMLParser extends XMLParser {
 	private String name;
 	private String output;
 
-	public XMLReturnObject parse(InputStream stream) throws XmlPullParserException,
-			IOException {
+	public XMLReturnObject parse(InputStream stream)
+			throws XmlPullParserException, IOException {
 		try {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -58,14 +59,17 @@ public class LoxoneXMLParser extends XMLParser {
 			}
 			String name = parser.getName();
 			if (name.equals(DATE_TAG)) {
-				entries.add(readS(parser));
+				IEntry entry = readS(parser);
+				if (entry != null) {
+					entries.add(entry);
+				}
 			} else {
 				skip(parser);
 			}
 		}
 		return entries;
 	}
-	
+
 	private long idCounter;
 	private boolean switcher;
 
@@ -81,6 +85,11 @@ public class LoxoneXMLParser extends XMLParser {
 		long date = 0;
 		try {
 			date = df.parse(time).getTime();
+			if(date < 1359156322000L) {
+				parser.nextTag();
+				parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
+				return null;
+			}
 		} catch (ParseException e) {
 			Log.e(getClass().getSimpleName(),
 					"Parsing date failed: " + e.getMessage());
@@ -88,14 +97,14 @@ public class LoxoneXMLParser extends XMLParser {
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
 		IEntry entry = null;
-		if(output.equals("Q")) {
+		if (output.equals("Q")) {
 			if (switcher) {
 				entry = new PressureEntry(date, idCounter);
 				idCounter++;
 			}
 			switcher = !switcher;
 		} else {
-			entry = new Entry(date, valueString, output);			
+			entry = new Entry(date, valueString, output);
 		}
 		return entry;
 	}
