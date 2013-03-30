@@ -7,6 +7,9 @@ import java.net.CookieManager;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -48,12 +51,18 @@ public class DownloadLoxoneXMLTask extends
 	protected Map<String, List<IEntry>> doInBackground(String... urls) {
 		Log.i(getClass().getSimpleName(), "Synchronization with Loxone started");
 		try {
-			return loadXmlFromNetwork(urls[0]);
-		} catch (IOException e) {
-			Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
-			return null;
-		} catch (XmlPullParserException e) {
-			Log.e(getClass().getSimpleName(), "XML error: " + e.getMessage());
+			try {
+				return loadXmlFromNetwork(urls[0]);
+			} catch (IOException e) {
+				Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
+				return null;
+			} catch (XmlPullParserException e) {
+				Log.e(getClass().getSimpleName(), "XML error: " + e.getMessage());
+				return null;
+			}
+		} catch (Exception e) {
+			// lege foutmelding
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -80,7 +89,7 @@ public class DownloadLoxoneXMLTask extends
 	private Map<String, List<IEntry>> loadXmlFromNetwork(String urlString)
 			throws IOException, XmlPullParserException {
 
-		Map<String, List<IEntry>> list = new HashMap<String, List<IEntry>>();
+		Map<String, List<IEntry>> map = new HashMap<String, List<IEntry>>();
 
 		FTPClient client = new FTPClient();
 		try {
@@ -101,6 +110,7 @@ public class DownloadLoxoneXMLTask extends
 			for (FTPFile ftpFile : ftpFiles) {
 				fileNames.add(ftpFile.getName());
 			}
+			Log.i(getClass().getSimpleName(), "File names found!"); 
 			// needed for authentication
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
@@ -121,15 +131,22 @@ public class DownloadLoxoneXMLTask extends
 						Log.i(getClass().getSimpleName(), "Started parsing "
 								+ fileName);
 						XMLReturnObject XMLResult = loxoneXMLParser.parse(in);
-						list.put(XMLResult.getName(), XMLResult.getEntries());
-						// list.add(loxoneXMLParser.parse(in));
+						List<IEntry> entries = XMLResult.getEntries();
+						Collections.sort(entries, new Comparator<IEntry>() {
+
+							@Override
+							public int compare(IEntry lhs, IEntry rhs) {
+								return Long.valueOf(lhs.getDate()).compareTo(Long.valueOf(rhs.getDate()));
+							}
+						});
+						map.put(XMLResult.getName(), entries );
 					} else {
 						Log.e(getClass().getSimpleName(), "No inputstream for "
 								+ fileName);
 					}
 
 				} catch (Exception e) {
-					Log.e(getClass().getSimpleName(), e.getMessage());
+					e.printStackTrace();
 				}
 			}
 
@@ -144,7 +161,7 @@ public class DownloadLoxoneXMLTask extends
 				client.disconnect();
 			}
 		}
-		return list;
+		return map;
 	}
 
 }

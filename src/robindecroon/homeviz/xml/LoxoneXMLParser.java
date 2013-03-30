@@ -11,6 +11,8 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import robindecroon.homeviz.Constants;
+
 import android.annotation.SuppressLint;
 import android.util.Log;
 import android.util.Xml;
@@ -70,9 +72,6 @@ public class LoxoneXMLParser extends XMLParser {
 		return entries;
 	}
 
-	private long idCounter;
-	private boolean switcher;
-
 	@SuppressLint("SimpleDateFormat")
 	private IEntry readS(XmlPullParser parser) throws IOException,
 			XmlPullParserException {
@@ -81,11 +80,11 @@ public class LoxoneXMLParser extends XMLParser {
 		String time = parser.getAttributeValue(null, DATE_ATTRIBUTE);
 		String valueString = parser.getAttributeValue(null, output);
 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		long date = 0;
 		try {
 			date = df.parse(time).getTime();
-			if(date < 1359156322000L) {
+			if (date < Constants.CURRENT_TIME) {
 				parser.nextTag();
 				parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
 				return null;
@@ -96,16 +95,12 @@ public class LoxoneXMLParser extends XMLParser {
 		}
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
-		IEntry entry = null;
-		if (output.equals("Q")) {
-			if (switcher) {
-				entry = new PressureEntry(date, idCounter);
-				idCounter++;
-			}
-			switcher = !switcher;
-		} else {
-			entry = new Entry(date, valueString, output);
-		}
-		return entry;
+		// IEntry entry = null;
+		// if (output.equals("Q")) {
+		// entry = new PressureEntry(date, );
+		// } else {
+		return new Entry(date, valueString, output);
+		// }
+		// return entry;
 	}
 }

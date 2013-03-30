@@ -12,7 +12,7 @@ public class Appliance extends Consumer {
 
 	@Override
 	public Amount getPrice(Period currentPeriod) {
-		double power = getWatt() * getAverageHoursOn() / 1000;
+		double power = getWatt() * getAverageHoursOn(currentPeriod) / 1000;
 		Amount price1 = new Amount(power).multiply(getKwhPrice());
 		Amount price2 = new Amount(getLiter() * getWaterPrice().getEuroValue());
 		Amount price = price1.add(price2);

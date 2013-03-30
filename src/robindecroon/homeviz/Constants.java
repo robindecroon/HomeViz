@@ -1,9 +1,14 @@
 package robindecroon.homeviz;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import android.graphics.Color;
 
 public class Constants {
-
+	
+	public final static long CURRENT_TIME = getStartTime("2013-03-26 10:22:00");
+	
 	/*
 	 * Configuration
 	 */
@@ -75,4 +80,15 @@ public class Constants {
 	public final static double BOTTLE_CONTENT = 1.5;
 	public static final String METAPHOR_WATER_TEXT = " bottles of water";
 	public static final String METAPHOR_CONSUMER_NAME = "consumerName";
+	
+	
+	private static long getStartTime(String date) {
+		try {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+			return df.parse(date).getTime();
+		} catch (ParseException e) {
+			return 0;
+		}
+	}
+
 }

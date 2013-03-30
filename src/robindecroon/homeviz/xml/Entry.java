@@ -15,6 +15,11 @@ public class Entry implements IEntry {
 //		this.name = name;
 		this.type = type;
 	}
+	
+	public boolean getState() {
+		return false;
+	}
+	
 
 //	/**
 //	 * @return the name

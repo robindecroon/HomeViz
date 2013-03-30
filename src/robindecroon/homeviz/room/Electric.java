@@ -13,16 +13,16 @@ public class Electric extends Consumer {
 
 	@Override
 	public Amount getPrice(Period currentPeriod) {
-		Amount price = new Amount(getPower()).multiply(getKwhPrice());
+		Amount price = new Amount(getPower(currentPeriod)).multiply(getKwhPrice());
 		return price.multiply(currentPeriod.getMultiplier());
 	}
 
-	public double getPower() {
-		return getWatt() * getAverageHoursOn() / 1000;
+	public double getPower(Period period) {
+		return getWatt() * getAverageHoursOn(period) / 1000;
 	}
 
 	public double getPowerUsage(Period period) {
-		return getPower() * period.getMultiplier();
+		return getPower(period) * period.getMultiplier();
 	}
 
 }
