@@ -25,6 +25,7 @@ import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerLi
 import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
+import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
 import android.app.ActionBar;
@@ -56,7 +57,9 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static int lastCatergory;
 	public static int lastPosition;
 
-	private static boolean INIT = true;
+	public static Period currentPeriod = Period.WEEK;
+
+	private boolean INIT = true;
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
@@ -64,7 +67,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	private NoDefaultSpinner yieldActionBarSpinner;
 
 	public static int page;
-	
+
 	public static boolean downloaded = false;
 
 	public void disableSpinners() {
@@ -121,7 +124,7 @@ public class Main extends FragmentActivity implements LocationListener {
 
 			}
 		}
-		if(!downloaded) {
+		if (!downloaded) {
 			downloadStatistics();
 			downloaded = true;
 		}
@@ -240,7 +243,6 @@ public class Main extends FragmentActivity implements LocationListener {
 			HomeVizXMLParser parser = new HomeVizXMLParser(
 					(HomeVizApplication) getApplication());
 			parser.parse(in);
-			app.randomizeLocationsOfPersons();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (XmlPullParserException e) {
@@ -310,7 +312,7 @@ public class Main extends FragmentActivity implements LocationListener {
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.menu_refresh) {
-			downloadStatistics(); 
+			downloadStatistics();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -457,9 +459,9 @@ public class Main extends FragmentActivity implements LocationListener {
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-	    //
+		//
 	}
 }

@@ -1,7 +1,6 @@
 package robindecroon.homeviz.room;
 
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Period;
 import android.content.Context;
 
 public class Heating extends Consumer {
@@ -11,7 +10,7 @@ public class Heating extends Consumer {
 	}
 
 	@Override
-	public Amount getPrice(Period currentPeriod) {
+	public Amount getPrice() {
 		// TODO
 		return new Amount(Math.random() * 10);
 	}

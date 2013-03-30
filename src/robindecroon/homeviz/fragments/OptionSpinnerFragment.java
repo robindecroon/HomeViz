@@ -3,7 +3,7 @@ package robindecroon.homeviz.fragments;
 import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
-import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.Main;
 import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
 import robindecroon.homeviz.fragments.total.TotalTreeMapFragment;
 import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
@@ -26,8 +26,9 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
 		PeriodListener periodListener = new PeriodListener(getActivity());
 		OptionSpinner spinner = (OptionSpinner) v.findViewById(id);
-		spinner.setIndex(((HomeVizApplication) getActivity().getApplication())
-				.getCurrentPeriod().getId());
+		// spinner.setIndex(((HomeVizApplication)
+		// getActivity().getApplication())
+		// .getCurrentPeriod().getId());
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
 		spinner.setOnClickListener(periodListener);
@@ -39,20 +40,23 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 			if (period != Period.CUSTOM)
 				namePeriods[i] = period.getName(getActivity());
 		}
+		spinner.setIndex(Main.currentPeriod.getId());
 		spinner.setOptions(namePeriods);
 		spinner.addListener(this);
 	}
 
 	@Override
-	public void optionChanged(int index, String name) {
+	public void optionChanged(final int index, String name) {
+		Main.currentPeriod = Period.getPeriod(index);
 		try {
-			((HomeVizApplication) getActivity().getApplication())
-					.setCurrentPeriod(Period.values()[index]);
-			Log.i(getClass().getSimpleName(),
-					"Current period: " + Period.values()[index]);
+			// final HomeVizApplication app = ((HomeVizApplication)
+			// getActivity().getApplication());
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
+					// app.setCurrentPeriod(Period.values()[index]);
+					// Log.i(getClass().getSimpleName(),
+					// "Current period: " + app.getCurrentPeriod());
 					try {
 						UsageContainerFragment.resetViews();
 					} catch (Exception e) {

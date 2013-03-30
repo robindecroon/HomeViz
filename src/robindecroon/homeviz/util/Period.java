@@ -213,6 +213,15 @@ public enum Period {
 		return end;
 	}
 
+	public static Period getPeriod(int id) {
+		for (Period period : values()) {
+			if (period.getId() == id) {
+				return period;
+			}
+		}
+		return Period.CUSTOM;
+	}
+
 	public abstract int getMultiplier();
 
 	public abstract int getId();

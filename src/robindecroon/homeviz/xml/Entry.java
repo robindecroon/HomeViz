@@ -6,27 +6,27 @@ public class Entry implements IEntry {
 
 	private final long date;
 	private final String value;
-//	private final String name;
+	// private final String name;
 	private final String type;
 
 	public Entry(long date, String value, String type) {
 		this.date = date;
 		this.value = value;
-//		this.name = name;
+		// this.name = name;
 		this.type = type;
 	}
-	
-	public boolean getState() {
-		return false;
-	}
-	
 
-//	/**
-//	 * @return the name
-//	 */
-//	public String getName() {
-//		return name;
-//	}
+	@Override
+	public boolean getState() {
+		return !value.equals("0.000");
+	}
+
+	// /**
+	// * @return the name
+	// */
+	// public String getName() {
+	// return name;
+	// }
 
 	/**
 	 * @return the type
@@ -51,7 +51,7 @@ public class Entry implements IEntry {
 	}
 
 	public boolean getBoolean() {
-		return value.equals("1.000");
+		return !value.equals("0.000");
 	}
 
 	@Override

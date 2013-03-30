@@ -6,7 +6,6 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.listeners.ConsumerOnClickListener;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.util.Period;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,8 +35,6 @@ public class UsageFragment extends OptionSpinnerFragment {
 		}
 		final int finalRoomIndex = roomIndex;
 
-		Period currentPeriod = app.getCurrentPeriod();
-
 		// Lights
 		LinearLayout lights = (LinearLayout) rootView
 				.findViewById(R.id.light_layout);
@@ -45,7 +42,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				getActivity(), Constants.LIGHT));
 		TextView light = (TextView) rootView
 				.findViewById(R.id.usage_light_price);
-		light.setText(currentRoom.getLightPrice(currentPeriod).toString());
+		light.setText(currentRoom.getLightPrice().toString());
 
 		// Water
 		LinearLayout waters = (LinearLayout) rootView
@@ -54,7 +51,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				getActivity(), Constants.WATER));
 		TextView water = (TextView) rootView
 				.findViewById(R.id.usage_water_price);
-		water.setText(currentRoom.getWaterPrice(currentPeriod).toString());
+		water.setText(currentRoom.getWaterPrice().toString());
 
 		// Heating
 		LinearLayout heatings = (LinearLayout) rootView
@@ -63,7 +60,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				getActivity(), Constants.HEATING));
 		TextView heating = (TextView) rootView
 				.findViewById(R.id.usage_heating_price);
-		heating.setText(currentRoom.getHeating(currentPeriod).toString());
+		heating.setText(currentRoom.getHeating().toString());
 
 		// Appliances
 		LinearLayout appliances = (LinearLayout) rootView
@@ -72,8 +69,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				finalRoomIndex, getActivity(), Constants.APPLIANCE));
 		TextView appliance = (TextView) rootView
 				.findViewById(R.id.usage_appliances_price);
-		appliance.setText(currentRoom.getAppliancesPrice(currentPeriod)
-				.toString());
+		appliance.setText(currentRoom.getAppliancesPrice().toString());
 
 		// Home Cinema
 		LinearLayout homeCinemas = (LinearLayout) rootView
@@ -82,13 +78,12 @@ public class UsageFragment extends OptionSpinnerFragment {
 				finalRoomIndex, getActivity(), Constants.HOMECINEMA));
 		TextView homeCinema = (TextView) rootView
 				.findViewById(R.id.usage_tv_price);
-		homeCinema.setText(currentRoom.getHomeCinemaPrice(currentPeriod)
-				.toString());
+		homeCinema.setText(currentRoom.getHomeCinemaPrice().toString());
 
 		// Total
 		final TextView usageAmount = (TextView) rootView
 				.findViewById(R.id.usage_amount);
-		usageAmount.setText(currentRoom.getTotalPrice(currentPeriod));
+		usageAmount.setText(currentRoom.getTotalPrice());
 
 		// Time
 		initOptionSpinner(rootView, R.id.topSpinner, R.id.topArrowLeft,

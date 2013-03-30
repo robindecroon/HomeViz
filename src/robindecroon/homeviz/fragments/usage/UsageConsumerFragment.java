@@ -18,7 +18,6 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.ImageScaler;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.usage.UsageActivityUtils;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,17 +51,15 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 			Log.e(getClass().getSimpleName(), "No room arguments");
 		}
 
-		Period currentPeriod = app.getCurrentPeriod();
-
 		initOptionSpinner(rootView, R.id.sub_spinner, R.id.sub_arrow_left,
 				R.id.sub_arrow_right);
 
-		setAmounts(rootView, currentRoom, currentPeriod);
+		setAmounts(rootView, currentRoom);
 
 		return rootView;
 	}
 
-	private void setAmounts(View v, Room currentRoom, Period currentPeriod) {
+	private void setAmounts(View v, Room currentRoom) {
 		LinearLayout subLayout = (LinearLayout) v
 				.findViewById(R.id.sub_container);
 		subLayout.removeAllViews();
@@ -131,7 +128,7 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 				text.setLayoutParams(new LinearLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				text.setTextSize(40);
-				Amount price = consumer.getPrice(currentPeriod);
+				Amount price = consumer.getPrice();
 				sum = sum.add(price);
 				text.setText(price.toString());
 

@@ -50,7 +50,7 @@
 		<Water name="kraan7" />
 	</Room>
 	<Room name="Loxone">
-		<Light name="drukknopi7" watt="100" />
+		<Light name="ledverlichtingdimbarelamp" watt="100" />
 		<Light name="drukknopalarm" watt="100" />
 		<Appliance name="drukknopi2" watt="100" />
 		<Appliance name="drukknopi3" watt="100" />

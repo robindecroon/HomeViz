@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -336,6 +337,7 @@ public class OptionSpinner extends View implements
 
 			// Notify change.
 			notifyChanged(index, currentText);
+			Log.i(getClass().getSimpleName(), "new index: " + index);
 
 			// Check the animation stack
 			if (animationStack.size() > 0) {

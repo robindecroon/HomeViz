@@ -1,15 +1,14 @@
 package robindecroon.homeviz.room;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
+import robindecroon.homeviz.Main;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.xml.IEntry;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public abstract class Consumer {
 
@@ -30,7 +29,7 @@ public abstract class Consumer {
 		this.watt = watt;
 		this.context = context;
 		this.averageHoursOn = Math.random();
-		
+
 	}
 
 	/**
@@ -63,70 +62,57 @@ public abstract class Consumer {
 		this.watt = watt;
 	}
 
-	private boolean debug = false;
-	
 	/**
 	 * @return the averageMinOn
 	 */
-	public double getAverageHoursOn(Period period) {
+	public double getAverageHoursOn() {
+		Period period = Main.currentPeriod;
 		try {
-			if(entries != null) debug = true;
-			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-			int multiplier = Integer.valueOf(sp.getString("demo_multiplier", "1"));
-			
+			SharedPreferences sp = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			int multiplier = Integer.valueOf(sp.getString("demo_multiplier",
+					"1"));
+
 			long totalMillisOn = 0;
-			  
+
 			long end = period.getEnd().getTimeInMillis();
 			long begin = period.getBegin().getTimeInMillis();
-			
-			boolean on = true;
+
 			int startI = 0;
 			int endI = 0;
-			for(int i = 1; i < entries.size(); i++) {
+			for (int i = 1; i < entries.size(); i++) {
 				IEntry entry = entries.get(i);
-				if(entry.getDate() >= begin) {
+				if (entry.getDate() >= begin) {
 					startI = i;
 					break;
 				}
 			}
-			if(startI == 0) {
+			if (startI == 0) {
 				return 0;
 			}
-			for(int j = startI; j < entries.size(); j++) {
+			for (int j = startI; j < entries.size(); j++) {
 				IEntry entry = entries.get(j);
-				if(entry.getDate() > end) {
+				if (entry.getDate() > end) {
 					endI = j - 1;
 					break;
 				}
 			}
-			if(endI == 0) endI = entries.size() - 1;
-			
-			
+			if (endI == 0)
+				endI = entries.size() - 1;
+
 			long start = entries.get(startI).getDate();
-			for(int k = startI + 1; k <= endI; k++) {
+			for (int k = startI + 1; k <= endI; k++) {
+
 				IEntry entry = entries.get(k);
-				if(!entry.getState()) {
+				if (!entry.getState()) {
 					totalMillisOn += entry.getDate() - start;
 				} else {
 					start = entry.getDate();
 				}
 			}
-			double result = ((totalMillisOn * multiplier) /3600000);
-			
-			
-			if(getName().equals("drukknopi7")) {
-				Log.i(getName(), "startMilles: " + begin);
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Log.i(getName(), "today: " + df.parse("2013-03-30 00:00:00").getTime());
-				Log.i(getName(), "totalMillisOn: " + totalMillisOn); 
-				Log.i(getName(), "startI: " + startI);
-				Log.i(getName(), "endI: " + endI);
-			}
-			
-			return result;
+			return (totalMillisOn * multiplier) / 3600000.0;
 		} catch (Exception e) {
-			if(debug) e.printStackTrace();
-			return averageHoursOn;
+			return averageHoursOn * period.getMultiplier();
 		}
 	}
 
@@ -186,7 +172,7 @@ public abstract class Consumer {
 		this.name = name;
 	}
 
-	public abstract Amount getPrice(Period currentPeriod);
+	public abstract Amount getPrice();
 
 	@Override
 	public String toString() {

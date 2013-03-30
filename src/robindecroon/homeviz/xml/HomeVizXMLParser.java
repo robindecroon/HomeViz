@@ -160,7 +160,7 @@ public class HomeVizXMLParser extends XMLParser {
 		String name = parser.getAttributeValue(null, "name");
 		int watt = Integer.parseInt(parser.getAttributeValue(null, "watt"));
 
-		HomeCinema homeCinema = new HomeCinema(name, watt,app);
+		HomeCinema homeCinema = new HomeCinema(name, watt, app);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, HOMECINEMA_TAG);

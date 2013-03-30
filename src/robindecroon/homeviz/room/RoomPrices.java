@@ -1,28 +1,27 @@
 package robindecroon.homeviz.room;
 
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Period;
 
 public interface RoomPrices {
 
 	/**
 	 * @return the light
 	 */
-	public abstract Amount getLightPrice(Period currentPeriod);
+	public abstract Amount getLightPrice();
 
 	/**
 	 * @return the water
 	 */
-	public abstract Amount getWaterPrice(Period currentPeriod);
+	public abstract Amount getWaterPrice();
 
 	/**
 	 * @return the appliances
 	 */
-	public abstract Amount getAppliancesPrice(Period currentPeriod);
+	public abstract Amount getAppliancesPrice();
 
 	/**
 	 * @return the tv
 	 */
-	public abstract Amount getHomeCinemaPrice(Period currentPeriod);
+	public abstract Amount getHomeCinemaPrice();
 
 }

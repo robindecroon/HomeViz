@@ -4,6 +4,7 @@ import java.util.Map;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.room.Room;
@@ -39,8 +40,6 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 			Log.e(getClass().getSimpleName(), "No room arguments");
 		}
 
-		Period currentPeriod = app.getCurrentPeriod();
-
 		initOptionSpinner(rootView, R.id.chart_spinner, R.id.chart_arraw_left,
 				R.id.chart_arrow_right);
 
@@ -51,7 +50,7 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 		chart.getSettings().setUseWideViewPort(true);
 		chart.getSettings().setLoadWithOverviewMode(true);
 
-		Map<String, Amount> map = currentRoom.getPricesMap(currentPeriod);
+		Map<String, Amount> map = currentRoom.getPricesMap();
 		if (!map.isEmpty()) {
 			GoogleChartType type;
 			switch (getArguments().getInt(Constants.FRAGMENT_BUNDLE_TYPE)) {
@@ -66,7 +65,7 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 						+ getArguments().getInt(Constants.FRAGMENT_BUNDLE_TYPE));
 			}
 			String url = GoogleChartTools.getUsageViz("Usage details",
-					currentPeriod, getActivity(), map, chart.getWidth(),
+					Main.currentPeriod, getActivity(), map, chart.getWidth(),
 					chart.getHeight(), type);
 			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
 					"UTF-8", null);

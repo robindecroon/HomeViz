@@ -7,7 +7,6 @@ import java.net.CookieManager;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -57,7 +56,8 @@ public class DownloadLoxoneXMLTask extends
 				Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 				return null;
 			} catch (XmlPullParserException e) {
-				Log.e(getClass().getSimpleName(), "XML error: " + e.getMessage());
+				Log.e(getClass().getSimpleName(),
+						"XML error: " + e.getMessage());
 				return null;
 			}
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class DownloadLoxoneXMLTask extends
 			for (FTPFile ftpFile : ftpFiles) {
 				fileNames.add(ftpFile.getName());
 			}
-			Log.i(getClass().getSimpleName(), "File names found!"); 
+			Log.i(getClass().getSimpleName(), "File names found!");
 			// needed for authentication
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
@@ -136,10 +136,11 @@ public class DownloadLoxoneXMLTask extends
 
 							@Override
 							public int compare(IEntry lhs, IEntry rhs) {
-								return Long.valueOf(lhs.getDate()).compareTo(Long.valueOf(rhs.getDate()));
+								return Long.valueOf(lhs.getDate()).compareTo(
+										Long.valueOf(rhs.getDate()));
 							}
 						});
-						map.put(XMLResult.getName(), entries );
+						map.put(XMLResult.getName(), entries);
 					} else {
 						Log.e(getClass().getSimpleName(), "No inputstream for "
 								+ fileName);

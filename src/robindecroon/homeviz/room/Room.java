@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import robindecroon.homeviz.Main;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.Person;
 
 /**
@@ -65,20 +65,20 @@ public class Room implements RoomPrices {
 		this.heating = new Amount(Math.random());
 	};
 
-	public Map<String, Amount> getPricesMap(Period period) {
+	public Map<String, Amount> getPricesMap() {
 		Map<String, Amount> map = new HashMap<String, Amount>();
-		map.put("Light", getLightPrice(period));
-		map.put("Water", getWaterPrice(period));
-		map.put("Heating", getHeating(period));
-		map.put("Appliances", getAppliancesPrice(period));
-		map.put("Home Cinema", getHomeCinemaPrice(period));
+		map.put("Light", getLightPrice());
+		map.put("Water", getWaterPrice());
+		map.put("Heating", getHeating());
+		map.put("Appliances", getAppliancesPrice());
+		map.put("Home Cinema", getHomeCinemaPrice());
 		return map;
 	}
 
-	public Map<String, Amount> getLightsMap(Period period) {
+	public Map<String, Amount> getLightsMap() {
 		Map<String, Amount> map = new HashMap<String, Amount>();
 		for (Light light : lights) {
-			map.put(light.getName(), light.getPrice(period));
+			map.put(light.getName(), light.getPrice());
 		}
 		return map;
 	}
@@ -105,10 +105,10 @@ public class Room implements RoomPrices {
 		return name;
 	}
 
-	public CharSequence getTotalPrice(Period p) {
-		Amount total = getLightPrice(p).add(getWaterPrice(p))
-				.add(getAppliancesPrice(p)).add(getHomeCinemaPrice(p))
-				.add(getHeating(p));
+	public CharSequence getTotalPrice() {
+		Amount total = getLightPrice().add(getWaterPrice())
+				.add(getAppliancesPrice()).add(getHomeCinemaPrice())
+				.add(getHeating());
 		return total.toString();
 	}
 
@@ -120,10 +120,10 @@ public class Room implements RoomPrices {
 	 * .util.Period)
 	 */
 	@Override
-	public Amount getLightPrice(Period currentPeriod) {
+	public Amount getLightPrice() {
 		Amount total = new Amount(0);
 		for (Light light : lights) {
-			total = total.add(light.getPrice(currentPeriod));
+			total = total.add(light.getPrice());
 		}
 		return total;
 	}
@@ -136,10 +136,10 @@ public class Room implements RoomPrices {
 	 * .util.Period)
 	 */
 	@Override
-	public Amount getWaterPrice(Period currentPeriod) {
+	public Amount getWaterPrice() {
 		Amount total = new Amount(0);
 		for (Water water : waters) {
-			total = total.add(water.getPrice(currentPeriod));
+			total = total.add(water.getPrice());
 		}
 		return total;
 	}
@@ -147,8 +147,8 @@ public class Room implements RoomPrices {
 	/**
 	 * @return the heating
 	 */
-	public Amount getHeating(Period currentPeriod) {
-		return heating.multiply(currentPeriod.getMultiplier());
+	public Amount getHeating() {
+		return heating.multiply(Main.currentPeriod.getMultiplier());
 	}
 
 	/**
@@ -167,10 +167,10 @@ public class Room implements RoomPrices {
 	 * homeviz.util.Period)
 	 */
 	@Override
-	public Amount getAppliancesPrice(Period currentPeriod) {
+	public Amount getAppliancesPrice() {
 		Amount total = new Amount(0);
 		for (Appliance appliance : appliances) {
-			total = total.add(appliance.getPrice(currentPeriod));
+			total = total.add(appliance.getPrice());
 		}
 		return total;
 	}
@@ -183,10 +183,10 @@ public class Room implements RoomPrices {
 	 * homeviz.util.Period)
 	 */
 	@Override
-	public Amount getHomeCinemaPrice(Period currentPeriod) {
+	public Amount getHomeCinemaPrice() {
 		Amount total = new Amount(0);
 		for (HomeCinema homeCinema : homeCinemas) {
-			total = total.add(homeCinema.getPrice(currentPeriod));
+			total = total.add(homeCinema.getPrice());
 		}
 		return total;
 	}
@@ -302,7 +302,7 @@ public class Room implements RoomPrices {
 			return list;
 		}
 	}
-	
+
 	public Consumer getConsumerWithName(String name) throws NoSuchDevicesInRoom {
 		List<Consumer> consumers = new ArrayList<Consumer>();
 		consumers.addAll(appliances);
@@ -310,7 +310,7 @@ public class Room implements RoomPrices {
 		consumers.addAll(waters);
 		consumers.addAll(homeCinemas);
 		consumers.addAll(lights);
-		for(Consumer cons: consumers) {
+		for (Consumer cons : consumers) {
 			if (cons.getName().equalsIgnoreCase(name))
 				return cons;
 		}

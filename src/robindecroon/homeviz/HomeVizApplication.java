@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import libraries.stackoverflow.RandomNumberGenerator;
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.ImageScaler;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.Person;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Application;
@@ -29,11 +27,6 @@ import com.facebook.model.GraphUser;
  * 
  */
 public class HomeVizApplication extends Application {
-
-	/**
-	 * De huidige periode.
-	 */
-	private Period currentPeriod = Period.WEEK;
 
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Person> persons = new ArrayList<Person>();
@@ -84,25 +77,6 @@ public class HomeVizApplication extends Application {
 		ImageScaler.setContext(this);
 	}
 
-	/**
-	 * Geef de huidige periode in welke staat de app zich bevindt.
-	 * 
-	 * @return the currentPeriod
-	 */
-	public Period getCurrentPeriod() {
-		return currentPeriod;
-	}
-
-	/**
-	 * Stel een nieuwe periode in.
-	 * 
-	 * @param currentPeriod
-	 *            the currentPeriod to set
-	 */
-	public void setCurrentPeriod(Period currentPeriod) {
-		this.currentPeriod = currentPeriod;
-	}
-
 	public void addPerson(Person person) {
 		this.persons.add(person);
 	}
@@ -113,18 +87,6 @@ public class HomeVizApplication extends Application {
 
 	public void setCountries(Map<String, Country> map) {
 		this.countryMap = map;
-	}
-
-	public void randomizeLocationsOfPersons() {
-		for (Person person : persons) {
-			if (!person.equals(getCurrentUser())) {
-				int[] percentages = RandomNumberGenerator.genNumbers(
-						rooms.size(), 100);
-				for (int i = 0; i < percentages.length; i++) {
-					rooms.get(i).setPercentageForPerson(person, percentages[i]);
-				}
-			}
-		}
 	}
 
 	public List<Room> getRooms() {
@@ -164,8 +126,6 @@ public class HomeVizApplication extends Application {
 	public void reset() {
 		try {
 			countryMap.clear();
-			currentPeriod = Period.WEEK;
-			// currentRoomIndex = 0;
 			facebookUser = null;
 			persons.clear();
 			rooms.clear();

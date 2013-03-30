@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -53,7 +52,8 @@ public class LoxoneXMLParser extends XMLParser {
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
 
 		String tempName = parser.getAttributeValue(null, NAME_ATTRIBUTE);
-		name = tempName.toLowerCase().replaceAll(" ", "");
+		name = tempName.toLowerCase().replaceAll(" ", "").replace("-", "")
+				.replace(">", "");
 		output = parser.getAttributeValue(null, OUTPUTS);
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {

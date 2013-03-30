@@ -3,7 +3,6 @@ package robindecroon.homeviz.room;
 import java.util.List;
 
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Period;
 
 public class House extends Room {
 
@@ -15,37 +14,37 @@ public class House extends Room {
 	}
 
 	@Override
-	public Amount getLightPrice(Period currentPeriod) {
+	public Amount getLightPrice() {
 		Amount total = new Amount(0);
 		for (Room room : rooms) {
-			total = total.add(room.getLightPrice(currentPeriod));
+			total = total.add(room.getLightPrice());
 		}
 		return total;
 	}
 
 	@Override
-	public Amount getWaterPrice(Period currentPeriod) {
+	public Amount getWaterPrice() {
 		Amount total = new Amount(0);
 		for (Room room : rooms) {
-			total = total.add(room.getWaterPrice(currentPeriod));
+			total = total.add(room.getWaterPrice());
 		}
 		return total;
 	}
 
 	@Override
-	public Amount getAppliancesPrice(Period currentPeriod) {
+	public Amount getAppliancesPrice() {
 		Amount total = new Amount(0);
 		for (Room room : rooms) {
-			total = total.add(room.getAppliancesPrice(currentPeriod));
+			total = total.add(room.getAppliancesPrice());
 		}
 		return total;
 	}
 
 	@Override
-	public Amount getHomeCinemaPrice(Period currentPeriod) {
+	public Amount getHomeCinemaPrice() {
 		Amount total = new Amount(0);
 		for (Room room : rooms) {
-			total = total.add(room.getHomeCinemaPrice(currentPeriod));
+			total = total.add(room.getHomeCinemaPrice());
 		}
 		return total;
 	}
