@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+@SuppressWarnings("rawtypes")
 public class MyExpandableAdapter extends BaseExpandableListAdapter {
 
 	private List<Room> groups;

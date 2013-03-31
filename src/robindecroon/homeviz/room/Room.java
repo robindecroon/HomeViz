@@ -1,8 +1,10 @@
 package robindecroon.homeviz.room;
 
+import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import robindecroon.homeviz.Main;
@@ -23,6 +25,7 @@ public class Room implements RoomPrices {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	@SuppressLint("DefaultLocale")
 	@Override
 	public String toString() {
 		return getName().toUpperCase();

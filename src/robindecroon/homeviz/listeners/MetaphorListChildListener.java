@@ -39,6 +39,7 @@ public class MetaphorListChildListener implements
 			case Constants.METAPHOR_TYPE_CO2:
 				newArgs.putString(Constants.METAPHOR_VALUE, consumer
 						.getCO2Value().toString());
+
 				newArgs.putInt(Constants.METAPHOR_TYPE,
 						Constants.METAPHOR_TYPE_CO2);
 				break;

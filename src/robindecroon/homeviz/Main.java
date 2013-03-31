@@ -59,7 +59,9 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	public static Period currentPeriod = Period.WEEK;
 
-	private boolean INIT = true;
+	
+	
+	private static boolean INIT = true;
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;

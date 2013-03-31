@@ -13,4 +13,9 @@ public class Water extends Consumer {
 	public Amount getPrice() {
 		return new Amount(getLiter() * getWaterPrice().getEuroValue());
 	}
+
+	@Override
+	public double getPower() {
+		return 0;
+	}
 }

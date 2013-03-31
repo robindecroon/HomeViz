@@ -12,7 +12,7 @@ public class CO2 {
 
 	public CO2 add(CO2 other) {
 		return new CO2((value * unit.getMultiplier())
-				* (other.getValue() * other.getUnit().getMultiplier()),
+				+ (other.getValue() * other.getUnit().getMultiplier()),
 				WeightUnit.GRAM);
 	}
 

@@ -1,6 +1,8 @@
 package robindecroon.homeviz.xml;
 
+import android.annotation.SuppressLint;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Entry implements IEntry {
 
@@ -54,9 +56,11 @@ public class Entry implements IEntry {
 		return !value.equals("0.000");
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public String toString() {
-		return "T=" + new Date(date).toLocaleString() + " " + getType() + ": "
+		SimpleDateFormat df = new SimpleDateFormat();
+		return "T=" + df.format(new Date(date)) + " " + getType() + ": "
 				+ value;
 	}
 }

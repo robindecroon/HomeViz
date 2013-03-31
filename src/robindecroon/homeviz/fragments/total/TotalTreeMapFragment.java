@@ -43,17 +43,16 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment {
 				.findViewById(R.id.you_current_user);
 		userView.setText(R.string.you_text);
 
-		GraphUser user = ((HomeVizApplication) getActivity().getApplication())
-				.getFacebookUser();
-		if (user != null) {
-			LinearLayout layout = (LinearLayout) rootView
-					.findViewById(R.id.you_user_layout);
-			layout.removeAllViews();
-			ProfilePictureView profilePictureView = new ProfilePictureView(
-					getActivity());
-			profilePictureView.setProfileId(user.getId());
-			layout.addView(profilePictureView);
-		}
+//		GraphUser user = ((HomeVizApplication) getActivity().getApplication()).getFacebookUser();
+//		if (user != null) {
+//			LinearLayout layout = (LinearLayout) rootView
+//					.findViewById(R.id.you_user_layout);
+//			layout.removeAllViews();
+//			ProfilePictureView profilePictureView = new ProfilePictureView(
+//					getActivity());
+//			profilePictureView.setProfileId(user.getId());
+//			layout.addView(profilePictureView);
+//		}
 
 		return rootView;
 	}

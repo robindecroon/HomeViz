@@ -1,6 +1,5 @@
 package robindecroon.homeviz.util;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,12 +9,7 @@ import android.widget.LinearLayout;
 
 public class ImageScaler {
 
-	private static Context context;
-
-	public static void setContext(Context c) {
-		context = c;
-	}
-
+	@SuppressWarnings("deprecation")
 	public static void scaleImage(ImageView view, int boundBoxInDp) {
 		// Get the ImageView and its bitmap
 		Drawable drawing = view.getDrawable();
@@ -53,11 +47,6 @@ public class ImageScaler {
 		params.width = width;
 		params.height = height;
 		view.setLayoutParams(params);
-	}
-
-	private int dpToPx(int dp) {
-		float density = context.getResources().getDisplayMetrics().density;
-		return Math.round(dp * density);
 	}
 
 }

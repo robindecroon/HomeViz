@@ -29,6 +29,7 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		// spinner.setIndex(((HomeVizApplication)
 		// getActivity().getApplication())
 		// .getCurrentPeriod().getId());
+		spinner.setIndex(Main.currentPeriod.getId());
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
 		spinner.setOnClickListener(periodListener);
@@ -40,7 +41,6 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 			if (period != Period.CUSTOM)
 				namePeriods[i] = period.getName(getActivity());
 		}
-		spinner.setIndex(Main.currentPeriod.getId());
 		spinner.setOptions(namePeriods);
 		spinner.addListener(this);
 	}

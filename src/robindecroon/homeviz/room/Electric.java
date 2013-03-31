@@ -14,6 +14,7 @@ public class Electric extends Consumer {
 		return new Amount(getPower()).multiply(getKwhPrice());
 	}
 
+	@Override
 	public double getPower() {
 		return getWatt() * getAverageHoursOn() / 1000;
 	}

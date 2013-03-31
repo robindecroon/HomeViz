@@ -80,6 +80,7 @@ public class ExpandableListFragment extends Fragment implements
 	 * behavior of ListFragment. In particular, this is currently the only way
 	 * to have the built-in indeterminant progress state be shown.
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

@@ -11,7 +11,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import robindecroon.homeviz.Constants;
-
 import android.annotation.SuppressLint;
 import android.util.Log;
 import android.util.Xml;
@@ -45,6 +44,7 @@ public class LoxoneXMLParser extends XMLParser {
 		}
 	}
 
+	@SuppressLint("DefaultLocale")
 	private List<IEntry> readStatistics(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		List<IEntry> entries = new ArrayList<IEntry>();

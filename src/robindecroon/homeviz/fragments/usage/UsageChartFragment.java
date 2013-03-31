@@ -9,7 +9,6 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.visualization.GoogleChartTools;
 import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;

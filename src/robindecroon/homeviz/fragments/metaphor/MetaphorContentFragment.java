@@ -15,6 +15,7 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.WeightUnit;
 import robindecroon.homeviz.util.ImageScaler;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,12 +65,14 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 				ImageScaler.scaleImage(consumerImage, 120);
 
 			} else {
+				CO2 sum = new CO2(0, WeightUnit.GRAM);
+				Fuel fuelSum = new Fuel(Math.random() * 10, FuelKind.DIESEL);
+				double waterSum = 0;
 				for (Room room : ((HomeVizApplication) getActivity()
 						.getApplication()).getRooms()) {
 					try {
 						switch (type) {
 						case Constants.METAPHOR_TYPE_CO2:
-							CO2 sum = new CO2(0, WeightUnit.GRAM);
 							for (Consumer consumer : room.getElectrics()) {
 								sum = sum.add(consumer.getCO2Value());
 							}
@@ -77,8 +80,6 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							title.setText(R.string.metaphor_co2);
 							break;
 						case Constants.METAPHOR_TYPE_FUEL:
-							Fuel fuelSum = new Fuel(Math.random() * 10,
-									FuelKind.DIESEL);
 							for (Consumer consumer : room.getHeatings()) {
 								fuelSum = fuelSum.add(consumer.getFuel(),
 										FuelKind.DIESEL);
@@ -88,7 +89,6 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							title.setText("Liters of Diesel");
 							break;
 						case Constants.METAPHOR_TYPE_WATER:
-							double waterSum = 0;
 							for (Consumer consumer : room.getWaters()) {
 								waterSum += consumer.getLiter();
 							}

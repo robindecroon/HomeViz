@@ -3,7 +3,7 @@ package robindecroon.homeviz.room;
 import robindecroon.homeviz.util.Amount;
 import android.content.Context;
 
-public class Appliance extends Consumer {
+public class Appliance extends Electric {
 
 	public Appliance(String name, int watt, Context context) {
 		super(name, watt, context);
@@ -11,9 +11,9 @@ public class Appliance extends Consumer {
 
 	@Override
 	public Amount getPrice() {
-		double power = getWatt() * getAverageHoursOn() / 1000;
-		Amount price1 = new Amount(power).multiply(getKwhPrice());
+		Amount electricPrice = super.getPrice();
 		Amount price2 = new Amount(getLiter() * getWaterPrice().getEuroValue());
-		return price1.add(price2);
+		return electricPrice.add(price2);
 	}
+
 }

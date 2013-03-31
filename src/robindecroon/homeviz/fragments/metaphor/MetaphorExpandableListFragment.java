@@ -34,6 +34,7 @@ public class MetaphorExpandableListFragment extends ExpandableListFragment {
 		return mainView;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void onActivityCreated(Bundle savedState) {
 		super.onActivityCreated(savedState);

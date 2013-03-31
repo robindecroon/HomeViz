@@ -11,7 +11,6 @@ import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Country;
-import robindecroon.homeviz.util.ImageScaler;
 import robindecroon.homeviz.util.Person;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Application;
@@ -74,7 +73,6 @@ public class HomeVizApplication extends Application {
 	 */
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
-		ImageScaler.setContext(this);
 	}
 
 	public void addPerson(Person person) {

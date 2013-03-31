@@ -15,4 +15,10 @@ public class Heating extends Consumer {
 		return new Amount(Math.random() * 10);
 	}
 
+	@Override
+	public double getPower() {
+		// TODO in kwh!! Voor fuel te berekenen
+		return Math.random();
+	}
+
 }

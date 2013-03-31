@@ -2,6 +2,7 @@ package robindecroon.homeviz.room;
 
 import java.util.List;
 
+import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.Main;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
@@ -12,15 +13,16 @@ import android.preference.PreferenceManager;
 
 public abstract class Consumer {
 
-	private String name;
 	private static Amount kwhPrice;
 	private static Amount waterPrice;
 	private static double co2Value;
 
+	private String name;
+
 	private int watt;
 	private double averageHoursOn;
-
 	private double liter;
+	
 	private List<IEntry> entries;
 	private Context context;
 
@@ -36,7 +38,7 @@ public abstract class Consumer {
 	 * @return the liter
 	 */
 	public double getLiter() {
-		return liter;
+		return liter * Main.currentPeriod.getMultiplier();
 	}
 
 	/**
@@ -184,21 +186,21 @@ public abstract class Consumer {
 
 	}
 
-	public double getKWH() {
-		// TODO
-		return Math.random() * 10;
-	}
-
 	public CO2 getCO2Value() {
-		return new CO2(getKWH() * co2Value, WeightUnit.GRAM);
+		if(co2Value == 0) {
+			return new CO2(getPower() * Constants.BELGIAN_CO2, WeightUnit.GRAM);
+		}
+		return new CO2(getPower() * co2Value, WeightUnit.GRAM);
 	}
 
 	public Fuel getFuel() {
-		return new Fuel(getKWH(), FuelKind.DIESEL);
+		return new Fuel(getPower(), FuelKind.DIESEL);
 	}
 
 	public void putEntries(List<IEntry> list) {
 		this.entries = list;
 	}
+	
+	public abstract double getPower();
 
 }

@@ -187,6 +187,7 @@ public class HomeVizXMLParser extends XMLParser {
 
 		String name = parser.getAttributeValue(null, "name");
 		Water water = new Water(name, app);
+		water.setLiter(Math.random() * 5);
 
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, WATER_TAG);
