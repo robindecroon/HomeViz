@@ -42,7 +42,7 @@
 		<Water name="kraan2" />
 	</Room>
 	<Room name="Bathroom">
-		<Light name="l14" watt="5" />
+		<Light name="l14" watt="25" />
 		<Light name="l15" watt="80" />
 		<Appliance name="shaver" watt="15" />
 		<Appliance name="fone" watt="1000" />

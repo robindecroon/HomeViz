@@ -319,4 +319,12 @@ public class Room implements RoomPrices {
 		}
 		throw new NoSuchDevicesInRoom(this);
 	}
+	
+	public int getTotalLightWatt() throws NoSuchDevicesInRoom {
+		int result = 0;
+		for(Consumer cons: getLights()) {
+			result += cons.getWatt();
+		}
+		return result;
+	}
 }

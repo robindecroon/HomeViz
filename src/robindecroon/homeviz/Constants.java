@@ -9,7 +9,12 @@ import android.graphics.Color;
 @SuppressLint("SimpleDateFormat")
 public class Constants {
 
+	/*
+	 * HomeViz
+	 */
 	public final static long CURRENT_TIME = getStartTime("2013-01-01 00:00:00");
+	public final static String PREF_NAME = "HomeVizSettings";
+	public final static String USER = "CURRENT_USER";
 
 	/*
 	 * Configuration
@@ -24,12 +29,6 @@ public class Constants {
 	public final static String VIZ_TYPE = "Visualization Type";
 
 	/*
-	 * Constants
-	 */
-	public final static String PREF_NAME = "HomeVizSettings";
-	public final static String USER = "CURRENT_USER";
-
-	/*
 	 * Loxone
 	 */
 	// public final static String LOXONE_IP = "192.168.1.102";
@@ -37,15 +36,12 @@ public class Constants {
 	// public final static String LOXONE_PASSWORD = "";
 	// public final static String WORKING_DIRECTORY = "pools/A/A0/HomeViz/temp";
 	public final static String LOXONE_IP = "192.168.1.200";
-	// public final static String LOXONE_USER = "admin";
-	// public final static String LOXONE_PASSWORD = "admin";
 	public final static String WORKING_DIRECTORY = "stats/";
 
 	/*
 	 * Action Bar
 	 */
 	public final static int SPINNER_TEXT_COLOR = Color.WHITE;
-
 	public final static String CATEGORY = "category";
 	public final static String SELECTION = "selection";
 	public final static int USAGE = 1;
@@ -85,6 +81,15 @@ public class Constants {
 
 	public static final double BELGIAN_CO2 = 253.6057761;
 
+	/*
+	 * Total
+	 */
+	public static final String TOTAL_HOME = "Home";
+
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	private static long getStartTime(String date) {
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

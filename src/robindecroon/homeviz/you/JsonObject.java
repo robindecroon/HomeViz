@@ -2,8 +2,8 @@ package robindecroon.homeviz.you;
 
 import java.util.List;
 
+import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import android.util.Log;
@@ -29,28 +29,27 @@ public class JsonObject {
 	}
 
 	public static JsonObject getTestJson(List<Room> rooms) {
-		JsonObject root = new JsonObject("Home", null);
-
+		JsonObject root = new JsonObject(Constants.TOTAL_HOME, null);
 		JsonObject[] roomsJson = new JsonObject[rooms.size()];
 		int j = 0;
+		double total = 0;
+		for (Room room : rooms) {
+			try {
+				total += room.getTotalLightWatt();
+			} catch (NoSuchDevicesInRoom e) {
+
+			}
+		}
 		for (Room room : rooms) {
 			List<Light> elecs = null;
 			try {
 				elecs = room.getLights();
-				double totalWatt = 0;
-				for (Consumer cons : elecs) {
-					totalWatt += cons.getWatt();
-				}
-				// TODO Y U NO WORK
 				JsonObject json = new JsonObject(room.getName(), null);
-				JsonObject[] children;
-				children = new JsonObject[elecs.size()];
+				JsonObject[] children = new JsonObject[elecs.size()];
 				int i = 0;
 				for (Light elec : elecs) {
-					children[i] = new JsonObject(
-							elec.getName(),
-							""
-									+ Integer.valueOf((int) ((elec.getWatt() / totalWatt) * 100)));
+					children[i] = new JsonObject(elec.getName(), ""
+							+ (int) ((100 * elec.getWatt() / (total))));
 					i++;
 				}
 				json.setChildren(children);
