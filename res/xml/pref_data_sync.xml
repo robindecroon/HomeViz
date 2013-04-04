@@ -2,24 +2,54 @@
 
     <!--
          NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-         dismiss it.
+         dismiss it.
     -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:disableDependentsState="true"
+        android:key="demo_mode"
+        android:summary="@string/demo_explanation"
+        android:title="@string/demo_mode" />
+
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+        android:defaultValue="@string/loxone_ip"
+        android:dependency="demo_mode"
+        android:inputType="textCapWords"
+        android:key="loxone_ip"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Loxone IP Address" />
+    <EditTextPreference
+        android:defaultValue="@string/loxone_user"
+        android:dependency="demo_mode"
+        android:inputType="textCapWords"
+        android:key="loxone_user"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Loxone username" />
+    <EditTextPreference
+        android:defaultValue="@string/loxone_password"
+        android:dependency="demo_mode"
+        android:inputType="textCapWords"
+        android:key="loxone_password"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Loxone password" />
+
     <ListPreference
         android:defaultValue="10"
+        android:dependency="demo_mode"
         android:entries="@array/pref_sync_frequency_titles"
         android:entryValues="@array/pref_sync_frequency_values"
         android:key="sync_frequency"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_sync_frequency" />
-    
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="demo_mode"
-        android:summary="@string/multiply_all_prices_with_your_multiplier"
-        android:title="@string/demo_mode" />
-    
     <ListPreference
         android:defaultValue="10"
         android:dependency="demo_mode"

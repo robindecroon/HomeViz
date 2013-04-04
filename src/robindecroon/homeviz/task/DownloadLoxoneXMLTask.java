@@ -27,10 +27,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.IEntry;
 import robindecroon.homeviz.xml.LoxoneXMLParser;
 import robindecroon.homeviz.xml.XMLReturnObject;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
@@ -38,20 +35,24 @@ public class DownloadLoxoneXMLTask extends
 		AsyncTask<String, Void, Map<String, List<IEntry>>> {
 
 	private List<Room> rooms;
+	
+	private String user;
+	private String password;
+	private String ip;
 
-	private Context context;
-
-	public DownloadLoxoneXMLTask(List<Room> rooms, Context context) {
+	public DownloadLoxoneXMLTask(List<Room> rooms) {
 		this.rooms = rooms;
-		this.context = context;
 	}
 
 	@Override
-	protected Map<String, List<IEntry>> doInBackground(String... urls) {
+	protected Map<String, List<IEntry>> doInBackground(String... settings) {
 		Log.i(getClass().getSimpleName(), "Synchronization with Loxone started");
+		user = settings[0];
+		password = settings[1];
+		ip = settings[2];
 		try {
 			try {
-				return loadXmlFromNetwork(urls[0]);
+				return loadXmlFromNetwork();
 			} catch (IOException e) {
 				Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 				return null;
@@ -86,22 +87,16 @@ public class DownloadLoxoneXMLTask extends
 		}
 	}
 
-	private Map<String, List<IEntry>> loadXmlFromNetwork(String urlString)
+	private Map<String, List<IEntry>> loadXmlFromNetwork()
 			throws IOException, XmlPullParserException {
 
 		Map<String, List<IEntry>> map = new HashMap<String, List<IEntry>>();
 
 		FTPClient client = new FTPClient();
 		try {
-
-			client.connect(urlString);
+			client.connect(ip);
 			client.enterLocalPassiveMode();
 
-			SharedPreferences sp = PreferenceManager
-					.getDefaultSharedPreferences(context);
-			String user = sp.getString("loxone_user", "admin");
-			;
-			String password = sp.getString("loxone_password", "admin");
 			client.login(user, password);
 			client.changeWorkingDirectory(Constants.WORKING_DIRECTORY);
 
@@ -118,7 +113,7 @@ public class DownloadLoxoneXMLTask extends
 			for (String fileName : fileNames) {
 				try {
 					// The XML statistics file
-					URL url = new URL("http://" + Constants.LOXONE_IP
+					URL url = new URL("http://" + ip
 							+ "/stats/" + fileName + ".xml");
 					URLConnection httpConn = url.openConnection();
 					// Authentication

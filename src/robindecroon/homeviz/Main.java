@@ -34,6 +34,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -41,6 +42,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -57,24 +59,15 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static int lastPosition;
 
 	public static Period currentPeriod = Period.WEEK;
-
 	private static boolean INIT = true;
-
+	public static int page;
+	public static boolean downloaded = false;
+	
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
 	private NoDefaultSpinner yieldActionBarSpinner;
 
-	public static int page;
-
-	public static boolean downloaded = false;
-
-	public void disableSpinners() {
-		usageActionBarSpinner.setEnabled(false);
-		totalActionBarSpinner.setEnabled(false);
-		metaphorActionBarSpinner.setEnabled(false);
-		yieldActionBarSpinner.setEnabled(false);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,9 +123,16 @@ public class Main extends FragmentActivity implements LocationListener {
 	}
 
 	private void downloadStatistics() {
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String user = sp
+				.getString("loxone_user", Constants.LOXONE_DEFAULT_USER);
+		String password = sp.getString("loxone_password",
+				Constants.LOXONE_DEFAULT_PASSWORD);
+		String ip = sp.getString("loxone_ip", Constants.LOXONE_DEFAULT_IP);
 		new DownloadLoxoneXMLTask(
-				((HomeVizApplication) getApplication()).getRooms(), this)
-				.execute(Constants.LOXONE_IP);
+				((HomeVizApplication) getApplication()).getRooms()).execute(
+				user, password, ip);
 		downloaded = true;
 	}
 

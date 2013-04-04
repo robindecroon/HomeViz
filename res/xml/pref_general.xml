@@ -3,8 +3,8 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="local_prices"
-        android:summary="@string/pref_description_social_recommendations"
-        android:title="@string/pref_title_social_recommendations" />
+        android:summary="@string/pref_title_local_prices_description"
+        android:title="@string/pref_title_local_prices" />
     
     <CheckBoxPreference
         android:defaultValue="true"
@@ -12,26 +12,5 @@
         android:dependency="local_prices"
         android:summary="When allowed HomeViz can calculate prices on local price exchange rates, when disabled Belgian prices will be used."
         android:title="Allow HomeViz to use your location" />
-
-    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <EditTextPreference
-        android:defaultValue="@string/loxone_user"
-        android:inputType="textCapWords"
-        android:key="loxone_user"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="Loxone username" />
-    
-    
-    <EditTextPreference
-        android:defaultValue="@string/loxone_password"
-        android:inputType="textCapWords"
-        android:key="loxone_password"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="Loxone password" />
 
 </PreferenceScreen>

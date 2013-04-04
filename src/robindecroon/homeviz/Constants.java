@@ -31,11 +31,13 @@ public class Constants {
 	/*
 	 * Loxone
 	 */
-	// public final static String LOXONE_IP = "192.168.1.102";
-	// public final static String LOXONE_USER = "anonymous";
-	// public final static String LOXONE_PASSWORD = "";
+	// public final static String LOXONE_DEFAULT_IP = "192.168.1.102";
+//	 public final static String LOXONE_DEFAULT_USER = "anonymous";
+//	 public final static String LOXONE_DEFAULT_PASSWORD = "";
 	// public final static String WORKING_DIRECTORY = "pools/A/A0/HomeViz/temp";
-	public final static String LOXONE_IP = "192.168.1.200";
+	public final static String LOXONE_DEFAULT_USER = "admin";
+	public final static String LOXONE_DEFAULT_PASSWORD = "admin";
+	public final static String LOXONE_DEFAULT_IP = "192.168.1.200";
 	public final static String WORKING_DIRECTORY = "stats/";
 
 	/*
