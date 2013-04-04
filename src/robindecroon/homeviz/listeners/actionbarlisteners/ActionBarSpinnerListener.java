@@ -32,6 +32,8 @@ public abstract class ActionBarSpinnerListener implements
 	}
 
 	protected void startIntent(int position, int category) {
+		Main.categoryStack.push(category);
+		Main.selectionStack.push(position);
 		Intent intent = new Intent(context, Main.class);
 		intent.putExtra(Constants.CATEGORY, category);
 		intent.putExtra(Constants.SELECTION, position);

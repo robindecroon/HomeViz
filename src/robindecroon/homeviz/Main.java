@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Stack;
 
 import libraries.stackoverflow.NoDefaultSpinner;
 
@@ -62,12 +64,11 @@ public class Main extends FragmentActivity implements LocationListener {
 	private static boolean INIT = true;
 	public static int page;
 	public static boolean downloaded = false;
-	
+
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
 	private NoDefaultSpinner yieldActionBarSpinner;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -446,8 +447,23 @@ public class Main extends FragmentActivity implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
+	public static Stack<Integer> categoryStack = new Stack<Integer>();
+	public static Stack<Integer> selectionStack = new Stack<Integer>();
+
 	@Override
 	public void onBackPressed() {
-		//
+		try {
+			categoryStack.pop();
+			categoryStack.pop();
+			selectionStack.pop();
+			selectionStack.pop();
+			Intent intent = new Intent(this, Main.class);
+			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
+			intent.putExtra(Constants.SELECTION, selectionStack.pop());
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+		} catch (EmptyStackException e) {
+			finish();
+		}
 	}
 }
