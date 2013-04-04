@@ -1,5 +1,7 @@
 package robindecroon.homeviz.room;
 
+import java.text.NumberFormat;
+
 public class CO2 {
 
 	private final double value;
@@ -22,7 +24,8 @@ public class CO2 {
 
 	@Override
 	public String toString() {
-		return String.format("%.2f", value) + " " + unit.toString();
+		String format = NumberFormat.getInstance().format(value);
+		return format + " " + unit.toString();
 	}
 
 	/**
