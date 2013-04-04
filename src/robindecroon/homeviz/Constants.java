@@ -85,11 +85,17 @@ public class Constants {
 	 * Total
 	 */
 	public static final String TOTAL_HOME = "Home";
+	public static final int TREEMAP_LIGHT_WATT = 0;
+	public static final int TREEMAP_LIGHT_KWH = 10;
+	public static final int TREEMAP_APPLIANCE_WATT = 1;
+	public static final int TREEMAP_APPLIANCE_KWH = 11;
+	public static final int TREEMAP_HOMECINEMA_WATT = 2;
+	public static final int TREEMAP_HOMECINEMA_KWH = 12;
+	public static final String TREEMAP_OPTION = "treemap option";
 
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
+	// /////////////////////////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////////////////////////
+
 	private static long getStartTime(String date) {
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

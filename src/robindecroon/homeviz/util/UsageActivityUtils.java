@@ -1,4 +1,4 @@
-package robindecroon.homeviz.util.usage;
+package robindecroon.homeviz.util;
 
 import robindecroon.homeviz.R;
 import android.content.Context;
@@ -92,6 +92,18 @@ public abstract class UsageActivityUtils {
 		text.setTextSize(40);
 		text.setText(context.getResources().getString(
 				R.string.no_heating_in_room));
+
+		return text;
+	}
+
+	public static View getNoNetworkConnection(Context context) {
+		TextView text = new TextView(context);
+		text.setTextColor(context.getResources().getColor(R.color.White));
+		text.setGravity(Gravity.CENTER);
+		text.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		text.setTextSize(40);
+		text.setText(context.getResources().getString(R.string.no_network));
 
 		return text;
 	}

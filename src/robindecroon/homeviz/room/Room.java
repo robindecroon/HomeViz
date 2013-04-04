@@ -20,6 +20,27 @@ import robindecroon.homeviz.util.Person;
  */
 public class Room implements RoomPrices {
 
+	public enum ConsumerType {
+		Light, Appliance, HomeCinema, Water, Heating;
+	}
+
+	public List<Consumer> getConsumersOfType(ConsumerType type)
+			throws NoSuchDevicesInRoom {
+		switch (type) {
+		case Light:
+			return getLights();
+		case Appliance:
+			return getAppliances();
+		case HomeCinema:
+			return getHomeCinemas();
+		case Water:
+			return getWaters();
+		case Heating:
+			return getHeatings();
+		}
+		throw new IllegalArgumentException("Type " + type + " does not exist");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -37,13 +58,13 @@ public class Room implements RoomPrices {
 	private String name;
 	private Amount heating;
 
-	private List<Light> lights = new ArrayList<Light>();
-	private List<Water> waters = new ArrayList<Water>();;
-	private List<HomeCinema> homeCinemas = new ArrayList<HomeCinema>();
-	private List<Appliance> appliances = new ArrayList<Appliance>();
-	private List<Heating> heatings = new ArrayList<Heating>();
+	private List<Consumer> lights = new ArrayList<Consumer>();
+	private List<Consumer> waters = new ArrayList<Consumer>();;
+	private List<Consumer> homeCinemas = new ArrayList<Consumer>();
+	private List<Consumer> appliances = new ArrayList<Consumer>();
+	private List<Consumer> heatings = new ArrayList<Consumer>();
 
-	public List<Heating> getHeatings() {
+	public List<Consumer> getHeatings() {
 		return this.heatings;
 	}
 
@@ -80,7 +101,7 @@ public class Room implements RoomPrices {
 
 	public Map<String, Amount> getLightsMap() {
 		Map<String, Amount> map = new HashMap<String, Amount>();
-		for (Light light : lights) {
+		for (Consumer light : lights) {
 			map.put(light.getName(), light.getPrice());
 		}
 		return map;
@@ -125,7 +146,7 @@ public class Room implements RoomPrices {
 	@Override
 	public Amount getLightPrice() {
 		Amount total = new Amount(0);
-		for (Light light : lights) {
+		for (Consumer light : lights) {
 			total = total.add(light.getPrice());
 		}
 		return total;
@@ -141,7 +162,7 @@ public class Room implements RoomPrices {
 	@Override
 	public Amount getWaterPrice() {
 		Amount total = new Amount(0);
-		for (Water water : waters) {
+		for (Consumer water : waters) {
 			total = total.add(water.getPrice());
 		}
 		return total;
@@ -172,7 +193,7 @@ public class Room implements RoomPrices {
 	@Override
 	public Amount getAppliancesPrice() {
 		Amount total = new Amount(0);
-		for (Appliance appliance : appliances) {
+		for (Consumer appliance : appliances) {
 			total = total.add(appliance.getPrice());
 		}
 		return total;
@@ -188,7 +209,7 @@ public class Room implements RoomPrices {
 	@Override
 	public Amount getHomeCinemaPrice() {
 		Amount total = new Amount(0);
-		for (HomeCinema homeCinema : homeCinemas) {
+		for (Consumer homeCinema : homeCinemas) {
 			total = total.add(homeCinema.getPrice());
 		}
 		return total;
@@ -198,7 +219,7 @@ public class Room implements RoomPrices {
 		this.lights.add(tempLight);
 	}
 
-	public List<Light> getLights() throws NoSuchDevicesInRoom {
+	public List<Consumer> getLights() throws NoSuchDevicesInRoom {
 		if (this.lights.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
@@ -206,9 +227,9 @@ public class Room implements RoomPrices {
 	}
 
 	public Light getLight(String name) {
-		for (Light light : lights) {
+		for (Consumer light : lights) {
 			if (light.getName().equals(name)) {
-				return light;
+				return (Light) light;
 			}
 		}
 		throw new IllegalArgumentException("No light with name: " + name
@@ -229,7 +250,7 @@ public class Room implements RoomPrices {
 		}
 	}
 
-	public List<Water> getWaters() throws NoSuchDevicesInRoom {
+	public List<Consumer> getWaters() throws NoSuchDevicesInRoom {
 		if (this.waters.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
@@ -241,9 +262,9 @@ public class Room implements RoomPrices {
 	}
 
 	public Water getWater(String name) {
-		for (Water water : waters) {
+		for (Consumer water : waters) {
 			if (water.getName().equals(name)) {
-				return water;
+				return (Water) water;
 			}
 		}
 		throw new IllegalArgumentException("No water with name: " + name
@@ -255,23 +276,23 @@ public class Room implements RoomPrices {
 	}
 
 	public HomeCinema getHomeCinema(String name) {
-		for (HomeCinema homeCinema : homeCinemas) {
+		for (Consumer homeCinema : homeCinemas) {
 			if (homeCinema.getName().equals(name)) {
-				return homeCinema;
+				return (HomeCinema) homeCinema;
 			}
 		}
 		throw new IllegalArgumentException("No HomeCinema with name: " + name
 				+ " in room: " + this.getName());
 	}
 
-	public List<HomeCinema> getHomeCinemas() throws NoSuchDevicesInRoom {
+	public List<Consumer> getHomeCinemas() throws NoSuchDevicesInRoom {
 		if (this.homeCinemas.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
 		return this.homeCinemas;
 	}
 
-	public List<Appliance> getAppliances() throws NoSuchDevicesInRoom {
+	public List<Consumer> getAppliances() throws NoSuchDevicesInRoom {
 		if (this.appliances.size() == 0) {
 			throw new NoSuchDevicesInRoom(this);
 		}
@@ -319,10 +340,10 @@ public class Room implements RoomPrices {
 		}
 		throw new NoSuchDevicesInRoom(this);
 	}
-	
+
 	public int getTotalLightWatt() throws NoSuchDevicesInRoom {
 		int result = 0;
-		for(Consumer cons: getLights()) {
+		for (Consumer cons : getLights()) {
 			result += cons.getWatt();
 		}
 		return result;

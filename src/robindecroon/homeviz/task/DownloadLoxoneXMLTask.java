@@ -111,15 +111,17 @@ public class DownloadLoxoneXMLTask extends
 				fileNames.add(ftpFile.getName());
 			}
 			Log.i(getClass().getSimpleName(), "File names found!");
-			// needed for authentication
+
+			// Cookies necessary for authentication
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
 			for (String fileName : fileNames) {
-				URL url;
 				try {
-					url = new URL("http://" + Constants.LOXONE_IP + "/stats/"
-							+ fileName + ".xml");
+					// The XML statistics file
+					URL url = new URL("http://" + Constants.LOXONE_IP
+							+ "/stats/" + fileName + ".xml");
 					URLConnection httpConn = url.openConnection();
+					// Authentication
 					byte[] auth = (user + ":" + password).getBytes();
 					String basic = Base64.encodeToString(auth, Base64.NO_WRAP);
 					httpConn.setRequestProperty("Authorization", "Basic "

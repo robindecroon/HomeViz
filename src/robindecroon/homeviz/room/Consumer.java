@@ -22,7 +22,7 @@ public abstract class Consumer {
 	private int watt;
 	private double averageHoursOn;
 	private double liter;
-	
+
 	private List<IEntry> entries;
 	private Context context;
 
@@ -187,7 +187,7 @@ public abstract class Consumer {
 	}
 
 	public CO2 getCO2Value() {
-		if(co2Value == 0) {
+		if (co2Value == 0) {
 			return new CO2(getPower() * Constants.BELGIAN_CO2, WeightUnit.GRAM);
 		}
 		return new CO2(getPower() * co2Value, WeightUnit.GRAM);
@@ -200,7 +200,7 @@ public abstract class Consumer {
 	public void putEntries(List<IEntry> list) {
 		this.entries = list;
 	}
-	
+
 	public abstract double getPower();
 
 }

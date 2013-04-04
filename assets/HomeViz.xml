@@ -8,17 +8,15 @@
 		<Light name="l3" watt="20" />
 		<HomeCinema name="tv1" watt="176" />
 		<HomeCinema name="hifi1" watt="90" />
-		<HomeCinema name="desktop1" watt="200" />
 	</Room>
 	<Room name="Kitchen">
 		<Light name="l4" watt="5" />
 		<Light name="l5" watt="40" />
 		<Light name="l6" watt="10" />
 		<Light name="l7" watt="30" />
-		<Appliance name="dishwasher" watt="1200" />
-		<Appliance name="senseo" watt="1200" />
-		<Appliance name="vacuummini" watt="100" />
-		<HomeCinema name="tv2" watt="100" />
+		<Appliance name="dishwasher" watt="2000" />
+		<Appliance name="senseo" watt="1000" />
+		<HomeCinema name="tv2" watt="200" />
 		<HomeCinema name="radio2" watt="50" />
 		<Water name="kraan1" />
 	</Room>
@@ -26,9 +24,9 @@
 		<Light name="l8" watt="5" />
 		<Light name="l9" watt="80" />
 		<Light name="l10" watt="10" />
-		<Appliance name="washer" watt="500" />
-		<Appliance name="dryer" watt="2000" />
-		<Appliance name="vacuum" watt="2000" />
+		<Appliance name="washer" watt="1000" />
+		<Appliance name="dryer" watt="1000" />
+		<Appliance name="vacuum" watt="1000" />
 		<HomeCinema name="router" watt="10" />
 	</Room>
 	<Room name="Bedroom">
@@ -36,7 +34,7 @@
 		<Light name="l12" watt="80" />
 		<Light name="l13" watt="10" />
 		<Appliance name="senseo" watt="1200" />
-		<Appliance name="vacuummini" watt="100" />
+		<Appliance name="vacuummini" watt="1000" />
 		<HomeCinema name="macbook" watt="100" />
 		<HomeCinema name="radio3" watt="50" />
 		<Water name="kraan2" />
@@ -44,7 +42,7 @@
 	<Room name="Bathroom">
 		<Light name="l14" watt="25" />
 		<Light name="l15" watt="80" />
-		<Appliance name="shaver" watt="15" />
+		<Appliance name="shaver" watt="150" />
 		<Appliance name="fone" watt="1000" />
 		<Water name="kraan4" />
 		<Water name="kraan7" />
@@ -52,8 +50,9 @@
 	<Room name="Loxone">
 		<Light name="ledverlichtingdimbarelamp" watt="100" />
 		<Light name="drukknopalarm" watt="100" />
-		<Appliance name="drukknopi2" watt="100" />
-		<Appliance name="drukknopi3" watt="100" />
+		<Appliance name="drukknopi2" watt="500" />
+		<Appliance name="drukknopi3" watt="500" />
+		<HomeCinema name="desktop1" watt="500" />
 	</Room>
 	
 

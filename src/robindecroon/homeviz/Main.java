@@ -25,6 +25,7 @@ import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerLi
 import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
+import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
@@ -39,8 +40,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -59,8 +58,6 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	public static Period currentPeriod = Period.WEEK;
 
-	
-	
 	private static boolean INIT = true;
 
 	private NoDefaultSpinner usageActionBarSpinner;
@@ -143,6 +140,9 @@ public class Main extends FragmentActivity implements LocationListener {
 		lastCatergory = Constants.TOTAL;
 		totalActionBarSpinner.setSelection(selection);
 		Fragment fragment2 = new TotalTreeMapFragment();
+		Bundle args = new Bundle();
+		args.putInt(Constants.TREEMAP_OPTION, selection);
+		fragment2.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment2).commit();
 	}
@@ -341,7 +341,7 @@ public class Main extends FragmentActivity implements LocationListener {
 			provider = null;
 			boolean gpsEnabled = locationManager
 					.isProviderEnabled(LocationManager.GPS_PROVIDER);
-			boolean internetEnabled = isNetworkConnected();
+			boolean internetEnabled = Network.isNetworkConnected(this);
 
 			if (internetEnabled) {
 				Log.i("Homescreen", "Tracking location through internet");
@@ -392,22 +392,6 @@ public class Main extends FragmentActivity implements LocationListener {
 	}
 
 	/**
-	 * Methode die nagaat of de gebruiker met internet verbonden is.
-	 * 
-	 * @return True als de gebruiker met internet verbonden is.
-	 */
-	private boolean isNetworkConnected() {
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-		if (networkInfo != null) {
-			// Geen actieve netwerken
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Methode die de currentCity en currentCountry variable invult, gebaseerd
 	 * op het meegegeven Location object.
 	 * 
@@ -425,7 +409,7 @@ public class Main extends FragmentActivity implements LocationListener {
 				Locale.getDefault());
 		List<Address> addresses;
 		try {
-			if (isNetworkConnected()) {
+			if (Network.isNetworkConnected(this)) {
 				addresses = geocoder.getFromLocation(lat, lng, 1);
 				Address first = addresses.get(0);
 				currentCity = first.getLocality();

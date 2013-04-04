@@ -337,7 +337,6 @@ public class OptionSpinner extends View implements
 
 			// Notify change.
 			notifyChanged(index, currentText);
-			Log.i(getClass().getSimpleName(), "new index: " + index);
 
 			// Check the animation stack
 			if (animationStack.size() > 0) {

@@ -16,9 +16,10 @@ import robindecroon.homeviz.room.HomeCinema;
 import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Water;
+import robindecroon.homeviz.room.Room.ConsumerType;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.ImageScaler;
-import robindecroon.homeviz.util.usage.UsageActivityUtils;
+import robindecroon.homeviz.util.UsageActivityUtils;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -64,37 +65,27 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 				.findViewById(R.id.sub_container);
 		subLayout.removeAllViews();
 
-		List<Consumer> consumers = new ArrayList<Consumer>();
+		List<Consumer> consumers = null;
 		Bundle args = getArguments();
 		try {
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case Constants.LIGHT:
-				for (Light light : currentRoom.getLights()) {
-					consumers.add(light);
-				}
+				consumers = currentRoom.getConsumersOfType(ConsumerType.Light);
 				break;
 			case Constants.APPLIANCE:
-				for (Appliance appliance : currentRoom.getAppliances()) {
-					consumers.add(appliance);
-				}
+				consumers = currentRoom.getConsumersOfType(ConsumerType.Appliance);
 				break;
 			case Constants.HOMECINEMA:
-				for (HomeCinema homeCinema : currentRoom.getHomeCinemas()) {
-					consumers.add(homeCinema);
-				}
+				consumers = currentRoom.getConsumersOfType(ConsumerType.HomeCinema);
 				break;
 			case Constants.WATER:
-				for (Water water : currentRoom.getWaters()) {
-					consumers.add(water);
-				}
+				consumers = currentRoom.getConsumersOfType(ConsumerType.Water);
 				break;
 			case Constants.HEATING:
-				for (Heating heating : currentRoom.getHeatings()) {
-					consumers.add(heating);
-				}
+				consumers = currentRoom.getConsumersOfType(ConsumerType.Heating);
 				break;
 			default:
-				break;
+				throw new IllegalStateException("default case should not be reached!");
 			}
 
 			Amount sum = new Amount(0);

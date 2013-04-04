@@ -5,8 +5,10 @@ package robindecroon.homeviz.util.webviews;
 
 import java.util.List;
 
+import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.you.JsonObject;
+import robindecroon.homeviz.room.Room.ConsumerType;
+import robindecroon.homeviz.total.JsonObject;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,11 +28,34 @@ public class MyWebViewClient extends WebViewClient {
 	private String string;
 	private String name;
 
-	public MyWebViewClient(WebView myBrowser, String name, List<Room> rooms) {
+	public MyWebViewClient(WebView myBrowser, String name, List<Room> rooms,
+			int option) {
 		this.myBrowser = myBrowser;
 		this.setName(name);
 		Gson gson = new Gson();
-		this.string = "'" + gson.toJson(JsonObject.getTestJson(rooms)) + "'";
+		switch (option) {
+		case Constants.TREEMAP_LIGHT_WATT:
+			this.string = "'" + gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.Light))
+					+ "'";
+			break;
+		case Constants.TREEMAP_LIGHT_KWH:
+
+			break;
+		case Constants.TREEMAP_APPLIANCE_WATT:
+			this.string = "'"
+					+ gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.Appliance)) + "'";
+			break;
+		case Constants.TREEMAP_APPLIANCE_KWH:
+
+			break;
+		case Constants.TREEMAP_HOMECINEMA_WATT:
+			this.string = "'"
+					+ gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.HomeCinema)) + "'";
+			break;
+		case Constants.TREEMAP_HOMECINEMA_KWH:
+
+			break;
+		}
 	}
 
 	public void setString(String string) {
