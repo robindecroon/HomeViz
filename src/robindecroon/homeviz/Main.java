@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -64,11 +63,24 @@ public class Main extends FragmentActivity implements LocationListener {
 	private static boolean INIT = true;
 	public static int page;
 	public static boolean downloaded = false;
+	
+	// nodig voor backbutton
+	public static Stack<Integer> categoryStack = new Stack<Integer>();
+	public static Stack<Integer> selectionStack = new Stack<Integer>();
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
 	private NoDefaultSpinner yieldActionBarSpinner;
+	
+	private void clearStatics() {
+		INIT = true;
+		downloaded = false;
+		lastCatergory = 0;
+		lastPosition = 0;
+		categoryStack.clear();
+		selectionStack.clear();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -447,9 +459,6 @@ public class Main extends FragmentActivity implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
-	public static Stack<Integer> categoryStack = new Stack<Integer>();
-	public static Stack<Integer> selectionStack = new Stack<Integer>();
-
 	@Override
 	public void onBackPressed() {
 		try {
@@ -462,7 +471,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
 			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
-		} catch (EmptyStackException e) {
+		} catch (Exception e) {
+			clearStatics();
 			finish();
 		}
 	}
