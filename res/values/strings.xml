@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">HomeViz</string>
+    <string name="watt">Watt</string>
+    <string name="kwh">kWh</string>
     <string name="no_network">You need to have a working internet connection to view this content.</string>
     <string name="metaphor_co2">Carbon Footprint</string>
     <string name="keyword_you">YOU</string>

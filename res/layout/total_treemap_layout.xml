@@ -56,12 +56,26 @@
             android:textColor="@color/White"
             android:textIsSelectable="false"
             android:textSize="30sp" />
-        
-        <Spinner 
+
+        <RadioGroup
+            android:id="@+id/total_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" >
+
+            <RadioButton
+                android:id="@+id/total_radio_watt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/watt" />
+            
+             <RadioButton
+                android:id="@+id/total_radio_kwh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kwh" />
+        </RadioGroup>
     </RelativeLayout>
 
     <WebView

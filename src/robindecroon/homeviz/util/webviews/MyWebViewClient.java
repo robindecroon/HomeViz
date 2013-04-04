@@ -9,6 +9,7 @@ import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.Room.ConsumerType;
 import robindecroon.homeviz.total.JsonObject;
+import robindecroon.homeviz.total.TreemapType;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,29 +34,37 @@ public class MyWebViewClient extends WebViewClient {
 		this.myBrowser = myBrowser;
 		this.setName(name);
 		Gson gson = new Gson();
+		ConsumerType consType = null;
+		TreemapType treemapType = null;
 		switch (option) {
 		case Constants.TREEMAP_LIGHT_WATT:
-			this.string = "'" + gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.Light))
-					+ "'";
+			consType = ConsumerType.Light;
+			treemapType = TreemapType.Watt;
 			break;
 		case Constants.TREEMAP_LIGHT_KWH:
-
+			consType = ConsumerType.Light;
+			treemapType = TreemapType.Power;
 			break;
 		case Constants.TREEMAP_APPLIANCE_WATT:
-			this.string = "'"
-					+ gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.Appliance)) + "'";
+			consType = ConsumerType.Appliance;
+			treemapType = TreemapType.Watt;
 			break;
 		case Constants.TREEMAP_APPLIANCE_KWH:
-
+			consType = ConsumerType.Appliance;
+			treemapType = TreemapType.Power;
 			break;
 		case Constants.TREEMAP_HOMECINEMA_WATT:
-			this.string = "'"
-					+ gson.toJson(JsonObject.getWattJSON(rooms, ConsumerType.HomeCinema)) + "'";
+			consType = ConsumerType.HomeCinema;
+			treemapType = TreemapType.Watt;
 			break;
 		case Constants.TREEMAP_HOMECINEMA_KWH:
-
+			consType = ConsumerType.HomeCinema;
+			treemapType = TreemapType.Power;
 			break;
 		}
+		this.string = "'"
+				+ gson.toJson(JsonObject.getWattJSON(rooms, consType,
+						treemapType)) + "'";
 	}
 
 	public void setString(String string) {

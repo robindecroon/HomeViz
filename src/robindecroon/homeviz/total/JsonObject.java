@@ -29,7 +29,8 @@ public class JsonObject {
 		this.value = value;
 	}
 
-	public static JsonObject getWattJSON(List<Room> rooms, ConsumerType type) {
+	public static JsonObject getWattJSON(List<Room> rooms, ConsumerType type,
+			TreemapType mapType) {
 		JsonObject root = new JsonObject(Constants.TOTAL_HOME, null);
 		JsonObject[] roomsJson = new JsonObject[rooms.size()];
 		int j = 0;
@@ -37,10 +38,17 @@ public class JsonObject {
 		for (Room room : rooms) {
 			try {
 				for (Consumer cons : room.getConsumersOfType(type)) {
-					total += cons.getWatt();
+					switch (mapType) {
+					case Watt:
+						total += cons.getWatt();
+						break;
+					case Power:
+						total += cons.getPower();
+						break;
+					}
 				}
 			} catch (NoSuchDevicesInRoom e) {
-
+				// skip this room
 			}
 		}
 		for (Room room : rooms) {
@@ -51,8 +59,17 @@ public class JsonObject {
 				JsonObject[] children = new JsonObject[consumers.size()];
 				int i = 0;
 				for (Consumer consumer : consumers) {
+					double temp = 0;
+					switch (mapType) {
+					case Watt:
+						temp = consumer.getWatt();
+						break;
+					case Power:
+						temp = consumer.getPower();
+						break;
+					}
 					children[i] = new JsonObject(consumer.getName(), ""
-							+ (int) ((100 * consumer.getWatt() / (total))));
+							+ (int) ((100 * temp / (total))));
 					i++;
 				}
 				json.setChildren(children);
