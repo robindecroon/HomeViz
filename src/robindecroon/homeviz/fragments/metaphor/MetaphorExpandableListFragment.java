@@ -18,20 +18,13 @@ import android.widget.ExpandableListView;
 
 public class MetaphorExpandableListFragment extends ExpandableListFragment {
 
-	MyExpandableAdapter mAdapter;
-
-	private ExpandableListView elv;
-
 	private static ExpandableListView.OnChildClickListener listener;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View mainView = inflater.inflate(R.layout.expandable_list, container,
-				false);
-
-		return mainView;
+		return inflater.inflate(R.layout.expandable_list, container, false);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -39,12 +32,10 @@ public class MetaphorExpandableListFragment extends ExpandableListFragment {
 	public void onActivityCreated(Bundle savedState) {
 		super.onActivityCreated(savedState);
 
-		elv = getExpandableListView();
-
 		Bundle args = getArguments();
-		final int type = args.getInt(Constants.METAPHOR_TYPE);
-		Class classType = null;
 		if (args != null) {
+			Class classType = null;
+			final int type = args.getInt(Constants.METAPHOR_TYPE);
 			switch (args.getInt(Constants.METAPHOR_TYPE)) {
 			case Constants.METAPHOR_TYPE_CO2:
 				classType = Electric.class;
@@ -56,17 +47,23 @@ public class MetaphorExpandableListFragment extends ExpandableListFragment {
 				classType = Water.class;
 				break;
 			}
+
+			final MyExpandableAdapter adapter = new MyExpandableAdapter(
+					this.getActivity(), ((HomeVizApplication) getActivity()
+							.getApplication()).getRooms(), classType);
+
+			ExpandableListView elv = getExpandableListView();
+			elv.setAdapter(adapter);
+			elv.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+
+			listener = new MetaphorListChildListener(getActivity(), adapter,
+					type);
+			elv.setOnChildClickListener(listener);
+		} else {
+			throw new IllegalStateException(getClass().getSimpleName()
+					+ " cannot be created without arguments!");
 		}
 
-		final MyExpandableAdapter adapter = new MyExpandableAdapter(
-				this.getActivity(), ((HomeVizApplication) getActivity()
-						.getApplication()).getRooms(), classType);
-
-		elv.setAdapter(adapter);
-		elv.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-
-		listener = new MetaphorListChildListener(getActivity(), adapter, type);
-		elv.setOnChildClickListener(listener);
 	}
 
 	public static ExpandableListView.OnChildClickListener getListener() {

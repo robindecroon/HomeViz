@@ -31,7 +31,8 @@ public class UsageFragment extends OptionSpinnerFragment {
 			roomIndex = getArguments().getInt("room");
 			currentRoom = app.getRooms().get(roomIndex);
 		} else {
-			Log.e(getClass().getSimpleName(), "No room arguments");
+			throw new IllegalStateException(getClass().getSimpleName()
+					+ " should have room arguments!");
 		}
 		final int finalRoomIndex = roomIndex;
 
