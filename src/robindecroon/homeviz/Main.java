@@ -65,9 +65,9 @@ public class Main extends FragmentActivity implements LocationListener {
 	private static boolean INIT = true;
 	public static int page;
 	public static boolean downloaded = false;
-	
+
 	public static int clickCounter = 0;
-		
+
 	// nodig voor backbutton
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
@@ -76,7 +76,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
 	private NoDefaultSpinner yieldActionBarSpinner;
-	
+
 	private void clearStatics() {
 		INIT = true;
 		downloaded = false;
@@ -335,11 +335,11 @@ public class Main extends FragmentActivity implements LocationListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		prepareBackStack();
-	    super.onRestoreInstanceState(savedInstanceState);
+		super.onRestoreInstanceState(savedInstanceState);
 	}
 
 	private void prepareBackStack() {
@@ -348,7 +348,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			categoryStack.pop();
 			selectionStack.pop();
 			selectionStack.pop();
-		} catch (EmptyStackException e) {}
+		} catch (EmptyStackException e) {
+		}
 	}
 
 	// ////////////////////////////////////////////////////
@@ -477,12 +478,12 @@ public class Main extends FragmentActivity implements LocationListener {
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		finish();
 		clickCounter--;
-		if(clickCounter <= 0) {
+		if (clickCounter <= 0) {
 			close();
 		}
 		try {
@@ -490,13 +491,14 @@ public class Main extends FragmentActivity implements LocationListener {
 			Intent intent = new Intent(this, Main.class);
 			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		} catch (Exception e) {
-			close(); 
+			close();
 		}
 	}
-	
+
 	private void close() {
 		clearStatics();
 		finish();
