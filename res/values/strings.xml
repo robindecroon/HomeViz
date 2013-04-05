@@ -101,5 +101,6 @@
     <string name="demo_explanation">Random values will be used, they are not representative for your real usage!</string>
     <string name="demo_mode">Demo Mode</string>
     <string name="loxone_ip">192.168.1.200</string>
+    <string name="share">Share</string>
 
 </resources>

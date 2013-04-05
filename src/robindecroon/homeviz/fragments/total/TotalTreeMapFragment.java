@@ -8,6 +8,7 @@ import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -115,7 +116,9 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 
 		myBrowser.loadUrl("javascript:window.location.reload( true )");
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
+		
 	}
+	
 
 	public static void resetViews() {
 		loadTreemap(lastView, lastOption);

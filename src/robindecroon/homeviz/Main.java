@@ -37,15 +37,22 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Picture;
+import android.graphics.drawable.PictureDrawable;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore.Images;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -54,7 +61,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.ShareActionProvider;
 
 public class Main extends FragmentActivity implements LocationListener {
 
@@ -71,6 +81,8 @@ public class Main extends FragmentActivity implements LocationListener {
 	// nodig voor backbutton
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
+
+	private ShareActionProvider mShareActionProvider;
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
@@ -307,7 +319,56 @@ public class Main extends FragmentActivity implements LocationListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.activity_main, menu);
+
+//		mShareActionProvider = (ShareActionProvider) menu.findItem(
+//				R.id.menu_share).getActionProvider();
+//
+//		// Set the default share intent
+//		mShareActionProvider.setShareIntent(getDefaultShareIntent());
+
 		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem menuShare = menu.findItem(R.id.menu_share);
+		mShareActionProvider = (ShareActionProvider) menuShare.getActionProvider();
+		mShareActionProvider.setShareIntent(getDefaultShareIntent());
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	private Intent getDefaultShareIntent() {
+
+		View view = ((ViewGroup) findViewById(android.R.id.content))
+				.getChildAt(0);
+
+//		WebView wv = (WebView) view.findViewById(R.id.you_webview);
+		Bitmap b = null;
+//		if (wv != null) {
+//			Picture picture = wv.capturePicture();
+//			PictureDrawable pictureDrawable = new PictureDrawable(picture);
+//			b = Bitmap.createBitmap(pictureDrawable.getIntrinsicWidth(),
+//					pictureDrawable.getIntrinsicHeight(),
+//					Bitmap.Config.ARGB_8888);
+//			Canvas canvas = new Canvas(b);
+//			canvas.drawPicture(pictureDrawable.getPicture());
+//		} else {
+			view.setDrawingCacheEnabled(true);
+			b = Bitmap.createBitmap(view.getDrawingCache());
+			view.setDrawingCacheEnabled(false);
+//		}
+
+		String saved = Images.Media.insertImage(this.getContentResolver(), b,
+				"HomeViz", "View of HomeViz");
+		Uri sdCardUri = Uri.parse("file://"
+				+ Environment.getExternalStorageDirectory());
+		sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, sdCardUri));
+
+		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+		sharingIntent.setType("image/png");
+		sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(saved));
+
+		return sharingIntent;
 	}
 
 	@Override
