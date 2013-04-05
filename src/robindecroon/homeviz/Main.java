@@ -64,6 +64,8 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static int page;
 	public static boolean downloaded = false;
 	
+	public static int clickCounter = 0;
+	
 	// nodig voor backbutton
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
@@ -458,9 +460,14 @@ public class Main extends FragmentActivity implements LocationListener {
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
-
+	
 	@Override
 	public void onBackPressed() {
+		finish();
+		clickCounter--;
+		if(clickCounter <= 0) {
+			close();
+		}
 		try {
 			categoryStack.pop();
 			categoryStack.pop();
@@ -469,11 +476,15 @@ public class Main extends FragmentActivity implements LocationListener {
 			Intent intent = new Intent(this, Main.class);
 			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		} catch (Exception e) {
-			clearStatics();
-			finish();
+			close();
 		}
+	}
+	
+	private void close() {
+		clearStatics();
+		finish();
 	}
 }
