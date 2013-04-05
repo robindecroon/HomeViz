@@ -35,6 +35,9 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 				container, false);
 		LinearLayout content = (LinearLayout) rootView
 				.findViewById(R.id.detail_container);
+		
+		initOptionSpinner(rootView, R.id.chart_spinner,
+				R.id.chart_arraw_left, R.id.chart_arrow_right);
 
 		boolean online = Network.isNetworkConnected(getActivity());
 
@@ -51,8 +54,6 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 						+ " should have room arguments!");
 			}
 
-			initOptionSpinner(rootView, R.id.chart_spinner,
-					R.id.chart_arraw_left, R.id.chart_arrow_right);
 
 			WebView chart = new WebView(getActivity());
 			content.addView(chart);

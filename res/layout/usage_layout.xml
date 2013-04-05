@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingTop="15dp" >
 
         <LinearLayout
             android:layout_width="250dp"
@@ -39,144 +39,153 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingRight="20dp"
             android:layout_gravity="right"
+            android:paddingRight="20dp"
             android:textColor="@color/WhiteSmoke"
             android:textIsSelectable="false"
             android:textSize="120sp" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="5" >
+        android:baselineAligned="false" >
 
         <LinearLayout
-            android:id="@+id/light_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/lightView"
+            <LinearLayout
+                android:id="@+id/light_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_light_usage"
-                android:src="@drawable/light_icon" />
-
-            <TextView
-                android:id="@+id/usage_light_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/White"
-                android:textIsSelectable="false"
-                android:textSize="40sp" />
-        </LinearLayout>
+                android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/appliances_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/lightView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_light_usage"
+                    android:src="@drawable/light_icon" />
 
-            <ImageView
-                android:id="@+id/appliancesView"
+                <TextView
+                    android:id="@+id/usage_light_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appliances_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_appliances_usage"
-                android:src="@drawable/appliances_icon" />
-
-            <TextView
-                android:id="@+id/usage_appliances_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/White"
-                android:textIsSelectable="false"
-                android:textSize="40sp" />
-        </LinearLayout>
+                android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/home_cinema_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/appliancesView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_appliances_usage"
+                    android:src="@drawable/appliances_icon" />
 
-            <ImageView
-                android:id="@+id/tvView"
+                <TextView
+                    android:id="@+id/usage_appliances_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_cinema_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_home_cinema_usage"
-                android:src="@drawable/tv_icon" />
-
-            <TextView
-                android:id="@+id/usage_tv_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/White"
-                android:textIsSelectable="false"
-                android:textSize="40sp" />
-        </LinearLayout>
+                android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/water_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/tvView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_home_cinema_usage"
+                    android:src="@drawable/tv_icon" />
 
-            <ImageView
-                android:id="@+id/waterView"
+                <TextView
+                    android:id="@+id/usage_tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/water_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_water_usage"
-                android:src="@drawable/water_icon" />
-
-            <TextView
-                android:id="@+id/usage_water_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/White"
-                android:textIsSelectable="false"
-                android:textSize="40sp" />
-        </LinearLayout>
+                android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/heating_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/waterView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_water_usage"
+                    android:src="@drawable/water_icon" />
 
-            <ImageView
-                android:id="@+id/heatingView"
+                <TextView
+                    android:id="@+id/usage_water_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/heating_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_heating_usage"
-                android:src="@drawable/heating_icon" />
-
-            <TextView
-                android:id="@+id/usage_heating_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/White"
-                android:textIsSelectable="false"
-                android:textSize="40sp" />
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/heatingView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_heating_usage"
+                    android:src="@drawable/heating_icon" />
+
+                <TextView
+                    android:id="@+id/usage_heating_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

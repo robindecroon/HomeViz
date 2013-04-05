@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +37,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -65,7 +67,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static boolean downloaded = false;
 	
 	public static int clickCounter = 0;
-	
+		
 	// nodig voor backbutton
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
@@ -333,6 +335,21 @@ public class Main extends FragmentActivity implements LocationListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		prepareBackStack();
+	    super.onRestoreInstanceState(savedInstanceState);
+	}
+
+	private void prepareBackStack() {
+		try {
+			categoryStack.pop();
+			categoryStack.pop();
+			selectionStack.pop();
+			selectionStack.pop();
+		} catch (EmptyStackException e) {}
+	}
 
 	// ////////////////////////////////////////////////////
 	// / Locatie ///
@@ -469,17 +486,14 @@ public class Main extends FragmentActivity implements LocationListener {
 			close();
 		}
 		try {
-			categoryStack.pop();
-			categoryStack.pop();
-			selectionStack.pop();
-			selectionStack.pop();
+			prepareBackStack();
 			Intent intent = new Intent(this, Main.class);
 			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
 			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		} catch (Exception e) {
-			close();
+			close(); 
 		}
 	}
 	
