@@ -105,5 +105,7 @@
     <string name="demo_mode">Demo Mode</string>
     <string name="loxone_ip">192.168.1.200</string>
     <string name="share">Share</string>
+    <string name="community">See what other users consumed</string>
+    <string name="about">About</string>
 
 </resources>
