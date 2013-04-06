@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">HomeViz</string>
+    <string name="no_share">Unfortunaltly HomeViz does not yet support sharing this graphics.</string>
+    <string name="no_share_providers">No Share Providers were found!</string>
+    <string name="no_external_storage">In order to use this function you need to have external storage, sorry!</string>
     <string name="watt">Watt</string>
     <string name="kwh">kWh</string>
     <string name="no_network">You need to have a working internet connection to view this content.</string>

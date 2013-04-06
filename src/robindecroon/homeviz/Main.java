@@ -1,6 +1,7 @@
 package robindecroon.homeviz;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,10 +39,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
-import android.graphics.Picture;
-import android.graphics.drawable.PictureDrawable;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -62,9 +59,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.ShareActionProvider;
+import android.widget.ShareActionProvider.OnShareTargetSelectedListener;
 
 public class Main extends FragmentActivity implements LocationListener {
 
@@ -82,7 +79,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
 
-	private ShareActionProvider mShareActionProvider;
+	// private ShareActionProvider mShareActionProvider;
 
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
@@ -92,7 +89,7 @@ public class Main extends FragmentActivity implements LocationListener {
 	private void clearStatics() {
 		INIT = true;
 		downloaded = false;
-		lastCatergory = 0;
+		lastCatergory = Constants.USAGE;
 		lastPosition = 0;
 		categoryStack.clear();
 		selectionStack.clear();
@@ -317,46 +314,25 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-
-//		mShareActionProvider = (ShareActionProvider) menu.findItem(
-//				R.id.menu_share).getActionProvider();
-//
-//		// Set the default share intent
-//		mShareActionProvider.setShareIntent(getDefaultShareIntent());
-
 		return true;
 	}
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		MenuItem menuShare = menu.findItem(R.id.menu_share);
-		mShareActionProvider = (ShareActionProvider) menuShare.getActionProvider();
-		mShareActionProvider.setShareIntent(getDefaultShareIntent());
-		return super.onPrepareOptionsMenu(menu);
+	public static boolean externalStorageIsAvailable() {
+		return Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState());
 	}
 
 	private Intent getDefaultShareIntent() {
-
+		if (!externalStorageIsAvailable()) {
+			throw new IllegalStateException("No external storage available");
+		}
 		View view = ((ViewGroup) findViewById(android.R.id.content))
 				.getChildAt(0);
 
-//		WebView wv = (WebView) view.findViewById(R.id.you_webview);
-		Bitmap b = null;
-//		if (wv != null) {
-//			Picture picture = wv.capturePicture();
-//			PictureDrawable pictureDrawable = new PictureDrawable(picture);
-//			b = Bitmap.createBitmap(pictureDrawable.getIntrinsicWidth(),
-//					pictureDrawable.getIntrinsicHeight(),
-//					Bitmap.Config.ARGB_8888);
-//			Canvas canvas = new Canvas(b);
-//			canvas.drawPicture(pictureDrawable.getPicture());
-//		} else {
-			view.setDrawingCacheEnabled(true);
-			b = Bitmap.createBitmap(view.getDrawingCache());
-			view.setDrawingCacheEnabled(false);
-//		}
+		view.setDrawingCacheEnabled(true);
+		Bitmap b = Bitmap.createBitmap(view.getDrawingCache());
+		view.setDrawingCacheEnabled(false);
 
 		String saved = Images.Media.insertImage(this.getContentResolver(), b,
 				"HomeViz", "View of HomeViz");
@@ -373,28 +349,48 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			Bundle extras = getIntent().getExtras();
-			int selection = 0;
-			if (extras != null) {
-				selection = extras.getInt(Constants.SELECTION);
-			}
-			Intent intent = new Intent(this, Main.class);
-			intent.putExtra(Constants.CATEGORY, Constants.USAGE);
-			intent.putExtra(Constants.SELECTION, selection);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
-			overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
-			getActionBar().setHomeButtonEnabled(false);
-			getActionBar().setIcon(R.drawable.icon);
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			handleHomeMenuButton();
 			return true;
-		} else if (item.getItemId() == R.id.menu_settings) {
+		case R.id.menu_settings:
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
-		} else if (item.getItemId() == R.id.menu_refresh) {
+			return true;
+		case R.id.menu_refresh:
 			downloadStatistics();
+			return true;
+		case R.id.menu_share:
+			handleShareMenuButton();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void handleShareMenuButton() {
+		try {
+			startActivity(getDefaultShareIntent());
+		} catch (IllegalStateException e) {
+			ToastMessages.noExternalStorage();
+		} catch (Exception e) {
+			Log.e(getClass().getSimpleName(), "Sharing failed!");
+		}
+	}
+
+	private void handleHomeMenuButton() {
+		Bundle extras = getIntent().getExtras();
+		int selection = 0;
+		if (extras != null) {
+			selection = extras.getInt(Constants.SELECTION);
+		}
+		Intent intent = new Intent(this, Main.class);
+		intent.putExtra(Constants.CATEGORY, Constants.USAGE);
+		intent.putExtra(Constants.SELECTION, selection);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		startActivity(intent);
+		overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
+		getActionBar().setHomeButtonEnabled(false);
+		getActionBar().setIcon(R.drawable.icon);
 	}
 
 	@Override

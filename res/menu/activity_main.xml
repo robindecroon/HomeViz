@@ -2,8 +2,8 @@
 
     <item
         android:id="@+id/menu_share"
-        android:actionProviderClass="android.widget.ShareActionProvider"
         android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_share"
         android:title="@string/share"/>
     <item
         android:id="@+id/menu_refresh"

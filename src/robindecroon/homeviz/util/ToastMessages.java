@@ -96,4 +96,22 @@ public class ToastMessages {
 				context.getResources().getString(R.string.data_loaded),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void noShare() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.no_share),
+				Toast.LENGTH_LONG).show();
+	}
+
+	public static void noShareProviders() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.no_share_providers),
+				Toast.LENGTH_LONG).show();
+	}
+
+	public static void noExternalStorage() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.no_external_storage),
+				Toast.LENGTH_LONG).show();
+	}
 }
