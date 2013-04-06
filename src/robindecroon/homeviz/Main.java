@@ -369,7 +369,8 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	private void handleShareMenuButton() {
 		try {
-			startActivity(getDefaultShareIntent());
+			
+			startActivity(Intent.createChooser(getDefaultShareIntent(), "Share your HomeViz graphics!"));
 		} catch (IllegalStateException e) {
 			ToastMessages.noExternalStorage();
 		} catch (Exception e) {
