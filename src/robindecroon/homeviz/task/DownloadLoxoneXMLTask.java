@@ -35,7 +35,7 @@ public class DownloadLoxoneXMLTask extends
 		AsyncTask<String, Void, Map<String, List<IEntry>>> {
 
 	private List<Room> rooms;
-	
+
 	private String user;
 	private String password;
 	private String ip;
@@ -87,8 +87,8 @@ public class DownloadLoxoneXMLTask extends
 		}
 	}
 
-	private Map<String, List<IEntry>> loadXmlFromNetwork()
-			throws IOException, XmlPullParserException {
+	private Map<String, List<IEntry>> loadXmlFromNetwork() throws IOException,
+			XmlPullParserException {
 
 		Map<String, List<IEntry>> map = new HashMap<String, List<IEntry>>();
 
@@ -113,8 +113,8 @@ public class DownloadLoxoneXMLTask extends
 			for (String fileName : fileNames) {
 				try {
 					// The XML statistics file
-					URL url = new URL("http://" + ip
-							+ "/stats/" + fileName + ".xml");
+					URL url = new URL("http://" + ip + "/stats/" + fileName
+							+ ".xml");
 					URLConnection httpConn = url.openConnection();
 					// Authentication
 					byte[] auth = (user + ":" + password).getBytes();

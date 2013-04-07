@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import robindecroon.homeviz.Main;

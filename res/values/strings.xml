@@ -2,11 +2,13 @@
 <resources>
 
     <string name="app_name">HomeViz</string>
+    <string name="about_text">HomeViz is created by <a href="https://twitter.com/RobinDeCroon">Robin De Croon</a> with the main purpose of raising Energy Awareness for owners of a smart home. This application is developed with the aim of getting a master\'s degree in Engineering Computer Science at the <a href="http://www.kuleuven.be">University of Leuven</a>. Robin\'s supervisor is <a href="http://erikduval.wordpress.com/">Professor Dr. E. Duval</a> and his advisor is <a href="http://www.ariadne-eu.org/content/dr-joris-klerkx">Dr. J. Klerkx</a>. \n \nHomeViz currently only works with Loxone, the test hardware was provided by <a href="http://www.demec.be">Demec</a>. \n \nHomeViz automatically scans if a Loxone Miniserver is connected to the Home Network at the provided IP address. When HomeViz couldn\'t detect a Miniserver, you will see the demo mode. This mode can be used for testing or to get a general overview of HomeViz\' functions. \n \nFor more information or any other questions see my thesis\' blog:  <a href="http://robindecroon.wordpress.com/">http://robindecroon.wordpress.com/</a></string>
     <string name="no_share">Unfortunaltly HomeViz does not yet support sharing this graphics.</string>
     <string name="no_share_providers">No Share Providers were found!</string>
     <string name="no_external_storage">In order to use this function you need to have external storage, sorry!</string>
     <string name="watt">Watt</string>
     <string name="kwh">kWh</string>
+    <string name="toast_community">Sorry, this is not implemented yet! \n Here you will be able to see what other users have consumed.</string>
     <string name="no_network">You need to have a working internet connection to view this content.</string>
     <string name="metaphor_co2">Carbon Footprint</string>
     <string name="keyword_you">YOU</string>
@@ -107,5 +109,7 @@
     <string name="share">Share</string>
     <string name="community">See what other users consumed</string>
     <string name="about">About</string>
+    <string name="title_activity_about">About</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

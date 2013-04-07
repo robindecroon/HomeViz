@@ -15,7 +15,6 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.WeightUnit;
 import robindecroon.homeviz.util.ImageScaler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

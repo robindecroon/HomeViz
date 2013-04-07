@@ -1,6 +1,5 @@
 package robindecroon.homeviz.fragments.usage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -9,13 +8,8 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
-import robindecroon.homeviz.room.Appliance;
 import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Heating;
-import robindecroon.homeviz.room.HomeCinema;
-import robindecroon.homeviz.room.Light;
 import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Water;
 import robindecroon.homeviz.room.Room.ConsumerType;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.ImageScaler;
@@ -73,19 +67,23 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 				consumers = currentRoom.getConsumersOfType(ConsumerType.Light);
 				break;
 			case Constants.APPLIANCE:
-				consumers = currentRoom.getConsumersOfType(ConsumerType.Appliance);
+				consumers = currentRoom
+						.getConsumersOfType(ConsumerType.Appliance);
 				break;
 			case Constants.HOMECINEMA:
-				consumers = currentRoom.getConsumersOfType(ConsumerType.HomeCinema);
+				consumers = currentRoom
+						.getConsumersOfType(ConsumerType.HomeCinema);
 				break;
 			case Constants.WATER:
 				consumers = currentRoom.getConsumersOfType(ConsumerType.Water);
 				break;
 			case Constants.HEATING:
-				consumers = currentRoom.getConsumersOfType(ConsumerType.Heating);
+				consumers = currentRoom
+						.getConsumersOfType(ConsumerType.Heating);
 				break;
 			default:
-				throw new IllegalStateException("default case should not be reached!");
+				throw new IllegalStateException(
+						"default case should not be reached!");
 			}
 
 			Amount sum = new Amount(0);

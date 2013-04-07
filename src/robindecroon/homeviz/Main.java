@@ -1,7 +1,6 @@
 package robindecroon.homeviz;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -60,8 +59,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ShareActionProvider;
-import android.widget.ShareActionProvider.OnShareTargetSelectedListener;
 
 public class Main extends FragmentActivity implements LocationListener {
 
@@ -317,6 +314,33 @@ public class Main extends FragmentActivity implements LocationListener {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			handleHomeMenuButton();
+			return true;
+		case R.id.menu_settings:
+			Intent settingsIntent = new Intent(this, SettingsActivity.class);
+			startActivity(settingsIntent);
+			return true;
+		case R.id.menu_refresh:
+			downloadStatistics();
+			return true;
+		case R.id.menu_share:
+			handleShareMenuButton();
+			return true;
+		case R.id.menu_about:
+			Intent aboutIntent = new Intent(this, AboutActivity.class);
+			startActivity(aboutIntent);
+			return true;
+		case R.id.menu_community:
+			ToastMessages.community();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	public static boolean externalStorageIsAvailable() {
 		return Environment.MEDIA_MOUNTED.equals(Environment
@@ -347,30 +371,11 @@ public class Main extends FragmentActivity implements LocationListener {
 		return sharingIntent;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			handleHomeMenuButton();
-			return true;
-		case R.id.menu_settings:
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivity(intent);
-			return true;
-		case R.id.menu_refresh:
-			downloadStatistics();
-			return true;
-		case R.id.menu_share:
-			handleShareMenuButton();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
 	private void handleShareMenuButton() {
 		try {
-			
-			startActivity(Intent.createChooser(getDefaultShareIntent(), "Share your HomeViz graphics!"));
+
+			startActivity(Intent.createChooser(getDefaultShareIntent(),
+					"Share your HomeViz graphics!"));
 		} catch (IllegalStateException e) {
 			ToastMessages.noExternalStorage();
 		} catch (Exception e) {

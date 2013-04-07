@@ -8,7 +8,6 @@ import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -29,7 +27,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	private static FragmentActivity context;
 
 	private static int lastOption;
-	
+
 	private static int treemapType;
 
 	@Override
@@ -43,29 +41,32 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 
 		initOptionSpinner(rootView, R.id.total_spinner, R.id.total_arrow_left,
 				R.id.total_arrow_right);
-		
-		RadioButton wattButton = (RadioButton) rootView.findViewById(R.id.total_radio_watt);
+
+		RadioButton wattButton = (RadioButton) rootView
+				.findViewById(R.id.total_radio_watt);
 		wattButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				treemapType = 0;
 				loadTreemap(lastView, lastOption + treemapType);
 			}
 		});
-		
-//		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.total_radio_group);
-		
-		RadioButton kwhButton = (RadioButton) rootView.findViewById(R.id.total_radio_kwh);
+
+		// RadioGroup group = (RadioGroup)
+		// rootView.findViewById(R.id.total_radio_group);
+
+		RadioButton kwhButton = (RadioButton) rootView
+				.findViewById(R.id.total_radio_kwh);
 		kwhButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				treemapType = 10;
 				loadTreemap(lastView, lastOption + treemapType);
 			}
 		});
-		if(treemapType == 0) {
+		if (treemapType == 0) {
 			wattButton.setChecked(true);
 			kwhButton.setChecked(false);
 		} else {
@@ -116,9 +117,8 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 
 		myBrowser.loadUrl("javascript:window.location.reload( true )");
 		myBrowser.loadUrl("file:///android_asset/www/treemap.html");
-		
+
 	}
-	
 
 	public static void resetViews() {
 		loadTreemap(lastView, lastOption);

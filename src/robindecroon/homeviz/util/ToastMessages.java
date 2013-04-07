@@ -114,4 +114,10 @@ public class ToastMessages {
 				context.getResources().getString(R.string.no_external_storage),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void community() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.toast_community),
+				Toast.LENGTH_LONG).show();
+	}
 }

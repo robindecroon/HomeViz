@@ -11,7 +11,6 @@ import robindecroon.homeviz.listeners.PeriodListener;
 import robindecroon.homeviz.util.Period;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 
 public abstract class OptionSpinnerFragment extends Fragment implements
