@@ -6,7 +6,7 @@ import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.Main;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
-import robindecroon.homeviz.xml.IEntry;
+import robindecroon.homeviz.xml.Entry;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -23,7 +23,7 @@ public abstract class Consumer {
 	private double averageHoursOn;
 	private double liter;
 
-	private List<IEntry> entries;
+	private List<Entry> entries;
 	private Context context;
 
 	public Consumer(String name, int watt, Context context) {
@@ -83,7 +83,7 @@ public abstract class Consumer {
 			int startI = 0;
 			int endI = 0;
 			for (int i = 1; i < entries.size(); i++) {
-				IEntry entry = entries.get(i);
+				Entry entry = entries.get(i);
 				if (entry.getDate() >= begin) {
 					startI = i;
 					break;
@@ -93,7 +93,7 @@ public abstract class Consumer {
 				return 0;
 			}
 			for (int j = startI; j < entries.size(); j++) {
-				IEntry entry = entries.get(j);
+				Entry entry = entries.get(j);
 				if (entry.getDate() > end) {
 					endI = j - 1;
 					break;
@@ -105,7 +105,7 @@ public abstract class Consumer {
 			long start = entries.get(startI).getDate();
 			for (int k = startI + 1; k <= endI; k++) {
 
-				IEntry entry = entries.get(k);
+				Entry entry = entries.get(k);
 				if (!entry.getState()) {
 					totalMillisOn += entry.getDate() - start;
 				} else {
@@ -197,7 +197,7 @@ public abstract class Consumer {
 		return new Fuel(getPower(), FuelKind.DIESEL);
 	}
 
-	public void putEntries(List<IEntry> list) {
+	public void putEntries(List<Entry> list) {
 		this.entries = list;
 	}
 

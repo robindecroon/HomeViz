@@ -37,7 +37,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 
 		TextView title = (TextView) fragmentView
 				.findViewById(R.id.metaphor_title);
-		title.setText(R.string.metaphor_co2);
+//		title.setText(R.string.metaphor_electricty_title);
 
 		Bundle args = getArguments();
 		if (args != null) {
@@ -76,16 +76,15 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 								sum = sum.add(consumer.getCO2Value());
 							}
 							value = sum.toString();
-							title.setText(R.string.metaphor_co2);
+							title.setText(R.string.metaphor_electricty_title);
 							break;
 						case Constants.METAPHOR_TYPE_FUEL:
 							for (Consumer consumer : room.getHeatings()) {
 								fuelSum = fuelSum.add(consumer.getFuel(),
 										FuelKind.DIESEL);
-								System.out.println("FuelSum: " + fuelSum);
 							}
 							value = fuelSum.toString();
-							title.setText("Liters of Diesel");
+							title.setText(R.string.metaphor_heating_title);
 							break;
 						case Constants.METAPHOR_TYPE_WATER:
 							for (Consumer consumer : room.getWaters()) {
@@ -94,7 +93,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							value = Math.round(waterSum
 									/ Constants.BOTTLE_CONTENT)
 									+ Constants.METAPHOR_WATER_TEXT;
-							title.setText("Bottles of water");
+							title.setText(R.string.metaphor_water_title);
 							break;
 						}
 					} catch (NoSuchDevicesInRoom e) {

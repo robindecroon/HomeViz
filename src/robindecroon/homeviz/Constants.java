@@ -13,6 +13,7 @@ public class Constants {
 	 * HomeViz
 	 */
 	public final static long CURRENT_TIME = getStartTime("2013-01-01 00:00:00");
+	public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public final static String PREF_NAME = "HomeVizSettings";
 	public final static String USER = "CURRENT_USER";
 
@@ -100,7 +101,7 @@ public class Constants {
 
 	private static long getStartTime(String date) {
 		try {
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
 			return df.parse(date).getTime();
 		} catch (ParseException e) {
 			return 0;

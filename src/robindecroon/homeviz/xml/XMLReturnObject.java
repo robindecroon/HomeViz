@@ -5,11 +5,13 @@ import java.util.List;
 public class XMLReturnObject {
 
 	private final String name;
-	private final List<IEntry> entries;
+	private final List<Entry> entries;
+	private final int nbOutputs;
 
-	public XMLReturnObject(String name, List<IEntry> entries) {
+	public XMLReturnObject(String name, List<Entry> entries, int nbOutputs) {
 		this.name = name;
 		this.entries = entries;
+		this.nbOutputs = nbOutputs;
 	}
 
 	/**
@@ -22,8 +24,15 @@ public class XMLReturnObject {
 	/**
 	 * @return the entries
 	 */
-	public List<IEntry> getEntries() {
+	public List<Entry> getEntries() {
 		return entries;
+	}
+
+	/**
+	 * @return the nbOutputs
+	 */
+	public int getNbOutputs() {
+		return nbOutputs;
 	}
 
 }

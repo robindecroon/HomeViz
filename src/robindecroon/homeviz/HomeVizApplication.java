@@ -4,14 +4,22 @@
 package robindecroon.homeviz;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.Country;
+import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.Person;
+import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -33,6 +41,26 @@ public class HomeVizApplication extends Application {
 	private GraphUser facebookUser;
 
 	private Map<String, Country> countryMap;
+
+	private SolarPanel solarPanel;
+
+	/**
+	 * @return the solarPanel
+	 */
+	public SolarPanel getSolarPanel() {
+		if (solarPanel == null) {
+			return SolarPanel.getDummy();
+		}
+		return solarPanel;
+	}
+
+	/**
+	 * @param solarPanel
+	 *            the solarPanel to set
+	 */
+	public void setSolarPanel(SolarPanel solarPanel) {
+		this.solarPanel = solarPanel;
+	}
 
 	/**
 	 * @param currentCountry

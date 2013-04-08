@@ -75,43 +75,43 @@ public class ToastMessages {
 
 	public static void longClickForTime() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.long_click_for_time),
+				context.getResources().getString(R.string.toast_long_click_for_time),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void connectionError() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.connection_error),
+				context.getResources().getString(R.string.toast_connection_error),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void notTooFast() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.too_fast),
+				context.getResources().getString(R.string.toast_too_fast),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void dataLoaded() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.data_loaded),
+				context.getResources().getString(R.string.toast_data_loaded),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void noShare() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.no_share),
+				context.getResources().getString(R.string.toast_no_share),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void noShareProviders() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.no_share_providers),
+				context.getResources().getString(R.string.toast_no_share_providers),
 				Toast.LENGTH_LONG).show();
 	}
 
 	public static void noExternalStorage() {
 		Toast.makeText(context,
-				context.getResources().getString(R.string.no_external_storage),
+				context.getResources().getString(R.string.toast_no_external_storage),
 				Toast.LENGTH_LONG).show();
 	}
 

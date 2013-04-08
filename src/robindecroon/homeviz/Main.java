@@ -20,6 +20,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
 import robindecroon.homeviz.fragments.total.TotalTreeMapFragment;
 import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
+import robindecroon.homeviz.fragments.yield.YieldFragment;
 import robindecroon.homeviz.listeners.actionbarlisteners.MetaphorActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.actionbarlisteners.TotalActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.actionbarlisteners.UsageActionBarSpinnerListener;
@@ -76,8 +77,6 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
 
-	// private ShareActionProvider mShareActionProvider;
-
 	private NoDefaultSpinner usageActionBarSpinner;
 	private NoDefaultSpinner totalActionBarSpinner;
 	private NoDefaultSpinner metaphorActionBarSpinner;
@@ -99,9 +98,6 @@ public class Main extends FragmentActivity implements LocationListener {
 
 		// init the actionbar and spinners
 		setupActionBar();
-
-		// TODO
-		yieldActionBarSpinner.setEnabled(false);
 
 		if (savedInstanceState == null && INIT) {
 			// read the configuration XML file
@@ -132,8 +128,7 @@ public class Main extends FragmentActivity implements LocationListener {
 					startMetaphorFragment(selection);
 					break;
 				case Constants.YIELD:
-					lastCatergory = Constants.YIELD;
-					yieldActionBarSpinner.setSelection(selection);
+					startYieldFragment(selection);
 					break;
 				}
 
@@ -153,9 +148,8 @@ public class Main extends FragmentActivity implements LocationListener {
 		String password = sp.getString("loxone_password",
 				Constants.LOXONE_DEFAULT_PASSWORD);
 		String ip = sp.getString("loxone_ip", Constants.LOXONE_DEFAULT_IP);
-		new DownloadLoxoneXMLTask(
-				((HomeVizApplication) getApplication()).getRooms()).execute(
-				user, password, ip);
+		new DownloadLoxoneXMLTask(((HomeVizApplication) getApplication()))
+				.execute(user, password, ip);
 		downloaded = true;
 	}
 
@@ -190,6 +184,14 @@ public class Main extends FragmentActivity implements LocationListener {
 		args.putInt("room", UsageContainerFragment.getCurrentSelection());
 		Fragment fragment = new UsageContainerFragment();
 		fragment.setArguments(args);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, fragment).commit();
+	}
+
+	private void startYieldFragment(int selection) {
+		yieldActionBarSpinner.setSelection(selection);
+		lastCatergory = Constants.YIELD;
+		Fragment fragment = new YieldFragment();
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 	}
@@ -314,7 +316,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

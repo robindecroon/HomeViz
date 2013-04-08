@@ -15,17 +15,20 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:contentDescription="@string/app_name"
         android:src="@drawable/solarpanels" />
 
     <TextView
+        android:paddingLeft="20dp"
         android:id="@+id/yield_solar_text"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:lineSpacingExtra="5sp"
         android:textColor="@color/White"
         android:textIsSelectable="false"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
 </LinearLayout>

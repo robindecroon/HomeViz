@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -25,9 +27,13 @@ public class LoxoneXMLParser extends XMLParser {
 	private static final String DATE_ATTRIBUTE = "T";
 	private static final String NAME_ATTRIBUTE = "Name";
 	private static final String OUTPUTS = "Outputs";
+	private static final String NB_OF_OUTPUTS = "NumOutputs";
+
 
 	private String name;
 	private String output;
+	private int nbOutputs;
+	private String[] outputs;
 
 	public XMLReturnObject parse(InputStream stream)
 			throws XmlPullParserException, IOException {
@@ -36,8 +42,8 @@ public class LoxoneXMLParser extends XMLParser {
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(stream, null);
 			parser.nextTag();
-			List<IEntry> entries = readStatistics(parser);
-			return new XMLReturnObject(name, entries);
+			List<Entry> entries = readStatistics(parser);
+			return new XMLReturnObject(name, entries, nbOutputs);
 
 		} finally {
 			stream.close();
@@ -45,9 +51,9 @@ public class LoxoneXMLParser extends XMLParser {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private List<IEntry> readStatistics(XmlPullParser parser)
+	private List<Entry> readStatistics(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
-		List<IEntry> entries = new ArrayList<IEntry>();
+		List<Entry> entries = new ArrayList<Entry>();
 
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
 
@@ -55,13 +61,23 @@ public class LoxoneXMLParser extends XMLParser {
 		name = tempName.toLowerCase().replaceAll(" ", "").replace("-", "")
 				.replace(">", "");
 		output = parser.getAttributeValue(null, OUTPUTS);
+		
+		try {
+			nbOutputs = Integer.valueOf(parser.getAttributeValue(null, NB_OF_OUTPUTS));
+			if(nbOutputs > 1) {
+				outputs = output.split(",");
+			}
+		} catch (NumberFormatException e) {
+			Log.e(getClass().getSimpleName(), name + " has no outnumber!");
+		}
+		
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
 			if (name.equals(DATE_TAG)) {
-				IEntry entry = readS(parser);
+				Entry entry = readS(parser);
 				if (entry != null) {
 					entries.add(entry);
 				}
@@ -73,14 +89,25 @@ public class LoxoneXMLParser extends XMLParser {
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	private IEntry readS(XmlPullParser parser) throws IOException,
+	private Entry readS(XmlPullParser parser) throws IOException,
 			XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, DATE_TAG);
 
 		String time = parser.getAttributeValue(null, DATE_ATTRIBUTE);
+		
 		String valueString = parser.getAttributeValue(null, output);
+		if(outputs != null) {
+			for(String out: outputs) {
+				String newString = parser.getAttributeValue(null, out);
+				if(newString != null) {
+					valueString = newString;
+					output = out;
+				}
+			}
+		}
+		
 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat(Constants.DATE_FORMAT);
 		long date = 0;
 		try {
 			date = df.parse(time).getTime();
@@ -95,12 +122,6 @@ public class LoxoneXMLParser extends XMLParser {
 		}
 		parser.nextTag();
 		parser.require(XmlPullParser.END_TAG, ns, DATE_TAG);
-		// IEntry entry = null;
-		// if (output.equals("Q")) {
-		// entry = new PressureEntry(date, );
-		// } else {
 		return new Entry(date, valueString, output);
-		// }
-		// return entry;
 	}
 }
