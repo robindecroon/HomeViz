@@ -27,7 +27,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 		Room currentRoom = null;
 		int roomIndex = 0;
 		if (getArguments() != null) {
-			roomIndex = getArguments().getInt("room");
+			roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
 			currentRoom = app.getRooms().get(roomIndex);
 		} else {
 			throw new IllegalStateException(getClass().getSimpleName()
@@ -54,10 +54,10 @@ public class UsageFragment extends OptionSpinnerFragment {
 		water.setText(currentRoom.getWaterPrice().toString());
 
 		// Heating
-		LinearLayout heatings = (LinearLayout) rootView
-				.findViewById(R.id.heating_layout);
-		heatings.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
-				getActivity(), Constants.HEATING));
+//		LinearLayout heatings = (LinearLayout) rootView
+//				.findViewById(R.id.heating_layout);
+//		heatings.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
+//				getActivity(), Constants.HEATING));
 		TextView heating = (TextView) rootView
 				.findViewById(R.id.usage_heating_price);
 		heating.setText(currentRoom.getHeating().toString());

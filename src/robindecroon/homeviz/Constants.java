@@ -16,6 +16,7 @@ public class Constants {
 	public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public final static String PREF_NAME = "HomeVizSettings";
 	public final static String USER = "CURRENT_USER";
+	public static final String COUNTRY = "country";
 
 	/*
 	 * Configuration
@@ -55,9 +56,11 @@ public class Constants {
 	/*
 	 * UsageChartFragment
 	 */
-	public final static String FRAGMENT_BUNDLE_TYPE = "charttype";
-	public final static String DUMMY_FRAGMENT_NAME = "DummyFragmentName";
+	public final static String USAGE_BUNDLE_TYPE = "charttype";
 	public final static String USAGE_TYPE = "Usage type";
+	public static final String USAGE_ROOM = "room";
+	public static final String USAGE_CHART_TITLE = "Usage details";
+
 
 	/*
 	 * Consumers
@@ -95,6 +98,23 @@ public class Constants {
 	public static final int TREEMAP_HOMECINEMA_WATT = 2;
 	public static final int TREEMAP_HOMECINEMA_KWH = 12;
 	public static final String TREEMAP_OPTION = "treemap option";
+	public static final String WEBVIEW_TREEMAP = "treemap";
+	
+	/*
+	 * Yield
+	 */
+	public static final String YIELD_GROUND_WATER = "ground water";
+	public static final String YIELD_TYPE = "yield type";
+	public static final String METER_SOLAR = "solar";
+	public static final String METER_GROUND_WATER = "groundwater";
+	public static final String METER_RAIN_WATER = "rainwater";
+
+	
+	
+	/*
+	 * DatePicker
+	 */
+	public static final String DATEPICKER_TITLE = "title";
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////

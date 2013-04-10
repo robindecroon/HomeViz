@@ -12,12 +12,12 @@
     tools:context=".Main" >
 
     <ImageView
+        android:id="@+id/yield_image"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="5"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/solarpanels" />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:paddingLeft="20dp"

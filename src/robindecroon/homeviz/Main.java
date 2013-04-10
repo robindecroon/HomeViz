@@ -95,11 +95,15 @@ public class Main extends FragmentActivity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
+		
 
 		// init the actionbar and spinners
 		setupActionBar();
 
-		if (savedInstanceState == null && INIT) {
+		if (INIT) {
+			// search the current location
+			initCurrentLocation();
+			
 			// read the configuration XML file
 			readHomeVizXML();
 
@@ -191,7 +195,10 @@ public class Main extends FragmentActivity implements LocationListener {
 	private void startYieldFragment(int selection) {
 		yieldActionBarSpinner.setSelection(selection);
 		lastCatergory = Constants.YIELD;
-		Fragment fragment = new YieldFragment();
+		Bundle args = new Bundle();
+		args.putInt(Constants.YIELD_TYPE, selection);
+		Fragment fragment = new YieldFragment();			
+		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 	}
@@ -377,7 +384,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		try {
 
 			startActivity(Intent.createChooser(getDefaultShareIntent(),
-					"Share your HomeViz graphics!"));
+					getResources().getString(R.string.share_text)));
 		} catch (IllegalStateException e) {
 			ToastMessages.noExternalStorage();
 		} catch (Exception e) {
@@ -416,36 +423,50 @@ public class Main extends FragmentActivity implements LocationListener {
 		} catch (EmptyStackException e) {
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		finish();
+		clickCounter--;
+		if (clickCounter <= 0) {
+			close();
+		}
+		try {
+			prepareBackStack();
+			Intent intent = new Intent(this, Main.class);
+			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
+			intent.putExtra(Constants.SELECTION, selectionStack.pop());
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		} catch (Exception e) {
+			close();
+		}
+	}
+
+	private void close() {
+		clearStatics();
+		finish();
+	}
 
 	// ////////////////////////////////////////////////////
 	// / Locatie ///
 	// ////////////////////////////////////////////////////
 
-	/**
-	 * Deze methode initialiseert het opzoeken van de locatie.
-	 * 
-	 * De primaire methode is het bepalen van de locatie via Netwerkgegevens.
-	 * Als dit niet lukt, wordt er gebruikgemaakt van de GPS (als deze
-	 * aanstaat). Is er geen internetverbinding en staat de GPS af, dan wordt de
-	 * locatie niet opgezocht.
-	 */
 	private void initCurrentLocation() {
-		LocationManager locationManager;
-		String provider;
+		Log.i(getClass().getSimpleName(), "LocationManager initialized");
 		try {
-			String svcName = Context.LOCATION_SERVICE;
-			locationManager = (LocationManager) getSystemService(svcName);
-
-			provider = null;
-			boolean gpsEnabled = locationManager
-					.isProviderEnabled(LocationManager.GPS_PROVIDER);
+			String provider= null;
+			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+			
 			boolean internetEnabled = Network.isNetworkConnected(this);
 
-			if (internetEnabled) {
-				Log.i("Homescreen", "Tracking location through internet");
+			if (internetEnabled) { 
+				Log.i(getClass().getSimpleName(), "Tracking location through internet");
 				Criteria criteria = new Criteria();
 				criteria.setAccuracy(Criteria.ACCURACY_FINE);
-				criteria.setPowerRequirement(Criteria.POWER_LOW);
+				criteria.setPowerRequirement(Criteria.POWER_HIGH);
 				criteria.setAltitudeRequired(false);
 				criteria.setBearingRequired(false);
 				criteria.setSpeedRequired(false);
@@ -453,14 +474,14 @@ public class Main extends FragmentActivity implements LocationListener {
 				provider = locationManager.getBestProvider(criteria, true);
 				locationManager.requestSingleUpdate(provider, this, null);
 			} else if (gpsEnabled) {
-				Log.i("Homescreen", "Tracking location through GPS");
+				Log.i(getClass().getSimpleName(), "Tracking location through GPS");
 				provider = LocationManager.GPS_PROVIDER;
 				locationManager.requestSingleUpdate(provider, this, null);
 			} else {
 				ToastMessages.noLocationResource();
 			}
 		} catch (Exception e) {
-			Log.i("Homescreen", "locationServices are disabled");
+			Log.i(getClass().getSimpleName(), "locationServices are disabled");
 			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -521,12 +542,13 @@ public class Main extends FragmentActivity implements LocationListener {
 
 		((HomeVizApplication) getApplication())
 				.setCurrentCountry(currentCountry);
-		Log.i("Homescreen", "Updated location, we are in: " + currentCity
+		Log.i(getClass().getSimpleName(), "Updated location, we are in: " + currentCity
 				+ ", " + currentCountry);
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
+		Log.i(getClass().getSimpleName(), "Location found!");
 		setLocation(location);
 	}
 
@@ -536,36 +558,10 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		Log.i("HomeScreen", "Tracking location through: " + provider);
 		initCurrentLocation();
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-	}
-
-	@Override
-	public void onBackPressed() {
-		finish();
-		clickCounter--;
-		if (clickCounter <= 0) {
-			close();
-		}
-		try {
-			prepareBackStack();
-			Intent intent = new Intent(this, Main.class);
-			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
-			intent.putExtra(Constants.SELECTION, selectionStack.pop());
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
-					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-		} catch (Exception e) {
-			close();
-		}
-	}
-
-	private void close() {
-		clearStatics();
-		finish();
 	}
 }

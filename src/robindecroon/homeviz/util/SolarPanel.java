@@ -1,52 +1,35 @@
 package robindecroon.homeviz.util;
 
-import java.text.NumberFormat;
 import java.util.Random;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public class SolarPanel {
+public class SolarPanel extends AYield implements IYield {
 
-	private final double total;
-	private final double current;
-	private final double today;	
-	private final double yesterday;
-	private final double twoDays;
-	private final double thisWeek;
-	private final double lastWeek;
-	private final double thisMonth;
-	private final double lastMonth;
-	private final double thisYear;
-	private final double lastYear;
-	private NumberFormat nf;
 
-	public SolarPanel(double total, double current, double today, double yesterday,
-			double twoDays, double thisWeek, double lastWeek, double thisMonth,
-			double lastMonth, double thisYear, double lastYear) {
-
-		this.total = total;
-		this.current = current;
-		this.today = today;
-		this.yesterday = yesterday;
-		this.twoDays = twoDays;
-		this.thisWeek = thisWeek;
-		this.lastWeek = lastWeek;
-		this.thisMonth = thisMonth;
-		this.lastMonth = lastMonth;
-		this.thisYear = thisYear;
-		this.lastYear = lastYear;
-
-		this.nf = NumberFormat.getInstance();
+	public SolarPanel(double total, double current, double today,
+			double yesterday, double twoDays, double thisWeek, double lastWeek,
+			double thisMonth, double lastMonth, double thisYear, double lastYear, String unit) {
+		super(total, current, today, yesterday, twoDays, thisWeek, lastWeek, thisMonth,
+				lastMonth, thisYear, lastYear);
+		SolarPanel.unit = unit;
 	}
+	
+	private static AYield dummy = newDummy();
 
-	private static SolarPanel dummy = newDummy();
-
-	public static SolarPanel getDummy() {
+	
+	public static AYield getDummy(String unit) {
+		SolarPanel.unit = unit;
 		return dummy;
 	}
+	
+	private static String unit;
+	public String unit() {
+		return " " + unit; 
+	}
 
-	public static SolarPanel newDummy() {
+	private static AYield newDummy() {
 		Random r = new Random();
 		double offset = 0.01;
 		double today = r.nextDouble();
@@ -67,81 +50,95 @@ public class SolarPanel {
 		return new SolarPanel(r.nextDouble() * 5000,  Math.abs(today - 0.12), today,
 				r.nextDouble() * 10, r.nextDouble() * 10, week * weekmulti,
 				week * 70, month * monthmulti, month * 310, year * yearmulti,
-				year * 3650);
+				year * 3650, unit);
 	}
 
-	/**
-	 * @return the total
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getTotal()
 	 */
+	@Override
 	public String getTotal() {
-		return nf.format(total);
+		return nf.format(total) + unit();
 	}
 
-	/**
-	 * @return the current
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getCurrent()
 	 */
+	@Override
 	public String getCurrent() {
-		return nf.format(current);
+		return nf.format(current) + unit();
 	}
 
-	/**
-	 * @return the yesterday
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getYesterday()
 	 */
+	@Override
 	public String getYesterday() {
-		return nf.format(yesterday);
+		return nf.format(yesterday) + unit();
 	}
 
-	/**
-	 * @return the twoDays
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getTwoDays()
 	 */
+	@Override
 	public String getTwoDays() {
-		return nf.format(twoDays);
+		return nf.format(twoDays) + unit();
 	}
 
-	/**
-	 * @return the thisWeek
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getThisWeek()
 	 */
+	@Override
 	public String getThisWeek() {
-		return nf.format(thisWeek);
+		return nf.format(thisWeek) + unit();
 	}
 
-	/**
-	 * @return the lastWeek
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getLastWeek()
 	 */
+	@Override
 	public String getLastWeek() {
-		return nf.format(lastWeek);
+		return nf.format(lastWeek) + unit();
 	}
 
-	/**
-	 * @return the thisMonth
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getThisMonth()
 	 */
+	@Override
 	public String getThisMonth() {
-		return nf.format(thisMonth);
+		return nf.format(thisMonth) + unit();
 	}
 
-	/**
-	 * @return the lastMonth
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getLastMonth()
 	 */
+	@Override
 	public String getLastMonth() {
-		return nf.format(lastMonth);
+		return nf.format(lastMonth) + unit();
 	}
 
-	/**
-	 * @return the thisYear
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getThisYear()
 	 */
+	@Override
 	public String getThisYear() {
-		return nf.format(thisYear);
+		return nf.format(thisYear) + unit();
 	}
 
-	/**
-	 * @return the lastYear
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getLastYear()
 	 */
+	@Override
 	public String getLastYear() {
-		return nf.format(lastYear);
+		return nf.format(lastYear) + unit();
 	}
 
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.util.AYield#getToday()
+	 */
+	@Override
 	public String getToday() {
-		return nf.format(today);
+		return nf.format(today) + unit();
 	}
 
 }

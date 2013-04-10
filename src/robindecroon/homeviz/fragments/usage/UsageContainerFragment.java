@@ -37,7 +37,7 @@ public class UsageContainerFragment extends Fragment {
 		FragmentStatePagerAdapter adapter = null;
 		Bundle args = getArguments();
 		if (args != null) {
-			currentPageNumber = args.getInt("room");
+			currentPageNumber = args.getInt(Constants.USAGE_ROOM);
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
 				adapter = new UsageChartFragmentPagerAdapter(manager, app, 1);

@@ -20,11 +20,10 @@ public class ConsumerFragmentPagerAdapter extends HomeVizFragmentPagerAdapter {
 	@Override
 	public Fragment getItem(int arg0) {
 		Bundle args = new Bundle();
-		args.putInt("room", arg0);
+		args.putInt(Constants.USAGE_ROOM, arg0);
 		args.putInt(Constants.USAGE_TYPE, consumer);
 		Fragment fragment = new UsageConsumerFragment();
 		fragment.setArguments(args);
 		return fragment;
 	}
-
 }

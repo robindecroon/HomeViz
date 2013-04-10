@@ -4,21 +4,17 @@
 package robindecroon.homeviz;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.util.AYield;
 import robindecroon.homeviz.util.Country;
-import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.GroundWater;
 import robindecroon.homeviz.util.Person;
+import robindecroon.homeviz.util.RainWater;
 import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Application;
@@ -42,14 +38,17 @@ public class HomeVizApplication extends Application {
 
 	private Map<String, Country> countryMap;
 
-	private SolarPanel solarPanel;
+	private AYield solarPanel;
+	private AYield rainWater;
+	private AYield groundWater;
+	
 
 	/**
 	 * @return the solarPanel
 	 */
-	public SolarPanel getSolarPanel() {
+	public AYield getSolarPanel() {
 		if (solarPanel == null) {
-			return SolarPanel.getDummy();
+			return SolarPanel.getDummy(getResources().getString(R.string.kwh));
 		}
 		return solarPanel;
 	}
@@ -58,8 +57,44 @@ public class HomeVizApplication extends Application {
 	 * @param solarPanel
 	 *            the solarPanel to set
 	 */
-	public void setSolarPanel(SolarPanel solarPanel) {
+	public void setSolarPanel(AYield solarPanel) {
 		this.solarPanel = solarPanel;
+	}
+	
+	/**
+	 * @return the solarPanel
+	 */
+	public AYield getRainWater() {
+		if (rainWater == null) {
+			return RainWater.getDummy(getResources().getString(R.string.liter));
+		}
+		return rainWater;
+	}
+
+	/**
+	 * @param solarPanel
+	 *            the solarPanel to set
+	 */
+	public void setRainWater(AYield rainWater) {
+		this.rainWater = rainWater;
+	}
+	
+	/**
+	 * @return the solarPanel
+	 */
+	public AYield getGroundWater() {
+		if (groundWater == null) {
+			return GroundWater.getDummy(getResources().getString(R.string.liter));
+		}
+		return groundWater;
+	}
+
+	/**
+	 * @param solarPanel
+	 *            the solarPanel to set
+	 */
+	public void setGroundWater(AYield groundWater) {
+		this.groundWater = groundWater;
 	}
 
 	/**
@@ -75,7 +110,7 @@ public class HomeVizApplication extends Application {
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("country", currentCountry);
+		editor.putString(Constants.COUNTRY, currentCountry);
 		editor.commit();
 	}
 
@@ -122,7 +157,7 @@ public class HomeVizApplication extends Application {
 	public double getCo2Multiplier() throws LocationUnknownException {
 		SharedPreferences settings = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		String currentCountry = settings.getString("country", null);
+		String currentCountry = settings.getString(Constants.COUNTRY, null);
 		if (currentCountry == null) {
 			throw new LocationUnknownException("No location");
 		} else {

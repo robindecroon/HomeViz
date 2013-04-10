@@ -53,9 +53,6 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 			}
 		});
 
-		// RadioGroup group = (RadioGroup)
-		// rootView.findViewById(R.id.total_radio_group);
-
 		RadioButton kwhButton = (RadioButton) rootView
 				.findViewById(R.id.total_radio_kwh);
 		kwhButton.setOnClickListener(new OnClickListener() {
@@ -82,18 +79,6 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 				.findViewById(R.id.you_current_user);
 		userView.setText(R.string.you_text);
 
-		// GraphUser user = ((HomeVizApplication)
-		// getActivity().getApplication()).getFacebookUser();
-		// if (user != null) {
-		// LinearLayout layout = (LinearLayout) rootView
-		// .findViewById(R.id.you_user_layout);
-		// layout.removeAllViews();
-		// ProfilePictureView profilePictureView = new ProfilePictureView(
-		// getActivity());
-		// profilePictureView.setProfileId(user.getId());
-		// layout.addView(profilePictureView);
-		// }
-
 		return rootView;
 	}
 
@@ -106,7 +91,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 				"AndroidFunction");
 
 		myBrowser.setWebViewClient(new MyWebViewClient(myBrowser,
-				MyWebViewClient.TREEMAP, ((HomeVizApplication) context
+				Constants.WEBVIEW_TREEMAP, ((HomeVizApplication) context
 						.getApplication()).getRooms(), option));
 
 		myBrowser.setBackgroundColor(0x00000000);

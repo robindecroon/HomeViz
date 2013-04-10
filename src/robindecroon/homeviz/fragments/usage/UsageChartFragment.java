@@ -47,7 +47,7 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 
 			Room currentRoom = null;
 			if (getArguments() != null) {
-				int roomIndex = getArguments().getInt("room");
+				int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
 				currentRoom = app.getRooms().get(roomIndex);
 			} else {
 				throw new IllegalStateException(getClass().getSimpleName()
@@ -69,7 +69,7 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 			Map<String, Amount> map = currentRoom.getPricesMap();
 			if (!map.isEmpty()) {
 				GoogleChartType type;
-				switch (getArguments().getInt(Constants.FRAGMENT_BUNDLE_TYPE)) {
+				switch (getArguments().getInt(Constants.USAGE_BUNDLE_TYPE)) {
 				case 1:
 					type = GoogleChartType.BarChart;
 					break;
@@ -80,9 +80,9 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 					throw new IllegalStateException(
 							"Wrong google chart element: "
 									+ getArguments().getInt(
-											Constants.FRAGMENT_BUNDLE_TYPE));
+											Constants.USAGE_BUNDLE_TYPE));
 				}
-				String url = GoogleChartTools.getUsageViz("Usage details",
+				String url = GoogleChartTools.getUsageViz(Constants.USAGE_CHART_TITLE,
 						Main.currentPeriod, getActivity(), map,
 						chart.getWidth(), chart.getHeight(), type);
 				chart.loadDataWithBaseURL("x-data://base", url, "text/html",
@@ -100,10 +100,4 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 
 		return rootView;
 	}
-
-	@Override
-	public String toString() {
-		return "Usage (chart)";
-	}
-
 }

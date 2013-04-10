@@ -32,15 +32,13 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.usage_consumer_layout,
 				container, false);
-		// ActionBar ab = getActivity().getActionBar();
-		// ab.setHomeButtonEnabled(true);
 
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();
 
 		Room currentRoom = null;
 		if (getArguments() != null) {
-			int roomIndex = getArguments().getInt("room");
+			int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
 			currentRoom = app.getRooms().get(roomIndex);
 		} else {
 			Log.e(getClass().getSimpleName(), "No room arguments");

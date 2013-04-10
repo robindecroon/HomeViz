@@ -49,7 +49,7 @@ public class ConsumerOnClickListener implements OnClickListener {
 		Fragment fragment = new UsageContainerFragment();
 		Bundle args = new Bundle();
 		args.putInt(Constants.USAGE_TYPE, consumerType);
-		args.putInt("room", roomIndex);
+		args.putInt(Constants.USAGE_ROOM, roomIndex);
 		fragment.setArguments(args);
 		FragmentManager fm = context.getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();

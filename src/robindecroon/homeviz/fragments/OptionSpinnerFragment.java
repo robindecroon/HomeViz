@@ -17,7 +17,7 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		SpinnerListener {
 
 	/**
-	 * Initialiseert de spinner.
+	 * Initialiseer de spinner.
 	 */
 	protected void initOptionSpinner(View v, int id, int leftId, int rightId) {
 		ArrowButton left = (ArrowButton) v.findViewById(leftId);
@@ -26,9 +26,6 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
 		PeriodListener periodListener = new PeriodListener(getActivity());
 		OptionSpinner spinner = (OptionSpinner) v.findViewById(id);
-		// spinner.setIndex(((HomeVizApplication)
-		// getActivity().getApplication())
-		// .getCurrentPeriod().getId());
 		spinner.setIndex(Main.currentPeriod.getId());
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
@@ -49,14 +46,9 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 	public void optionChanged(final int index, String name) {
 		Main.currentPeriod = Period.getPeriod(index);
 		try {
-			// final HomeVizApplication app = ((HomeVizApplication)
-			// getActivity().getApplication());
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					// app.setCurrentPeriod(Period.values()[index]);
-					// Log.i(getClass().getSimpleName(),
-					// "Current period: " + app.getCurrentPeriod());
 					try {
 						UsageContainerFragment.resetViews();
 					} catch (Exception e) {

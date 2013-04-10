@@ -3,6 +3,9 @@
 
     <string name="app_name">HomeViz</string>
     <string name="about">About</string>
+    <string name="share_text">Share your HomeViz graphics!</string>
+    <string name="from">From</string>
+    <string name="until">Until</string>
     <string name="about_text">HomeViz is created by <a href="https://twitter.com/RobinDeCroon">Robin De Croon</a> with the main purpose of raising Energy Awareness for owners of a smart home. This application is developed with the aim of getting a master\'s degree in Engineering Computer Science at the <a href="http://www.kuleuven.be">University of Leuven</a>. Robin\'s supervisor is <a href="http://erikduval.wordpress.com/">Professor Dr. E. Duval</a> and his advisor is <a href="http://www.ariadne-eu.org/content/dr-joris-klerkx">Dr. J. Klerkx</a>. \n \nHomeViz currently only works with Loxone, the test hardware was provided by <a href="http://www.demec.be">Demec</a>. \n \nHomeViz automatically scans if a Loxone Miniserver is connected to the Home Network at the provided IP address. When HomeViz couldn\'t detect a Miniserver, you will see the demo mode. This mode can be used for testing or to get a general overview of HomeViz\' functions. \n \nFor more information or any other questions see my thesis\' blog:  <a href="http://robindecroon.wordpress.com/">http://robindecroon.wordpress.com/</a></string>
     <string name="action_settings">Settings</string>
     <string name="app_id">599565630071463</string>
@@ -20,6 +23,7 @@
     <string name="detail">Details</string>
     <string name="house">House</string>
     <string name="kwh">kWh</string>
+    <string name="liter">liter</string>
     <string name="toast_long_click_for_time">Use the arrows to select another period. Long click on this period to set a custom time!</string>
     <string name="loxone_demo_multiplier">Loxone demo multiplier</string>
     <string name="loxone_ip">192.168.1.200</string>

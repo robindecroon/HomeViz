@@ -15,6 +15,7 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.WeightUnit;
 import robindecroon.homeviz.util.ImageScaler;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,6 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 
 		TextView title = (TextView) fragmentView
 				.findViewById(R.id.metaphor_title);
-//		title.setText(R.string.metaphor_electricty_title);
 
 		Bundle args = getArguments();
 		if (args != null) {
@@ -98,6 +98,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 						}
 					} catch (NoSuchDevicesInRoom e) {
 						// should not happen
+						Log.e(getClass().getSimpleName(), "You should not see this message ;-)");
 						e.printStackTrace();
 					}
 				}

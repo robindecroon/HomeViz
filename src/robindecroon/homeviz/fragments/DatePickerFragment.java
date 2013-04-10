@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.listeners.DatePickerListener;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -15,9 +16,6 @@ import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements
 		DatePickerDialog.OnDateSetListener {
-
-	public final static String FROM = "From";
-	public final static String UNTIL = "Until";
 
 	private Set<DatePickerListener> listeners = new HashSet<DatePickerListener>();
 
@@ -42,7 +40,7 @@ public class DatePickerFragment extends DialogFragment implements
 
 		String title = null;
 		try {
-			title = getArguments().getString("title");
+			title = getArguments().getString(Constants.DATEPICKER_TITLE);
 			dialog.setTitle(title);
 
 		} catch (Exception e) {

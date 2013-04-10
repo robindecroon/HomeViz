@@ -58,7 +58,7 @@ public class Amount {
 		if (currentCurrency == Currency.EURO) {
 			return currentCurrency + String.format("%.2f", valueInEuro);
 		} else {
-			throw new UnsupportedOperationException("Enkel EURO!");
+			throw new UnsupportedOperationException("Only euros!");
 		}
 	}
 

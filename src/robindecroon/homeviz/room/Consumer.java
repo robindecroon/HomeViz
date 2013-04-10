@@ -31,7 +31,6 @@ public abstract class Consumer {
 		this.watt = watt;
 		this.context = context;
 		this.averageHoursOn = Math.random();
-
 	}
 
 	/**
@@ -72,8 +71,7 @@ public abstract class Consumer {
 		try {
 			SharedPreferences sp = PreferenceManager
 					.getDefaultSharedPreferences(context);
-			int multiplier = Integer.valueOf(sp.getString("demo_multiplier",
-					"1"));
+			int multiplier = Integer.valueOf(sp.getString("demo_multiplier", "1"));
 
 			long totalMillisOn = 0;
 

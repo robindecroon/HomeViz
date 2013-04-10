@@ -22,9 +22,12 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.util.GroundWater;
+import robindecroon.homeviz.util.RainWater;
 import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.Entry;
@@ -114,9 +117,9 @@ public class DownloadLoxoneXMLTask extends
 						XMLReturnObject XMLResult = loxoneXMLParser.parse(in);
 						List<Entry> entries = XMLResult.getEntries();
 						if (XMLResult.getNbOutputs() < 2) {
-							putEntriesInMap(map, XMLResult, entries);
+							putEntriesInMap(map, XMLResult, entries);								
 						} else {
-							processMeasurement(entries);
+							processMeasurement(entries, XMLResult.getName());
 						}
 					} else {
 						Log.e(getClass().getSimpleName(), "No inputstream for "
@@ -159,7 +162,7 @@ public class DownloadLoxoneXMLTask extends
 		return fileNames;
 	}
 
-	private void processMeasurement(List<Entry> entries) {
+	private void processMeasurement(List<Entry> entries, String name) {
 		long lastDate = findLatestTime(entries);
 
 		double total = 0;
@@ -216,8 +219,23 @@ public class DownloadLoxoneXMLTask extends
 				}
 			}
 		}
-		app.setSolarPanel(new SolarPanel(total, current, today, yesterday, twoDays,
-				thisWeek, lastWeek, thisMonth, lastMonth, thisYear, lastYear));
+		if(name.contains(Constants.METER_SOLAR)) {
+			String unit = app.getResources().getString(R.string.kwh);
+			app.setSolarPanel(new SolarPanel(total, current, today, yesterday, twoDays,
+					thisWeek, lastWeek, thisMonth, lastMonth, thisYear, lastYear, unit));	
+			return;
+		} else if(name.contains(Constants.METER_GROUND_WATER)) {
+			String unit = app.getResources().getString(R.string.liter);
+			app.setGroundWater(new GroundWater(total, current, today, yesterday, twoDays,
+					thisWeek, lastWeek, thisMonth, lastMonth, thisYear, lastYear, unit));	
+			return;
+		} else if(name.contains(Constants.METER_RAIN_WATER)) {
+			String unit = app.getResources().getString(R.string.liter);
+			app.setRainWater(new RainWater(total, current, today, yesterday, twoDays,
+					thisWeek, lastWeek, thisMonth, lastMonth, thisYear, lastYear, unit));	
+			return;
+		}
+		Log.e(getClass().getSimpleName(), "Measurement with name: " + name + " is not processed!");
 	}
 
 	private long findLatestTime(List<Entry> entries) {

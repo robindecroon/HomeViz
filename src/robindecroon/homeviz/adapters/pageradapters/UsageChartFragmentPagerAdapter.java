@@ -20,8 +20,8 @@ public class UsageChartFragmentPagerAdapter extends HomeVizFragmentPagerAdapter 
 	@Override
 	public Fragment getItem(int arg0) {
 		Bundle args = new Bundle();
-		args.putInt("room", arg0);
-		args.putInt(Constants.FRAGMENT_BUNDLE_TYPE, type);
+		args.putInt(Constants.USAGE_ROOM, arg0);
+		args.putInt(Constants.USAGE_BUNDLE_TYPE, type);
 		Fragment fragment = new UsageChartFragment();
 		fragment.setArguments(args);
 		return fragment;

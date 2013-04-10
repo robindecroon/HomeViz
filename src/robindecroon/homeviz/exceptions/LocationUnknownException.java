@@ -6,9 +6,6 @@ public class LocationUnknownException extends RuntimeException {
 		super(string);
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 }
