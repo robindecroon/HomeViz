@@ -45,7 +45,7 @@ public class MetaphorListChildListener implements
 				break;
 			case Constants.METAPHOR_TYPE_FUEL:
 				newArgs.putString(Constants.METAPHOR_VALUE, consumer.getFuel()
-						.toString());
+						.toString(context));
 				newArgs.putInt(Constants.METAPHOR_TYPE,
 						Constants.METAPHOR_TYPE_FUEL);
 				break;
@@ -54,7 +54,7 @@ public class MetaphorListChildListener implements
 						Constants.METAPHOR_VALUE,
 						Math.round(consumer.getLiter()
 								/ Constants.BOTTLE_CONTENT)
-								+ Constants.METAPHOR_WATER_TEXT);
+								+ context.getResources().getString(R.string.metaphor_water_text));
 				newArgs.putInt(Constants.METAPHOR_TYPE,
 						Constants.METAPHOR_TYPE_WATER);
 				break;

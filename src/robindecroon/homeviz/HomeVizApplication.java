@@ -3,14 +3,23 @@
  */
 package robindecroon.homeviz;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.AYield;
+import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.GroundWater;
 import robindecroon.homeviz.util.Person;
@@ -20,6 +29,7 @@ import robindecroon.homeviz.util.ToastMessages;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.facebook.model.GraphUser;
 
@@ -35,8 +45,6 @@ public class HomeVizApplication extends Application {
 	private List<Person> persons = new ArrayList<Person>();
 
 	private GraphUser facebookUser;
-
-	private Map<String, Country> countryMap;
 
 	private AYield solarPanel;
 	private AYield rainWater;
@@ -102,16 +110,49 @@ public class HomeVizApplication extends Application {
 	 *            the currentCountry to set
 	 */
 	public void setCurrentCountry(String currentCountry) {
-		// TODO dirty hack
-		Country country = countryMap.get(currentCountry);
-		Consumer.setCO2Value(country.getCo2Value());
-		Consumer.setKwhPrice(country.getKwh());
-		Consumer.setWaterPrice(country.getLiterPrice());
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(Constants.COUNTRY, currentCountry);
-		editor.commit();
+		if (currentCountry != null) {
+			try {
+				InputStream input = getAssets().open(Constants.CO2_DATA_FILE_NAME);
+				BufferedReader in = new BufferedReader(new InputStreamReader(input));
+				String line = null;
+				Map<String, Country> countries = new HashMap<String, Country>();
+
+				NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+				NumberFormat dotFormat = NumberFormat.getInstance(Locale.US);
+				try {
+					// The headers
+					in.readLine();
+					while ((line = in.readLine()) != null) {
+						String[] values = line.split(";");
+						Number co2number = format.parse(values[1]);
+						Number kwhnumber = dotFormat.parse(values[2]);
+						Number liternumber = dotFormat.parse(values[3]);
+
+						double co2 = co2number.doubleValue();
+						double kwh = kwhnumber.doubleValue();
+						double liter = liternumber.doubleValue();
+						countries.put(values[0], new Country(values[0], co2,
+								new Amount(kwh), new Amount(liter)));
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+					Log.e(getClass().getSimpleName(), "Error in country CSV file!");
+				}
+				Country country = countries.get(currentCountry);
+				Consumer.setCO2Value(country.getCo2Value());
+				Consumer.setKwhPrice(country.getKwh());
+				Consumer.setWaterPrice(country.getLiterPrice());
+				SharedPreferences settings = PreferenceManager
+						.getDefaultSharedPreferences(this);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putString(Constants.COUNTRY, currentCountry);
+				editor.commit();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Log.e(getClass().getSimpleName(), "Country is null"); 
+		}
 	}
 
 	/**
@@ -146,28 +187,24 @@ public class HomeVizApplication extends Application {
 		this.rooms.add(room);
 	}
 
-	public void setCountries(Map<String, Country> map) {
-		this.countryMap = map;
-	}
-
 	public List<Room> getRooms() {
 		return this.rooms;
 	}
 
-	public double getCo2Multiplier() throws LocationUnknownException {
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String currentCountry = settings.getString(Constants.COUNTRY, null);
-		if (currentCountry == null) {
-			throw new LocationUnknownException("No location");
-		} else {
-			if (countryMap.containsKey(currentCountry)) {
-				return countryMap.get(currentCountry).getCo2Value();
-			} else {
-				throw new LocationUnknownException("No CO2 data");
-			}
-		}
-	}
+//	public double getCo2Multiplier() throws LocationUnknownException {
+//		SharedPreferences settings = PreferenceManager
+//				.getDefaultSharedPreferences(this);
+//		String currentCountry = settings.getString(Constants.COUNTRY, null);
+//		if (currentCountry == null) {
+//			throw new LocationUnknownException("No location");
+//		} else {
+//			if (countryMap.containsKey(currentCountry)) {
+//				return countryMap.get(currentCountry).getCo2Value();
+//			} else {
+//				throw new LocationUnknownException("No CO2 data");
+//			}
+//		}
+//	}
 
 	/**
 	 * @return the facebookUser
@@ -186,7 +223,6 @@ public class HomeVizApplication extends Application {
 
 	public void reset() {
 		try {
-			countryMap.clear();
 			facebookUser = null;
 			persons.clear();
 			rooms.clear();

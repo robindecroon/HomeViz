@@ -25,6 +25,7 @@ public class SolarPanel extends AYield implements IYield {
 	}
 	
 	private static String unit;
+	@Override
 	public String unit() {
 		return " " + unit; 
 	}

@@ -53,7 +53,7 @@ public class UsageFragment extends OptionSpinnerFragment {
 				.findViewById(R.id.usage_water_price);
 		water.setText(currentRoom.getWaterPrice().toString());
 
-		// Heating
+		// Heating // TODO
 //		LinearLayout heatings = (LinearLayout) rootView
 //				.findViewById(R.id.heating_layout);
 //		heatings.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,

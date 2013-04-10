@@ -12,13 +12,6 @@ public class ToastMessages {
 		context = c;
 	}
 
-	public static void noMoreDetail() {
-		Toast.makeText(
-				context,
-				context.getResources().getString(R.string.toast_no_more_detail),
-				Toast.LENGTH_SHORT).show();
-	}
-
 	public static void noFileManager() {
 		Toast.makeText(
 				context,
@@ -31,22 +24,6 @@ public class ToastMessages {
 		Toast.makeText(context,
 				context.getResources().getString(R.string.toast_wrong_file),
 				Toast.LENGTH_LONG).show();
-	}
-
-	public static void noSmallerPeriod() {
-		Toast.makeText(
-				context,
-				context.getResources().getString(
-						R.string.toast_no_smaller_period), Toast.LENGTH_LONG)
-				.show();
-	}
-
-	public static void noLargerPeriod() {
-		Toast.makeText(
-				context,
-				context.getResources().getString(
-						R.string.toast_no_larger_period), Toast.LENGTH_LONG)
-				.show();
 	}
 
 	public static void noLocationResource() {
@@ -64,13 +41,21 @@ public class ToastMessages {
 						.getString(R.string.toast_enable_location),
 				Toast.LENGTH_LONG).show();
 	}
-
-	public static void swypeDownForDetail() {
+	
+	public static void noSmallerPeriod() {
 		Toast.makeText(
 				context,
 				context.getResources().getString(
-						R.string.toast_swype_down_for_detail),
-				Toast.LENGTH_LONG).show();
+						R.string.toast_no_smaller_period), Toast.LENGTH_LONG)
+				.show();
+	}
+
+	public static void noLargerPeriod() {
+		Toast.makeText(
+				context,
+				context.getResources().getString(
+						R.string.toast_no_larger_period), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	public static void longClickForTime() {

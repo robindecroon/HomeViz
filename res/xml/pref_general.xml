@@ -10,7 +10,7 @@
         android:defaultValue="true"
         android:key="location_allowed"
         android:dependency="local_prices"
-        android:summary="When allowed HomeViz can calculate prices on local price exchange rates, when disabled Belgian prices will be used."
-        android:title="Allow HomeViz to use your location" />
+        android:summary="@string/settings_allow_location_summary"
+        android:title="@string/settings_allow_location_title" />
 
 </PreferenceScreen>

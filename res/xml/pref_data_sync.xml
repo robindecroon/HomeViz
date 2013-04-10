@@ -21,7 +21,7 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Loxone IP Address" />
+        android:title="@string/settings_loxone_ip" />
     <EditTextPreference
         android:defaultValue="@string/loxone_user"
         android:dependency="demo_mode"
@@ -30,7 +30,7 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Loxone username" />
+        android:title="@string/settings_loxone_user" />
     <EditTextPreference
         android:defaultValue="@string/loxone_password"
         android:dependency="demo_mode"
@@ -39,7 +39,7 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Loxone password" />
+        android:title="@string/settings_loxone_password" />
 
     <ListPreference
         android:defaultValue="10"

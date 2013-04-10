@@ -95,24 +95,19 @@ public class Main extends FragmentActivity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
-		
 
 		// init the actionbar and spinners
 		setupActionBar();
 
 		if (INIT) {
-			// search the current location
-			initCurrentLocation();
-			
 			// read the configuration XML file
 			readHomeVizXML();
-
-			// read CO2 data
-			readCO2Data();
 
 			// start with Usage (icons)
 			startUsageContainerFragment(0, 0);
 
+			// search the current location
+			initCurrentLocation();
 			INIT = false;
 		} else {
 			Bundle extras = getIntent().getExtras();
@@ -280,40 +275,6 @@ public class Main extends FragmentActivity implements LocationListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void readCO2Data() {
-		try {
-			InputStream input = getAssets().open(Constants.CO2_DATA_FILE_NAME);
-			BufferedReader in = new BufferedReader(new InputStreamReader(input));
-			String line = null;
-			Map<String, Country> countries = new HashMap<String, Country>();
-
-			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
-			NumberFormat dotFormat = NumberFormat.getInstance(Locale.US);
-			try {
-				// The headers
-				in.readLine();
-				while ((line = in.readLine()) != null) {
-					String[] values = line.split(";");
-					Number co2number = format.parse(values[1]);
-					Number kwhnumber = dotFormat.parse(values[2]);
-					Number liternumber = dotFormat.parse(values[3]);
-
-					double co2 = co2number.doubleValue();
-					double kwh = kwhnumber.doubleValue();
-					double liter = liternumber.doubleValue();
-					countries.put(values[0], new Country(values[0], co2,
-							new Amount(kwh), new Amount(liter)));
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Log.e(getClass().getSimpleName(), "Error in country CSV file!");
-			}
-			((HomeVizApplication) getApplication()).setCountries(countries);
-		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -524,15 +485,21 @@ public class Main extends FragmentActivity implements LocationListener {
 		String currentCity = null;
 		String currentCountry = null;
 
-		Geocoder geocoder = new Geocoder(getApplicationContext(),
-				Locale.getDefault());
-		List<Address> addresses;
+		Geocoder geocoder = new Geocoder(this, Locale.US);
 		try {
 			if (Network.isNetworkConnected(this)) {
-				addresses = geocoder.getFromLocation(lat, lng, 1);
-				Address first = addresses.get(0);
-				currentCity = first.getLocality();
-				currentCountry = first.getCountryName();
+				List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+				if (addresses.size() > 0) {
+					Address first = addresses.get(0);
+					currentCity = first.getLocality();
+					currentCountry = first.getCountryName();					
+					((HomeVizApplication) getApplication())
+					.setCurrentCountry(currentCountry);
+					Log.i(getClass().getSimpleName(), "Updated location, we are in: " + currentCity
+							+ ", " + currentCountry);
+				} else {
+					Log.e(getClass().getSimpleName(), "GeoCoder is down!");
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -540,10 +507,6 @@ public class Main extends FragmentActivity implements LocationListener {
 			currentCountry = getResources().getString(R.string.no_location);
 		}
 
-		((HomeVizApplication) getApplication())
-				.setCurrentCountry(currentCountry);
-		Log.i(getClass().getSimpleName(), "Updated location, we are in: " + currentCity
-				+ ", " + currentCountry);
 	}
 
 	@Override

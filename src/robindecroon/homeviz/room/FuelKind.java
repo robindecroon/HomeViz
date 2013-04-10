@@ -1,5 +1,8 @@
 package robindecroon.homeviz.room;
 
+import robindecroon.homeviz.R;
+import android.content.Context;
+
 public enum FuelKind {
 
 	DIESEL {
@@ -9,9 +12,9 @@ public enum FuelKind {
 		}
 
 		@Override
-		public String toString() {
+		public String toString(Context c) {
 			// TODO Auto-generated method stub
-			return "l diesel fuel";
+			return c.getResources().getString(R.string.metaphor_fuel_diesel);
 		}
 	},
 	GAS {
@@ -23,9 +26,9 @@ public enum FuelKind {
 		}
 
 		@Override
-		public String toString() {
+		public String toString(Context c) {
 			// TODO Auto-generated method stub
-			return "l gas oil";
+			return c.getResources().getString(R.string.metaphor_fuel_gas);
 		}
 
 	},
@@ -38,9 +41,9 @@ public enum FuelKind {
 		}
 
 		@Override
-		public String toString() {
+		public String toString(Context c) {
 			// TODO Auto-generated method stub
-			return "l fuel oil";
+			return c.getResources().getString(R.string.metaphor_fuel_oil);
 		}
 
 	},
@@ -53,16 +56,15 @@ public enum FuelKind {
 		}
 
 		@Override
-		public String toString() {
+		public String toString(Context c) {
 			// TODO Auto-generated method stub
-			return "l gasoline";
+			return c.getResources().getString(R.string.metaphor_fuel_gasoline);
 		}
 
 	};
 
 	public abstract double getMultiplier();
 
-	@Override
-	public abstract String toString();
+	public abstract String toString(Context c);
 
 }

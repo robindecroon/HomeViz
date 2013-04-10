@@ -82,7 +82,7 @@ public class Constants {
 	public final static int METAPHOR_TYPE_WATER = 2;
 	public final static String METAPHOR_CONSUMER = "metaphorTotal";
 	public final static double BOTTLE_CONTENT = 1.5;
-	public static final String METAPHOR_WATER_TEXT = " bottles of water";
+//	public static final String METAPHOR_WATER_TEXT = " bottles of water";
 	public static final String METAPHOR_CONSUMER_NAME = "consumerName";
 
 	public static final double BELGIAN_CO2 = 253.6057761;

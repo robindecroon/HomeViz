@@ -15,7 +15,6 @@ import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.room.WeightUnit;
 import robindecroon.homeviz.util.ImageScaler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +82,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 								fuelSum = fuelSum.add(consumer.getFuel(),
 										FuelKind.DIESEL);
 							}
-							value = fuelSum.toString();
+							value = fuelSum.toString(getActivity());
 							title.setText(R.string.metaphor_heating_title);
 							break;
 						case Constants.METAPHOR_TYPE_WATER:
@@ -92,14 +91,12 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							}
 							value = Math.round(waterSum
 									/ Constants.BOTTLE_CONTENT)
-									+ Constants.METAPHOR_WATER_TEXT;
+									+ getResources().getString(R.string.metaphor_water_text);
 							title.setText(R.string.metaphor_water_title);
 							break;
 						}
 					} catch (NoSuchDevicesInRoom e) {
-						// should not happen
-						Log.e(getClass().getSimpleName(), "You should not see this message ;-)");
-						e.printStackTrace();
+						// No consumer is this room
 					}
 				}
 			}

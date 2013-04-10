@@ -36,6 +36,8 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();
 
+		getActivity().getActionBar().setIcon(R.drawable.up_arrow);
+
 		Room currentRoom = null;
 		if (getArguments() != null) {
 			int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);

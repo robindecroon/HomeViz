@@ -1,5 +1,7 @@
 package robindecroon.homeviz.room;
 
+import android.content.Context;
+
 public class Fuel {
 
 	private final double liter;
@@ -44,9 +46,8 @@ public class Fuel {
 		return kind;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("%.2f", liter) + " " + kind.toString();
+	public String toString(Context c) {
+		return String.format("%.2f", liter) + " " + kind.toString(c);
 	}
 
 }
