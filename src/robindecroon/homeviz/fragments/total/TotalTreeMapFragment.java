@@ -5,10 +5,14 @@ import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
+import robindecroon.homeviz.fragments.metaphor.MetaphorContentFragment;
+import robindecroon.homeviz.fragments.metaphor.MetaphorExpandableListFragment;
+import robindecroon.homeviz.listeners.MetaphorListChildListener;
 import robindecroon.homeviz.util.webviews.MyJavaScriptInterface;
 import robindecroon.homeviz.util.webviews.MyWebViewClient;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,8 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	private static int lastOption;
 
 	private static int treemapType;
+	
+	private static Bundle args;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +77,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 			kwhButton.setChecked(true);
 		}
 
-		Bundle args = getArguments();
+		args = getArguments();
 		lastOption = args.getInt(Constants.TREEMAP_OPTION);
 		loadTreemap(lastView, lastOption + treemapType);
 
@@ -106,7 +112,10 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	}
 
 	public static void resetViews() {
-		
-		loadTreemap(lastView, lastOption);
+		Fragment fragment2 = new TotalTreeMapFragment();
+		fragment2.setArguments(args);
+		context.getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, fragment2).commit();
+//		loadTreemap(lastView, lastOption);
 	}
 }

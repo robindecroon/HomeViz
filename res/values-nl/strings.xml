@@ -27,7 +27,7 @@
     <string name="menu_refresh">Hersynchroniseer statistieken</string>
     <string name="menu_settings">Instellingen</string>
     <string name="metaphor">Metafoor</string>
-    <string name="metaphor_electricty_title">Ecologische voetafdruk (CO<sup>2</sup>)</string>
+    <string name="metaphor_electricty_title">Ecologische voetafdruk (CO<sub>2</sub>)</string>
     <string name="metaphor_fuel_diesel"> l diesel</string>
     <string name="metaphor_fuel_gas"> l gas</string>
     <string name="metaphor_fuel_gasoline"> l benzine</string>
