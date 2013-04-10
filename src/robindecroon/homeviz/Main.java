@@ -1,16 +1,10 @@
 package robindecroon.homeviz;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.EmptyStackException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Stack;
 
 import libraries.stackoverflow.NoDefaultSpinner;
@@ -26,8 +20,6 @@ import robindecroon.homeviz.listeners.actionbarlisteners.TotalActionBarSpinnerLi
 import robindecroon.homeviz.listeners.actionbarlisteners.UsageActionBarSpinnerListener;
 import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerListener;
 import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
-import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
@@ -511,7 +503,6 @@ public class Main extends FragmentActivity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		Log.i(getClass().getSimpleName(), "Location found!");
 		setLocation(location);
 	}
 

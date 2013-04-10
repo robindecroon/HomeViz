@@ -4,6 +4,7 @@
 package robindecroon.homeviz.util;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -135,7 +136,7 @@ public enum Period {
 	CUSTOM(R.string.period_custom) {
 		@Override
 		public int getId() {
-			return -1;
+			return 4;
 		}
 
 		@Override
@@ -150,13 +151,18 @@ public enum Period {
 
 		@Override
 		public int getMultiplier() {
-			return (int) ((getEnd().getTimeInMillis() - getBegin()
-					.getTimeInMillis()) / (86400000));
+			try {
+				return (int) ((getEnd().getTimeInMillis() - getBegin()
+						.getTimeInMillis()) / (86400000));
+			} catch (Exception e) {
+				// sometimes android calls this method before the end is set!
+				return 0;
+			}
 		}
 
 		@Override
 		public String getName(Context context) {
-			DateFormat formater = DateFormat.getDateInstance();
+			DateFormat formater = DateFormat.getDateInstance(DateFormat.SHORT);
 			try {
 				return formater.format(getBegin().getTime()) + " - "
 						+ formater.format(getEnd().getTime());

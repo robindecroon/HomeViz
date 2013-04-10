@@ -1,26 +1,43 @@
 package robindecroon.homeviz.fragments;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.listeners.DatePickerListener;
+import robindecroon.homeviz.Main;
+import robindecroon.homeviz.R;
+import robindecroon.homeviz.exceptions.IllegalPeriodModification;
+import robindecroon.homeviz.util.FragmentResetter;
+import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.ToastMessages;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements
 		DatePickerDialog.OnDateSetListener {
+	
+	private enum Type {
+		From, Until;
+	}
 
-	private Set<DatePickerListener> listeners = new HashSet<DatePickerListener>();
+	private Type type;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+		String title = getArguments().getString(Constants.DATEPICKER_TITLE);
+		Resources res = getActivity().getResources();
+		if (title.equals(res.getString(R.string.from) + "...")) {
+			type = Type.From;
+		} else if (title.equals("..." + res.getString(R.string.until))) {
+			type = Type.Until;
+		}
 
 		// Use the current date as the default date in the picker
 		final Calendar c = Calendar.getInstance();
@@ -30,22 +47,17 @@ public class DatePickerFragment extends DialogFragment implements
 
 		DatePickerDialog dialog = new DatePickerDialog(getActivity(), this,
 				year, month, day);
-
-		try {
-			addListener((DatePickerListener) getActivity());
-		} catch (ClassCastException e1) {
-			Log.e("DatePickerFragment", getActivity()
-					+ " is not an appropriate listener");
+		switch (type) {
+		case From:
+			dialog.getDatePicker().setMaxDate(new Date().getTime());			
+			break;
+		case Until:
+			dialog.getDatePicker().setMaxDate(new Date().getTime());			
+			break;
 		}
 
-		String title = null;
-		try {
-			title = getArguments().getString(Constants.DATEPICKER_TITLE);
-			dialog.setTitle(title);
-
-		} catch (Exception e) {
-			Log.e("DialogPickerFragment", "No arguments");
-		}
+		dialog.setTitle(title);
+		
 
 		return dialog;
 
@@ -53,16 +65,34 @@ public class DatePickerFragment extends DialogFragment implements
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int month, int day) {
-		updateListeners(new GregorianCalendar(year, month, day));
-	}
-
-	private void updateListeners(GregorianCalendar gregorianCalendar) {
-		for (DatePickerListener listener : listeners) {
-			listener.update(gregorianCalendar, getTag());
+		GregorianCalendar cal = new GregorianCalendar(year, month, day);
+		try {
+			Main.currentPeriod = Period.CUSTOM;
+			switch (type) {
+			case From:
+				Log.i(getClass().getSimpleName(), "From date set!");
+				Main.currentPeriod.setBegin(cal);
+				break;
+			case Until:
+				Log.i(getClass().getSimpleName(), "End date set!");
+				Period p = Main.currentPeriod;
+				p.setEnd(cal);
+				if(p.getEnd().before(p.getBegin())) {
+					Log.e(getClass().getSimpleName(), "Invalid date range!");
+					ToastMessages.invalidPeriod();
+					Main.currentPeriod = Period.WEEK;
+				}
+				try {
+					FragmentResetter.reset(getActivity());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			}
+		} catch (Exception e) {
+			Log.e(getClass().getSimpleName(), e.getMessage());
 		}
-	}
 
-	public void addListener(DatePickerListener listener) {
-		this.listeners.add(listener);
 	}
 }

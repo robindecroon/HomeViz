@@ -106,6 +106,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	}
 
 	public static void resetViews() {
+		
 		loadTreemap(lastView, lastOption);
 	}
 }

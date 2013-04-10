@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import robindecroon.homeviz.exceptions.LocationUnknownException;
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.AYield;
@@ -31,8 +30,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.facebook.model.GraphUser;
-
 /**
  * Eigen applicatieklasse om variabelen bij te houden.
  * 
@@ -43,8 +40,6 @@ public class HomeVizApplication extends Application {
 
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Person> persons = new ArrayList<Person>();
-
-	private GraphUser facebookUser;
 
 	private AYield solarPanel;
 	private AYield rainWater;
@@ -191,39 +186,8 @@ public class HomeVizApplication extends Application {
 		return this.rooms;
 	}
 
-//	public double getCo2Multiplier() throws LocationUnknownException {
-//		SharedPreferences settings = PreferenceManager
-//				.getDefaultSharedPreferences(this);
-//		String currentCountry = settings.getString(Constants.COUNTRY, null);
-//		if (currentCountry == null) {
-//			throw new LocationUnknownException("No location");
-//		} else {
-//			if (countryMap.containsKey(currentCountry)) {
-//				return countryMap.get(currentCountry).getCo2Value();
-//			} else {
-//				throw new LocationUnknownException("No CO2 data");
-//			}
-//		}
-//	}
-
-	/**
-	 * @return the facebookUser
-	 */
-	public GraphUser getFacebookUser() {
-		return facebookUser;
-	}
-
-	/**
-	 * @param facebookUser
-	 *            the facebookUser to set
-	 */
-	public void setFacebookUser(GraphUser facebookUser) {
-		this.facebookUser = facebookUser;
-	}
-
 	public void reset() {
 		try {
-			facebookUser = null;
 			persons.clear();
 			rooms.clear();
 		} catch (Exception e) {

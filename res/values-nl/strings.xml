@@ -17,6 +17,7 @@
     <string name="detail">Details</string>
     <string name="from">Vanaf</string>
     <string name="house">Huis</string>
+        <string name="invalid_period">Gelieve een geldige periode te kiezen!</string>
     <string name="kwh">kWh</string>
     <string name="liter">liter</string>
     <string name="loxone_demo_multiplier">Loxone demo vermenigvuldiger</string>

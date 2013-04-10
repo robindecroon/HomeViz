@@ -105,4 +105,10 @@ public class ToastMessages {
 				context.getResources().getString(R.string.toast_community),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void invalidPeriod() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.invalid_period),
+				Toast.LENGTH_LONG).show();
+	}
 }
