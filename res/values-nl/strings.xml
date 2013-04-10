@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="about">Over</string>
+    <string name="about_text">HomeViz is gemaakt door <a href="https://twitter.com/RobinDeCroon">Robin De Croon</a> met als hoofdoel energie-awareness te creeëren bij de gebruikers van een domotica systeem. Deze applicatie is ontwikkeld voor het behalen van het diploma master Ingenieurswetenschappen - Computerwetenschappen aan de <a href="http://www.kuleuven.be">KU Leuven</a>. Robins promotor is <a href="http://erikduval.wordpress.com/">Professor Dr. ir. E. Duval</a> en zijn dagelijkse begeleider is <a href="http://www.ariadne-eu.org/content/dr-joris-klerkx">Dr. J. Klerkx</a>. \n \nHomeViz werkt momenteel enkel met Loxone, de testhardware hiervan is geleverd door <a href="http://www.demec.be">Demec</a>. \n \nHomeViz scans automatisch of het thuisnetwerk verbonden is met een Loxone Miniserver op het ingestelde ip-adres. Wanneer HomeViz geen verbinding kan maken met een Miniserver, dan zal het automatisch overgaan in de demo-mode.  In deze mode ziet u willekeurige getallen. Deze mode is voornamelijk bedoeld om de verschillende functies van HomeViz uit te testen.\n \nVoor meer informatie of andere vragen zie:  <a href="http://robindecroon.wordpress.com/">http://robindecroon.wordpress.com/</a></string>
+    <string name="action_settings">Instellingen</string>
+    <string name="app_name">HomeViz</string>
+    <string name="community">Zie wat het gemiddelde verbruik van andere mensen is</string>
+    <string name="consumer_image">Verbruikers afbeelding</string>
+    <string name="content_description_appliances_usage">Verbruik huishoudstoestellen</string>
+    <string name="content_description_heating_usage">Verbruik verwarming</string>
+    <string name="content_description_home_cinema_usage">Verbruik multimediatoestellen</string>
+    <string name="content_description_light_usage">Verbruik lampen</string>
+    <string name="content_description_water_usage">Waterverbruik</string>
+    <string name="demo_explanation">Willekeurige waardes zullen gebruikt worden, deze zijn niet representatief!</string>
+    <string name="demo_mode">Demo Mode</string>
+    <string name="detail">Details</string>
+    <string name="from">Vanaf</string>
+    <string name="house">Huis</string>
+    <string name="kwh">kWh</string>
+    <string name="liter">liter</string>
+    <string name="loxone_demo_multiplier">Loxone demo vermenigvuldiger</string>
+    <string name="loxone_ip">192.168.1.200</string>
+    <string name="loxone_password">admin</string>
+    <string name="loxone_user">admin</string>
+    <string name="menu_refresh">Hersynchroniseer statistieken</string>
+    <string name="menu_settings">Instellingen</string>
+    <string name="metaphor">Metafoor</string>
+    <string name="metaphor_electricty_title">Ecologische voetafdruk (CO<sup>2</sup>)</string>
+    <string name="metaphor_fuel_diesel"> l diesel</string>
+    <string name="metaphor_fuel_gas"> l gas</string>
+    <string name="metaphor_fuel_gasoline"> l benzine</string>
+    <string name="metaphor_fuel_oil"> l olie</string>
+    <string name="metaphor_heating_title">Liter diesel</string>
+    <string name="metaphor_image">Metafoor afbeelding</string>
+    <string name="metaphor_water_text">\u0020flessen water (1,5l)</string>
+    <string name="metaphor_water_title">Flessenwater (1,5l)</string>
+    <string name="No">Nee</string>
+    <string name="no_appliance_in_room">Er zijn geen huishoudstoestellen in deze kamer!</string>
+    <string name="no_heating_in_room">Eris geen verwarming in deze kamer!</string>
+    <string name="no_home_cinema_in_room">Er zijn geen multimediatoestellen in deze kamer!</string>
+    <string name="no_lights">Er zijn geen lampen in deze kamer!</string>
+    <string name="no_location">Onbekende locatie</string>
+    <string name="no_network">U moet verbonden zijn met het internet om deze afbeeldingen te zien.</string>
+    <string name="no_water_in_room">Er is geen waterverbruik in deze kamer!</string>
+    <string name="not_implemented_yet">Deze funtie is momenteel nog niet ondersteund! ;-)</string>
+    <string name="period_custom">Persoonlijke tijdsperiode</string>
+    <string name="period_day">Vandaag</string>
+    <string name="period_last_month">Voorbije maand</string>
+    <string name="period_last_week">Voorbije week</string>
+    <string name="period_last_year">Voorbije jaar</string>
+    <string name="period_month">Deze maand</string>
+    <string name="period_two_days_ago">2 dagen geleden</string>
+    <string name="period_week">Deze week</string>
+    <string name="period_year">Dit jaar</string>
+    <string name="period_yesterday">Gisteren</string>
+    <string name="question_enable_location">Wilt u locatie-services toestaan?</string>
+    <string name="settings_allow_location_summary">Indien HomeViz uw locatie mag gebruiken, worden de prijzen berekend met lokale prijzen. Indien deze functie uitgeschakeld is, zullen Belgische prijzen gebruikt worden.</string>
+    <string name="settings_allow_location_title">HomeViz mag uw locatie gebruiken</string>
+    <string name="settings_loxone_ip">Loxone IP Adres</string>
+    <string name="settings_loxone_password">Loxone wachtwoord</string>
+    <string name="settings_loxone_user">Loxone gebruikersnaam</string>
+    <string name="share">Deel</string>
+    <string name="share_text">Deel uw HomeViz\' grafieken!</string>
+    <string name="title_activity_main">HomeViz</string>
+    <string name="toast_community">Sorry, deze functionaliteit moet nog voorzien worden. Hier zal u kunnen zien wat andere gebruikers verbruikt hebben.</string>
+    <string name="toast_connection_error">Het was niet mogelijk om een verbinding met het netwerk te maken.</string>
+    <string name="toast_data_loaded">Gegevens zijn succesvol van Loxone afgehaald!</string>
+    <string name="toast_enable_location">Gelieve het traceren van uw locatie toe te staan.</string>
+    <string name="toast_long_click_for_time">Gebruik de pijltjes om een andere periode te kiezen. Houd deze periode ingedrukt om een andere periode te kiezen.</string>
+    <string name="toast_no_external_storage">Om van deze functies gebruik te kunnen maken, moet u over extern geheugen beschikken. Sorry!</string>
+    <string name="toast_no_file_manager">Er kon geen programma gevonden worden, waarmee u naar bestanden kan zoeken.</string>
+    <string name="toast_no_larger_period">Dit is de grootst mogelijke periode!</string>
+    <string name="toast_no_location_resource">Gelieve uw WiFi of GPS in te stellen voor locatie tracering!</string>
+    <string name="toast_no_share_providers">Er zijn geen applicaties gevonden om deze grafieken mee te delen!</string>
+    <string name="toast_no_smaller_period">Geen kleinere periode mogelijk!</string>
+    <string name="toast_too_fast">Niet te snel aub! :-)</string>
+    <string name="toast_wrong_file">Gelieve het juiste bestand in te laden!</string>
+    <string name="total">Totaal</string>
+    <string name="until">Tot</string>
+    <string name="usage">Verbruik</string>
+    <string name="watt">Watt</string>
+    <string name="Yes">Ja</string>
+    <string name="yield">Opbrengst</string>
+    <string name="yield_current">Huidige productie</string>
+    <string name="yield_total">Totaal</string>
+    <string name="you_text">Welke kamer verbruikt het meeste?</string>
+
+    <string-array name="usage_spinner_data">
+        <item>Verbruik (afbeeldingen)</item>
+        <item>Verbruik (Staafdiagram)</item>
+        <item>Verbruik (Kolomdiagram)</item>
+    </string-array>
+    <string-array name="you_spinner_data">
+        <item>Treemap (lampen)</item>
+        <item>Treemap (huishoudstoestellen)</item>
+        <item>Treemap (multimediatoestellen)</item>
+    </string-array>
+    <string-array name="metaphor_spinner_data">
+        <item>Metafoor (elektriciteit)</item>
+        <item>Metafoor (verwarming)</item>
+        <item>Metafoor (water)</item>
+    </string-array>
+    <string-array name="yield_spinner_data">
+        <item>Opbrengst (zonnepanelen)</item>
+        <item>Opbrengst (regenwater)</item>
+        <item>Opbrengst (grondwater)</item>
+    </string-array>
+
+</resources>
