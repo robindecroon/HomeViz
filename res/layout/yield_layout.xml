@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,20 +13,22 @@
 
     <ImageView
         android:id="@+id/yield_image"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
         android:layout_gravity="center"
         android:layout_weight="5"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:paddingTop="30dp" />
 
     <TextView
-        android:paddingLeft="20dp"
         android:id="@+id/yield_solar_text"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
         android:layout_gravity="center"
         android:layout_weight="5"
+        android:gravity="center"
         android:lineSpacingExtra="5sp"
+        android:paddingLeft="20dp"
         android:textColor="@color/White"
         android:textIsSelectable="false"
         android:textSize="25sp" />

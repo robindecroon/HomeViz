@@ -9,11 +9,12 @@
     <RelativeLayout
         android:id="@+id/you_user_layout"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/total_spinner_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -50,6 +51,7 @@
             android:id="@+id/you_current_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/total_spinner_layout"
             android:layout_centerInParent="true"
             android:paddingLeft="80dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -69,8 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/watt" />
-            
-             <RadioButton
+
+            <RadioButton
                 android:id="@+id/total_radio_kwh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

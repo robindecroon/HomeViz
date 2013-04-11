@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingTop="15dp" >
 
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true" >
+            android:layout_height="50dp" >
 
             <libraries.nielsbillen.ArrowButton
                 android:id="@+id/metaphor_arrow_left"
@@ -36,12 +35,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:paddingTop="10dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/metaphor_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="right"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:textColor="@color/WhiteSmoke"
@@ -57,7 +57,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/metaphor_value"
