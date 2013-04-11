@@ -15,7 +15,7 @@ public class ConsumerFragmentPagerAdapter extends HomeVizFragmentPagerAdapter {
 			HomeVizApplication app, int consumer) {
 		super(fm, app);
 		this.consumer = consumer;
-	}
+	}   
 
 	@Override
 	public Fragment getItem(int arg0) {

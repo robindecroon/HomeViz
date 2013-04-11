@@ -21,7 +21,7 @@ public class Constants {
 	/*
 	 * Configuration
 	 */
-	public final static String XML_FILE_NAME = "Delnat.xml";
+	public final static String XML_FILE_NAME = "HomeViz.xml";
 	public final static String CO2_DATA_FILE_NAME = "co2.csv";
 
 	/*

@@ -39,7 +39,6 @@ import android.util.Log;
 public class HomeVizApplication extends Application {
 
 	private List<Room> rooms = new ArrayList<Room>();
-	private List<Person> persons = new ArrayList<Person>();
 
 	private AYield solarPanel;
 	private AYield rainWater;
@@ -151,31 +150,10 @@ public class HomeVizApplication extends Application {
 	}
 
 	/**
-	 * @return the currentUser
-	 */
-	public Person getCurrentUser() throws IllegalStateException {
-		SharedPreferences pref = getSharedPreferences(Constants.PREF_NAME, 0);
-		String name = pref.getString(Constants.CURRENT_USER, null);
-		for (Person person : getPersons()) {
-			if (person.getFirstName().equalsIgnoreCase(name))
-				return person;
-		}
-		throw new IllegalStateException("No current user found!");
-	}
-
-	public List<Person> getPersons() {
-		return this.persons;
-	}
-
-	/**
 	 * Constructor om een applicatie aan te maken. Laad automatisch de XML in.
 	 */
 	public HomeVizApplication() {
 		ToastMessages.setContext(this);
-	}
-
-	public void addPerson(Person person) {
-		this.persons.add(person);
 	}
 
 	public void addRoom(Room room) {
@@ -188,7 +166,6 @@ public class HomeVizApplication extends Application {
 
 	public void reset() {
 		try {
-			persons.clear();
 			rooms.clear();
 		} catch (Exception e) {
 			// nothing to clear

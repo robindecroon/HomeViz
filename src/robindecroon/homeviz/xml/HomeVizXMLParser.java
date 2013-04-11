@@ -24,13 +24,11 @@ public class HomeVizXMLParser extends XMLParser {
 	private static final String ns = null;
 
 	private static final String TAG = "HomeViz";
-	private static final String SETTINGS_TAG = "Settings";
 	private static final String ROOM_TAG = "Room";
 	private static final String LIGHT_TAG = "Light";
 	private static final String HOMECINEMA_TAG = "HomeCinema";
 	private static final String APPLIANCE_TAG = "Appliance";
 	private static final String WATER_TAG = "Water";
-	private static final String PERSON_TAG = "Person";
 
 	private HomeVizApplication app;
 
@@ -65,50 +63,14 @@ public class HomeVizXMLParser extends XMLParser {
 			}
 			String name = parser.getName();
 			// Starts by looking for the right tag
-			if (name.equals(SETTINGS_TAG)) {
-				readSettings(parser);
-			} else if (name.equals(ROOM_TAG)) {
+			if (name.equals(ROOM_TAG)) {
 				app.addRoom(readRoom(parser));
-			} else if (name.equals(PERSON_TAG)) {
-				app.addPerson(readPerson(parser));
 			} else {
 				skip(parser);
 			}
 		}
 		parser.require(XmlPullParser.END_TAG, ns, TAG);
 		return true;
-	}
-
-	private Person readPerson(XmlPullParser parser) throws IOException,
-			XmlPullParserException {
-		parser.require(XmlPullParser.START_TAG, ns, PERSON_TAG);
-
-		String firstname = parser.getAttributeValue(null, "firstname");
-		String lastname = parser.getAttributeValue(null, "lastname");
-
-		parser.nextTag();
-		parser.require(XmlPullParser.END_TAG, ns, PERSON_TAG);
-
-		return new Person(firstname, lastname);
-	}
-
-	private void readSettings(XmlPullParser parser) throws IOException,
-			XmlPullParserException {
-		parser.require(XmlPullParser.START_TAG, ns, SETTINGS_TAG);
-
-		String vizType = parser.getAttributeValue(null, "viztype");
-		String user = parser.getAttributeValue(null, "user");
-
-		SharedPreferences settings = app.getSharedPreferences(
-				Constants.PREF_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(Constants.CURRENT_USER, user);
-		editor.putString(Constants.VIZ_TYPE, vizType);
-		// Commit the edits!
-		editor.commit();
-
-		parser.nextTag();
-		parser.require(XmlPullParser.END_TAG, ns, SETTINGS_TAG);
 	}
 
 	private Room readRoom(XmlPullParser parser) throws IOException,

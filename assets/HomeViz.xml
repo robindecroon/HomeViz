@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HomeViz>
-	<Settings viztype="barchart" user="Robin"/>
-	
+<HomeViz>	
 	<Room name="Living Room">
 		<Light name="l1" watt="60" />
 		<Light name="l2" watt="50" />
@@ -31,7 +29,7 @@
 	</Room>
 	<Room name="Bedroom">
 		<Light name="l11" watt="5" />
-		<Light name="l12" watt="80" />
+		<Light name="l16" watt="80" />
 		<Light name="l13" watt="10" />
 		<Appliance name="senseo" watt="1200" />
 		<Appliance name="vacuummini" watt="1000" />
@@ -47,17 +45,15 @@
 		<Water name="kraan4" />
 		<Water name="kraan7" />
 	</Room>
-	<Room name="Loxone">
-		<Light name="ledverlichtingdimbarelamp" watt="100" />
-		<Light name="drukknopalarm" watt="100" />
-		<Appliance name="drukknopi2" watt="500" />
-		<Appliance name="drukknopi3" watt="500" />
-		<HomeCinema name="desktop1" watt="500" />
+	<Room name="Toilet">
+		<Light name="l12" watt="60" />
+		<Water name="wc" />
 	</Room>
-	
-
-	<Person firstname="Robin" lastname="De Croon" />
-	<Person firstname="Silke" lastname="De Croon" />
-	<Person firstname="Roosje" lastname="De Croon" />
-	<Person firstname="Vienna" lastname="Delnat" />
+	<Room name="Bedroom Children">
+		<Light name="l17" watt="5" />
+		<Light name="l18" watt="40" />
+		<Light name="l19" watt="10" />
+		<HomeCinema name="radio3" watt="50" />
+		<Water name="kraan3" />
+	</Room>
 </HomeViz>
