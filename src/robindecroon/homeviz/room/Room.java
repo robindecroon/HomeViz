@@ -1,6 +1,5 @@
 package robindecroon.homeviz.room;
 
-import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Map;
 import robindecroon.homeviz.Main;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.util.Amount;
-import robindecroon.homeviz.util.Person;
+import android.annotation.SuppressLint;
 
 /**
  * Klasse die een kamer voorstelt.
@@ -67,18 +66,9 @@ public class Room implements RoomPrices {
 		return this.heatings;
 	}
 
-	private Map<Person, Integer> personPercentageMap = new HashMap<Person, Integer>();
-
 	public Room(String name) {
 		this();
 		this.name = name;
-	}
-
-	/**
-	 * @return the personPercentageMap
-	 */
-	public Map<Person, Integer> getPersonPercentageMap() {
-		return personPercentageMap;
 	}
 
 	/**
@@ -233,20 +223,6 @@ public class Room implements RoomPrices {
 		}
 		throw new IllegalArgumentException("No light with name: " + name
 				+ " in room: " + this.getName());
-	}
-
-	public void setPercentageForPerson(Person person, int i) {
-		personPercentageMap.put(person, i);
-	}
-
-	public void printPercentages() {
-		System.out.println("Room " + this.getName());
-		System.out.println("----------------------------------------");
-		for (Person person : personPercentageMap.keySet()) {
-			System.out.println(person + " is "
-					+ personPercentageMap.get(person) + "% in "
-					+ this.getName());
-		}
 	}
 
 	public List<Consumer> getWaters() throws NoSuchDevicesInRoom {

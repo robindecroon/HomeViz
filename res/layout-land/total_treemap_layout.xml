@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    tools:context=".UsageDetailActivity" >
+
+    <RelativeLayout
+        android:id="@+id/you_user_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="50dp" >
+
+                <libraries.nielsbillen.ArrowButton
+                    android:id="@+id/total_arrow_left"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+
+                <libraries.nielsbillen.OptionSpinner
+                    android:id="@+id/total_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <libraries.nielsbillen.ArrowButton
+                    android:id="@+id/total_arrow_right"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/you_current_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="80dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White"
+            android:textIsSelectable="false"
+            android:textSize="30sp" />
+
+        <RadioGroup
+            android:id="@+id/total_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" >
+
+            <RadioButton
+                android:id="@+id/total_radio_watt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/watt" />
+            
+             <RadioButton
+                android:id="@+id/total_radio_kwh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kwh" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/you_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

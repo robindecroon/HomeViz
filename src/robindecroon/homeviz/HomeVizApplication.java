@@ -21,7 +21,6 @@ import robindecroon.homeviz.util.AYield;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
 import robindecroon.homeviz.util.GroundWater;
-import robindecroon.homeviz.util.Person;
 import robindecroon.homeviz.util.RainWater;
 import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
