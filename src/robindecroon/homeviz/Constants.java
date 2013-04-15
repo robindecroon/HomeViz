@@ -83,7 +83,6 @@ public class Constants {
 	public final static int METAPHOR_TYPE_WATER = 2;
 	public final static String METAPHOR_CONSUMER = "metaphorTotal";
 	public final static double BOTTLE_CONTENT = 1.5;
-//	public static final String METAPHOR_WATER_TEXT = " bottles of water";
 	public static final String METAPHOR_CONSUMER_NAME = "consumerName";
 
 	public static final double BELGIAN_CO2 = 253.6057761;
@@ -120,8 +119,8 @@ public class Constants {
 	/*
 	 * Home Creator
 	 */
-	public static final int MAX_NB_CONSUMERS = 4;
-	public static final String[] MULTIMEDIAS = {"desktop1", "hifi1", "hifi2", "macbook", "radio1", "radio2", "radio3", "router", "tv1", "tv2"};
+	public static final int MAX_NB_CONSUMERS = 5;
+	public static final String[] MULTIMEDIAS = {"laptop", "printer", "desktop1", "radio3", "tv2", "hifi1", "macbook", "radio1", "router", "hifi2", "tv1", "radio2"};
 	public static final String[] APPLIANCES = {"dishwasher", "dryer", "fone", "senseo", "shaver", "vacuum", "vacuummini", "washer"};
 	
 	

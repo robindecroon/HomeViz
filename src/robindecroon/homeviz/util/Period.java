@@ -10,7 +10,6 @@ import java.util.GregorianCalendar;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 import android.content.Context;
-import android.util.Log;
 
 /**
  * @author Robin
@@ -166,12 +165,11 @@ public enum Period {
 				return formater.format(getBegin().getTime()) + " - "
 						+ formater.format(getEnd().getTime());
 			} catch (NullPointerException e) {
-				Log.e(getClass().getSimpleName(), "No start date!");
 				return context.getResources().getString(R.string.period_custom);
 			}
 		}
 	};
-
+	
 	private final int nameId;
 
 	private GregorianCalendar begin;

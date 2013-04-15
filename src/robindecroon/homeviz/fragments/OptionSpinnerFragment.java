@@ -4,14 +4,10 @@ import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
 import robindecroon.homeviz.Main;
-import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
-import robindecroon.homeviz.fragments.total.TotalTreeMapFragment;
-import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
 import robindecroon.homeviz.listeners.PeriodListener;
 import robindecroon.homeviz.util.FragmentResetter;
 import robindecroon.homeviz.util.Period;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 public abstract class OptionSpinnerFragment extends Fragment implements

@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -36,7 +38,6 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();
 
-		getActivity().getActionBar().setIcon(R.drawable.up_arrow);
 
 		Room currentRoom = null;
 		if (getArguments() != null) {
@@ -50,8 +51,15 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 				R.id.sub_arrow_right);
 
 		setAmounts(rootView, currentRoom);
-
+		
 		return rootView;
+	}
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		MenuItem home = menu.getItem(android.R.id.home);
+		home.setIcon(R.drawable.up_arrow);
 	}
 
 	private void setAmounts(View v, Room currentRoom) {

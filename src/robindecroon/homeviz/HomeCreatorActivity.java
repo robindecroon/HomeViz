@@ -213,7 +213,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	private String getNextLight() {
-		if (lightCounter > 19) {
+		if (lightCounter > 21) {
 			lightCounter = 1;
 		}
 		String light = "l" + lightCounter;
@@ -241,7 +241,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	protected String getNextWater() {
-		if (waterCounter > 7) {
+		if (waterCounter > 8) {
 			waterCounter = 1;
 		}
 		String crane = "kraan" + waterCounter;
@@ -265,7 +265,7 @@ public class HomeCreatorActivity extends Activity {
 			appliancesCounter = 0;
 		}
 		String applName = appls[appliancesCounter];
-		multimediaCounter++;
+		appliancesCounter++;
 		return applName;
 	}
 

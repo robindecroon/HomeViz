@@ -254,6 +254,12 @@ public class Main extends FragmentActivity implements LocationListener {
 		yieldActionBarSpinner.setSaveEnabled(false);
 
 	}
+	
+	@Override
+    public boolean onPreparePanel(int featureId, View view, Menu menu) {
+        super.onPreparePanel(featureId, view, menu); // this returns false if all items are hidden
+        return true; // return true to prevent the menu's deletion 
+    }
 
 	private void readHomeVizXML() {
 		try {
@@ -267,8 +273,6 @@ public class Main extends FragmentActivity implements LocationListener {
 				in = getAssets().open(Constants.XML_FILE_NAME);				
 			} else {
 				in = openFileInput(xmlFileName);
-				System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin");
-				System.out.println(in.toString());
 			}
 			HomeVizXMLParser parser = new HomeVizXMLParser(
 					(HomeVizApplication) getApplication());
@@ -424,11 +428,12 @@ public class Main extends FragmentActivity implements LocationListener {
 		try {
 			String provider= null;
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//			boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 			
+			boolean internetLocation = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			boolean internetEnabled = Network.isNetworkConnected(this);
 
-			if (internetEnabled) { 
+			if (internetEnabled && internetLocation) { 
 				Log.i(getClass().getSimpleName(), "Tracking location through internet");
 				Criteria criteria = new Criteria();
 				criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -439,15 +444,12 @@ public class Main extends FragmentActivity implements LocationListener {
 				criteria.setCostAllowed(true);
 				provider = locationManager.getBestProvider(criteria, true);
 				locationManager.requestSingleUpdate(provider, this, null);
-			} else if (gpsEnabled) {
-				Log.i(getClass().getSimpleName(), "Tracking location through GPS");
-				provider = LocationManager.GPS_PROVIDER;
-				locationManager.requestSingleUpdate(provider, this, null);
-			} else {
+			}  else {
 				ToastMessages.noLocationResource();
 			}
 		} catch (Exception e) {
 			Log.i(getClass().getSimpleName(), "locationServices are disabled");
+			e.printStackTrace();
 			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

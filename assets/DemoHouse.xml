@@ -47,7 +47,7 @@
 	</Room>
 	<Room name="Toilet">
 		<Light name="l12" watt="60" />
-		<Water name="wc" />
+		<Water name="kraan8" />
 	</Room>
 	<Room name="Bedroom Children">
 		<Light name="l17" watt="5" />

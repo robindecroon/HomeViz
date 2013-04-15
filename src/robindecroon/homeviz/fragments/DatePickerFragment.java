@@ -7,7 +7,6 @@ import java.util.GregorianCalendar;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.exceptions.IllegalPeriodModification;
 import robindecroon.homeviz.util.FragmentResetter;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
