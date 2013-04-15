@@ -260,7 +260,16 @@ public class Main extends FragmentActivity implements LocationListener {
 			HomeVizApplication app = (HomeVizApplication) getApplication();
 			app.reset();
 			InputStream in = null;
-			in = getAssets().open(Constants.XML_FILE_NAME);
+			
+			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+			String xmlFileName = settings.getString(Constants.XML_FILE, Constants.XML_FILE_NAME);
+			if(xmlFileName.equals(Constants.XML_FILE_NAME)) {
+				in = getAssets().open(Constants.XML_FILE_NAME);				
+			} else {
+				in = openFileInput(xmlFileName);
+				System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin");
+				System.out.println(in.toString());
+			}
 			HomeVizXMLParser parser = new HomeVizXMLParser(
 					(HomeVizApplication) getApplication());
 			parser.parse(in);
@@ -296,6 +305,10 @@ public class Main extends FragmentActivity implements LocationListener {
 		case R.id.menu_about:
 			Intent aboutIntent = new Intent(this, AboutActivity.class);
 			startActivity(aboutIntent);
+			return true;
+		case R.id.menu_xml_creator:
+			Intent xmlCreatorIntent = new Intent(this, HomeCreatorActivity.class);
+			startActivity(xmlCreatorIntent);
 			return true;
 		case R.id.menu_community:
 			ToastMessages.community();

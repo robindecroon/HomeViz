@@ -111,4 +111,19 @@
         <item>Yield (Ground water)</item>
     </string-array>
 
+    <string name="title_activity_home_creator">Create your own home</string>
+    <string name="menu_xmlcreator">Create your own home</string>
+    <string name="home_creator_rooms_title">Your rooms:</string>
+    <string name="home_creator_create_a_new_room">Create a new room</string>
+    <string name="home_creator_room_name">Room name</string>
+    <string name="home_creator_number_of_lights">Number of lights</string>
+    <string name="home_creator_number_of_appliances">Number of appliances</string>
+    <string name="home_creator_number_of_multimedia_devices">Number of multimedia devices</string>
+    <string name="home_creator_number_of_water_consumers">Number of water consumers</string>
+    <string name="home_creator_add_room">Add room</string>
+    <string name="done">Done</string>
+    <string name="enter_room_name">Please enter a room name!</string>
+    <string name="clear">Clear all rooms!</string>
+    <string name="clear_rooms_message">Are you sure you want to delete all rooms?</string>
+
 </resources>

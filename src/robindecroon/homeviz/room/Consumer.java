@@ -33,6 +33,11 @@ public abstract class Consumer {
 		this.averageHoursOn = Math.random();
 	}
 
+	public String toXML() {
+		return "<" + getClass().getSimpleName() + "name=\"" + getName()
+				+ "\" watt=\"" + getWatt() + "\" />";
+	}
+
 	/**
 	 * @return the liter
 	 */
@@ -71,7 +76,8 @@ public abstract class Consumer {
 		try {
 			SharedPreferences sp = PreferenceManager
 					.getDefaultSharedPreferences(context);
-			int multiplier = Integer.valueOf(sp.getString("demo_multiplier", "1"));
+			int multiplier = Integer.valueOf(sp.getString("demo_multiplier",
+					"1"));
 
 			long totalMillisOn = 0;
 

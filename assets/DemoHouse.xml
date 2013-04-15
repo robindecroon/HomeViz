@@ -23,7 +23,7 @@
 		<Light name="l9" watt="80" />
 		<Light name="l10" watt="10" />
 		<Appliance name="washer" watt="1000" />
-		<Appliance name="dryer" watt="1000" />
+		<Appliance name="dryer" watt="500" />
 		<Appliance name="vacuum" watt="1000" />
 		<HomeCinema name="router" watt="10" />
 	</Room>
@@ -40,7 +40,7 @@
 	<Room name="Bathroom">
 		<Light name="l14" watt="25" />
 		<Light name="l15" watt="80" />
-		<Appliance name="shaver" watt="150" />
+		<Appliance name="shaver" watt="1500" />
 		<Appliance name="fone" watt="1000" />
 		<Water name="kraan4" />
 		<Water name="kraan7" />
@@ -53,7 +53,7 @@
 		<Light name="l17" watt="5" />
 		<Light name="l18" watt="40" />
 		<Light name="l19" watt="10" />
-		<HomeCinema name="radio3" watt="50" />
+		<HomeCinema name="radio3" watt="500" />
 		<Water name="kraan3" />
 	</Room>
 </HomeViz>

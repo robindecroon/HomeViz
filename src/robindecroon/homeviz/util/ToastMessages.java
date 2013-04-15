@@ -111,4 +111,10 @@ public class ToastMessages {
 				context.getResources().getString(R.string.invalid_period),
 				Toast.LENGTH_LONG).show();
 	}
+
+	public static void enterRoomName() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.enter_room_name),
+				Toast.LENGTH_LONG).show();
+	}
 }

@@ -135,8 +135,7 @@ public class HomeVizApplication extends Application {
 				Consumer.setCO2Value(country.getCo2Value());
 				Consumer.setKwhPrice(country.getKwh());
 				Consumer.setWaterPrice(country.getLiterPrice());
-				SharedPreferences settings = PreferenceManager
-						.getDefaultSharedPreferences(this);
+				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 				SharedPreferences.Editor editor = settings.edit();
 				editor.putString(Constants.COUNTRY, currentCountry);
 				editor.commit();

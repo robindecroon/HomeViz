@@ -21,7 +21,8 @@ public class Constants {
 	/*
 	 * Configuration
 	 */
-	public final static String XML_FILE_NAME = "HomeViz.xml";
+	protected static final String XML_FILE = "xml file name";
+	public final static String XML_FILE_NAME = "DemoHouse.xml";
 	public final static String CO2_DATA_FILE_NAME = "co2.csv";
 
 	/*
@@ -116,6 +117,14 @@ public class Constants {
 	 */
 	public static final String DATEPICKER_TITLE = "title";
 
+	/*
+	 * Home Creator
+	 */
+	public static final int MAX_NB_CONSUMERS = 4;
+	public static final String[] MULTIMEDIAS = {"desktop1", "hifi1", "hifi2", "macbook", "radio1", "radio2", "radio3", "router", "tv1", "tv2"};
+	public static final String[] APPLIANCES = {"dishwasher", "dryer", "fone", "senseo", "shaver", "vacuum", "vacuummini", "washer"};
+	
+	
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////
 

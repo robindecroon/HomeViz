@@ -323,4 +323,24 @@ public class Room implements RoomPrices {
 		}
 		return result;
 	}
+	
+	public String toXML() {
+		StringBuilder xml = new StringBuilder("<Room name=\"" + getName() + "\">");
+		try {
+			for(Consumer light : getElectrics()) {
+				xml.append(light.toXML());
+			}
+		} catch (NoSuchDevicesInRoom e) {
+			
+		}
+		try {
+			for(Consumer water : getWaters()) {
+				xml.append(water.toXML());
+			}
+		} catch (NoSuchDevicesInRoom e) {
+			
+		}
+		xml.append("</Room>");
+		return xml.toString();
+	}
 }
