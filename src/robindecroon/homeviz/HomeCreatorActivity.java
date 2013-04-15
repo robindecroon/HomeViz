@@ -125,7 +125,7 @@ public class HomeCreatorActivity extends Activity {
 
 					try {
 						FileOutputStream fos = openFileOutput(FILENAME,
-								Context.MODE_WORLD_READABLE);
+								Context.MODE_PRIVATE);
 						fos.write(xmlFileContent.toString().getBytes());
 						fos.close();
 

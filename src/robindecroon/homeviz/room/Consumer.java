@@ -34,7 +34,7 @@ public abstract class Consumer {
 	}
 
 	public String toXML() {
-		return "<" + getClass().getSimpleName() + "name=\"" + getName()
+		return "<" + getClass().getSimpleName() + " name=\"" + getName()
 				+ "\" watt=\"" + getWatt() + "\" />";
 	}
 

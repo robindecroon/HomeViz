@@ -4,7 +4,6 @@
 package robindecroon.homeviz.util;
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -167,8 +166,8 @@ public enum Period {
 				return formater.format(getBegin().getTime()) + " - "
 						+ formater.format(getEnd().getTime());
 			} catch (NullPointerException e) {
-				Log.e(getClass().getSimpleName(), "Nog geen startdatum");
-				return formater.format(getEnd().getTime());
+				Log.e(getClass().getSimpleName(), "No start date!");
+				return context.getResources().getString(R.string.period_custom);
 			}
 		}
 	};

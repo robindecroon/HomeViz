@@ -2,9 +2,11 @@
 <resources>
 
     <string name="about">Over</string>
-    <string name="about_text">HomeViz is gemaakt door <a href="https://twitter.com/RobinDeCroon">Robin De Croon</a> met als hoofdoel energie-awareness te creeëren bij de gebruikers van een domotica systeem. Deze applicatie is ontwikkeld voor het behalen van het diploma master Ingenieurswetenschappen - Computerwetenschappen aan de <a href="http://www.kuleuven.be">KU Leuven</a>. Robins promotor is <a href="http://erikduval.wordpress.com/">Professor Dr. ir. E. Duval</a> en zijn dagelijkse begeleider is <a href="http://www.ariadne-eu.org/content/dr-joris-klerkx">Dr. J. Klerkx</a>. \n \nHomeViz werkt momenteel enkel met Loxone, de testhardware hiervan is geleverd door <a href="http://www.demec.be">Demec</a>. \n \nHomeViz scans automatisch of het thuisnetwerk verbonden is met een Loxone Miniserver op het ingestelde ip-adres. Wanneer HomeViz geen verbinding kan maken met een Miniserver, dan zal het automatisch overgaan in de demo-mode.  In deze mode ziet u willekeurige getallen. Deze mode is voornamelijk bedoeld om de verschillende functies van HomeViz uit te testen.\n \nVoor meer informatie of andere vragen zie:  <a href="http://robindecroon.wordpress.com/">http://robindecroon.wordpress.com/</a></string>
+    <string name="about_text">HomeViz is gemaakt door <a href="https://twitter.com/RobinDeCroon">Robin De Croon</a> met als hoofdoel energie-awareness te creëren bij de gebruikers van een domotica systeem. Deze applicatie is ontwikkeld voor het behalen van het diploma master Ingenieurswetenschappen - Computerwetenschappen aan de <a href="http://www.kuleuven.be">KU Leuven</a>. Robins promotor is <a href="http://erikduval.wordpress.com/">Professor Dr. ir. E. Duval</a> en zijn dagelijkse begeleider is <a href="http://www.ariadne-eu.org/content/dr-joris-klerkx">Dr. J. Klerkx</a>. \n \nHomeViz werkt momenteel enkel met Loxone, de testhardware hiervan is geleverd door <a href="http://www.demec.be">Demec</a>. \n \nHomeViz scant automatisch of het thuisnetwerk verbonden is met een Loxone Miniserver op het ingestelde ip-adres. Wanneer HomeViz geen verbinding kan maken met een Miniserver, dan zal het automatisch overgaan in de demo-mode.  In deze mode ziet u willekeurige getallen. Deze mode is voornamelijk bedoeld om de verschillende functies van HomeViz uit te testen.\n \nVoor meer informatie of andere vragen zie:  <a href="http://robindecroon.wordpress.com/">http://robindecroon.wordpress.com/</a></string>
     <string name="action_settings">Instellingen</string>
     <string name="app_name">HomeViz</string>
+    <string name="clear">Verwijder alle kamers!</string>
+    <string name="clear_rooms_message">Bent u zeker dat u alle kamers wilt verwijderen?</string>
     <string name="community">Zie wat het gemiddelde verbruik van andere mensen is</string>
     <string name="consumer_image">Verbruikers afbeelding</string>
     <string name="content_description_appliances_usage">Verbruik huishoudstoestellen</string>
@@ -15,9 +17,19 @@
     <string name="demo_explanation">Willekeurige waardes zullen gebruikt worden, deze zijn niet representatief!</string>
     <string name="demo_mode">Demo Mode</string>
     <string name="detail">Details</string>
+    <string name="done">Klaar</string>
+    <string name="enter_room_name">Gelieve een kamernaam op te geven!</string>
     <string name="from">Vanaf</string>
+    <string name="home_creator_add_room">Voeg kamer toe</string>
+    <string name="home_creator_create_a_new_room">Maak een nieuwe kamer aan</string>
+    <string name="home_creator_number_of_appliances">Aantal huishoudstoestellen</string>
+    <string name="home_creator_number_of_lights">Aantal lampen</string>
+    <string name="home_creator_number_of_multimedia_devices">Aantal multimedia toestellen</string>
+    <string name="home_creator_number_of_water_consumers">Aantal water verbruikers</string>
+    <string name="home_creator_room_name">Naam van de kamer</string>
+    <string name="home_creator_rooms_title">Uw kamers:</string>
     <string name="house">Huis</string>
-        <string name="invalid_period">Gelieve een geldige periode te kiezen!</string>
+    <string name="invalid_period">Gelieve een geldige periode te kiezen!</string>
     <string name="kwh">kWh</string>
     <string name="liter">liter</string>
     <string name="loxone_demo_multiplier">Loxone demo vermenigvuldiger</string>
@@ -26,6 +38,7 @@
     <string name="loxone_user">admin</string>
     <string name="menu_refresh">Hersynchroniseer statistieken</string>
     <string name="menu_settings">Instellingen</string>
+    <string name="menu_xmlcreator">Stel uw eigen kamers in</string>
     <string name="metaphor">Metafoor</string>
     <string name="metaphor_electricty_title">Ecologische voetafdruk (CO<sub>2</sub>)</string>
     <string name="metaphor_fuel_diesel"> l diesel</string>
@@ -63,6 +76,7 @@
     <string name="settings_loxone_user">Loxone gebruikersnaam</string>
     <string name="share">Deel</string>
     <string name="share_text">Deel uw HomeViz\' grafieken!</string>
+    <string name="title_activity_home_creator">Stel uw eigen kamers in</string>
     <string name="title_activity_main">HomeViz</string>
     <string name="toast_community">Sorry, deze functionaliteit moet nog voorzien worden. Hier zal u kunnen zien wat andere gebruikers verbruikt hebben.</string>
     <string name="toast_connection_error">Het was niet mogelijk om een verbinding met het netwerk te maken.</string>
