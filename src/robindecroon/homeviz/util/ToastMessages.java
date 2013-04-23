@@ -81,13 +81,7 @@ public class ToastMessages {
 				context.getResources().getString(R.string.toast_data_loaded),
 				Toast.LENGTH_LONG).show();
 	}
-
-	public static void noShare() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.toast_no_share),
-				Toast.LENGTH_LONG).show();
-	}
-
+	
 	public static void noShareProviders() {
 		Toast.makeText(context,
 				context.getResources().getString(R.string.toast_no_share_providers),
@@ -115,6 +109,12 @@ public class ToastMessages {
 	public static void enterRoomName() {
 		Toast.makeText(context,
 				context.getResources().getString(R.string.enter_room_name),
+				Toast.LENGTH_LONG).show();
+	}
+
+	public static void refreshingStatistics() {
+		Toast.makeText(context,
+				context.getResources().getString(R.string.refreshing_statistics),
 				Toast.LENGTH_LONG).show();
 	}
 }

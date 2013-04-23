@@ -69,6 +69,7 @@
     <string name="period_year">Dit jaar</string>
     <string name="period_yesterday">Gisteren</string>
     <string name="question_enable_location">Wilt u locatie-services toestaan?</string>
+    <string name="refreshing_statistics">Gegevens worden gedownload in de achtergrond!</string>
     <string name="settings_allow_location_summary">Indien HomeViz uw locatie mag gebruiken, worden de prijzen berekend met lokale prijzen. Indien deze functie uitgeschakeld is, zullen Belgische prijzen gebruikt worden.</string>
     <string name="settings_allow_location_title">HomeViz mag uw locatie gebruiken</string>
     <string name="settings_loxone_ip">Loxone IP Adres</string>

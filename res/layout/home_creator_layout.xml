@@ -87,7 +87,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home_creator_number_of_lights"
                     android:textColor="@color/White" />
@@ -107,7 +107,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home_creator_number_of_appliances"
                     android:textColor="@color/White" />
@@ -127,7 +127,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home_creator_number_of_multimedia_devices"
                     android:textColor="@color/White" />
@@ -147,7 +147,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/home_creator_number_of_water_consumers"
                     android:textColor="@color/White" />

@@ -59,7 +59,6 @@ public class Main extends FragmentActivity implements LocationListener {
 	public static int lastPosition;
 
 	public static Period currentPeriod = Period.WEEK;
-	private static boolean INIT = true;
 	public static int page;
 	public static boolean downloaded = false;
 
@@ -75,7 +74,6 @@ public class Main extends FragmentActivity implements LocationListener {
 	private NoDefaultSpinner yieldActionBarSpinner;
 
 	private void clearStatics() {
-		INIT = true;
 		downloaded = false;
 		lastCatergory = Constants.USAGE;
 		lastPosition = 0;
@@ -91,7 +89,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		// init the actionbar and spinners
 		setupActionBar();
 
-		if (INIT) {
+		if (getIntent().getExtras() == null) {
 			// read the configuration XML file
 			readHomeVizXML();
 
@@ -100,7 +98,6 @@ public class Main extends FragmentActivity implements LocationListener {
 
 			// search the current location
 			initCurrentLocation();
-			INIT = false;
 		} else {
 			Bundle extras = getIntent().getExtras();
 			if (extras != null) {
@@ -301,6 +298,7 @@ public class Main extends FragmentActivity implements LocationListener {
 			startActivity(settingsIntent);
 			return true;
 		case R.id.menu_refresh:
+			ToastMessages.refreshingStatistics();
 			downloadStatistics();
 			return true;
 		case R.id.menu_share:
@@ -325,7 +323,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		return Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState());
 	}
-
+	
 	private Intent getDefaultShareIntent() {
 		if (!externalStorageIsAvailable()) {
 			throw new IllegalStateException("No external storage available");

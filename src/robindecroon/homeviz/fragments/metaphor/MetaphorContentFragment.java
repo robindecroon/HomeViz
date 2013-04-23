@@ -60,7 +60,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 				consumerImage.setAdjustViewBounds(true);
 				consumerImage.setLayoutParams(lp2);
 				consumerImage.setImageResource(id);
-				ImageScaler.scaleImage(consumerImage, 120);
+//				ImageScaler.scaleImage(consumerImage, 120);
 
 			} else {
 				CO2 sum = new CO2(0, WeightUnit.GRAM);
@@ -123,8 +123,9 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 
 	public void setValue(String text, View v, int id) {
 		TextView value = (TextView) v.findViewById(R.id.metaphor_value);
-		value.setCompoundDrawablesWithIntrinsicBounds(0, id, 0, 0);
 		value.setText(text);
 		value.invalidate();
+		ImageView image = (ImageView) v.findViewById(R.id.metaphor_image);
+		image.setImageResource(id);
 	}
 }

@@ -4,6 +4,7 @@
 package robindecroon.homeviz;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import robindecroon.homeviz.room.Consumer;
 import robindecroon.homeviz.room.Room;
 import robindecroon.homeviz.util.AYield;
@@ -24,6 +27,7 @@ import robindecroon.homeviz.util.GroundWater;
 import robindecroon.homeviz.util.RainWater;
 import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
+import robindecroon.homeviz.xml.HomeVizXMLParser;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -159,6 +163,30 @@ public class HomeVizApplication extends Application {
 	}
 
 	public List<Room> getRooms() {
+		if(this.rooms == null) {
+			try {
+				InputStream in = null;
+				Log.e(getClass().getSimpleName(), "Rooms shouldn't be null!");
+				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+				String xmlFileName = settings.getString(Constants.XML_FILE, Constants.XML_FILE_NAME);
+				if(xmlFileName.equals(Constants.XML_FILE_NAME)) {
+					in = getAssets().open(Constants.XML_FILE_NAME);				
+				} else {
+					in = openFileInput(xmlFileName);
+				}
+				HomeVizXMLParser parser = new HomeVizXMLParser(this);
+				parser.parse(in);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (XmlPullParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return this.rooms;
 	}
 
