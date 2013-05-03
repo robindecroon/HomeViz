@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.activities;
 
 import java.io.FileNotFoundException;
@@ -32,22 +37,44 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+/**
+ * The HomeCreator Activity.
+ */
 public class HomeCreatorActivity extends Activity {
 
+	/** The light counter. */
 	private int lightCounter = 1;
+	
+	/** The appliances counter. */
 	private int appliancesCounter = 0;
+	
+	/** The multimedia counter. */
 	private int multimediaCounter = 0;
+	
+	/** The water counter. */
 	private int waterCounter = 1;
 
+	/** The lights picker. */
 	private NumberPicker lightsPicker;
+	
+	/** The appliances picker. */
 	private NumberPicker appliancesPicker;
+	
+	/** The multimedia picker. */
 	private NumberPicker multimediaPicker;
+	
+	/** The water picker. */
 	private NumberPicker waterPicker;
 
+	/** The app. */
 	private HomeVizApplication app;
 
+	/** The backup. */
 	private List<Room> backup;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,101 +87,19 @@ public class HomeCreatorActivity extends Activity {
 
 		refreshRooms();
 
-		lightsPicker = (NumberPicker) findViewById(R.id.home_creator_light_picker);
-		lightsPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
-		lightsPicker.setMinValue(0);
+		initPickers();
 
-		appliancesPicker = (NumberPicker) findViewById(R.id.home_creator_appliances_picker);
-		appliancesPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
-		appliancesPicker.setMinValue(0);
+		initClearButton();
 
-		multimediaPicker = (NumberPicker) findViewById(R.id.home_creator_multimedia_picker);
-		multimediaPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
-		multimediaPicker.setMinValue(0);
+		initDoneButton();
 
-		waterPicker = (NumberPicker) findViewById(R.id.home_creator_water_picker);
-		waterPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
-		waterPicker.setMinValue(0);
+		initAddRoomButton();
+	}
 
-		Button clearButton = (Button) findViewById(R.id.home_creator_clear_button);
-		clearButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							app.reset();
-							refreshRooms();
-							break;
-						case DialogInterface.BUTTON_NEGATIVE:
-							break;
-						}
-					}
-				};
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						HomeCreatorActivity.this);
-				String message = getResources().getString(
-						R.string.clear_rooms_message);
-				String yes = getResources().getString(R.string.Yes);
-				String no = getResources().getString(R.string.No);
-				builder.setMessage(message)
-						.setPositiveButton(yes, dialogClickListener)
-						.setNegativeButton(no, dialogClickListener).show();
-			}
-		});
-
-		Button doneButton = (Button) findViewById(R.id.home_creator_done_button);
-		doneButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				if (app.getRooms().size() == 0) {
-					for (Room room : backup) {
-						app.addRoom(room);
-					}
-					onBackPressed();
-				} else {
-					StringBuilder xmlFileContent = new StringBuilder(
-							"<?xml version=\"1.0\" encoding=\"utf-8\"?><HomeViz>");
-					for (Room room : app.getRooms()) {
-						xmlFileContent.append(room.toXML());
-					}
-					xmlFileContent.append("</HomeViz>");
-
-					String FILENAME = "PersonalXML.xml";
-
-					try {
-						FileOutputStream fos = openFileOutput(FILENAME,
-								Context.MODE_PRIVATE);
-						fos.write(xmlFileContent.toString().getBytes());
-						fos.close();
-
-						SharedPreferences settings = PreferenceManager
-								.getDefaultSharedPreferences(HomeCreatorActivity.this);
-						SharedPreferences.Editor editor = settings.edit();
-						editor.putString(Constants.XML_FILE, FILENAME);
-						editor.commit();
-
-						Intent intent = new Intent(HomeCreatorActivity.this,
-								MainActivity.class);
-						intent.putExtra(Constants.CATEGORY,
-								MainActivity.lastCatergory);
-						intent.putExtra(Constants.SELECTION,
-								MainActivity.lastPosition);
-						startActivity(intent);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				// onBackPressed();
-			}
-		});
-
+	/**
+	 * Initializes the Add Room button
+	 */
+	private void initAddRoomButton() {
 		Button roomButton = (Button) findViewById(R.id.home_creator_add_room_button);
 		roomButton.setOnClickListener(new OnClickListener() {
 
@@ -207,6 +152,121 @@ public class HomeCreatorActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Initializes the Done button
+	 */
+	private void initDoneButton() {
+		Button doneButton = (Button) findViewById(R.id.home_creator_done_button);
+		doneButton.setOnClickListener(new OnClickListener() {
+
+			/* (non-Javadoc)
+			 * @see android.view.View.OnClickListener#onClick(android.view.View)
+			 */
+			@Override
+			public void onClick(View arg0) {
+				if (app.getRooms().size() == 0) {
+					for (Room room : backup) {
+						app.addRoom(room);
+					}
+					onBackPressed();
+				} else {
+					StringBuilder xmlFileContent = new StringBuilder(
+							"<?xml version=\"1.0\" encoding=\"utf-8\"?><HomeViz>");
+					for (Room room : app.getRooms()) {
+						xmlFileContent.append(room.toXML());
+					}
+					xmlFileContent.append("</HomeViz>");
+
+					String FILENAME = "PersonalXML.xml";
+
+					try {
+						FileOutputStream fos = openFileOutput(FILENAME,
+								Context.MODE_PRIVATE);
+						fos.write(xmlFileContent.toString().getBytes());
+						fos.close();
+
+						SharedPreferences settings = PreferenceManager
+								.getDefaultSharedPreferences(HomeCreatorActivity.this);
+						SharedPreferences.Editor editor = settings.edit();
+						editor.putString(Constants.XML_FILE, FILENAME);
+						editor.commit();
+
+						Intent intent = new Intent(HomeCreatorActivity.this,
+								MainActivity.class);
+						intent.putExtra(Constants.CATEGORY,
+								MainActivity.lastCatergory);
+						intent.putExtra(Constants.SELECTION,
+								MainActivity.lastPosition);
+						startActivity(intent);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+	}
+
+	/**
+	 * Initializes the Clear button
+	 */
+	private void initClearButton() {
+		Button clearButton = (Button) findViewById(R.id.home_creator_clear_button);
+		clearButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case DialogInterface.BUTTON_POSITIVE:
+							app.reset();
+							refreshRooms();
+							break;
+						case DialogInterface.BUTTON_NEGATIVE:
+							break;
+						}
+					}
+				};
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						HomeCreatorActivity.this);
+				String message = getResources().getString(
+						R.string.clear_rooms_message);
+				String yes = getResources().getString(R.string.Yes);
+				String no = getResources().getString(R.string.No);
+				builder.setMessage(message)
+						.setPositiveButton(yes, dialogClickListener)
+						.setNegativeButton(no, dialogClickListener).show();
+			}
+		});
+	}
+
+	/**
+	 * Initializes the Pickers
+	 */
+	private void initPickers() {
+		lightsPicker = (NumberPicker) findViewById(R.id.home_creator_light_picker);
+		lightsPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
+		lightsPicker.setMinValue(0);
+
+		appliancesPicker = (NumberPicker) findViewById(R.id.home_creator_appliances_picker);
+		appliancesPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
+		appliancesPicker.setMinValue(0);
+
+		multimediaPicker = (NumberPicker) findViewById(R.id.home_creator_multimedia_picker);
+		multimediaPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
+		multimediaPicker.setMinValue(0);
+
+		waterPicker = (NumberPicker) findViewById(R.id.home_creator_water_picker);
+		waterPicker.setMaxValue(Constants.MAX_NB_CONSUMERS);
+		waterPicker.setMinValue(0);
+	}
+
+	/**
+	 * Refresh the left sidebar.
+	 */
 	protected void refreshRooms() {
 		TextView roomsText = (TextView) findViewById(R.id.home_creator_rooms);
 		StringBuilder text = new StringBuilder();
@@ -217,6 +277,11 @@ public class HomeCreatorActivity extends Activity {
 		roomsText.setText(text);
 	}
 
+	/**
+	 * Gets the next light.
+	 *
+	 * @return the next light
+	 */
 	private String getNextLight() {
 		if (lightCounter > 21) {
 			lightCounter = 1;
@@ -237,6 +302,9 @@ public class HomeCreatorActivity extends Activity {
 		super.onBackPressed();
 	}
 
+	/**
+	 * Check if the user doesn't leave this screen with no rooms.
+	 */
 	private void safetyCheck() {
 		if (app.getRooms().size() == 0) {
 			for (Room room : backup) {
@@ -245,6 +313,11 @@ public class HomeCreatorActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Gets the next water device.
+	 *
+	 * @return the next water
+	 */
 	protected String getNextWater() {
 		if (waterCounter > 8) {
 			waterCounter = 1;
@@ -254,6 +327,11 @@ public class HomeCreatorActivity extends Activity {
 		return crane;
 	}
 
+	/**
+	 * Gets the next multimedia device.
+	 *
+	 * @return the next multimedia
+	 */
 	protected String getNextMultimedia() {
 		String[] mumes = Constants.MULTIMEDIAS;
 		if (multimediaCounter >= mumes.length) {
@@ -264,6 +342,11 @@ public class HomeCreatorActivity extends Activity {
 		return mumeName;
 	}
 
+	/**
+	 * Gets the next appliance name.
+	 *
+	 * @return the next appliance name
+	 */
 	protected String getNextApplianceName() {
 		String[] appls = Constants.APPLIANCES;
 		if (appliancesCounter >= appls.length) {
@@ -281,6 +364,9 @@ public class HomeCreatorActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -291,6 +377,11 @@ public class HomeCreatorActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Clears the text input.
+	 *
+	 * @param edit the edittext
+	 */
 	private void clearEdit(EditText edit) {
 		lightsPicker.setValue(0);
 		appliancesPicker.setValue(0);

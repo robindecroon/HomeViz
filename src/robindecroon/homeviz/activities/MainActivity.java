@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.activities;
 
 import java.io.IOException;
@@ -25,6 +30,7 @@ import robindecroon.homeviz.listeners.actionbarlisteners.YieldActionBarSpinnerLi
 import robindecroon.homeviz.task.DownloadLoxoneXMLTask;
 import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.Storage;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
 import android.app.ActionBar;
@@ -56,26 +62,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends FragmentActivity implements LocationListener {
-
-	public static int lastCatergory;
-	public static int lastPosition;
-
+	
+	/** The current period. */
 	public static Period currentPeriod = Period.WEEK;
-	public static int page;
-	public static boolean downloaded = false;
 
+	/** The last catergory. */
+	public static int lastCatergory;
+	/** The last position. */
+	public static int lastPosition;
+	/** The page. */
+	public static int page;
+	/** The downloaded. */
+	public static boolean downloaded = false;
+	/** The click counter. */
 	public static int clickCounter = 0;
 
-	// nodig voor backbutton
+	/** The category stack. */
 	public static Stack<Integer> categoryStack = new Stack<Integer>();
+	/** The selection stack. */
 	public static Stack<Integer> selectionStack = new Stack<Integer>();
 
+	/** The usage action bar spinner. */
 	private NoDefaultSpinner usageActionBarSpinner;
+	/** The total action bar spinner. */
 	private NoDefaultSpinner totalActionBarSpinner;
+	/** The metaphor action bar spinner. */
 	private NoDefaultSpinner metaphorActionBarSpinner;
+	/** The yield action bar spinner. */
 	private NoDefaultSpinner yieldActionBarSpinner;
 
+	/**
+	 * Clear all values.
+	 */
 	private void clearStatics() {
 		downloaded = false;
 		lastCatergory = Constants.USAGE;
@@ -84,6 +106,9 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		selectionStack.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,104 +117,126 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		// init the actionbar and spinners
 		setupActionBar();
 
-		if (getIntent().getExtras() == null) {
+		Bundle extras = getIntent().getExtras();
+		// Check if initial activity
+		if (extras == null) {
 			// read the configuration XML file
 			readHomeVizXML();
 
 			// start with Usage (icons)
-			startUsageContainerFragment(0, 0);
+			lastPosition = 0;
+			startUsageContainerFragment(0);
 
 			// search the current location
 			initCurrentLocation();
 		} else {
-			Bundle extras = getIntent().getExtras();
-			if (extras != null) {
-				int selection = extras.getInt(Constants.SELECTION);
-				lastPosition = selection;
-				int category = extras.getInt(Constants.CATEGORY);
-				switch (category) {
-				case Constants.USAGE:
-					startUsageContainerFragment(selection,
-							extras.getInt("room"));
-					break;
-				case Constants.TOTAL:
-					startTotalFragment(selection);
-					break;
-				case Constants.METAPHOR:
-					startMetaphorFragment(selection);
-					break;
-				case Constants.YIELD:
-					startYieldFragment(selection);
-					break;
-				}
-
+			lastPosition = extras.getInt(Constants.SELECTION);
+			int category = extras.getInt(Constants.CATEGORY);
+			switch (category) {
+			case Constants.USAGE:
+				startUsageContainerFragment(extras.getInt("room"));
+				break;
+			case Constants.TOTAL:
+				startTotalFragment();
+				break;
+			case Constants.METAPHOR:
+				startMetaphorFragment();
+				break;
+			case Constants.YIELD:
+				startYieldFragment();
+				break;
 			}
 		}
 		if (!downloaded) {
 			downloadStatistics();
-			downloaded = true;
 		}
 	}
 
+	/**
+	 * Download statistics.
+	 */
 	private void downloadStatistics() {
-		SharedPreferences sp = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String user = sp
-				.getString("loxone_user", Constants.LOXONE_DEFAULT_USER);
-		String password = sp.getString("loxone_password",
-				Constants.LOXONE_DEFAULT_PASSWORD);
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		String user = sp.getString("loxone_user", Constants.LOXONE_DEFAULT_USER);
+		String password = sp.getString("loxone_password", Constants.LOXONE_DEFAULT_PASSWORD);
 		String ip = sp.getString("loxone_ip", Constants.LOXONE_DEFAULT_IP);
 		new DownloadLoxoneXMLTask(((HomeVizApplication) getApplication()))
 				.execute(user, password, ip);
 		downloaded = true;
 	}
 
-	private void startTotalFragment(int selection) {
+	/**
+	 * Start total fragment.
+	 *
+	 * @param selection the selection
+	 */
+	private void startTotalFragment() {
 		lastCatergory = Constants.TOTAL;
-		totalActionBarSpinner.setSelection(selection);
-		Fragment fragment2 = new TotalTreeMapFragment();
+		totalActionBarSpinner.setSelection(lastPosition);
+		Fragment totalTreeMapFragment = new TotalTreeMapFragment();
 		Bundle args = new Bundle();
-		args.putInt(Constants.TREEMAP_OPTION, selection);
-		fragment2.setArguments(args);
+		args.putInt(Constants.TREEMAP_OPTION, lastPosition);
+		totalTreeMapFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, fragment2).commit();
+				.replace(R.id.container, totalTreeMapFragment).commit();
 	}
 
-	private void startMetaphorFragment(int selection) {
+	/**
+	 * Start metaphor fragment.
+	 *
+	 * @param selection the selection
+	 */
+	private void startMetaphorFragment() {
 		lastCatergory = Constants.METAPHOR;
-		metaphorActionBarSpinner.setSelection(selection);
+		metaphorActionBarSpinner.setSelection(lastPosition);
 		Fragment metaphorFragment = new MetaphorContainerFragment();
 		Bundle args = new Bundle();
 		args.putBoolean(Constants.METAPHOR_CONSUMER, false);
-		args.putInt(Constants.METAPHOR_TYPE, selection);
+		args.putInt(Constants.METAPHOR_TYPE, lastPosition);
 		metaphorFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, metaphorFragment).commit();
 	}
 
-	private void startUsageContainerFragment(int selection, int roomIndex) {
-		usageActionBarSpinner.setSelection(selection);
+	/**
+	 * Start usage container fragment.
+	 *
+	 * @param selection the selection
+	 * @param roomIndex the room index
+	 */
+	private void startUsageContainerFragment(int roomIndex) {
 		lastCatergory = Constants.USAGE;
+		usageActionBarSpinner.setSelection(lastPosition);
 		Bundle args = new Bundle();
-		args.putInt(Constants.USAGE_TYPE, selection);
+		args.putInt(Constants.USAGE_TYPE, lastPosition);
 		args.putInt("room", UsageContainerFragment.getCurrentSelection());
-		Fragment fragment = new UsageContainerFragment();
-		fragment.setArguments(args);
+		Fragment usageContainerFragment = new UsageContainerFragment();
+		usageContainerFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, fragment).commit();
+				.replace(R.id.container, usageContainerFragment).commit();
 	}
 
-	private void startYieldFragment(int selection) {
-		yieldActionBarSpinner.setSelection(selection);
+	/**
+	 * Start yield fragment.
+	 *
+	 * @param selection the selection
+	 */
+	private void startYieldFragment() {
 		lastCatergory = Constants.YIELD;
+		yieldActionBarSpinner.setSelection(lastPosition);
 		Bundle args = new Bundle();
-		args.putInt(Constants.YIELD_TYPE, selection);
-		Fragment fragment = new YieldFragment();
-		fragment.setArguments(args);
+		args.putInt(Constants.YIELD_TYPE, lastPosition);
+		Fragment yieldFragment = new YieldFragment();
+		yieldFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, fragment).commit();
+				.replace(R.id.container, yieldFragment).commit();
 	}
 
+	/**
+	 * Initialize the actionbar.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean setupActionBar() {
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowCustomEnabled(true);
@@ -198,22 +245,31 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 		LayoutInflater inflator = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflator.inflate(R.layout.action_bar_title, null);
+		View actionbarView = inflator.inflate(R.layout.action_bar_title, null);
 
-		initSpinners(v);
+		initSpinners(actionbarView);
 
-		ab.setCustomView(v);
+		ab.setCustomView(actionbarView);
 
 		return true;
 	}
 
+	/**
+	 * Sets the usage icons selection.
+	 *
+	 * @param selection the new usage icons selection
+	 */
 	public void setUsageIconsSelection(int selection) {
 		usageActionBarSpinner.setSelection(selection);
 	}
 
-	public void initSpinners(View v) {
-
-		usageActionBarSpinner = (NoDefaultSpinner) v
+	/**
+	 * Initialize the spinners.
+	 *
+	 * @param view the rootview
+	 */
+	public void initSpinners(View view) {
+		usageActionBarSpinner = (NoDefaultSpinner) view
 				.findViewById(R.id.usage_spinner);
 		usageActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.usage_spinner_data,
@@ -223,7 +279,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 						this));
 		usageActionBarSpinner.setSaveEnabled(false);
 
-		totalActionBarSpinner = (NoDefaultSpinner) v
+		totalActionBarSpinner = (NoDefaultSpinner) view
 				.findViewById(R.id.you_spinner);
 		totalActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.you_spinner_data,
@@ -233,7 +289,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 						this));
 		totalActionBarSpinner.setSaveEnabled(false);
 
-		metaphorActionBarSpinner = (NoDefaultSpinner) v
+		metaphorActionBarSpinner = (NoDefaultSpinner) view
 				.findViewById(R.id.metaphor_spinner);
 		metaphorActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(
 				this, R.array.metaphor_spinner_data,
@@ -243,7 +299,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 						this));
 		metaphorActionBarSpinner.setSaveEnabled(false);
 
-		yieldActionBarSpinner = (NoDefaultSpinner) v
+		yieldActionBarSpinner = (NoDefaultSpinner) view
 				.findViewById(R.id.yield_spinner);
 		yieldActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
 				R.array.yield_spinner_data,
@@ -252,24 +308,26 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 				.setOnItemSelectedListener(new YieldActionBarSpinnerListener(
 						this));
 		yieldActionBarSpinner.setSaveEnabled(false);
-
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onPreparePanel(int, android.view.View, android.view.Menu)
+	 */
 	@Override
 	public boolean onPreparePanel(int featureId, View view, Menu menu) {
-		super.onPreparePanel(featureId, view, menu); // this returns false if
-														// all items are hidden
+		super.onPreparePanel(featureId, view, menu); // this returns false if all items are hidden
 		return true; // return true to prevent the menu's deletion
 	}
 
+	/**
+	 * Read the house configuration file.
+	 */
 	private void readHomeVizXML() {
 		try {
 			HomeVizApplication app = (HomeVizApplication) getApplication();
 			app.reset();
 			InputStream in = null;
-
-			SharedPreferences settings = PreferenceManager
-					.getDefaultSharedPreferences(this);
+			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 			String xmlFileName = settings.getString(Constants.XML_FILE,
 					Constants.XML_FILE_NAME);
 			if (xmlFileName.equals(Constants.XML_FILE_NAME)) {
@@ -277,8 +335,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			} else {
 				in = openFileInput(xmlFileName);
 			}
-			HomeVizXMLParser parser = new HomeVizXMLParser(
-					(HomeVizApplication) getApplication());
+			HomeVizXMLParser parser = new HomeVizXMLParser(app);
 			parser.parse(in);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -287,12 +344,18 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -326,26 +389,24 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public static boolean externalStorageIsAvailable() {
-		return Environment.MEDIA_MOUNTED.equals(Environment
-				.getExternalStorageState());
-	}
-
+	/**
+	 * Gets the default ShareIntent.
+	 *
+	 * @return the default ShareIntent
+	 */
 	private Intent getDefaultShareIntent() {
-		if (!externalStorageIsAvailable()) {
+		if (!Storage.externalStorageIsAvailable()) {
 			throw new IllegalStateException("No external storage available");
 		}
-		View view = ((ViewGroup) findViewById(android.R.id.content))
-				.getChildAt(0);
+		View viewToDraw = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
 
-		view.setDrawingCacheEnabled(true);
-		Bitmap b = Bitmap.createBitmap(view.getDrawingCache());
-		view.setDrawingCacheEnabled(false);
+		viewToDraw.setDrawingCacheEnabled(true);
+		Bitmap bitmap = Bitmap.createBitmap(viewToDraw.getDrawingCache());
+		viewToDraw.setDrawingCacheEnabled(false);
 
-		String saved = Images.Media.insertImage(this.getContentResolver(), b,
-				"HomeViz", "View of HomeViz");
-		Uri sdCardUri = Uri.parse("file://"
-				+ Environment.getExternalStorageDirectory());
+		String saved = Images.Media.insertImage(
+				this.getContentResolver(), bitmap, "HomeViz", "View of HomeViz");
+		Uri sdCardUri = Uri.parse("file://" + Environment.getExternalStorageDirectory());
 		sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, sdCardUri));
 
 		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -355,11 +416,13 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		return sharingIntent;
 	}
 
+	/**
+	 * Handle share menu button.
+	 */
 	private void handleShareMenuButton() {
 		try {
-
-			startActivity(Intent.createChooser(getDefaultShareIntent(),
-					getResources().getString(R.string.share_text)));
+			String shareText = getResources().getString(R.string.share_text);
+			startActivity(Intent.createChooser(getDefaultShareIntent(), shareText));
 		} catch (IllegalStateException e) {
 			ToastMessages.noExternalStorage();
 		} catch (Exception e) {
@@ -367,6 +430,9 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		}
 	}
 
+	/**
+	 * Handle home menu button.
+	 */
 	private void handleHomeMenuButton() {
 		Bundle extras = getIntent().getExtras();
 		int selection = 0;
@@ -383,12 +449,18 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		getActionBar().setIcon(R.drawable.icon);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onRestoreInstanceState(android.os.Bundle)
+	 */
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		prepareBackStack();
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
+	/**
+	 * Prepare back stack.
+	 */
 	private void prepareBackStack() {
 		try {
 			categoryStack.pop();
@@ -399,6 +471,9 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		finish();
@@ -411,35 +486,39 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
-			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
-					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		} catch (Exception e) {
 			close();
 		}
 	}
 
+	/**
+	 * Close.
+	 */
 	private void close() {
 		clearStatics();
 		finish();
 	}
 
-	// ////////////////////////////////////////////////////
-	// / Locatie ///
-	// ////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	/// Location 																				///
+	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Inits the current location.
+	 */
 	private void initCurrentLocation() {
 		Log.i(getClass().getSimpleName(), "LocationManager initialized");
 		try {
-			String provider = null;
-			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			LocationManager locationManager = 
+					(LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			boolean internetLocation = locationManager
 					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			boolean internetEnabled = Network.isNetworkConnected(this);
 
 			if (internetEnabled && internetLocation) {
-				Log.i(getClass().getSimpleName(),
-						"Tracking location through internet");
+				Log.i(getClass().getSimpleName(), "Tracking location through internet");
 				Criteria criteria = new Criteria();
 				criteria.setAccuracy(Criteria.ACCURACY_FINE);
 				criteria.setPowerRequirement(Criteria.POWER_HIGH);
@@ -447,15 +526,15 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 				criteria.setBearingRequired(false);
 				criteria.setSpeedRequired(false);
 				criteria.setCostAllowed(true);
-				provider = locationManager.getBestProvider(criteria, true);
+				String provider = locationManager.getBestProvider(criteria, true);
 				locationManager.requestSingleUpdate(provider, this, null);
 			} else {
 				ToastMessages.noLocationResource();
 			}
 		} catch (Exception e) {
 			Log.i(getClass().getSimpleName(), "locationServices are disabled");
-			e.printStackTrace();
-			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+			DialogInterface.OnClickListener dialogClickListener = 
+					new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
@@ -465,18 +544,15 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 						MainActivity.this.startActivity(myIntent);
 						break;
-
 					case DialogInterface.BUTTON_NEGATIVE:
 						// No button clicked
 						break;
 					}
 				}
 			};
-
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					MainActivity.this);
-			builder.setMessage(
-					getResources().getString(R.string.question_enable_location))
+			builder.setMessage(getResources().getString(R.string.question_enable_location))
 					.setPositiveButton(getResources().getString(R.string.Yes),
 							dialogClickListener)
 					.setNegativeButton(getResources().getString(R.string.No),
@@ -485,11 +561,9 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	}
 
 	/**
-	 * Methode die de currentCity en currentCountry variable invult, gebaseerd
-	 * op het meegegeven Location object.
+	 * Sets the latest known location.
 	 * 
-	 * @param currentLocation
-	 *            De huidige locatie.
+	 * @param currentLocation the latest location
 	 */
 	private void setLocation(Location currentLocation) {
 		double lat = currentLocation.getLatitude();
@@ -498,6 +572,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		String currentCity = null;
 		String currentCountry = null;
 
+		// US is needed for lookup in CSV file (english country names)
 		Geocoder geocoder = new Geocoder(this, Locale.US);
 		try {
 			if (Network.isNetworkConnected(this)) {
@@ -506,10 +581,8 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 					Address first = addresses.get(0);
 					currentCity = first.getLocality();
 					currentCountry = first.getCountryName();
-					((HomeVizApplication) getApplication())
-							.setCurrentCountry(currentCountry);
-					Log.i(getClass().getSimpleName(),
-							"Updated location, we are in: " + currentCity
+					((HomeVizApplication) getApplication()).setCurrentCountry(currentCountry);
+					Log.i(getClass().getSimpleName(), "Updated location, we are in: " + currentCity
 									+ ", " + currentCountry);
 				} else {
 					Log.e(getClass().getSimpleName(), "GeoCoder is down!");
@@ -523,20 +596,32 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onLocationChanged(android.location.Location)
+	 */
 	@Override
 	public void onLocationChanged(Location location) {
 		setLocation(location);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onProviderDisabled(java.lang.String)
+	 */
 	@Override
 	public void onProviderDisabled(String provider) {
 	}
 
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onProviderEnabled(java.lang.String)
+	 */
 	@Override
 	public void onProviderEnabled(String provider) {
 		initCurrentLocation();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onStatusChanged(java.lang.String, int, android.os.Bundle)
+	 */
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
