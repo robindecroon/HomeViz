@@ -4,15 +4,15 @@ import java.util.Map;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
-import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.total.GoogleChartTools;
+import robindecroon.homeviz.total.GoogleChartType;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.UsageActivityUtils;
-import robindecroon.homeviz.visualization.GoogleChartTools;
-import robindecroon.homeviz.visualization.GoogleChartType;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,8 +82,9 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 									+ getArguments().getInt(
 											Constants.USAGE_BUNDLE_TYPE));
 				}
-				String url = GoogleChartTools.getUsageViz(Constants.USAGE_CHART_TITLE,
-						Main.currentPeriod, getActivity(), map,
+				String url = GoogleChartTools.getUsageViz(
+						Constants.USAGE_CHART_TITLE,
+						MainActivity.currentPeriod, getActivity(), map,
 						chart.getWidth(), chart.getHeight(), type);
 				chart.loadDataWithBaseURL("x-data://base", url, "text/html",
 						"UTF-8", null);

@@ -1,5 +1,6 @@
-package robindecroon.homeviz;
+package robindecroon.homeviz.activities;
 
+import robindecroon.homeviz.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -12,8 +13,8 @@ public class AboutActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_layout);
-		
-		TextView t =  (TextView) findViewById(R.id.about_text);
+
+		TextView t = (TextView) findViewById(R.id.about_text);
 		t.setMovementMethod(LinkMovementMethod.getInstance());
 		// Show the Up button in the action bar.
 		setupActionBar();

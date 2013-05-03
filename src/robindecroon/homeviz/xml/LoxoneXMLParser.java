@@ -27,7 +27,6 @@ public class LoxoneXMLParser extends XMLParser {
 	private static final String OUTPUTS = "Outputs";
 	private static final String NB_OF_OUTPUTS = "NumOutputs";
 
-
 	private String name;
 	private String output;
 	private int nbOutputs;
@@ -59,16 +58,17 @@ public class LoxoneXMLParser extends XMLParser {
 		name = tempName.toLowerCase().replaceAll(" ", "").replace("-", "")
 				.replace(">", "");
 		output = parser.getAttributeValue(null, OUTPUTS);
-		
+
 		try {
-			nbOutputs = Integer.valueOf(parser.getAttributeValue(null, NB_OF_OUTPUTS));
-			if(nbOutputs > 1) {
+			nbOutputs = Integer.valueOf(parser.getAttributeValue(null,
+					NB_OF_OUTPUTS));
+			if (nbOutputs > 1) {
 				outputs = output.split(",");
 			}
 		} catch (NumberFormatException e) {
 			Log.e(getClass().getSimpleName(), name + " has no outnumber!");
 		}
-		
+
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -92,18 +92,17 @@ public class LoxoneXMLParser extends XMLParser {
 		parser.require(XmlPullParser.START_TAG, ns, DATE_TAG);
 
 		String time = parser.getAttributeValue(null, DATE_ATTRIBUTE);
-		
+
 		String valueString = parser.getAttributeValue(null, output);
-		if(outputs != null) {
-			for(String out: outputs) {
+		if (outputs != null) {
+			for (String out : outputs) {
 				String newString = parser.getAttributeValue(null, out);
-				if(newString != null) {
+				if (newString != null) {
 					valueString = newString;
 					output = out;
 				}
 			}
 		}
-		
 
 		SimpleDateFormat df = new SimpleDateFormat(Constants.DATE_FORMAT);
 		long date = 0;

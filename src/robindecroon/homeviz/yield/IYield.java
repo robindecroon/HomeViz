@@ -1,7 +1,7 @@
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.yield;
 
 public interface IYield {
-		
+
 	/**
 	 * @return the total
 	 */
@@ -56,7 +56,7 @@ public interface IYield {
 	 * @return the today
 	 */
 	public abstract String getToday();
-	
+
 	/**
 	 * @return the unit
 	 */

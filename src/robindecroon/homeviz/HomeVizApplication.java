@@ -18,16 +18,16 @@ import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.util.AYield;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.device.Consumer;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Country;
-import robindecroon.homeviz.util.GroundWater;
-import robindecroon.homeviz.util.RainWater;
-import robindecroon.homeviz.util.SolarPanel;
 import robindecroon.homeviz.util.ToastMessages;
 import robindecroon.homeviz.xml.HomeVizXMLParser;
+import robindecroon.homeviz.yield.AYield;
+import robindecroon.homeviz.yield.GroundWater;
+import robindecroon.homeviz.yield.RainWater;
+import robindecroon.homeviz.yield.SolarPanel;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -46,7 +46,6 @@ public class HomeVizApplication extends Application {
 	private AYield solarPanel;
 	private AYield rainWater;
 	private AYield groundWater;
-	
 
 	/**
 	 * @return the solarPanel
@@ -65,7 +64,7 @@ public class HomeVizApplication extends Application {
 	public void setSolarPanel(AYield solarPanel) {
 		this.solarPanel = solarPanel;
 	}
-	
+
 	/**
 	 * @return the solarPanel
 	 */
@@ -83,13 +82,14 @@ public class HomeVizApplication extends Application {
 	public void setRainWater(AYield rainWater) {
 		this.rainWater = rainWater;
 	}
-	
+
 	/**
 	 * @return the solarPanel
 	 */
 	public AYield getGroundWater() {
 		if (groundWater == null) {
-			return GroundWater.getDummy(getResources().getString(R.string.liter));
+			return GroundWater.getDummy(getResources()
+					.getString(R.string.liter));
 		}
 		return groundWater;
 	}
@@ -109,8 +109,10 @@ public class HomeVizApplication extends Application {
 	public void setCurrentCountry(String currentCountry) {
 		if (currentCountry != null) {
 			try {
-				InputStream input = getAssets().open(Constants.CO2_DATA_FILE_NAME);
-				BufferedReader in = new BufferedReader(new InputStreamReader(input));
+				InputStream input = getAssets().open(
+						Constants.CO2_DATA_FILE_NAME);
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						input));
 				String line = null;
 				Map<String, Country> countries = new HashMap<String, Country>();
 
@@ -133,13 +135,15 @@ public class HomeVizApplication extends Application {
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
-					Log.e(getClass().getSimpleName(), "Error in country CSV file!");
+					Log.e(getClass().getSimpleName(),
+							"Error in country CSV file!");
 				}
 				Country country = countries.get(currentCountry);
 				Consumer.setCO2Value(country.getCo2Value());
 				Consumer.setKwhPrice(country.getKwh());
 				Consumer.setWaterPrice(country.getLiterPrice());
-				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+				SharedPreferences settings = PreferenceManager
+						.getDefaultSharedPreferences(this);
 				SharedPreferences.Editor editor = settings.edit();
 				editor.putString(Constants.COUNTRY, currentCountry);
 				editor.commit();
@@ -147,7 +151,7 @@ public class HomeVizApplication extends Application {
 				e.printStackTrace();
 			}
 		} else {
-			Log.e(getClass().getSimpleName(), "Country is null"); 
+			Log.e(getClass().getSimpleName(), "Country is null");
 		}
 	}
 
@@ -163,14 +167,16 @@ public class HomeVizApplication extends Application {
 	}
 
 	public List<Room> getRooms() {
-		if(this.rooms == null) {
+		if (this.rooms == null) {
 			try {
 				InputStream in = null;
 				Log.e(getClass().getSimpleName(), "Rooms shouldn't be null!");
-				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-				String xmlFileName = settings.getString(Constants.XML_FILE, Constants.XML_FILE_NAME);
-				if(xmlFileName.equals(Constants.XML_FILE_NAME)) {
-					in = getAssets().open(Constants.XML_FILE_NAME);				
+				SharedPreferences settings = PreferenceManager
+						.getDefaultSharedPreferences(this);
+				String xmlFileName = settings.getString(Constants.XML_FILE,
+						Constants.XML_FILE_NAME);
+				if (xmlFileName.equals(Constants.XML_FILE_NAME)) {
+					in = getAssets().open(Constants.XML_FILE_NAME);
 				} else {
 					in = openFileInput(xmlFileName);
 				}

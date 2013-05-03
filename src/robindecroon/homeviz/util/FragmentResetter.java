@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.util.Log;
 
 public class FragmentResetter {
-	
+
 	public static void reset(Activity c) {
 		try {
 			c.runOnUiThread(new Runnable() {

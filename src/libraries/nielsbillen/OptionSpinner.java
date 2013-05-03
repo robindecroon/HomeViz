@@ -128,47 +128,51 @@ public class OptionSpinner extends View implements
 
 		if (!canvas.getClipBounds(rect))
 			return;
-		
+
 		// The TEXT SIZE expressed in dp
 		final float MYTEXTSIZE = 200;
 		// Get the screen's density scale
 		final float scale = getResources().getDisplayMetrics().density;
 		// Convert the dps to pixels, based on density scale
 		int textSizePx = (int) (MYTEXTSIZE * scale + 0.5f);
-		
-		int currentTextSize = Math.min(38, determineMaxTextSize(currentText, textSizePx));
-		int nextTextSize = Math.min(38, determineMaxTextSize(nextText, textSizePx));
-		
+
+		int currentTextSize = Math.min(38,
+				determineMaxTextSize(currentText, textSizePx));
+		int nextTextSize = Math.min(38,
+				determineMaxTextSize(nextText, textSizePx));
+
 		float drawY = rect.exactCenterY() + paint.descent();
 
 		float drawX = rect.left + this.drawX1 * rect.width();
 		paint.setTextSize(currentTextSize);
 		canvas.drawText(currentText, drawX, drawY, paint);
-		 paint.setTextSize(nextTextSize);
+		paint.setTextSize(nextTextSize);
 		drawX = rect.left + this.drawX2 * rect.width();
-		canvas.drawText(nextText, drawX, drawY,paint);
+		canvas.drawText(nextText, drawX, drawY, paint);
 
 	}
-	
+
 	/**
 	 * Retrieve the maximum text size to fit in a given width.
-	 * @param str (String): Text to check for size.
-	 * @param maxWidth (float): Maximum allowed width.
+	 * 
+	 * @param str
+	 *            (String): Text to check for size.
+	 * @param maxWidth
+	 *            (float): Maximum allowed width.
 	 * @return (int): The desired text size.
 	 */
-	private int determineMaxTextSize(String str, float maxWidth)
-	{
-	    int size = 10;       
-	    Paint paint = new Paint();
+	private int determineMaxTextSize(String str, float maxWidth) {
+		int size = 10;
+		Paint paint = new Paint();
 
-	    float meas = 0;
-	    
-	    do {
-	        paint.setTextSize(++ size);
-	        meas = paint.measureText(str, 0, str.length());
-	    } while(meas < maxWidth && meas > 0);
+		float meas = 0;
 
-	    return size;
+		do {
+			paint.setTextSize(++size);
+			meas = paint.measureText(str, 0, str.length());
+		} while (meas < maxWidth && meas > 0);
+
+		return size;
 	}
 
 	/**

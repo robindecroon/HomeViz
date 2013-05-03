@@ -1,18 +1,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <!--
-         NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-         dismiss it.
-    -->
-    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    
     <CheckBoxPreference
         android:defaultValue="true"
         android:disableDependentsState="true"
         android:key="demo_mode"
         android:summary="@string/demo_explanation"
         android:title="@string/demo_mode" />
-
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
     <EditTextPreference
         android:defaultValue="@string/loxone_ip"
         android:dependency="demo_mode"
@@ -40,7 +33,6 @@
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/settings_loxone_password" />
-
     <ListPreference
         android:defaultValue="10"
         android:dependency="demo_mode"
@@ -59,5 +51,5 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/loxone_demo_multiplier" />
-
+    
 </PreferenceScreen>

@@ -32,7 +32,7 @@
         android:label="@string/app_name"
          >
         <activity
-            android:name="robindecroon.homeviz.Main"
+            android:name="robindecroon.homeviz.activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.PageIndicatorDefaults" >
             <intent-filter>
@@ -42,22 +42,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="robindecroon.homeviz.SettingsActivity"
+            android:name="robindecroon.homeviz.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@android:style/Theme.DeviceDefault" >
         </activity>
         <activity
-            android:name="robindecroon.homeviz.AboutActivity"
+            android:name="robindecroon.homeviz.activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName="robindecroon.homeviz.Main" >
+            android:parentActivityName="robindecroon.homeviz.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.Main" />
         </activity>
         <activity
-            android:name="robindecroon.homeviz.HomeCreatorActivity"
+            android:name="robindecroon.homeviz.activities.HomeCreatorActivity"
             android:label="@string/title_activity_home_creator"
-            android:parentActivityName="robindecroon.homeviz.Main" >
+            android:parentActivityName="robindecroon.homeviz.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="robindecroon.homeviz.Main" />

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import android.util.Log;
 
-
 public enum OutputType {
 	Input, Q, AQ, AQp, AQa, AQ1, AQ2, AQ3, AQ4, AQ5, AQ6, AQ7, AQ8, AQ9;
 
@@ -20,9 +19,9 @@ public enum OutputType {
 		logErrorMessage(string);
 		return Q;
 	}
-	
+
 	private static void logErrorMessage(String string) {
-		if(errors.contains(string)) {
+		if (errors.contains(string)) {
 			// do nothing
 		} else {
 			errors.add(string);

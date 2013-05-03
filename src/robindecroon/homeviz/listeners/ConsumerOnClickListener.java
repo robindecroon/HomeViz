@@ -1,8 +1,8 @@
 package robindecroon.homeviz.listeners;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
 import android.app.ActionBar;
 import android.content.Context;
@@ -41,8 +41,8 @@ public class ConsumerOnClickListener implements OnClickListener {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View abv = inflator.inflate(R.layout.action_bar_title, null);
 
-		((Main) context).initSpinners(abv);
-		((Main) context).setUsageIconsSelection(0);
+		((MainActivity) context).initSpinners(abv);
+		((MainActivity) context).setUsageIconsSelection(0);
 
 		ab.setCustomView(abv);
 

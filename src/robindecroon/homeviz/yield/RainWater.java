@@ -1,60 +1,62 @@
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.yield;
 
 import java.util.Random;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public class SolarPanel extends AYield implements IYield {
+public class RainWater extends AYield implements IYield {
 
-
-	public SolarPanel(double total, double current, double today,
+	public RainWater(double total, double current, double today,
 			double yesterday, double twoDays, double thisWeek, double lastWeek,
-			double thisMonth, double lastMonth, double thisYear, double lastYear, String unit) {
-		super(total, current, today, yesterday, twoDays, thisWeek, lastWeek, thisMonth,
-				lastMonth, thisYear, lastYear);
-		SolarPanel.unit = unit;
+			double thisMonth, double lastMonth, double thisYear,
+			double lastYear, String unit) {
+		super(total, current, today, yesterday, twoDays, thisWeek, lastWeek,
+				thisMonth, lastMonth, thisYear, lastYear);
+		RainWater.unit = unit;
 	}
-	
+
 	private static AYield dummy = newDummy();
 
-	
 	public static AYield getDummy(String unit) {
-		SolarPanel.unit = unit;
+		RainWater.unit = unit;
 		return dummy;
 	}
-	
+
 	private static String unit;
+
 	@Override
 	public String unit() {
-		return " " + unit; 
+		return " " + unit;
 	}
 
 	private static AYield newDummy() {
 		Random r = new Random();
 		double offset = 0.01;
 		double today = r.nextDouble();
-		double weekmulti = offset + Days.daysBetween(new DateTime(),
-				new DateTime().withDayOfWeek(1)).getDays()
-				* -10;
-		double monthmulti = offset + Days.daysBetween(new DateTime(),
-				new DateTime().withDayOfMonth(1)).getDays()
-				* -10;
-		double yearmulti = offset + Days.daysBetween(new DateTime(),
-				new DateTime().withDayOfYear(1)).getDays()
-				* -10;
+		double weekmulti = offset
+				+ Days.daysBetween(new DateTime(),
+						new DateTime().withDayOfWeek(1)).getDays() * -10;
+		double monthmulti = offset
+				+ Days.daysBetween(new DateTime(),
+						new DateTime().withDayOfMonth(1)).getDays() * -10;
+		double yearmulti = offset
+				+ Days.daysBetween(new DateTime(),
+						new DateTime().withDayOfYear(1)).getDays() * -10;
 
-		double week = r.nextDouble(); 
+		double week = r.nextDouble();
 		double month = r.nextDouble() + week;
 		double year = r.nextDouble() + month;
 
-		return new SolarPanel(r.nextDouble() * 5000,  Math.abs(today - 0.12), today,
-				r.nextDouble() * 10, r.nextDouble() * 10, week * weekmulti,
-				week * 70, month * monthmulti, month * 310, year * yearmulti,
-				year * 3650, unit);
+		return new RainWater(r.nextDouble() * 5000, Math.abs(today - 0.12),
+				today, r.nextDouble() * 10, r.nextDouble() * 10, week
+						* weekmulti, week * 70, month * monthmulti,
+				month * 310, year * yearmulti, year * 3650, unit);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getTotal()
 	 */
 	@Override
@@ -62,7 +64,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(total) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getCurrent()
 	 */
 	@Override
@@ -70,7 +74,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(current) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getYesterday()
 	 */
 	@Override
@@ -78,7 +84,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(yesterday) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getTwoDays()
 	 */
 	@Override
@@ -86,7 +94,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(twoDays) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getThisWeek()
 	 */
 	@Override
@@ -94,7 +104,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(thisWeek) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getLastWeek()
 	 */
 	@Override
@@ -102,7 +114,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(lastWeek) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getThisMonth()
 	 */
 	@Override
@@ -110,7 +124,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(thisMonth) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getLastMonth()
 	 */
 	@Override
@@ -118,7 +134,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(lastMonth) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getThisYear()
 	 */
 	@Override
@@ -126,7 +144,9 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(thisYear) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getLastYear()
 	 */
 	@Override
@@ -134,12 +154,13 @@ public class SolarPanel extends AYield implements IYield {
 		return nf.format(lastYear) + unit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see robindecroon.homeviz.util.AYield#getToday()
 	 */
 	@Override
 	public String getToday() {
 		return nf.format(today) + unit();
 	}
-
 }

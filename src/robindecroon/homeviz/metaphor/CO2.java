@@ -1,6 +1,8 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.metaphor;
 
 import java.text.NumberFormat;
+
+import robindecroon.homeviz.util.WeightUnit;
 
 public class CO2 {
 

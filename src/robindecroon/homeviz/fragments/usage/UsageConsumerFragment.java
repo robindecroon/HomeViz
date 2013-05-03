@@ -8,9 +8,9 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
-import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Room.ConsumerType;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.Room.ConsumerType;
+import robindecroon.homeviz.house.device.Consumer;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.ImageScaler;
 import robindecroon.homeviz.util.UsageActivityUtils;
@@ -38,7 +38,6 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 		HomeVizApplication app = (HomeVizApplication) getActivity()
 				.getApplication();
 
-
 		Room currentRoom = null;
 		if (getArguments() != null) {
 			int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
@@ -51,7 +50,7 @@ public class UsageConsumerFragment extends OptionSpinnerFragment {
 				R.id.sub_arrow_right);
 
 		setAmounts(rootView, currentRoom);
-		
+
 		return rootView;
 	}
 

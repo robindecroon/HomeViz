@@ -1,4 +1,4 @@
-package robindecroon.homeviz.visualization;
+package robindecroon.homeviz.total;
 
 import java.util.Map;
 

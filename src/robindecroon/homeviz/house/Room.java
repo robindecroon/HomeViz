@@ -1,12 +1,17 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.house;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
+import robindecroon.homeviz.house.device.Appliance;
+import robindecroon.homeviz.house.device.Consumer;
+import robindecroon.homeviz.house.device.HomeCinema;
+import robindecroon.homeviz.house.device.Light;
+import robindecroon.homeviz.house.device.Water;
 import robindecroon.homeviz.util.Amount;
 import android.annotation.SuppressLint;
 
@@ -16,7 +21,7 @@ import android.annotation.SuppressLint;
  * @author Robin
  * 
  */
-public class Room implements RoomPrices {
+public class Room {
 
 	public enum ConsumerType {
 		Light, Appliance, HomeCinema, Water, Heating;
@@ -129,10 +134,9 @@ public class Room implements RoomPrices {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * robindecroon.homeviz.room.RoomPrices#getLightPrice(robindecroon.homeviz
+	 * robindecroon.homeviz.house.RoomPrices#getLightPrice(robindecroon.homeviz
 	 * .util.Period)
 	 */
-	@Override
 	public Amount getLightPrice() {
 		Amount total = new Amount(0);
 		for (Consumer light : lights) {
@@ -145,10 +149,9 @@ public class Room implements RoomPrices {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * robindecroon.homeviz.room.RoomPrices#getWaterPrice(robindecroon.homeviz
+	 * robindecroon.homeviz.house.RoomPrices#getWaterPrice(robindecroon.homeviz
 	 * .util.Period)
 	 */
-	@Override
 	public Amount getWaterPrice() {
 		Amount total = new Amount(0);
 		for (Consumer water : waters) {
@@ -161,7 +164,7 @@ public class Room implements RoomPrices {
 	 * @return the heating
 	 */
 	public Amount getHeating() {
-		return heating.multiply(Main.currentPeriod.getMultiplier());
+		return heating.multiply(MainActivity.currentPeriod.getMultiplier());
 	}
 
 	/**
@@ -176,10 +179,9 @@ public class Room implements RoomPrices {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * robindecroon.homeviz.room.RoomPrices#getAppliancesPrice(robindecroon.
+	 * robindecroon.homeviz.house.RoomPrices#getAppliancesPrice(robindecroon.
 	 * homeviz.util.Period)
 	 */
-	@Override
 	public Amount getAppliancesPrice() {
 		Amount total = new Amount(0);
 		for (Consumer appliance : appliances) {
@@ -192,10 +194,9 @@ public class Room implements RoomPrices {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * robindecroon.homeviz.room.RoomPrices#getHomeCinemaPrice(robindecroon.
+	 * robindecroon.homeviz.house.RoomPrices#getHomeCinemaPrice(robindecroon.
 	 * homeviz.util.Period)
 	 */
-	@Override
 	public Amount getHomeCinemaPrice() {
 		Amount total = new Amount(0);
 		for (Consumer homeCinema : homeCinemas) {
@@ -323,22 +324,23 @@ public class Room implements RoomPrices {
 		}
 		return result;
 	}
-	
+
 	public String toXML() {
-		StringBuilder xml = new StringBuilder("<Room name=\"" + getName() + "\">");
+		StringBuilder xml = new StringBuilder("<Room name=\"" + getName()
+				+ "\">");
 		try {
-			for(Consumer light : getElectrics()) {
+			for (Consumer light : getElectrics()) {
 				xml.append(light.toXML());
 			}
 		} catch (NoSuchDevicesInRoom e) {
-			
+
 		}
 		try {
-			for(Consumer water : getWaters()) {
+			for (Consumer water : getWaters()) {
 				xml.append(water.toXML());
 			}
 		} catch (NoSuchDevicesInRoom e) {
-			
+
 		}
 		xml.append("</Room>");
 		return xml.toString();

@@ -5,7 +5,7 @@ import robindecroon.homeviz.R;
 import robindecroon.homeviz.adapters.listadapters.MyExpandableAdapter;
 import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
 import robindecroon.homeviz.fragments.metaphor.MetaphorContentFragment;
-import robindecroon.homeviz.room.Consumer;
+import robindecroon.homeviz.house.device.Consumer;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,7 +54,8 @@ public class MetaphorListChildListener implements
 						Constants.METAPHOR_VALUE,
 						Math.round(consumer.getLiter()
 								/ Constants.BOTTLE_CONTENT)
-								+ context.getResources().getString(R.string.metaphor_water_text));
+								+ context.getResources().getString(
+										R.string.metaphor_water_text));
 				newArgs.putInt(Constants.METAPHOR_TYPE,
 						Constants.METAPHOR_TYPE_WATER);
 				break;

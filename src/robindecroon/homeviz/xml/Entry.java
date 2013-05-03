@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 import robindecroon.homeviz.util.OutputType;
 
-public class Entry  {
+public class Entry {
 
 	private final long date;
 	private final String value;

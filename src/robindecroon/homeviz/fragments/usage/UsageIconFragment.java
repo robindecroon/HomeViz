@@ -4,8 +4,8 @@ import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
+import robindecroon.homeviz.house.Room;
 import robindecroon.homeviz.listeners.ConsumerOnClickListener;
-import robindecroon.homeviz.room.Room;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class UsageFragment extends OptionSpinnerFragment {
+public class UsageIconFragment extends OptionSpinnerFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,10 +54,11 @@ public class UsageFragment extends OptionSpinnerFragment {
 		water.setText(currentRoom.getWaterPrice().toString());
 
 		// Heating // TODO
-//		LinearLayout heatings = (LinearLayout) rootView
-//				.findViewById(R.id.heating_layout);
-//		heatings.setOnClickListener(new ConsumerOnClickListener(finalRoomIndex,
-//				getActivity(), Constants.HEATING));
+		// LinearLayout heatings = (LinearLayout) rootView
+		// .findViewById(R.id.heating_layout);
+		// heatings.setOnClickListener(new
+		// ConsumerOnClickListener(finalRoomIndex,
+		// getActivity(), Constants.HEATING));
 		TextView heating = (TextView) rootView
 				.findViewById(R.id.usage_heating_price);
 		heating.setText(currentRoom.getHeating().toString());

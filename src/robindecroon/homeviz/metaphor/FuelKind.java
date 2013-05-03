@@ -1,4 +1,4 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.metaphor;
 
 import robindecroon.homeviz.R;
 import android.content.Context;

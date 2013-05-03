@@ -7,13 +7,12 @@ import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
-import robindecroon.homeviz.room.CO2;
-import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Fuel;
-import robindecroon.homeviz.room.FuelKind;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.WeightUnit;
-import robindecroon.homeviz.util.ImageScaler;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.device.Consumer;
+import robindecroon.homeviz.metaphor.CO2;
+import robindecroon.homeviz.metaphor.Fuel;
+import robindecroon.homeviz.metaphor.FuelKind;
+import robindecroon.homeviz.util.WeightUnit;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -60,7 +59,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 				consumerImage.setAdjustViewBounds(true);
 				consumerImage.setLayoutParams(lp2);
 				consumerImage.setImageResource(id);
-//				ImageScaler.scaleImage(consumerImage, 120);
+				// ImageScaler.scaleImage(consumerImage, 120);
 
 			} else {
 				CO2 sum = new CO2(0, WeightUnit.GRAM);
@@ -91,7 +90,8 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 							}
 							value = Math.round(waterSum
 									/ Constants.BOTTLE_CONTENT)
-									+ getResources().getString(R.string.metaphor_water_text);
+									+ getResources().getString(
+											R.string.metaphor_water_text);
 							title.setText(R.string.metaphor_water_title);
 							break;
 						}

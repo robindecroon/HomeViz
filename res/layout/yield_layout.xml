@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="10"
-    tools:context=".Main" >
+    tools:context=".MainActivity" >
 
     <ImageView
         android:id="@+id/yield_image"

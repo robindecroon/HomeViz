@@ -41,7 +41,7 @@ public class ToastMessages {
 						.getString(R.string.toast_enable_location),
 				Toast.LENGTH_LONG).show();
 	}
-	
+
 	public static void noSmallerPeriod() {
 		Toast.makeText(
 				context,
@@ -59,15 +59,19 @@ public class ToastMessages {
 	}
 
 	public static void longClickForTime() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.toast_long_click_for_time),
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				context,
+				context.getResources().getString(
+						R.string.toast_long_click_for_time), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	public static void connectionError() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.toast_connection_error),
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				context,
+				context.getResources().getString(
+						R.string.toast_connection_error), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	public static void notTooFast() {
@@ -81,17 +85,21 @@ public class ToastMessages {
 				context.getResources().getString(R.string.toast_data_loaded),
 				Toast.LENGTH_LONG).show();
 	}
-	
+
 	public static void noShareProviders() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.toast_no_share_providers),
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				context,
+				context.getResources().getString(
+						R.string.toast_no_share_providers), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	public static void noExternalStorage() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.toast_no_external_storage),
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				context,
+				context.getResources().getString(
+						R.string.toast_no_external_storage), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	public static void community() {
@@ -113,8 +121,10 @@ public class ToastMessages {
 	}
 
 	public static void refreshingStatistics() {
-		Toast.makeText(context,
-				context.getResources().getString(R.string.refreshing_statistics),
+		Toast.makeText(
+				context,
+				context.getResources()
+						.getString(R.string.refreshing_statistics),
 				Toast.LENGTH_LONG).show();
 	}
 }

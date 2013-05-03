@@ -3,7 +3,7 @@
  */
 package robindecroon.homeviz.exceptions;
 
-import robindecroon.homeviz.room.Room;
+import robindecroon.homeviz.house.Room;
 
 /**
  * @author Robin

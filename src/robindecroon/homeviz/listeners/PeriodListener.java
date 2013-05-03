@@ -27,18 +27,18 @@ public class PeriodListener implements OnClickListener, OnLongClickListener {
 	public boolean onLongClick(View v) {
 		String from = context.getResources().getString(R.string.from);
 		String until = context.getResources().getString(R.string.until);
-		
+
 		DatePickerFragment untilPicker = new DatePickerFragment();
 		Bundle argsTo = new Bundle();
 		argsTo.putString(Constants.DATEPICKER_TITLE, "..." + until);
 		untilPicker.setArguments(argsTo);
-		untilPicker.show(context.getFragmentManager(),until);
+		untilPicker.show(context.getFragmentManager(), until);
 
 		DatePickerFragment fromPicker = new DatePickerFragment();
 		Bundle argsFrom = new Bundle();
 		argsFrom.putString(Constants.DATEPICKER_TITLE, from + "...");
 		fromPicker.setArguments(argsFrom);
-		fromPicker.show(context.getFragmentManager(),from);
+		fromPicker.show(context.getFragmentManager(), from);
 
 		return true;
 	}

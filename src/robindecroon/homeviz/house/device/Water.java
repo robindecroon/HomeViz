@@ -1,7 +1,7 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.house.device;
 
 import android.content.Context;
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.util.Amount;
 
 public class Water extends Consumer {
@@ -12,8 +12,9 @@ public class Water extends Consumer {
 
 	@Override
 	public Amount getPrice() {
-//		return new Amount(getLiter() * getWaterPrice().getEuroValue());
-		return new Amount(Math.random() * Main.currentPeriod.getMultiplier());
+		// return new Amount(getLiter() * getWaterPrice().getEuroValue());
+		return new Amount(Math.random()
+				* MainActivity.currentPeriod.getMultiplier());
 	}
 
 	@Override

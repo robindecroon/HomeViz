@@ -1,4 +1,4 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.util;
 
 public enum WeightUnit {
 

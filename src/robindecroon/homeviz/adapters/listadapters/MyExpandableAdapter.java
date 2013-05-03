@@ -3,11 +3,11 @@ package robindecroon.homeviz.adapters.listadapters;
 import java.util.List;
 
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Electric;
-import robindecroon.homeviz.room.Heating;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Water;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.device.Consumer;
+import robindecroon.homeviz.house.device.Electric;
+import robindecroon.homeviz.house.device.Heating;
+import robindecroon.homeviz.house.device.Water;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;

@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.Main;
 import robindecroon.homeviz.R;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.util.FragmentResetter;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
@@ -20,7 +20,7 @@ import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements
 		DatePickerDialog.OnDateSetListener {
-	
+
 	private enum Type {
 		From, Until;
 	}
@@ -48,15 +48,14 @@ public class DatePickerFragment extends DialogFragment implements
 				year, month, day);
 		switch (type) {
 		case From:
-			dialog.getDatePicker().setMaxDate(new Date().getTime());			
+			dialog.getDatePicker().setMaxDate(new Date().getTime());
 			break;
 		case Until:
-			dialog.getDatePicker().setMaxDate(new Date().getTime());			
+			dialog.getDatePicker().setMaxDate(new Date().getTime());
 			break;
 		}
 
 		dialog.setTitle(title);
-		
 
 		return dialog;
 
@@ -66,20 +65,20 @@ public class DatePickerFragment extends DialogFragment implements
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		GregorianCalendar cal = new GregorianCalendar(year, month, day);
 		try {
-			Main.currentPeriod = Period.CUSTOM;
+			MainActivity.currentPeriod = Period.CUSTOM;
 			switch (type) {
 			case From:
 				Log.i(getClass().getSimpleName(), "From date set!");
-				Main.currentPeriod.setBegin(cal);
+				MainActivity.currentPeriod.setBegin(cal);
 				break;
 			case Until:
 				Log.i(getClass().getSimpleName(), "End date set!");
-				Period p = Main.currentPeriod;
+				Period p = MainActivity.currentPeriod;
 				p.setEnd(cal);
-				if(p.getEnd().before(p.getBegin())) {
+				if (p.getEnd().before(p.getBegin())) {
 					Log.e(getClass().getSimpleName(), "Invalid date range!");
 					ToastMessages.invalidPeriod();
-					Main.currentPeriod = Period.WEEK;
+					MainActivity.currentPeriod = Period.WEEK;
 				}
 				try {
 					FragmentResetter.reset(getActivity());

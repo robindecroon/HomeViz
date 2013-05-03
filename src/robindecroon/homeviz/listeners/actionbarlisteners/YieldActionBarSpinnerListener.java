@@ -1,13 +1,13 @@
 package robindecroon.homeviz.listeners.actionbarlisteners;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
 import android.view.View;
 import android.widget.AdapterView;
 
 public class YieldActionBarSpinnerListener extends ActionBarSpinnerListener {
 
-	public YieldActionBarSpinnerListener(Main context) {
+	public YieldActionBarSpinnerListener(MainActivity context) {
 		super(context);
 	}
 

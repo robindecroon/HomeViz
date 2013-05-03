@@ -3,7 +3,7 @@ package robindecroon.homeviz.fragments;
 import libraries.nielsbillen.ArrowButton;
 import libraries.nielsbillen.OptionSpinner;
 import libraries.nielsbillen.SpinnerListener;
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.listeners.PeriodListener;
 import robindecroon.homeviz.util.FragmentResetter;
 import robindecroon.homeviz.util.Period;
@@ -23,7 +23,7 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		right.setArrowDirection(ArrowButton.DIRECTION_RIGHT);
 		PeriodListener periodListener = new PeriodListener(getActivity());
 		OptionSpinner spinner = (OptionSpinner) v.findViewById(id);
-		spinner.setIndex(Main.currentPeriod.getId());
+		spinner.setIndex(MainActivity.currentPeriod.getId());
 		spinner.setLeftButton(left);
 		spinner.setRightButton(right);
 		spinner.setOnClickListener(periodListener);
@@ -32,7 +32,7 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 		String[] namePeriods = new String[periods.length];
 		for (int i = 0; i < periods.length; i++) {
 			Period period = periods[i];
-				namePeriods[i] = period.getName(getActivity());
+			namePeriods[i] = period.getName(getActivity());
 		}
 		spinner.setOptions(namePeriods);
 		spinner.addListener(this);
@@ -40,7 +40,7 @@ public abstract class OptionSpinnerFragment extends Fragment implements
 
 	@Override
 	public void optionChanged(final int index, String name) {
-		Main.currentPeriod = Period.getPeriod(index);
+		MainActivity.currentPeriod = Period.getPeriod(index);
 		FragmentResetter.reset(getActivity());
 	}
 

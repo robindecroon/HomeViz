@@ -1,11 +1,15 @@
-package robindecroon.homeviz.room;
+package robindecroon.homeviz.house.device;
 
 import java.util.List;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
+import robindecroon.homeviz.metaphor.CO2;
+import robindecroon.homeviz.metaphor.Fuel;
+import robindecroon.homeviz.metaphor.FuelKind;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
+import robindecroon.homeviz.util.WeightUnit;
 import robindecroon.homeviz.xml.Entry;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -42,7 +46,7 @@ public abstract class Consumer {
 	 * @return the liter
 	 */
 	public double getLiter() {
-		return liter * Main.currentPeriod.getMultiplier();
+		return liter * MainActivity.currentPeriod.getMultiplier();
 	}
 
 	/**
@@ -72,7 +76,7 @@ public abstract class Consumer {
 	 * @return the averageMinOn
 	 */
 	public double getAverageHoursOn() {
-		Period period = Main.currentPeriod;
+		Period period = MainActivity.currentPeriod;
 		try {
 			SharedPreferences sp = PreferenceManager
 					.getDefaultSharedPreferences(context);

@@ -7,11 +7,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import robindecroon.homeviz.HomeVizApplication;
-import robindecroon.homeviz.room.Appliance;
-import robindecroon.homeviz.room.HomeCinema;
-import robindecroon.homeviz.room.Light;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Water;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.device.Appliance;
+import robindecroon.homeviz.house.device.HomeCinema;
+import robindecroon.homeviz.house.device.Light;
+import robindecroon.homeviz.house.device.Water;
 import android.util.Log;
 import android.util.Xml;
 

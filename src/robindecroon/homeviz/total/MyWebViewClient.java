@@ -1,15 +1,13 @@
 /**
  * 
  */
-package robindecroon.homeviz.util.webviews;
+package robindecroon.homeviz.total;
 
 import java.util.List;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Room.ConsumerType;
-import robindecroon.homeviz.total.JsonObject;
-import robindecroon.homeviz.total.TreemapType;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.Room.ConsumerType;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -70,7 +68,8 @@ public class MyWebViewClient extends WebViewClient {
 
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		myBrowser.loadUrl("javascript:window.setTimeout(go(" + string + "),100)");
+		myBrowser.loadUrl("javascript:window.setTimeout(go(" + string
+				+ "),100)");
 	}
 
 	@Override

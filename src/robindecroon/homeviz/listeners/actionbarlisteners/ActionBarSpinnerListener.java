@@ -1,7 +1,7 @@
 package robindecroon.homeviz.listeners.actionbarlisteners;
 
 import robindecroon.homeviz.Constants;
-import robindecroon.homeviz.Main;
+import robindecroon.homeviz.activities.MainActivity;
 import android.content.Intent;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 public abstract class ActionBarSpinnerListener implements
 		AdapterView.OnItemSelectedListener {
 
-	protected Main context;
+	protected MainActivity context;
 
-	public ActionBarSpinnerListener(Main context) {
+	public ActionBarSpinnerListener(MainActivity context) {
 		this.context = context;
 	}
 
@@ -32,16 +32,16 @@ public abstract class ActionBarSpinnerListener implements
 	}
 
 	protected void startIntent(int position, int category) {
-		Main.clickCounter++;
-		Main.categoryStack.push(category);
-		Main.selectionStack.push(position);
-		Intent intent = new Intent(context, Main.class);
+		MainActivity.clickCounter++;
+		MainActivity.categoryStack.push(category);
+		MainActivity.selectionStack.push(position);
+		Intent intent = new Intent(context, MainActivity.class);
 		intent.putExtra(Constants.CATEGORY, category);
 		intent.putExtra(Constants.SELECTION, position);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-		if (Main.lastCatergory != category) {
+		if (MainActivity.lastCatergory != category) {
 			context.startActivity(intent);
-		} else if (Main.lastPosition != position) {
+		} else if (MainActivity.lastPosition != position) {
 			context.startActivity(intent);
 		}
 	}

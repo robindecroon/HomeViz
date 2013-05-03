@@ -1,12 +1,12 @@
-package robindecroon.homeviz.util;
+package robindecroon.homeviz.yield;
 
 import java.text.NumberFormat;
 
 public abstract class AYield implements IYield {
-	
+
 	protected final double total;
 	protected final double current;
-	protected final double today;	
+	protected final double today;
 	protected final double yesterday;
 	protected final double twoDays;
 	protected final double thisWeek;

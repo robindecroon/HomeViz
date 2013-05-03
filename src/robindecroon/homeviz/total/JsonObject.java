@@ -4,9 +4,9 @@ import java.util.List;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.exceptions.NoSuchDevicesInRoom;
-import robindecroon.homeviz.room.Consumer;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Room.ConsumerType;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.Room.ConsumerType;
+import robindecroon.homeviz.house.device.Consumer;
 import android.util.Log;
 
 public class JsonObject {

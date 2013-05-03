@@ -1,4 +1,4 @@
-package robindecroon.homeviz;
+package robindecroon.homeviz.activities;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +11,9 @@ import libraries.stackoverflow.NoDefaultSpinner;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import robindecroon.homeviz.Constants;
+import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.R;
 import robindecroon.homeviz.fragments.metaphor.MetaphorContainerFragment;
 import robindecroon.homeviz.fragments.total.TotalTreeMapFragment;
 import robindecroon.homeviz.fragments.usage.UsageContainerFragment;
@@ -53,7 +56,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-public class Main extends FragmentActivity implements LocationListener {
+public class MainActivity extends FragmentActivity implements LocationListener {
 
 	public static int lastCatergory;
 	public static int lastPosition;
@@ -181,7 +184,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		lastCatergory = Constants.YIELD;
 		Bundle args = new Bundle();
 		args.putInt(Constants.YIELD_TYPE, selection);
-		Fragment fragment = new YieldFragment();			
+		Fragment fragment = new YieldFragment();
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
@@ -251,23 +254,26 @@ public class Main extends FragmentActivity implements LocationListener {
 		yieldActionBarSpinner.setSaveEnabled(false);
 
 	}
-	
+
 	@Override
-    public boolean onPreparePanel(int featureId, View view, Menu menu) {
-        super.onPreparePanel(featureId, view, menu); // this returns false if all items are hidden
-        return true; // return true to prevent the menu's deletion 
-    }
+	public boolean onPreparePanel(int featureId, View view, Menu menu) {
+		super.onPreparePanel(featureId, view, menu); // this returns false if
+														// all items are hidden
+		return true; // return true to prevent the menu's deletion
+	}
 
 	private void readHomeVizXML() {
 		try {
 			HomeVizApplication app = (HomeVizApplication) getApplication();
 			app.reset();
 			InputStream in = null;
-			
-			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-			String xmlFileName = settings.getString(Constants.XML_FILE, Constants.XML_FILE_NAME);
-			if(xmlFileName.equals(Constants.XML_FILE_NAME)) {
-				in = getAssets().open(Constants.XML_FILE_NAME);				
+
+			SharedPreferences settings = PreferenceManager
+					.getDefaultSharedPreferences(this);
+			String xmlFileName = settings.getString(Constants.XML_FILE,
+					Constants.XML_FILE_NAME);
+			if (xmlFileName.equals(Constants.XML_FILE_NAME)) {
+				in = getAssets().open(Constants.XML_FILE_NAME);
 			} else {
 				in = openFileInput(xmlFileName);
 			}
@@ -309,7 +315,8 @@ public class Main extends FragmentActivity implements LocationListener {
 			startActivity(aboutIntent);
 			return true;
 		case R.id.menu_xml_creator:
-			Intent xmlCreatorIntent = new Intent(this, HomeCreatorActivity.class);
+			Intent xmlCreatorIntent = new Intent(this,
+					HomeCreatorActivity.class);
 			startActivity(xmlCreatorIntent);
 			return true;
 		case R.id.menu_community:
@@ -323,7 +330,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		return Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState());
 	}
-	
+
 	private Intent getDefaultShareIntent() {
 		if (!externalStorageIsAvailable()) {
 			throw new IllegalStateException("No external storage available");
@@ -366,7 +373,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		if (extras != null) {
 			selection = extras.getInt(Constants.SELECTION);
 		}
-		Intent intent = new Intent(this, Main.class);
+		Intent intent = new Intent(this, MainActivity.class);
 		intent.putExtra(Constants.CATEGORY, Constants.USAGE);
 		intent.putExtra(Constants.SELECTION, selection);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -391,7 +398,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		} catch (EmptyStackException e) {
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		finish();
@@ -401,7 +408,7 @@ public class Main extends FragmentActivity implements LocationListener {
 		}
 		try {
 			prepareBackStack();
-			Intent intent = new Intent(this, Main.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra(Constants.CATEGORY, categoryStack.pop());
 			intent.putExtra(Constants.SELECTION, selectionStack.pop());
 			intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
@@ -424,15 +431,15 @@ public class Main extends FragmentActivity implements LocationListener {
 	private void initCurrentLocation() {
 		Log.i(getClass().getSimpleName(), "LocationManager initialized");
 		try {
-			String provider= null;
+			String provider = null;
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//			boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-			
-			boolean internetLocation = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+			boolean internetLocation = locationManager
+					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			boolean internetEnabled = Network.isNetworkConnected(this);
 
-			if (internetEnabled && internetLocation) { 
-				Log.i(getClass().getSimpleName(), "Tracking location through internet");
+			if (internetEnabled && internetLocation) {
+				Log.i(getClass().getSimpleName(),
+						"Tracking location through internet");
 				Criteria criteria = new Criteria();
 				criteria.setAccuracy(Criteria.ACCURACY_FINE);
 				criteria.setPowerRequirement(Criteria.POWER_HIGH);
@@ -442,7 +449,7 @@ public class Main extends FragmentActivity implements LocationListener {
 				criteria.setCostAllowed(true);
 				provider = locationManager.getBestProvider(criteria, true);
 				locationManager.requestSingleUpdate(provider, this, null);
-			}  else {
+			} else {
 				ToastMessages.noLocationResource();
 			}
 		} catch (Exception e) {
@@ -456,7 +463,7 @@ public class Main extends FragmentActivity implements LocationListener {
 						ToastMessages.enableLocation();
 						Intent myIntent = new Intent(
 								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-						Main.this.startActivity(myIntent);
+						MainActivity.this.startActivity(myIntent);
 						break;
 
 					case DialogInterface.BUTTON_NEGATIVE:
@@ -466,7 +473,8 @@ public class Main extends FragmentActivity implements LocationListener {
 				}
 			};
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					MainActivity.this);
 			builder.setMessage(
 					getResources().getString(R.string.question_enable_location))
 					.setPositiveButton(getResources().getString(R.string.Yes),
@@ -497,11 +505,12 @@ public class Main extends FragmentActivity implements LocationListener {
 				if (addresses.size() > 0) {
 					Address first = addresses.get(0);
 					currentCity = first.getLocality();
-					currentCountry = first.getCountryName();					
+					currentCountry = first.getCountryName();
 					((HomeVizApplication) getApplication())
-					.setCurrentCountry(currentCountry);
-					Log.i(getClass().getSimpleName(), "Updated location, we are in: " + currentCity
-							+ ", " + currentCountry);
+							.setCurrentCountry(currentCountry);
+					Log.i(getClass().getSimpleName(),
+							"Updated location, we are in: " + currentCity
+									+ ", " + currentCountry);
 				} else {
 					Log.e(getClass().getSimpleName(), "GeoCoder is down!");
 				}

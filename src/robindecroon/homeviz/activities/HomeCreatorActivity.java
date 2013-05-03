@@ -1,4 +1,4 @@
-package robindecroon.homeviz;
+package robindecroon.homeviz.activities;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,11 +7,14 @@ import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import robindecroon.homeviz.room.Appliance;
-import robindecroon.homeviz.room.HomeCinema;
-import robindecroon.homeviz.room.Light;
-import robindecroon.homeviz.room.Room;
-import robindecroon.homeviz.room.Water;
+import robindecroon.homeviz.Constants;
+import robindecroon.homeviz.HomeVizApplication;
+import robindecroon.homeviz.R;
+import robindecroon.homeviz.house.Room;
+import robindecroon.homeviz.house.device.Appliance;
+import robindecroon.homeviz.house.device.HomeCinema;
+import robindecroon.homeviz.house.device.Light;
+import robindecroon.homeviz.house.device.Water;
 import robindecroon.homeviz.util.ToastMessages;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -136,9 +139,11 @@ public class HomeCreatorActivity extends Activity {
 						editor.commit();
 
 						Intent intent = new Intent(HomeCreatorActivity.this,
-								Main.class);
-						intent.putExtra(Constants.CATEGORY, Main.lastCatergory);
-						intent.putExtra(Constants.SELECTION, Main.lastPosition);
+								MainActivity.class);
+						intent.putExtra(Constants.CATEGORY,
+								MainActivity.lastCatergory);
+						intent.putExtra(Constants.SELECTION,
+								MainActivity.lastPosition);
 						startActivity(intent);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();

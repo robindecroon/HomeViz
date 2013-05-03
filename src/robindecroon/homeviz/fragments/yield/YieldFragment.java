@@ -3,7 +3,7 @@ package robindecroon.homeviz.fragments.yield;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.util.AYield;
+import robindecroon.homeviz.yield.AYield;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

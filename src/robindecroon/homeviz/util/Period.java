@@ -169,7 +169,7 @@ public enum Period {
 			}
 		}
 	};
-	
+
 	private final int nameId;
 
 	private GregorianCalendar begin;
