@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.adapters.listadapters;
 
 import java.util.List;
@@ -17,13 +22,28 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+/**
+ * The Class MyExpandableAdapter.
+ */
 @SuppressWarnings("rawtypes")
 public class MyExpandableAdapter extends BaseExpandableListAdapter {
 
+	/** The groups. */
 	private List<Room> groups;
+	
+	/** The context. */
 	private FragmentActivity context;
+	
+	/** The consumer class. */
 	private Class consumerClass;
 
+	/**
+	 * Instantiates a new my expandable adapter.
+	 *
+	 * @param context the context
+	 * @param rooms the rooms
+	 * @param consumerClass the consumer class
+	 */
 	public MyExpandableAdapter(FragmentActivity context, List<Room> rooms,
 			Class consumerClass) {
 		this.groups = rooms;
@@ -31,6 +51,9 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		this.consumerClass = consumerClass;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getChild(int, int)
+	 */
 	@Override
 	public Consumer getChild(int arg0, int arg1) {
 		try {
@@ -41,8 +64,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 			} else if (consumerClass == Heating.class) {
 				return groups.get(arg0).getHeatings().get(arg1);
 			} else {
-				throw new IllegalStateException("No child for class: "
-						+ consumerClass.toString());
+				throw new IllegalStateException("No child for class: " + consumerClass.toString());
 			}
 		} catch (NoSuchDevicesInRoom e) {
 			Log.i(getClass().getSimpleName(), "No consumers in this room");
@@ -50,11 +72,17 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getChildId(int, int)
+	 */
 	@Override
 	public long getChildId(int arg0, int arg1) {
 		return arg1;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getChildrenCount(int)
+	 */
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		try {
@@ -65,8 +93,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 			} else if (consumerClass == Heating.class) {
 				return groups.get(groupPosition).getHeatings().size();
 			} else {
-				throw new IllegalStateException("No child for class: "
-						+ consumerClass.toString());
+				throw new IllegalStateException("No child for class: " + consumerClass.toString());
 			}
 		} catch (NoSuchDevicesInRoom e) {
 			Log.i(getClass().getSimpleName(), "No consumers in this room");
@@ -74,6 +101,11 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		}
 	}
 
+	/**
+	 * Gets the generic view.
+	 *
+	 * @return the generic view
+	 */
 	public TextView getGenericView() {
 		// Layout parameters for the ExpandableListView
 		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
@@ -88,6 +120,9 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		return textView;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
@@ -96,21 +131,33 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		return textView;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getGroup(int)
+	 */
 	@Override
 	public Room getGroup(int groupPosition) {
 		return groups.get(groupPosition);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getGroupCount()
+	 */
 	@Override
 	public int getGroupCount() {
 		return groups.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getGroupId(int)
+	 */
 	@Override
 	public long getGroupId(int groupPosition) {
 		return groupPosition;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getGroupView(int, boolean, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
@@ -119,11 +166,17 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		return textView;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#isChildSelectable(int, int)
+	 */
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#hasStableIds()
+	 */
 	@Override
 	public boolean hasStableIds() {
 		return true;

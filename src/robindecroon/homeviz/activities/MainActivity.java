@@ -269,44 +269,28 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	 * @param view the rootview
 	 */
 	public void initSpinners(View view) {
-		usageActionBarSpinner = (NoDefaultSpinner) view
-				.findViewById(R.id.usage_spinner);
+		usageActionBarSpinner = (NoDefaultSpinner) view.findViewById(R.id.usage_spinner);
 		usageActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.usage_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		usageActionBarSpinner
-				.setOnItemSelectedListener(new UsageActionBarSpinnerListener(
-						this));
+				R.array.usage_spinner_data, android.R.layout.simple_spinner_dropdown_item));
+		usageActionBarSpinner.setOnItemSelectedListener(new UsageActionBarSpinnerListener(this));
 		usageActionBarSpinner.setSaveEnabled(false);
 
-		totalActionBarSpinner = (NoDefaultSpinner) view
-				.findViewById(R.id.you_spinner);
+		totalActionBarSpinner = (NoDefaultSpinner) view.findViewById(R.id.you_spinner);
 		totalActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.you_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		totalActionBarSpinner
-				.setOnItemSelectedListener(new TotalActionBarSpinnerListener(
-						this));
+				R.array.you_spinner_data, android.R.layout.simple_spinner_dropdown_item));
+		totalActionBarSpinner.setOnItemSelectedListener(new TotalActionBarSpinnerListener(this));
 		totalActionBarSpinner.setSaveEnabled(false);
 
-		metaphorActionBarSpinner = (NoDefaultSpinner) view
-				.findViewById(R.id.metaphor_spinner);
+		metaphorActionBarSpinner = (NoDefaultSpinner) view.findViewById(R.id.metaphor_spinner);
 		metaphorActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(
-				this, R.array.metaphor_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		metaphorActionBarSpinner
-				.setOnItemSelectedListener(new MetaphorActionBarSpinnerListener(
-						this));
+				this, R.array.metaphor_spinner_data, android.R.layout.simple_spinner_dropdown_item));
+		metaphorActionBarSpinner.setOnItemSelectedListener(new MetaphorActionBarSpinnerListener(this));
 		metaphorActionBarSpinner.setSaveEnabled(false);
 
-		yieldActionBarSpinner = (NoDefaultSpinner) view
-				.findViewById(R.id.yield_spinner);
+		yieldActionBarSpinner = (NoDefaultSpinner) view.findViewById(R.id.yield_spinner);
 		yieldActionBarSpinner.setAdapter(ArrayAdapter.createFromResource(this,
-				R.array.yield_spinner_data,
-				android.R.layout.simple_spinner_dropdown_item));
-		yieldActionBarSpinner
-				.setOnItemSelectedListener(new YieldActionBarSpinnerListener(
-						this));
+				R.array.yield_spinner_data,	android.R.layout.simple_spinner_dropdown_item));
+		yieldActionBarSpinner.setOnItemSelectedListener(new YieldActionBarSpinnerListener(this));
 		yieldActionBarSpinner.setSaveEnabled(false);
 	}
 
@@ -378,8 +362,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			startActivity(aboutIntent);
 			return true;
 		case R.id.menu_xml_creator:
-			Intent xmlCreatorIntent = new Intent(this,
-					HomeCreatorActivity.class);
+			Intent xmlCreatorIntent = new Intent(this, HomeCreatorActivity.class);
 			startActivity(xmlCreatorIntent);
 			return true;
 		case R.id.menu_community:
@@ -533,31 +516,33 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			}
 		} catch (Exception e) {
 			Log.i(getClass().getSimpleName(), "locationServices are disabled");
-			DialogInterface.OnClickListener dialogClickListener = 
-					new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch (which) {
-					case DialogInterface.BUTTON_POSITIVE:
-						ToastMessages.enableLocation();
-						Intent myIntent = new Intent(
-								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-						MainActivity.this.startActivity(myIntent);
-						break;
-					case DialogInterface.BUTTON_NEGATIVE:
-						// No button clicked
-						break;
-					}
-				}
-			};
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					MainActivity.this);
-			builder.setMessage(getResources().getString(R.string.question_enable_location))
-					.setPositiveButton(getResources().getString(R.string.Yes),
-							dialogClickListener)
-					.setNegativeButton(getResources().getString(R.string.No),
-							dialogClickListener).show();
+			showLocationSettings();
 		}
+	}
+
+	/**
+	 * Let the user enable location services.
+	 */
+	private void showLocationSettings() {
+		DialogInterface.OnClickListener dialogClickListener = 
+				new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+				case DialogInterface.BUTTON_POSITIVE:
+					ToastMessages.enableLocation();
+					Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					MainActivity.this.startActivity(myIntent);
+					break;
+				case DialogInterface.BUTTON_NEGATIVE:
+					break;
+				}
+			}
+		};
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getResources().getString(R.string.question_enable_location))
+			.setPositiveButton(getResources().getString(R.string.Yes), dialogClickListener)
+			.setNegativeButton(getResources().getString(R.string.No), dialogClickListener).show();
 	}
 
 	/**
@@ -569,8 +554,8 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		double lat = currentLocation.getLatitude();
 		double lng = currentLocation.getLongitude();
 
-		String currentCity = null;
-		String currentCountry = null;
+		String currentCity = getResources().getString(R.string.no_location);
+		String currentCountry = getResources().getString(R.string.no_location);
 
 		// US is needed for lookup in CSV file (english country names)
 		Geocoder geocoder = new Geocoder(this, Locale.US);
@@ -590,8 +575,6 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			currentCity = getResources().getString(R.string.no_location);
-			currentCountry = getResources().getString(R.string.no_location);
 		}
 
 	}

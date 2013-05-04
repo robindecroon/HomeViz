@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.activities;
 
 import java.util.List;
@@ -27,6 +32,7 @@ import android.preference.PreferenceManager;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends PreferenceActivity {
+	
 	/**
 	 * Determines whether to always show the simplified settings UI, where
 	 * settings are presented in a single list. When false, settings are shown
@@ -35,6 +41,9 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onPostCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -59,7 +68,7 @@ public class SettingsActivity extends PreferenceActivity {
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.xml.pref_general);
 
-		// Add 'notifications' preferences, and a corresponding header.
+		// Add preferences, and a corresponding header.
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 
 		// Add 'data and sync' preferences, and a corresponding header.
@@ -83,9 +92,13 @@ public class SettingsActivity extends PreferenceActivity {
 	/**
 	 * Helper method to determine if the device has an extra-large screen. For
 	 * example, 10" tablets are extra-large.
+	 *
+	 * @param context the context
+	 * @return true, if is x large tablet
 	 */
 	private static boolean isXLargeTablet(Context context) {
-		return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
+		return (context.getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
 	}
 
 	/**
@@ -94,6 +107,9 @@ public class SettingsActivity extends PreferenceActivity {
 	 * doesn't have newer APIs like {@link PreferenceFragment}, or the device
 	 * doesn't have an extra-large screen. In these cases, a single-pane
 	 * "simplified" settings UI should be shown.
+	 *
+	 * @param context the context
+	 * @return true, if is simple preferences
 	 */
 	private static boolean isSimplePreferences(Context context) {
 		return ALWAYS_SIMPLE_PREFS
@@ -114,7 +130,8 @@ public class SettingsActivity extends PreferenceActivity {
 	 * A preference value change listener that updates the preference's summary
 	 * to reflect its new value.
 	 */
-	private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+	private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
+			new Preference.OnPreferenceChangeListener() {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object value) {
 			String stringValue = value.toString();
@@ -126,9 +143,7 @@ public class SettingsActivity extends PreferenceActivity {
 				int index = listPreference.findIndexOfValue(stringValue);
 
 				// Set the summary to reflect the new value.
-				preference
-						.setSummary(index >= 0 ? listPreference.getEntries()[index]
-								: null);
+				preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
 
 			} else {
 				// For all other preferences, set the summary to the value's
@@ -145,7 +160,8 @@ public class SettingsActivity extends PreferenceActivity {
 	 * preference title) is updated to reflect the value. The summary is also
 	 * immediately updated upon calling this method. The exact display format is
 	 * dependent on the type of preference.
-	 * 
+	 *
+	 * @param preference the preference
 	 * @see #sBindPreferenceSummaryToValueListener
 	 */
 	private static void bindPreferenceSummaryToValue(Preference preference) {
@@ -165,6 +181,10 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static class GeneralPreferenceFragment extends PreferenceFragment {
+		
+		/* (non-Javadoc)
+		 * @see android.preference.PreferenceFragment#onCreate(android.os.Bundle)
+		 */
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -178,6 +198,10 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static class DataSyncPreferenceFragment extends PreferenceFragment {
+		
+		/* (non-Javadoc)
+		 * @see android.preference.PreferenceFragment#onCreate(android.os.Bundle)
+		 */
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);

@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 public class MyWebViewClient extends WebViewClient {
 
 	WebView myBrowser;
-	private String string;
+	private String json;
 	private String name;
 
 	public MyWebViewClient(WebView myBrowser, String name, List<Room> rooms,
@@ -57,19 +57,19 @@ public class MyWebViewClient extends WebViewClient {
 			treemapType = TreemapType.Power;
 			break;
 		}
-		this.string = "'"
+		this.json = "'"
 				+ gson.toJson(JsonObject.getWattJSON(rooms, consType,
 						treemapType)) + "'";
 	}
 
 	public void setString(String string) {
-		this.string = string;
+		this.json = string;
 	}
 
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		myBrowser.loadUrl("javascript:window.setTimeout(go(" + string
-				+ "),100)");
+		myBrowser.loadUrl("javascript:go(" + json + ")");
+//		myBrowser.loadUrl("javascript:window.setTimeout(go(" + json + "), 50)");
 	}
 
 	@Override

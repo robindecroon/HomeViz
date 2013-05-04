@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.fragments.usage;
 
 import java.util.Map;
@@ -14,91 +19,150 @@ import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.UsageActivityUtils;
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
+/**
+ * The Class UsageChartFragment.
+ */
 @SuppressLint("SetJavaScriptEnabled")
 public class UsageChartFragment extends OptionSpinnerFragment {
 
+	/** The chart. */
+	private WebView chart;
+	
+	/** The content. */
+	private LinearLayout content;
+	
+	/** The map. */
+	private Map<String, Amount> map;
+
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.usage_detail_layout,
+		View usageChartView = inflater.inflate(R.layout.usage_detail_layout,
 				container, false);
-		LinearLayout content = (LinearLayout) rootView
+		content = (LinearLayout) usageChartView
 				.findViewById(R.id.detail_container);
 
-		initOptionSpinner(rootView, R.id.chart_spinner, R.id.chart_arraw_left,
-				R.id.chart_arrow_right);
+		initOptionSpinner(usageChartView, R.id.chart_spinner,
+				R.id.chart_arraw_left, R.id.chart_arrow_right);
 
-		boolean online = Network.isNetworkConnected(getActivity());
+		final FragmentActivity context = getActivity();
+		HomeVizApplication app = (HomeVizApplication) context.getApplication();
+		Bundle args = getArguments();
+		Room currentRoom = null;
+		if (Network.isNetworkConnected(context) && args != null) {
 
-		if (online) {
-			HomeVizApplication app = (HomeVizApplication) getActivity()
-					.getApplication();
+			int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
+			currentRoom = app.getRooms().get(roomIndex);
+			map = currentRoom.getPricesMap();
 
-			Room currentRoom = null;
-			if (getArguments() != null) {
-				int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
-				currentRoom = app.getRooms().get(roomIndex);
-			} else {
-				throw new IllegalStateException(getClass().getSimpleName()
-						+ " should have room arguments!");
-			}
-
-			WebView chart = new WebView(getActivity());
-			content.addView(chart);
-			chart.setLayoutParams(new LinearLayout.LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-			chart.setBackgroundColor(0x00000000);
-			chart.getSettings().setJavaScriptEnabled(true);
-			chart.getSettings().setUseWideViewPort(true);
-			chart.getSettings().setLoadWithOverviewMode(true);
-			chart.getSettings().setLayoutAlgorithm(
-					LayoutAlgorithm.SINGLE_COLUMN);
-			chart.setInitialScale(1);
-
-			Map<String, Amount> map = currentRoom.getPricesMap();
-			if (!map.isEmpty()) {
-				GoogleChartType type;
-				switch (getArguments().getInt(Constants.USAGE_BUNDLE_TYPE)) {
-				case 1:
-					type = GoogleChartType.BarChart;
-					break;
-				case 2:
-					type = GoogleChartType.ColumnChart;
-					break;
-				default:
-					throw new IllegalStateException(
-							"Wrong google chart element: "
-									+ getArguments().getInt(
-											Constants.USAGE_BUNDLE_TYPE));
-				}
-				String url = GoogleChartTools.getUsageViz(
-						Constants.USAGE_CHART_TITLE,
-						MainActivity.currentPeriod, getActivity(), map,
-						chart.getWidth(), chart.getHeight(), type);
-				chart.loadDataWithBaseURL("x-data://base", url, "text/html",
-						"UTF-8", null);
-
-				// content.addView(chart);
-			} else {
-				throw new IllegalStateException();
-			}
+			initChartWebView(context);
+			loadGoogleChartTools(usageChartView, context);
 		} else {
 			Log.e(getClass().getSimpleName(), "No internet connection!");
-			content.addView(UsageActivityUtils
-					.getNoNetworkConnection(getActivity()));
+			content.addView(UsageActivityUtils.getNoNetworkConnection(context));
 		}
+		return usageChartView;
+	}
 
-		return rootView;
+	/**
+	 * Initialize the chart web view.
+	 *
+	 * @param context the context
+	 */
+	private void initChartWebView(final FragmentActivity context) {
+		chart = new WebView(context);
+		chart.setLayoutParams(content.getLayoutParams());
+		chart.setBackgroundColor(0x00000000);
+		chart.getSettings().setJavaScriptEnabled(true);
+		chart.getSettings().setUseWideViewPort(true);
+		chart.getSettings().setLoadWithOverviewMode(true);
+		chart.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		chart.setInitialScale(1);
+		
+		content.addView(chart);
+	}
+
+
+	/**
+	 * Load google chart tools.
+	 *
+	 * @param usageChartView the usage chart view
+	 * @param context the context
+	 */
+	private void loadGoogleChartTools(View usageChartView,
+			final FragmentActivity context) {
+		usageChartView.post(new Runnable() { 
+        public void run() { 
+            Rect rect = new Rect(); 
+            Window win = context.getWindow();  // Get the Window
+            win.getDecorView().getWindowVisibleDisplayFrame(rect); 
+            // Get the height of Status Bar 
+            int statusBarHeight = rect.top; 
+            // Get the height occupied by the decoration contents 
+            int contentViewTop = win.findViewById(Window.ID_ANDROID_CONTENT).getTop(); 
+            // Calculate titleBarHeight by deducting statusBarHeight from contentViewTop  
+            int titleBarHeight = contentViewTop - statusBarHeight; 
+ 
+            // By now we got the height of titleBar & statusBar
+            // Now lets get the screen size
+            DisplayMetrics metrics = new DisplayMetrics();
+            context.getWindowManager().getDefaultDisplay().getMetrics(metrics);   
+            int screenHeight = metrics.heightPixels;
+            int screenWidth = metrics.widthPixels;
+ 
+            // Now calculate the height that our layout can be set
+            // If you know that your application doesn't have statusBar added, then don't add here also. Same applies to application bar also 
+            int layoutHeight = screenHeight - (titleBarHeight + statusBarHeight);
+            
+            // Finally load the Google Chart Tools figure with the proper dimensions
+            if (!map.isEmpty()) {
+    			GoogleChartType type = determineType();
+
+    			String url = GoogleChartTools.getUsageViz(
+    					Constants.USAGE_CHART_TITLE, MainActivity.currentPeriod,
+    					getActivity(), map, screenWidth, layoutHeight - 100, type);
+    			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
+    					"UTF-8", null);
+    		} else {
+    			throw new IllegalStateException(
+    					"Prices map in this room shouldn't be empty!");
+    		}
+        }
+
+        
+		private GoogleChartType determineType() {
+			GoogleChartType type;
+			switch (getArguments().getInt(Constants.USAGE_BUNDLE_TYPE)) {
+			case 1:
+				type = GoogleChartType.BarChart;
+				break;
+			case 2:
+				type = GoogleChartType.ColumnChart;
+				break;
+			default:
+				throw new IllegalStateException("Wrong google chart element: "
+						+ getArguments().getInt(Constants.USAGE_BUNDLE_TYPE));
+			}
+			return type;
+		} 
+       });
 	}
 }
