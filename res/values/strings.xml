@@ -95,11 +95,11 @@
     <string name="total">Total</string>
     <string name="until">Until</string>
     <string name="usage">Usage</string>
+    <string name="usage_chart_currency">Usage details in euro</string>
     <string name="watt">Watt</string>
     <string name="Yes">Yes</string>
     <string name="yield">Yield</string>
     <string name="yield_current">Current production</string>
-    <string name="yield_total">Total</string>
     <string name="you_text">Which room consumes the most?</string>
 
     <string-array name="usage_spinner_data">

@@ -10,11 +10,10 @@ import java.util.Map;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
-import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.fragments.OptionSpinnerFragment;
 import robindecroon.homeviz.house.Room;
-import robindecroon.homeviz.total.GoogleChartTools;
-import robindecroon.homeviz.total.GoogleChartType;
+import robindecroon.homeviz.usage.GoogleChartTools;
+import robindecroon.homeviz.usage.GoogleChartType;
 import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Network;
 import robindecroon.homeviz.util.UsageActivityUtils;
@@ -95,6 +94,9 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 		chart.getSettings().setUseWideViewPort(true);
 		chart.getSettings().setLoadWithOverviewMode(true);
 		chart.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		chart.getSettings().setSupportZoom(false);
+		chart.getSettings().setBuiltInZoomControls(false);
+		chart.getSettings().setDisplayZoomControls(false);
 		chart.setInitialScale(1);
 		
 		content.addView(chart);
@@ -134,13 +136,12 @@ public class UsageChartFragment extends OptionSpinnerFragment {
             
             // Finally load the Google Chart Tools figure with the proper dimensions
             if (!map.isEmpty()) {
-    			GoogleChartType type = determineType();
+    			GoogleChartType chartType = determineType();
+    			String chartTitle = getResources().getString(R.string.usage_chart_currency);
 
-    			String url = GoogleChartTools.getUsageViz(
-    					Constants.USAGE_CHART_TITLE, MainActivity.currentPeriod,
-    					getActivity(), map, screenWidth, layoutHeight - 100, type);
-    			chart.loadDataWithBaseURL("x-data://base", url, "text/html",
-    					"UTF-8", null);
+    			String url = GoogleChartTools.getGoogleChartToolsHTML(chartTitle, context, map, 
+    					screenWidth, layoutHeight - 100, chartType);
+    			chart.loadDataWithBaseURL(null, url, "text/html", "UTF-8", null);
     		} else {
     			throw new IllegalStateException(
     					"Prices map in this room shouldn't be empty!");

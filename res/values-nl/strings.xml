@@ -95,11 +95,11 @@
     <string name="total">Totaal</string>
     <string name="until">Tot</string>
     <string name="usage">Verbruik</string>
+    <string name="usage_chart_currency">Verbruik in euro</string>
     <string name="watt">Watt</string>
     <string name="Yes">Ja</string>
     <string name="yield">Opbrengst</string>
     <string name="yield_current">Huidige productie</string>
-    <string name="yield_total">Totaal</string>
     <string name="you_text">Welke kamer verbruikt het meeste?</string>
 
     <string-array name="usage_spinner_data">

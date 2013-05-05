@@ -1,9 +1,9 @@
-package libraries.nielsbillen;
+package libraries.optionspinner;
 
 /**
  * Listener for notifying push events.
  * 
- * @author Niels
+ * @author Niels Billen
  * @version 0.1
  */
 public interface ButtonListener {

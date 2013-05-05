@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.fragments.usage;
 
 import robindecroon.homeviz.Constants;
@@ -19,17 +24,21 @@ import android.view.ViewGroup;
 
 import com.viewpagerindicator.TabPageIndicator;
 
+/**
+ * The Class UsageContainerFragment.
+ */
 public class UsageContainerFragment extends Fragment {
 
-	public static int currentPageNumber;
-
+	/** The pager. */
 	private static ViewPager pager;
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater
-				.inflate(R.layout.simple_tabs, container, false);
+		View usageContainerView = inflater.inflate(R.layout.simple_tabs, container, false);
 
 		FragmentActivity activity = getActivity();
 		HomeVizApplication app = (HomeVizApplication) activity.getApplication();
@@ -37,7 +46,6 @@ public class UsageContainerFragment extends Fragment {
 		FragmentStatePagerAdapter adapter = null;
 		Bundle args = getArguments();
 		if (args != null) {
-			currentPageNumber = args.getInt(Constants.USAGE_ROOM);
 			switch (args.getInt(Constants.USAGE_TYPE)) {
 			case 1:
 				adapter = new UsageChartFragmentPagerAdapter(manager, app, 1);
@@ -68,17 +76,22 @@ public class UsageContainerFragment extends Fragment {
 			Log.e(getClass().getSimpleName(), "No arguments were supplied!");
 			adapter = new UsageIconFragmentPagerAdapter(manager, app);
 		}
-		pager = (ViewPager) rootView.findViewById(R.id.pager);
+		pager = (ViewPager) usageContainerView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
-		TabPageIndicator indicator = (TabPageIndicator) rootView
+		TabPageIndicator indicator = (TabPageIndicator) usageContainerView
 				.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
-		indicator.setCurrentItem(currentPageNumber);
+		indicator.setCurrentItem(args.getInt(Constants.USAGE_ROOM));
 
-		return rootView;
+		return usageContainerView;
 	}
 
+	/**
+	 * Gets the current selection.
+	 *
+	 * @return the current selection
+	 */
 	public static int getCurrentSelection() {
 		if (pager != null)
 			return pager.getCurrentItem();
@@ -86,6 +99,9 @@ public class UsageContainerFragment extends Fragment {
 			return 0;
 	}
 
+	/**
+	 * Reset views.
+	 */
 	public static void resetViews() {
 		pager.getAdapter().notifyDataSetChanged();
 	}

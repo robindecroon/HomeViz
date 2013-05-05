@@ -19,16 +19,278 @@
         android:layout_weight="5"
         android:contentDescription="@string/app_name" />
 
-    <TextView
-        android:id="@+id/yield_solar_text"
+    <LinearLayout
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:layout_weight="5"
-        android:lineSpacingExtra="5sp"
-        android:paddingLeft="20dp"
-        android:textColor="@color/White"
-        android:textIsSelectable="false"
-        android:textSize="25sp" />
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/total"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/yield_current"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_day"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_yesterday"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_two_days_ago"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_two_days_ago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_week"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_last_week"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_last_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_month"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_last_month"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_last_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_year"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/period_last_year"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/yield_last_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/White"
+                android:textIsSelectable="false"
+                android:textSize="25sp" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

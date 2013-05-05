@@ -29,18 +29,18 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp" >
 
-                <libraries.nielsbillen.ArrowButton
+                <libraries.optionspinner.ArrowButton
                     android:id="@+id/total_arrow_left"
                     android:layout_width="40dp"
                     android:layout_height="match_parent" />
 
-                <libraries.nielsbillen.OptionSpinner
+                <libraries.optionspinner.OptionSpinner
                     android:id="@+id/total_spinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <libraries.nielsbillen.ArrowButton
+                <libraries.optionspinner.ArrowButton
                     android:id="@+id/total_arrow_right"
                     android:layout_width="40dp"
                     android:layout_height="match_parent" />

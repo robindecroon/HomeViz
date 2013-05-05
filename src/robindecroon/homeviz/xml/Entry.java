@@ -9,9 +9,6 @@ import android.annotation.SuppressLint;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import robindecroon.homeviz.util.OutputType;
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Entry.
  */
@@ -24,7 +21,7 @@ public class Entry {
 	private final String value;
 	
 	/** The type. */
-	private final OutputType type;
+	private final LoxoneXMLOutputType type;
 
 	/**
 	 * Instantiates a new entry.
@@ -36,7 +33,7 @@ public class Entry {
 	public Entry(long date, String value, String type) {
 		this.date = date;
 		this.value = value;
-		this.type = OutputType.getType(type);
+		this.type = LoxoneXMLOutputType.getType(type);
 	}
 
 	/**
@@ -53,7 +50,7 @@ public class Entry {
 	 *
 	 * @return the type
 	 */
-	public OutputType getType() {
+	public LoxoneXMLOutputType getType() {
 		return type;
 	}
 
@@ -82,7 +79,6 @@ public class Entry {
 	@Override
 	public String toString() {
 		SimpleDateFormat df = new SimpleDateFormat();
-		return "T=" + df.format(new Date(date)) + " " + getType() + ": "
-				+ value;
+		return "T=" + df.format(new Date(date)) + " " + getType() + ": " + value;
 	}
 }

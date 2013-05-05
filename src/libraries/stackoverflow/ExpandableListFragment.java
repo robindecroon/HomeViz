@@ -21,9 +21,8 @@ import android.widget.TextView;
 
 /**
  * This class has originally been taken from
- * http://stackoverflow.com/questions/6051050
- * /expandablelistfragment-with-loadermanager-for-compatibility-package and then
- * modified by Manfred Moser <manfred@simpligility.com> to get it to work with
+ * <url>http://stackoverflow.com/a/10424766/1741111</url>
+ * and then modified by Manfred Moser <manfred@simpligility.com> to get it to work with
  * the v4 r4 compatibility library. With inspirations from the library source.
  * 
  * All ASLv2 licensed.

@@ -36,21 +36,95 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
- * Eigen applicatieklasse om variabelen bij te houden.
- * 
- * @author Robin
- * 
+ * The Class HomeVizApplication.
  */
 public class HomeVizApplication extends Application {
 
+	/** The rooms. */
 	private List<Room> rooms = new ArrayList<Room>();
 
+	/** The solar panel. */
 	private AYield solarPanel;
+	
+	/** The rain water. */
 	private AYield rainWater;
+	
+	/** The ground water. */
 	private AYield groundWater;
+	
+	/**
+	 * Instantiates a new home viz application.
+	 */
+	public HomeVizApplication() {
+		ToastMessages.setContext(this);
+	}
+	
+	/**
+	 * Adds a room.
+	 *
+	 * @param room the room
+	 */
+	public void addRoom(Room room) {
+		this.rooms.add(room);
+	}
 
 	/**
-	 * @return the solarPanel
+	 * Gets the rooms.
+	 *
+	 * @return the rooms
+	 */
+	public List<Room> getRooms() {
+		if (this.rooms == null) {
+			generateRooms();
+		}
+		return this.rooms;
+	}
+
+	/**
+	 * Sets the current country.
+	 *
+	 * @param currentCountry the new current country
+	 */
+	public void setCurrentCountry(String currentCountry) {
+		if (currentCountry != null) {
+			try {
+				Map<String, Country> countries = readCountryCSVFile();
+				
+				// Initialize the country specific values
+				Country country = countries.get(currentCountry);
+				Consumer.setCO2Value(country.getCo2Value());
+				Consumer.setKwhPrice(country.getKwh());
+				Consumer.setWaterPrice(country.getLiterPrice());
+				
+				// Save the last known location
+				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putString(Constants.COUNTRY, currentCountry);
+				editor.commit();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Log.e(getClass().getSimpleName(), "Country is null");
+		}
+	}
+
+	/**
+	 * Reset.
+	 */
+	public void reset() {
+		try {
+			rooms.clear();
+		} catch (Exception e) {
+			// nothing to clear
+		}
+	}
+	
+	/**
+	 * Gets the solar panel.
+	 *
+	 * @return the solar panel
 	 */
 	public AYield getSolarPanel() {
 		if (solarPanel == null) {
@@ -60,15 +134,18 @@ public class HomeVizApplication extends Application {
 	}
 
 	/**
-	 * @param solarPanel
-	 *            the solarPanel to set
+	 * Sets the solar panel.
+	 *
+	 * @param solarPanel the new solar panel
 	 */
 	public void setSolarPanel(AYield solarPanel) {
 		this.solarPanel = solarPanel;
 	}
 
 	/**
-	 * @return the solarPanel
+	 * Gets the rain water.
+	 *
+	 * @return the rain water
 	 */
 	public AYield getRainWater() {
 		if (rainWater == null) {
@@ -78,15 +155,18 @@ public class HomeVizApplication extends Application {
 	}
 
 	/**
-	 * @param solarPanel
-	 *            the solarPanel to set
+	 * Sets the rain water.
+	 *
+	 * @param rainWater the new rain water
 	 */
 	public void setRainWater(AYield rainWater) {
 		this.rainWater = rainWater;
 	}
 
 	/**
-	 * @return the solarPanel
+	 * Gets the ground water.
+	 *
+	 * @return the ground water
 	 */
 	public AYield getGroundWater() {
 		if (groundWater == null) {
@@ -97,112 +177,76 @@ public class HomeVizApplication extends Application {
 	}
 
 	/**
-	 * @param solarPanel
-	 *            the solarPanel to set
+	 * Sets the ground water.
+	 *
+	 * @param groundWater the new ground water
 	 */
 	public void setGroundWater(AYield groundWater) {
 		this.groundWater = groundWater;
 	}
-
+	
 	/**
-	 * @param currentCountry
-	 *            the currentCountry to set
+	 * Read country csv file.
+	 *
+	 * @return the map
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public void setCurrentCountry(String currentCountry) {
-		if (currentCountry != null) {
-			try {
-				InputStream input = getAssets().open(
-						Constants.CO2_DATA_FILE_NAME);
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						input));
-				String line = null;
-				Map<String, Country> countries = new HashMap<String, Country>();
+	private Map<String, Country> readCountryCSVFile() throws IOException {
+		InputStream input = getAssets().open(Constants.CO2_DATA_FILE_NAME);
+		BufferedReader in = new BufferedReader(new InputStreamReader(input));
+		String line = null;
+		Map<String, Country> countries = new HashMap<String, Country>();
 
-				NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
-				NumberFormat dotFormat = NumberFormat.getInstance(Locale.US);
-				try {
-					// The headers
-					in.readLine();
-					while ((line = in.readLine()) != null) {
-						String[] values = line.split(";");
-						Number co2number = format.parse(values[1]);
-						Number kwhnumber = dotFormat.parse(values[2]);
-						Number liternumber = dotFormat.parse(values[3]);
-
-						double co2 = co2number.doubleValue();
-						double kwh = kwhnumber.doubleValue();
-						double liter = liternumber.doubleValue();
-						countries.put(values[0], new Country(values[0], co2,
-								new Amount(kwh), new Amount(liter)));
-					}
-				} catch (ParseException e) {
-					e.printStackTrace();
-					Log.e(getClass().getSimpleName(),
-							"Error in country CSV file!");
-				}
-				Country country = countries.get(currentCountry);
-				Consumer.setCO2Value(country.getCo2Value());
-				Consumer.setKwhPrice(country.getKwh());
-				Consumer.setWaterPrice(country.getLiterPrice());
-				SharedPreferences settings = PreferenceManager
-						.getDefaultSharedPreferences(this);
-				SharedPreferences.Editor editor = settings.edit();
-				editor.putString(Constants.COUNTRY, currentCountry);
-				editor.commit();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			Log.e(getClass().getSimpleName(), "Country is null");
-		}
-	}
-
-	/**
-	 * Constructor om een applicatie aan te maken. Laad automatisch de XML in.
-	 */
-	public HomeVizApplication() {
-		ToastMessages.setContext(this);
-	}
-
-	public void addRoom(Room room) {
-		this.rooms.add(room);
-	}
-
-	public List<Room> getRooms() {
-		if (this.rooms == null) {
-			try {
-				InputStream in = null;
-				Log.e(getClass().getSimpleName(), "Rooms shouldn't be null!");
-				SharedPreferences settings = PreferenceManager
-						.getDefaultSharedPreferences(this);
-				String xmlFileName = settings.getString(Constants.XML_FILE,
-						Constants.XML_FILE_NAME);
-				if (xmlFileName.equals(Constants.XML_FILE_NAME)) {
-					in = getAssets().open(Constants.XML_FILE_NAME);
-				} else {
-					in = openFileInput(xmlFileName);
-				}
-				HomeVizXMLParser parser = new HomeVizXMLParser(this);
-				parser.parse(in);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (XmlPullParserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return this.rooms;
-	}
-
-	public void reset() {
+		NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+		NumberFormat dotFormat = NumberFormat.getInstance(Locale.US);
 		try {
-			rooms.clear();
-		} catch (Exception e) {
-			// nothing to clear
+			in.readLine();
+			while ((line = in.readLine()) != null) {
+				String[] values = line.split(";");
+				Number co2number = format.parse(values[1]);
+				Number kwhnumber = dotFormat.parse(values[2]);
+				Number liternumber = dotFormat.parse(values[3]);
+
+				double co2 = co2number.doubleValue();
+				double kwh = kwhnumber.doubleValue();
+				double liter = liternumber.doubleValue();
+				countries.put(values[0], new Country(values[0], co2,
+						new Amount(kwh), new Amount(liter)));
+			}
+		} catch (ParseException e) {
+			Log.e(getClass().getSimpleName(), "Error in country CSV file!");
+		}
+		return countries;
+	}
+	
+	/**
+	 * Rarely android clears the rooms to release memory.
+	 */
+	private void generateRooms() {
+		try {
+			Log.e("Application", "Regenerated the rooms");
+			
+			// Find location of last CSV file
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+			String xmlFileName = prefs.getString(Constants.XML_FILE, Constants.XML_FILE_NAME);
+			
+			// Read the CSV file
+			InputStream in = null;
+			if (xmlFileName.equals(Constants.XML_FILE_NAME)) {
+				in = getAssets().open(Constants.XML_FILE_NAME);
+			} else {
+				in = openFileInput(xmlFileName);
+			}
+			
+			// Reparse the configuration file in order to link the devices with their rooms.
+			HomeVizXMLParser parser = new HomeVizXMLParser(this);
+			parser.parse(in);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
 		}
 	}
 }

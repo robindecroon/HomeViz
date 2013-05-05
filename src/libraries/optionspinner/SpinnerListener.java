@@ -1,8 +1,8 @@
-package libraries.nielsbillen;
+package libraries.optionspinner;
 
 /**
  * 
- * @author Niels
+ * @author Niels Billen
  * @version 0.1
  */
 public interface SpinnerListener {

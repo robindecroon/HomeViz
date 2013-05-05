@@ -1,13 +1,16 @@
-/**
- * 
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
  */
+
 package robindecroon.homeviz.total;
 
 import java.util.List;
 
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.house.Room;
-import robindecroon.homeviz.house.Room.ConsumerType;
+import robindecroon.homeviz.house.device.ConsumerType;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,19 +18,26 @@ import android.webkit.WebViewClient;
 import com.google.gson.Gson;
 
 /**
- * @author Robin
- * 
+ * The Class MyWebViewClient.
  */
 public class MyWebViewClient extends WebViewClient {
 
+	/** The my browser. */
 	WebView myBrowser;
+	
+	/** The json. */
 	private String json;
-	private String name;
 
-	public MyWebViewClient(WebView myBrowser, String name, List<Room> rooms,
+	/**
+	 * Instantiates a new my web view client.
+	 *
+	 * @param myBrowser the my browser
+	 * @param rooms the rooms
+	 * @param option the option
+	 */
+	public MyWebViewClient(WebView myBrowser, List<Room> rooms,
 			int option) {
 		this.myBrowser = myBrowser;
-		this.setName(name);
 		Gson gson = new Gson();
 		ConsumerType consType = null;
 		TreemapType treemapType = null;
@@ -57,47 +67,41 @@ public class MyWebViewClient extends WebViewClient {
 			treemapType = TreemapType.Power;
 			break;
 		}
-		this.json = "'"
-				+ gson.toJson(JsonObject.getWattJSON(rooms, consType,
-						treemapType)) + "'";
+		this.json = "'"	+ gson.toJson(JsonObject.getWattJSON(rooms, consType, treemapType)) + "'";
 	}
 
+	/**
+	 * Sets the string.
+	 *
+	 * @param string the new string
+	 */
 	public void setString(String string) {
 		this.json = string;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.webkit.WebViewClient#onPageFinished(android.webkit.WebView, java.lang.String)
+	 */
 	@Override
 	public void onPageFinished(WebView view, String url) {
 		myBrowser.loadUrl("javascript:go(" + json + ")");
-//		myBrowser.loadUrl("javascript:window.setTimeout(go(" + json + "), 50)");
 	}
 
+	/* (non-Javadoc)
+	 * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
+	 */
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		view.loadUrl(url);
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.webkit.WebViewClient#onReceivedError(android.webkit.WebView, int, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void onReceivedError(WebView view, int errorCode,
 			String description, String failingUrl) {
-		Log.e("WebViewClient", "Error in  " + name + "description: "
-				+ description);
+		Log.e("WebViewClient", "Error in webviewclien with description: " + description);
 	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
 }

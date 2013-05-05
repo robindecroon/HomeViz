@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.fragments;
 
 import java.util.Calendar;
@@ -10,6 +15,7 @@ import robindecroon.homeviz.activities.MainActivity;
 import robindecroon.homeviz.util.FragmentResetter;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.ToastMessages;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -18,24 +24,33 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 
+/**
+ * The Class DatePickerFragment.
+ */
 public class DatePickerFragment extends DialogFragment implements
 		DatePickerDialog.OnDateSetListener {
 
-	private enum Type {
-		From, Until;
-	}
+	/**
+	 * The Enum DatePickerFragmentType.
+	 */
+	private enum DatePickerFragmentType { From, Until; }
 
-	private Type type;
+	/** The date picker fragment type. */
+	private DatePickerFragmentType datePickerFragmentType;
 
+	/* (non-Javadoc)
+	 * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+		
+		Activity context = getActivity();
 		String title = getArguments().getString(Constants.DATEPICKER_TITLE);
-		Resources res = getActivity().getResources();
+		Resources res = context.getResources();
 		if (title.equals(res.getString(R.string.from) + "...")) {
-			type = Type.From;
+			datePickerFragmentType = DatePickerFragmentType.From;
 		} else if (title.equals("..." + res.getString(R.string.until))) {
-			type = Type.Until;
+			datePickerFragmentType = DatePickerFragmentType.Until;
 		}
 
 		// Use the current date as the default date in the picker
@@ -44,9 +59,8 @@ public class DatePickerFragment extends DialogFragment implements
 		int month = c.get(Calendar.MONTH);
 		int day = c.get(Calendar.DAY_OF_MONTH);
 
-		DatePickerDialog dialog = new DatePickerDialog(getActivity(), this,
-				year, month, day);
-		switch (type) {
+		DatePickerDialog dialog = new DatePickerDialog(context, this, year, month, day);
+		switch (datePickerFragmentType) {
 		case From:
 			dialog.getDatePicker().setMaxDate(new Date().getTime());
 			break;
@@ -61,12 +75,15 @@ public class DatePickerFragment extends DialogFragment implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.DatePickerDialog.OnDateSetListener#onDateSet(android.widget.DatePicker, int, int, int)
+	 */
 	@Override
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		GregorianCalendar cal = new GregorianCalendar(year, month, day);
 		try {
 			MainActivity.currentPeriod = Period.CUSTOM;
-			switch (type) {
+			switch (datePickerFragmentType) {
 			case From:
 				Log.i(getClass().getSimpleName(), "From date set!");
 				MainActivity.currentPeriod.setBegin(cal);
@@ -83,7 +100,6 @@ public class DatePickerFragment extends DialogFragment implements
 				try {
 					FragmentResetter.reset(getActivity());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;

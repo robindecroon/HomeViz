@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.task;
 
 import java.io.IOException;
@@ -37,21 +42,40 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
+/**
+ * The Class DownloadLoxoneXMLTask.
+ */
 public class DownloadLoxoneXMLTask extends
 		AsyncTask<String, Void, Map<String, List<Entry>>> {
 
+	/** The rooms. */
 	private List<Room> rooms;
+	
+	/** The app. */
 	private HomeVizApplication app;
 
+	/** The user. */
 	private String user;
+	
+	/** The password. */
 	private String password;
+	
+	/** The ip. */
 	private String ip;
 
+	/**
+	 * Instantiates a new download loxone xml task.
+	 *
+	 * @param app the app
+	 */
 	public DownloadLoxoneXMLTask(HomeVizApplication app) {
 		this.rooms = app.getRooms();
 		this.app = app;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
 	@Override
 	protected Map<String, List<Entry>> doInBackground(String... settings) {
 		Log.i(getClass().getSimpleName(), "Synchronization with Loxone started");
@@ -65,75 +89,74 @@ public class DownloadLoxoneXMLTask extends
 				Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 				return null;
 			} catch (XmlPullParserException e) {
-				Log.e(getClass().getSimpleName(),
-						"XML error: " + e.getMessage());
+				Log.e(getClass().getSimpleName(), "XML error: " + e.getMessage());
 				return null;
 			}
 		} catch (Exception e) {
-			// lege foutmelding
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Map<String, List<Entry>> result) {
 		if (result != null) {
-
 			for (String name : result.keySet()) {
 				for (Room room : rooms) {
 					try {
 						Consumer cons = room.getConsumerWithName(name);
 						cons.putEntries(result.get(name));
-					} catch (NoSuchDevicesInRoom e) {
-						// Not in this Room
-					}
+					} catch (NoSuchDevicesInRoom e) {}
 				}
 			}
 			ToastMessages.dataLoaded();
-			Log.i(getClass().getSimpleName(), "Downloading Statistics 100%!");
+			Log.i(getClass().getSimpleName(), "Downloaded Statistics 100%!");
 		}
 	}
 
+	/**
+	 * Load xml from network.
+	 *
+	 * @return the map
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws XmlPullParserException the xml pull parser exception
+	 */
 	private Map<String, List<Entry>> loadXmlFromNetwork() throws IOException,
 			XmlPullParserException {
 
 		Map<String, List<Entry>> map = new HashMap<String, List<Entry>>();
-
 		FTPClient client = new FTPClient();
 		try {
-			Set<String> fileNames = getFileNames(client);
-
 			// Cookies necessary for authentication
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
-			for (String fileName : fileNames) {
+			
+			for (String fileName : getFileNames(client)) {
 				try {
 					InputStream in = openInputStream(fileName);
 					if (in != null) {
 						LoxoneXMLParser loxoneXMLParser = new LoxoneXMLParser();
-						Log.i(getClass().getSimpleName(), "Started parsing "
-								+ fileName);
+						Log.i(getClass().getSimpleName(), "Started parsing " + fileName);
 						XMLReturnObject XMLResult = loxoneXMLParser.parse(in);
 						List<Entry> entries = XMLResult.getEntries();
 						if (XMLResult.getNbOutputs() < 2) {
 							putEntriesInMap(map, XMLResult, entries);
 						} else {
-							processMeasurement(entries, XMLResult.getName());
+							parseMeasurement(entries, XMLResult.getName());
 						}
 					} else {
-						Log.e(getClass().getSimpleName(), "No inputstream for "
-								+ fileName);
+						Log.e(getClass().getSimpleName(), "No inputstream for "	+ fileName);
 					}
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 
 		} catch (SocketException e) {
-			Log.e(getClass().getSimpleName(),
-					"Connection error: " + e.getMessage());
+			Log.e(getClass().getSimpleName(), "Connection error: " + e.getMessage());
 		} catch (IOException e) {
 			Log.e(getClass().getSimpleName(), "IO error: " + e.getMessage());
 		} finally {
@@ -145,11 +168,17 @@ public class DownloadLoxoneXMLTask extends
 		return map;
 	}
 
-	private Set<String> getFileNames(FTPClient client) throws SocketException,
-			IOException {
+	/**
+	 * Gets the file names.
+	 *
+	 * @param client the client
+	 * @return the file names
+	 * @throws SocketException the socket exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	private Set<String> getFileNames(FTPClient client) throws SocketException, IOException {
 		client.connect(ip);
 		client.enterLocalPassiveMode();
-
 		client.login(user, password);
 		client.changeWorkingDirectory(Constants.WORKING_DIRECTORY);
 
@@ -162,7 +191,13 @@ public class DownloadLoxoneXMLTask extends
 		return fileNames;
 	}
 
-	private void processMeasurement(List<Entry> entries, String name) {
+	/**
+	 * Parses the measurement.
+	 *
+	 * @param entries the entries
+	 * @param name the name
+	 */
+	private void parseMeasurement(List<Entry> entries, String name) {
 		long lastDate = findLatestTime(entries);
 
 		double total = 0;
@@ -224,60 +259,75 @@ public class DownloadLoxoneXMLTask extends
 			app.setSolarPanel(new SolarPanel(total, current, today, yesterday,
 					twoDays, thisWeek, lastWeek, thisMonth, lastMonth,
 					thisYear, lastYear, unit));
-			return;
 		} else if (name.contains(Constants.METER_GROUND_WATER)) {
 			String unit = app.getResources().getString(R.string.liter);
 			app.setGroundWater(new GroundWater(total, current, today,
 					yesterday, twoDays, thisWeek, lastWeek, thisMonth,
 					lastMonth, thisYear, lastYear, unit));
-			return;
 		} else if (name.contains(Constants.METER_RAIN_WATER)) {
 			String unit = app.getResources().getString(R.string.liter);
 			app.setRainWater(new RainWater(total, current, today, yesterday,
 					twoDays, thisWeek, lastWeek, thisMonth, lastMonth,
 					thisYear, lastYear, unit));
-			return;
+		} else{
+			Log.e(getClass().getSimpleName(), "Measurement with name: " + name + " is not processed!");			
 		}
-		Log.e(getClass().getSimpleName(), "Measurement with name: " + name
-				+ " is not processed!");
 	}
 
+	/**
+	 * Find latest time.
+	 *
+	 * @param entries the entries
+	 * @return the long
+	 */
 	private long findLatestTime(List<Entry> entries) {
 		long lastDate = 0;
 		for (Entry entry : entries) {
 			long newDate = entry.getDate();
-			if (lastDate < newDate) {
-				lastDate = newDate;
-			}
+			if (lastDate < newDate) lastDate = newDate;
 		}
 		return lastDate;
 	}
 
+	/**
+	 * Put entries in map.
+	 *
+	 * @param map the map
+	 * @param XMLResult the xML result
+	 * @param entries the entries
+	 */
 	private void putEntriesInMap(Map<String, List<Entry>> map,
 			XMLReturnObject XMLResult, List<Entry> entries) {
 		Collections.sort(entries, new Comparator<Entry>() {
-
 			@Override
 			public int compare(Entry lhs, Entry rhs) {
-				return Long.valueOf(lhs.getDate()).compareTo(
-						Long.valueOf(rhs.getDate()));
+				return Long.valueOf(lhs.getDate()).compareTo(Long.valueOf(rhs.getDate()));
 			}
 		});
 		map.put(XMLResult.getName(), entries);
 	}
 
+	/**
+	 * Open input stream.
+	 *
+	 * @param fileName the file name
+	 * @return the input stream
+	 * @throws MalformedURLException the malformed url exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private InputStream openInputStream(String fileName)
 			throws MalformedURLException, IOException {
-		// The XML statistics file
+		// Location of the XML statistics file
 		URL url = new URL("http://" + ip + "/stats/" + fileName + ".xml");
 		URLConnection httpConn = url.openConnection();
+		
 		// Authentication
 		byte[] auth = (user + ":" + password).getBytes();
 		String basic = Base64.encodeToString(auth, Base64.NO_WRAP);
 		httpConn.setRequestProperty("Authorization", "Basic " + basic);
 
-		InputStream in = httpConn.getInputStream();
-		return in;
+		// Get the input stream
+		return httpConn.getInputStream();
 	}
 
 }

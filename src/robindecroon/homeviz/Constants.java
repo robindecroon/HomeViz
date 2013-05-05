@@ -8,10 +8,11 @@ package robindecroon.homeviz;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import robindecroon.homeviz.util.Amount;
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Constants.
  */
@@ -47,6 +48,7 @@ public class Constants {
 	
 	/** The Constant CO2_DATA_FILE_NAME. */
 	public static final String CO2_DATA_FILE_NAME = "co2.csv";
+	
 
 	/*
 	 * SharedPreferences
@@ -56,14 +58,13 @@ public class Constants {
 	
 	/** The Constant VIZ_TYPE. */
 	public static final String VIZ_TYPE = "Visualization Type";
+	
+	/** The Constant DEMO_MULTIPLIER. */
+	public static final String DEMO_MULTIPLIER = "demo_multiplier";
 
 	/*
 	 * Loxone
 	 */
-	// public final static String LOXONE_DEFAULT_IP = "192.168.1.102";
-	// public final static String LOXONE_DEFAULT_USER = "anonymous";
-	// public final static String LOXONE_DEFAULT_PASSWORD = "";
-	// public final static String WORKING_DIRECTORY = "pools/A/A0/HomeViz/temp";
 	/** The Constant LOXONE_DEFAULT_USER. */
 	public static final String LOXONE_DEFAULT_USER = "admin";
 	
@@ -111,9 +112,6 @@ public class Constants {
 	
 	/** The Constant USAGE_ROOM. */
 	public static final String USAGE_ROOM = "room";
-	
-	/** The Constant USAGE_CHART_TITLE. */
-	public static final String USAGE_CHART_TITLE = "Usage details";
 
 	/*
 	 * Consumers
@@ -124,8 +122,8 @@ public class Constants {
 	/** The Constant APPLIANCE. */
 	public static final int APPLIANCE = 12;
 	
-	/** The Constant HOMECINEMA. */
-	public static final int HOMECINEMA = 13;
+	/** The Constant MULTIMEDIA. */
+	public static final int MULTIMEDIA = 13;
 	
 	/** The Constant WATER. */
 	public static final int WATER = 14;
@@ -135,6 +133,12 @@ public class Constants {
 	
 	/** The Constant IMAGE_SCALE. */
 	public static final int IMAGE_SCALE = 350;
+	
+	/** The Constant DEFAULT_KWH_PRICE. */
+	public static final Amount DEFAULT_KWH_PRICE = new Amount(0.2289);
+	
+	/** The Constant DEFAULT_WATER_PRICE. */
+	public static final Amount DEFAULT_WATER_PRICE = new Amount(0.0014);
 
 	/*
 	 * Metaphors
@@ -163,8 +167,8 @@ public class Constants {
 	/** The Constant METAPHOR_CONSUMER_NAME. */
 	public static final String METAPHOR_CONSUMER_NAME = "consumerName";
 
-	/** The Constant BELGIAN_CO2. */
-	public static final double BELGIAN_CO2 = 253.6057761;
+	/** The Constant DEFAULT_CO2. */
+	public static final double DEFAULT_CO2 = 253.6057761;
 
 	/*
 	 * Total
@@ -192,9 +196,6 @@ public class Constants {
 	
 	/** The Constant TREEMAP_OPTION. */
 	public static final String TREEMAP_OPTION = "treemap option";
-	
-	/** The Constant WEBVIEW_TREEMAP. */
-	public static final String WEBVIEW_TREEMAP = "treemap";
 
 	/*
 	 * Yield
@@ -235,8 +236,8 @@ public class Constants {
 	public static final String[] APPLIANCES = { "dishwasher", "dryer", "fone",
 			"senseo", "shaver", "vacuum", "vacuummini", "washer" };
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Gets the start time.

@@ -169,7 +169,7 @@ public class MetaphorContentFragment extends OptionSpinnerFragment {
 	 * @param contentView the content view
 	 * @param imageId the image id
 	 */
-	public void setValue(String metaphorValue, int imageId) {
+	private void setValue(String metaphorValue, int imageId) {
 		TextView value = (TextView) contentView.findViewById(R.id.metaphor_value);
 		value.setText(metaphorValue);
 		value.invalidate();

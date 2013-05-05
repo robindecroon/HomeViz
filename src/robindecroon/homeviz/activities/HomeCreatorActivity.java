@@ -71,6 +71,9 @@ public class HomeCreatorActivity extends Activity {
 
 	/** The backup. */
 	private List<Room> backup;
+	
+	/** The demo multiplier. */
+	private int demoMultiplier;
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -84,6 +87,9 @@ public class HomeCreatorActivity extends Activity {
 
 		app = (HomeVizApplication) getApplication();
 		backup = app.getRooms();
+		
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(app);
+		demoMultiplier = Integer.valueOf(sp.getString(Constants.DEMO_MULTIPLIER, "1"));
 
 		refreshRooms();
 
@@ -97,7 +103,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	/**
-	 * Initializes the Add Room button
+	 * Initializes the Add Room button.
 	 */
 	private void initAddRoomButton() {
 		Button roomButton = (Button) findViewById(R.id.home_creator_add_room_button);
@@ -118,28 +124,25 @@ public class HomeCreatorActivity extends Activity {
 					int nbLights = lightsPicker.getValue();
 					for (int l = 0; l < nbLights; l++) {
 						String name = getNextLight();
-						room.addLight(new Light(name, 50,
-								getApplicationContext()));
+						room.addLight(new Light(name, 50, demoMultiplier));
 					}
 
 					int nbAppliances = appliancesPicker.getValue();
 					for (int l = 0; l < nbAppliances; l++) {
 						String name = getNextApplianceName();
-						room.addAppliance(new Appliance(name, 50,
-								getApplicationContext()));
+						room.addAppliance(new Appliance(name, 50, demoMultiplier));
 					}
 
 					int nbMultimedias = multimediaPicker.getValue();
 					for (int l = 0; l < nbMultimedias; l++) {
 						String name = getNextMultimedia();
-						room.addHomeCinema(new HomeCinema(name, 50,
-								getApplicationContext()));
+						room.addHomeCinema(new HomeCinema(name, 50,demoMultiplier));
 					}
 
 					int nbWaters = waterPicker.getValue();
 					for (int l = 0; l < nbWaters; l++) {
 						String name = getNextWater();
-						room.addWater(new Water(name, getApplicationContext()));
+						room.addWater(new Water(name,demoMultiplier));
 					}
 
 					app.addRoom(room);
@@ -153,7 +156,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	/**
-	 * Initializes the Done button
+	 * Initializes the Done button.
 	 */
 	private void initDoneButton() {
 		Button doneButton = (Button) findViewById(R.id.home_creator_done_button);
@@ -209,7 +212,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	/**
-	 * Initializes the Clear button
+	 * Initializes the Clear button.
 	 */
 	private void initClearButton() {
 		Button clearButton = (Button) findViewById(R.id.home_creator_clear_button);
@@ -244,7 +247,7 @@ public class HomeCreatorActivity extends Activity {
 	}
 
 	/**
-	 * Initializes the Pickers
+	 * Initializes the Pickers.
 	 */
 	private void initPickers() {
 		lightsPicker = (NumberPicker) findViewById(R.id.home_creator_light_picker);

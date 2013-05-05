@@ -1,9 +1,9 @@
-package libraries.nielsbillen;
+package libraries.optionspinner;
 
 /**
  * Abstract interface representing a class that can have listeners of type T
  * 
- * @author Niels
+ * @author Niels Billen
  * @version 0.1
  */
 public interface ListenerContainer<T> {

@@ -1,4 +1,4 @@
-package libraries.nielsbillen;
+package libraries.optionspinner;
 
 import java.util.ArrayList;
 
@@ -15,8 +15,11 @@ import android.view.View;
  * A widget that displays some options through which can be scrolled by using
  * two buttons.
  * 
- * @author Niels
+ * @author Niels Billen
  * @version 0.1
+ * 
+ * Modified for HomeViz by Robin De Croon
+ * 
  */
 public class OptionSpinner extends View implements
 		ListenerContainer<SpinnerListener> {
@@ -136,17 +139,18 @@ public class OptionSpinner extends View implements
 		// Convert the dps to pixels, based on density scale
 		int textSizePx = (int) (MYTEXTSIZE * scale + 0.5f);
 
-		int currentTextSize = Math.min(38,
-				determineMaxTextSize(currentText, textSizePx));
-		int nextTextSize = Math.min(38,
-				determineMaxTextSize(nextText, textSizePx));
+		int currentTextSize = Math.min(38, determineMaxTextSize(currentText, textSizePx));
+		int nextTextSize = Math.min(38, determineMaxTextSize(nextText, textSizePx));
 
 		float drawY = rect.exactCenterY() + paint.descent();
-
 		float drawX = rect.left + this.drawX1 * rect.width();
-		paint.setTextSize(currentTextSize);
+		
+		int textSize = Math.max(currentTextSize, nextTextSize);
+		
+		paint.setTextSize(textSize);
 		canvas.drawText(currentText, drawX, drawY, paint);
-		paint.setTextSize(nextTextSize);
+		
+		paint.setTextSize(textSize);
 		drawX = rect.left + this.drawX2 * rect.width();
 		canvas.drawText(nextText, drawX, drawY, paint);
 

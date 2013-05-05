@@ -5,7 +5,7 @@
  */
 package robindecroon.homeviz.fragments.total;
 
-import libraries.nielsbillen.SpinnerListener;
+import libraries.optionspinner.SpinnerListener;
 import robindecroon.homeviz.Constants;
 import robindecroon.homeviz.HomeVizApplication;
 import robindecroon.homeviz.R;
@@ -152,8 +152,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	 */
 	private void loadTreemap(int option) {
 		treemap.setWebViewClient(new MyWebViewClient(treemap,
-				Constants.WEBVIEW_TREEMAP, ((HomeVizApplication) context
-						.getApplication()).getRooms(), option + treemapType));
+				((HomeVizApplication) context.getApplication()).getRooms(), option + treemapType));
 		treemap.loadUrl("file:///android_asset/www/treemap.html");
 	}
 

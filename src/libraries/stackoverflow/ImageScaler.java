@@ -1,4 +1,4 @@
-package robindecroon.homeviz.util;
+package libraries.stackoverflow;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -7,8 +7,19 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * The Class ImageScaler.
+ * 
+ * source: <url>http://argillander.wordpress.com/2011/11/24/scale-image-into-imageview-then-resize-imageview-to-match-the-image/</url>
+ */
 public class ImageScaler {
 
+	/**
+	 * Scale image.
+	 *
+	 * @param view the view
+	 * @param boundBoxInDp the bound box in dp
+	 */
 	@SuppressWarnings("deprecation")
 	public static void scaleImage(ImageView view, int boundBoxInDp) {
 		// Get the ImageView and its bitmap

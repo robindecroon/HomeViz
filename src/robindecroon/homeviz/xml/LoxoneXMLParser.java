@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.xml;
 
 import java.io.IOException;
@@ -15,23 +20,52 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 import android.util.Xml;
 
+/**
+ * The Class LoxoneXMLParser.
+ */
 public class LoxoneXMLParser extends XMLParser {
 
-	// We don't use namespaces
+	/** The Constant ns. */
 	private static final String ns = null;
 
+	/** The Constant STATISTICS. */
 	private static final String STATISTICS = "Statistics";
+	
+	/** The Constant DATE_TAG. */
 	private static final String DATE_TAG = "S";
+	
+	/** The Constant DATE_ATTRIBUTE. */
 	private static final String DATE_ATTRIBUTE = "T";
+	
+	/** The Constant NAME_ATTRIBUTE. */
 	private static final String NAME_ATTRIBUTE = "Name";
+	
+	/** The Constant OUTPUTS. */
 	private static final String OUTPUTS = "Outputs";
+	
+	/** The Constant NB_OF_OUTPUTS. */
 	private static final String NB_OF_OUTPUTS = "NumOutputs";
 
+	/** The name. */
 	private String name;
+	
+	/** The output. */
 	private String output;
+	
+	/** The nb outputs. */
 	private int nbOutputs;
+	
+	/** The outputs. */
 	private String[] outputs;
 
+	/**
+	 * Parses the.
+	 *
+	 * @param stream the stream
+	 * @return the xML return object
+	 * @throws XmlPullParserException the xml pull parser exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public XMLReturnObject parse(InputStream stream)
 			throws XmlPullParserException, IOException {
 		try {
@@ -41,12 +75,19 @@ public class LoxoneXMLParser extends XMLParser {
 			parser.nextTag();
 			List<Entry> entries = readStatistics(parser);
 			return new XMLReturnObject(name, entries, nbOutputs);
-
 		} finally {
 			stream.close();
 		}
 	}
 
+	/**
+	 * Read statistics.
+	 *
+	 * @param parser the parser
+	 * @return the list
+	 * @throws XmlPullParserException the xml pull parser exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@SuppressLint("DefaultLocale")
 	private List<Entry> readStatistics(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
@@ -55,8 +96,8 @@ public class LoxoneXMLParser extends XMLParser {
 		parser.require(XmlPullParser.START_TAG, ns, STATISTICS);
 
 		String tempName = parser.getAttributeValue(null, NAME_ATTRIBUTE);
-		name = tempName.toLowerCase().replaceAll(" ", "").replace("-", "")
-				.replace(">", "");
+		// Filter invalid names
+		name = tempName.toLowerCase().replaceAll(" ", "").replace("-", "").replace(">", "");
 		output = parser.getAttributeValue(null, OUTPUTS);
 
 		try {
@@ -86,6 +127,14 @@ public class LoxoneXMLParser extends XMLParser {
 		return entries;
 	}
 
+	/**
+	 * Read s.
+	 *
+	 * @param parser the parser
+	 * @return the entry
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws XmlPullParserException the xml pull parser exception
+	 */
 	@SuppressLint("SimpleDateFormat")
 	private Entry readS(XmlPullParser parser) throws IOException,
 			XmlPullParserException {

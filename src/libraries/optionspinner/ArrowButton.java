@@ -1,4 +1,4 @@
-package libraries.nielsbillen;
+package libraries.optionspinner;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import android.view.View;
 /**
  * A button which also draws an arrow.
  * 
- * @author Niels
+ * @author Niels Billen
  * @version 0.1
  */
 public class ArrowButton extends View implements

@@ -21,18 +21,18 @@
             android:layout_height="50dp"
             android:layout_alignParentLeft="true" >
 
-            <libraries.nielsbillen.ArrowButton
+            <libraries.optionspinner.ArrowButton
                 android:id="@+id/topArrowLeft"
                 android:layout_width="40dp"
                 android:layout_height="match_parent" />
 
-            <libraries.nielsbillen.OptionSpinner
+            <libraries.optionspinner.OptionSpinner
                 android:id="@+id/topSpinner"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <libraries.nielsbillen.ArrowButton
+            <libraries.optionspinner.ArrowButton
                 android:id="@+id/topArrowRight"
                 android:layout_width="40dp"
                 android:layout_height="match_parent" />

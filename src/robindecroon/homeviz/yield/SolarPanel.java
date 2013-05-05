@@ -1,3 +1,8 @@
+/* Copyright (C) Robin De Croon - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Robin De Croon <robindecroon@msn.com>, May 2013
+ */
 package robindecroon.homeviz.yield;
 
 import java.util.Random;
@@ -5,8 +10,28 @@ import java.util.Random;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public class SolarPanel extends AYield implements IYield {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SolarPanel.
+ */
+public class SolarPanel extends AYield {
 
+	/**
+	 * Instantiates a new solar panel.
+	 *
+	 * @param total the total
+	 * @param current the current
+	 * @param today the today
+	 * @param yesterday the yesterday
+	 * @param twoDays the two days
+	 * @param thisWeek the this week
+	 * @param lastWeek the last week
+	 * @param thisMonth the this month
+	 * @param lastMonth the last month
+	 * @param thisYear the this year
+	 * @param lastYear the last year
+	 * @param unit the unit
+	 */
 	public SolarPanel(double total, double current, double today,
 			double yesterday, double twoDays, double thisWeek, double lastWeek,
 			double thisMonth, double lastMonth, double thisYear,
@@ -16,32 +41,45 @@ public class SolarPanel extends AYield implements IYield {
 		SolarPanel.unit = unit;
 	}
 
+	/** The dummy. */
 	private static AYield dummy = newDummy();
 
+	/**
+	 * Gets the dummy.
+	 *
+	 * @param unit the unit
+	 * @return the dummy
+	 */
 	public static AYield getDummy(String unit) {
 		SolarPanel.unit = unit;
 		return dummy;
 	}
 
+	/** The unit. */
 	private static String unit;
 
+	/* (non-Javadoc)
+	 * @see robindecroon.homeviz.yield.AYield#unit()
+	 */
 	@Override
 	public String unit() {
 		return " " + unit;
 	}
 
+	/**
+	 * New dummy.
+	 *
+	 * @return the a yield
+	 */
 	private static AYield newDummy() {
 		Random r = new Random();
 		double offset = 0.01;
 		double today = r.nextDouble();
-		double weekmulti = offset
-				+ Days.daysBetween(new DateTime(),
+		double weekmulti = offset + Days.daysBetween(new DateTime(),
 						new DateTime().withDayOfWeek(1)).getDays() * -10;
-		double monthmulti = offset
-				+ Days.daysBetween(new DateTime(),
+		double monthmulti = offset + Days.daysBetween(new DateTime(),
 						new DateTime().withDayOfMonth(1)).getDays() * -10;
-		double yearmulti = offset
-				+ Days.daysBetween(new DateTime(),
+		double yearmulti = offset + Days.daysBetween(new DateTime(),
 						new DateTime().withDayOfYear(1)).getDays() * -10;
 
 		double week = r.nextDouble();
