@@ -43,8 +43,8 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 	/** The content. */
 	private LinearLayout content;
 	
-	/** The map. */
-	private Map<String, Amount> map;
+	/** The data. */
+	private Map<String, Amount> data;
 
 
 	/* (non-Javadoc)
@@ -70,7 +70,7 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 
 			int roomIndex = getArguments().getInt(Constants.USAGE_ROOM);
 			currentRoom = app.getRooms().get(roomIndex);
-			map = currentRoom.getPricesMap();
+			data = currentRoom.getPricesMap();
 
 			initChartWebView(context);
 			loadGoogleChartTools(usageChartView, context);
@@ -112,7 +112,8 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 	private void loadGoogleChartTools(View usageChartView,
 			final FragmentActivity context) {
 		usageChartView.post(new Runnable() { 
-        public void run() { 
+        @Override
+		public void run() { 
             Rect rect = new Rect(); 
             Window win = context.getWindow();  // Get the Window
             win.getDecorView().getWindowVisibleDisplayFrame(rect); 
@@ -135,16 +136,16 @@ public class UsageChartFragment extends OptionSpinnerFragment {
             int layoutHeight = screenHeight - (titleBarHeight + statusBarHeight);
             
             // Finally load the Google Chart Tools figure with the proper dimensions
-            if (!map.isEmpty()) {
+            if (!data.isEmpty()) {
     			GoogleChartType chartType = determineType();
     			String chartTitle = getResources().getString(R.string.usage_chart_currency);
 
-    			String url = GoogleChartTools.getGoogleChartToolsHTML(chartTitle, context, map, 
+    			String url = GoogleChartTools.getGoogleChartToolsHTML(chartTitle, context, data, 
     					screenWidth, layoutHeight - 100, chartType);
     			chart.loadDataWithBaseURL(null, url, "text/html", "UTF-8", null);
     		} else {
     			throw new IllegalStateException(
-    					"Prices map in this room shouldn't be empty!");
+    					"Prices data in this room shouldn't be empty!");
     		}
         }
 

@@ -41,7 +41,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	private static int treemapType;
 
 	/** The last arguments. */
-	private static Bundle args;
+	private static Bundle lastArgs;
 
 	/** The treemap. */
 	private WebView treemap;
@@ -60,12 +60,12 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 				R.layout.total_treemap_layout, container, false);
 
 		context = getActivity();
-		args = getArguments();
+		lastArgs = getArguments();
 
 		initOptionSpinner(totalFragmentView, R.id.total_spinner,
 				R.id.total_arrow_left, R.id.total_arrow_right);
 
-		final int lastOption = args.getInt(Constants.TREEMAP_OPTION);
+		final int lastOption = lastArgs.getInt(Constants.TREEMAP_OPTION);
 		RadioButton wattButton = initWattButton(totalFragmentView, lastOption);
 		RadioButton kwhButton = initKwhButton(totalFragmentView, lastOption);
 		if (treemapType == 0) {
@@ -108,6 +108,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	 */
 	private void setSizeTreemapView(View totalFragmentView, final int lastOption) {
 		totalFragmentView.post(new Runnable() {
+			@Override
 			public void run() {
 				Rect rect = new Rect();
 				Window win = context.getWindow(); // Get the Window
@@ -205,7 +206,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 	 */
 	public static void resetViews() {
 		Fragment totalTreeMapFragment = new TotalTreeMapFragment();
-		totalTreeMapFragment.setArguments(args);
+		totalTreeMapFragment.setArguments(lastArgs);
 		context.getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, totalTreeMapFragment).commit();
 	}

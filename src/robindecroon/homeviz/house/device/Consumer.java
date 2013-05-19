@@ -16,11 +16,12 @@ import robindecroon.homeviz.util.Amount;
 import robindecroon.homeviz.util.Period;
 import robindecroon.homeviz.util.WeightUnit;
 import robindecroon.homeviz.xml.Entry;
+import robindecroon.homeviz.xml.XMLSerializable;
 
 /**
  * The Class Consumer.
  */
-public abstract class Consumer {
+public abstract class Consumer implements XMLSerializable {
 
 	/** The kwh price. */
 	private static Amount kwhPrice = Constants.DEFAULT_KWH_PRICE;
@@ -68,6 +69,7 @@ public abstract class Consumer {
 	 *
 	 * @return the string
 	 */
+	@Override
 	public String toXML() {
 		return "<" + getClass().getSimpleName() + " consumerName=\"" + getName() 
 				+ "\" watt=\"" + getWatt() + "\" />";

@@ -19,12 +19,13 @@ import robindecroon.homeviz.house.device.HomeCinema;
 import robindecroon.homeviz.house.device.Light;
 import robindecroon.homeviz.house.device.Water;
 import robindecroon.homeviz.util.Amount;
+import robindecroon.homeviz.xml.XMLSerializable;
 import android.annotation.SuppressLint;
 
 /**
  * The Class Room.
  */
-public class Room {
+public class Room implements XMLSerializable{
 	
 	/** The room name. */
 	private String roomName;
@@ -374,6 +375,7 @@ public class Room {
 	 *
 	 * @return the string
 	 */
+	 @Override
 	public String toXML() {
 		StringBuilder xml = new StringBuilder("<Room roomName=\"" + getName() + "\">");
 		try {

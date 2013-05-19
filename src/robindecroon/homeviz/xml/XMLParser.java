@@ -14,7 +14,7 @@ import org.xmlpull.v1.XmlPullParserException;
  * The Class XMLParser.
  */
 public abstract class XMLParser {
-
+	
 	/**
 	 * Skip.
 	 *

@@ -95,5 +95,5 @@ public abstract class OptionSpinnerFragment extends Fragment implements SpinnerL
 		MainActivity.currentPeriod = Period.getPeriod(index);
 		FragmentResetter.reset(getActivity());
 	}
-
+	
 }
