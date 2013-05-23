@@ -57,7 +57,14 @@ public class CO2 {
 	 */
 	@Override
 	public String toString() {
-		return NumberFormat.getInstance().format(value) + " " + unit.toString();
+		CO2 toReturn = this;
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(0);
+		if(value > 1000) {
+			toReturn = convertTo(WeightUnit.KILOGRAM);
+			nf.setMaximumFractionDigits(2);
+		}
+		return nf.format(toReturn.getValue()) + " " + toReturn.getUnit().toString();
 	}
 
 	/**

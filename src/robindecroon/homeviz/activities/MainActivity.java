@@ -240,7 +240,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	private boolean setupActionBar() {
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowCustomEnabled(true);
-		ab.setDisplayHomeAsUpEnabled(false);
+		ab.setDisplayHomeAsUpEnabled(true);
 		ab.setDisplayShowTitleEnabled(false);
 
 		LayoutInflater inflator = (LayoutInflater) this
@@ -417,17 +417,20 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	 * Handle home menu button.
 	 */
 	private void handleHomeMenuButton() {
-		Bundle extras = getIntent().getExtras();
-		int selection = 0;
-		if (extras != null) {
-			selection = extras.getInt(Constants.SELECTION);
-		}
+//		Bundle extras = getIntent().getExtras();
+//		int selection = 0;
+//		int category = 0;
+//		if (extras != null) {
+//			category = extras.getInt(Constants.CATEGORY);
+//			selection = extras.getInt(Constants.SELECTION);
+//		}
 		Intent intent = new Intent(this, MainActivity.class);
 		intent.putExtra(Constants.CATEGORY, Constants.USAGE);
-		intent.putExtra(Constants.SELECTION, selection);
+		intent.putExtra(Constants.SELECTION, 0);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivity(intent);
-		overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
+//		if(selection == 0 && category == 0) 
+//			overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
 		getActionBar().setHomeButtonEnabled(false);
 		getActionBar().setIcon(R.drawable.icon);
 	}

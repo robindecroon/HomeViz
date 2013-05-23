@@ -9,7 +9,7 @@
     <string name="clear_rooms_message">Bent u zeker dat u alle kamers wilt verwijderen?</string>
     <string name="community">Zie wat het gemiddelde verbruik van andere mensen is</string>
     <string name="consumer_image">Verbruikers afbeelding</string>
-    <string name="content_description_appliances_usage">Verbruik huishoudstoestellen</string>
+    <string name="content_description_appliances_usage">Verbruik huishoudtoestellen</string>
     <string name="content_description_heating_usage">Verbruik verwarming</string>
     <string name="content_description_home_cinema_usage">Verbruik multimediatoestellen</string>
     <string name="content_description_light_usage">Verbruik lampen</string>
@@ -22,7 +22,7 @@
     <string name="from">Vanaf</string>
     <string name="home_creator_add_room">Voeg kamer toe</string>
     <string name="home_creator_create_a_new_room">Maak een nieuwe kamer aan</string>
-    <string name="home_creator_number_of_appliances">Aantal huishoudstoestellen</string>
+    <string name="home_creator_number_of_appliances">Aantal huishoudtoestellen</string>
     <string name="home_creator_number_of_lights">Aantal lampen</string>
     <string name="home_creator_number_of_multimedia_devices">Aantal multimedia toestellen</string>
     <string name="home_creator_number_of_water_consumers">Aantal water verbruikers</string>
@@ -50,7 +50,7 @@
     <string name="metaphor_water_text">\u0020flessen water (1,5l)</string>
     <string name="metaphor_water_title">Flessenwater (1,5l)</string>
     <string name="No">Nee</string>
-    <string name="no_appliance_in_room">Er zijn geen huishoudstoestellen in deze kamer!</string>
+    <string name="no_appliance_in_room">Er zijn geen huishoudtoestellen in deze kamer!</string>
     <string name="no_heating_in_room">Eris geen verwarming in deze kamer!</string>
     <string name="no_home_cinema_in_room">Er zijn geen multimediatoestellen in deze kamer!</string>
     <string name="no_lights">Er zijn geen lampen in deze kamer!</string>
@@ -109,7 +109,7 @@
     </string-array>
     <string-array name="you_spinner_data">
         <item>Treemap (lampen)</item>
-        <item>Treemap (huishoudstoestellen)</item>
+        <item>Treemap (huishoudtoestellen)</item>
         <item>Treemap (multimediatoestellen)</item>
     </string-array>
     <string-array name="metaphor_spinner_data">

@@ -83,6 +83,7 @@ public class ConsumerOnClickListener implements OnClickListener {
 	 */
 	private ActionBar setUpArrowInActionBar() {
 		ActionBar ab = context.getActionBar();
+		context.overridePendingTransition(R.anim.down_enter, R.anim.down_leave);
 		ab.setDisplayShowCustomEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 		ab.setDisplayShowTitleEnabled(false);
