@@ -111,6 +111,8 @@
         <item>Treemap (lampen)</item>
         <item>Treemap (huishoudtoestellen)</item>
         <item>Treemap (multimediatoestellen)</item>
+        <item>Treemap (water)</item>
+        <item>Treemap (verwarming)</item>
     </string-array>
     <string-array name="metaphor_spinner_data">
         <item>Metafoor (elektriciteit)</item>

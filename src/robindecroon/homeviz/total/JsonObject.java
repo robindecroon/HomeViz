@@ -27,27 +27,30 @@ public class JsonObject {
 
 	/** The children. */
 	private JsonObject[] children;
-	
+
 	// Constructor needed for gson
 	/**
 	 * Instantiates a new json object.
 	 */
-	public JsonObject() {}
+	public JsonObject() {
+	}
 
 	/**
 	 * Instantiates a new json object.
-	 *
-	 * @param name the name
-	 * @param value the value
+	 * 
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
 	 */
 	public JsonObject(String name, String value) {
 		this.name = name;
 		this.value = value;
 	}
-	
+
 	/**
 	 * Gets the name.
-	 *
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -56,8 +59,9 @@ public class JsonObject {
 
 	/**
 	 * Sets the name.
-	 *
-	 * @param name the new name
+	 * 
+	 * @param name
+	 *            the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -65,7 +69,7 @@ public class JsonObject {
 
 	/**
 	 * Gets the value.
-	 *
+	 * 
 	 * @return the value
 	 */
 	public String getValue() {
@@ -74,8 +78,9 @@ public class JsonObject {
 
 	/**
 	 * Sets the value.
-	 *
-	 * @param value the new value
+	 * 
+	 * @param value
+	 *            the new value
 	 */
 	public void setValue(String value) {
 		this.value = value;
@@ -83,17 +88,18 @@ public class JsonObject {
 
 	/**
 	 * Gets the children.
-	 *
+	 * 
 	 * @return the children
 	 */
 	public JsonObject[] getChildren() {
 		return children;
 	}
-	
+
 	/**
 	 * Sets the children.
-	 *
-	 * @param children the new children
+	 * 
+	 * @param children
+	 *            the new children
 	 */
 	public void setChildren(JsonObject[] children) {
 		this.children = children;
@@ -101,45 +107,57 @@ public class JsonObject {
 
 	/**
 	 * Gets the watt json.
-	 *
-	 * @param rooms the rooms
-	 * @param type the type
-	 * @param mapType the map type
+	 * 
+	 * @param rooms
+	 *            the rooms
+	 * @param type
+	 *            the type
+	 * @param mapType
+	 *            the map type
 	 * @return the watt json
 	 */
 	public static JsonObject getWattJSON(List<Room> rooms, ConsumerType type,
 			TreemapType mapType) {
 		double total = calculateTotal(rooms, type, mapType);
-		
+
 		JsonObject root = new JsonObject(Constants.TOTAL_HOME, null);
 		JsonObject[] roomsJson = new JsonObject[rooms.size()];
 		int j = 0;
 		for (Room room : rooms) {
 			try {
-				List<Consumer> consumers = null;
-				consumers = room.getConsumersOfType(type);
-				JsonObject json = new JsonObject(room.getName(), null);
-				JsonObject[] children = new JsonObject[consumers.size()];
-				int i = 0;
-				for (Consumer consumer : consumers) {
-					double temp = 0;
-					switch (mapType) {
-					case Watt:
-						temp = consumer.getWatt();
-						break;
-					case Power:
-						temp = consumer.getPower();
-						break;
+				JsonObject json;
+				if (mapType == TreemapType.Heating) {
+					json = new JsonObject(room.getName(), String.valueOf(room
+							.getHeating().getEuroValue()));
+				} else {
+					int i = 0;
+					List<Consumer> consumers = null;
+					json = new JsonObject(room.getName(), null);
+					consumers = room.getConsumersOfType(type);
+					JsonObject[] children = new JsonObject[consumers.size()];
+					for (Consumer consumer : consumers) {
+						double temp = 0;
+						switch (mapType) {
+						case Watt:
+							temp = consumer.getWatt();
+							break;
+						case Power:
+							temp = consumer.getPower();
+							break;
+						case Water:
+							temp = consumer.getPrice().getEuroValue();
+						}
+						children[i] = new JsonObject(consumer.getName(), ""
+								+ (int) ((100 * temp / (total))));
+						i++;
 					}
-					children[i] = new JsonObject(
-							consumer.getName(), "" + (int) ((100 * temp / (total))));
-					i++;
+					json.setChildren(children);
 				}
-				json.setChildren(children);
 				roomsJson[j] = json;
 			} catch (NoSuchDevicesInRoom e) {
 				roomsJson[j] = new JsonObject();
-				Log.i("JSONObject", "No consumers of type  " + type + " in " + room.getName());
+				Log.i("JSONObject", "No consumers of type  " + type + " in "
+						+ room.getName());
 			} finally {
 				j++;
 			}
@@ -151,10 +169,13 @@ public class JsonObject {
 
 	/**
 	 * Calculate total.
-	 *
-	 * @param rooms the rooms
-	 * @param type the type
-	 * @param mapType the map type
+	 * 
+	 * @param rooms
+	 *            the rooms
+	 * @param type
+	 *            the type
+	 * @param mapType
+	 *            the map type
 	 * @return the double
 	 */
 	private static double calculateTotal(List<Room> rooms, ConsumerType type,
@@ -170,9 +191,15 @@ public class JsonObject {
 					case Power:
 						total += cons.getPower();
 						break;
+					case Water:
+						total += cons.getPrice().getEuroValue();
+						break;
+					default:
+						return 0;
 					}
 				}
-			} catch (NoSuchDevicesInRoom e) {}
+			} catch (NoSuchDevicesInRoom e) {
+			}
 		}
 		return total;
 	}

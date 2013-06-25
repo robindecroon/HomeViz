@@ -71,8 +71,8 @@ public abstract class Consumer implements XMLSerializable {
 	 */
 	@Override
 	public String toXML() {
-		return "<" + getClass().getSimpleName() + " consumerName=\"" + getName() 
-				+ "\" watt=\"" + getWatt() + "\" />";
+		return "<" + getClass().getSimpleName() + " name=\"" + getName() 
+				+ "\" watt=\"" + getWatt() + "\" />"; 
 	}
 
 	/**

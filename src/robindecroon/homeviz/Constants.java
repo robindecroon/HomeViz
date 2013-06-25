@@ -194,6 +194,12 @@ public class Constants {
 	/** The Constant TREEMAP_HOMECINEMA_KWH. */
 	public static final int TREEMAP_HOMECINEMA_KWH = 12;
 	
+	/** The Constant TREEMAP_WATER. */
+	public static final int TREEMAP_WATER = 3;
+	
+	/** The Constant TREEMAP_HEATING. */
+	public static final int TREEMAP_HEATING = 4;
+	
 	/** The Constant TREEMAP_OPTION. */
 	public static final String TREEMAP_OPTION = "treemap option";
 

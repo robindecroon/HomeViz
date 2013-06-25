@@ -75,6 +75,10 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 			wattButton.setChecked(false);
 			kwhButton.setChecked(true);
 		}
+		if(lastOption > 2) {
+			wattButton.setEnabled(false);
+			kwhButton.setEnabled(false);
+		}
 
 		initTreemap(totalFragmentView);
 
@@ -138,7 +142,7 @@ public class TotalTreeMapFragment extends OptionSpinnerFragment implements
 						- (titleBarHeight + statusBarHeight);
 				LayoutParams lp = treemap.getLayoutParams();
 				lp.width = screenWidth;
-				lp.height = layoutHeight;
+				lp.height = layoutHeight - 20;
 				treemap.setLayoutParams(lp);
 				loadTreemap(lastOption);
 			}

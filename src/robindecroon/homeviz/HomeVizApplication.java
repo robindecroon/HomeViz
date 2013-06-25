@@ -86,27 +86,34 @@ public class HomeVizApplication extends Application {
 	 * @param currentCountry the new current country
 	 */
 	public void setCurrentCountry(String currentCountry) {
-		if (currentCountry != null) {
-			try {
-				Map<String, Country> countries = readCountryCSVFile();
-				
-				// Initialize the country specific values
-				Country country = countries.get(currentCountry);
-				Consumer.setCO2Value(country.getCo2Value());
-				Consumer.setKwhPrice(country.getKwh());
-				Consumer.setWaterPrice(country.getLiterPrice());
-				
-				// Save the last known location
-				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-				SharedPreferences.Editor editor = settings.edit();
-				editor.putString(Constants.COUNTRY, currentCountry);
-				editor.commit();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
+		try {
+			if (currentCountry != null) {
+				try {
+					Map<String, Country> countries = readCountryCSVFile();
+					
+					// Initialize the country specific values
+					Country country = countries.get(currentCountry);
+					if (country != null) {
+						Consumer.setCO2Value(country.getCo2Value());
+						Consumer.setKwhPrice(country.getKwh());
+						Consumer.setWaterPrice(country.getLiterPrice());
+						// Save the last known location
+						SharedPreferences settings = PreferenceManager
+								.getDefaultSharedPreferences(this);
+						SharedPreferences.Editor editor = settings.edit();
+						editor.putString(Constants.COUNTRY, currentCountry);
+						editor.commit();
+					} else {
+						Log.e(getClass().getSimpleName(), "No local data for " + currentCountry);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				Log.e(getClass().getSimpleName(), "Country is null");
 			}
-		} else {
-			Log.e(getClass().getSimpleName(), "Country is null");
+		} catch (Exception e) {
+			Log.e(getClass().getSimpleName(), "This should not happen! Exception in setCountry");
 		}
 	}
 

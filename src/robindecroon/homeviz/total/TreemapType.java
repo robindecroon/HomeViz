@@ -12,6 +12,10 @@ public enum TreemapType {
 	
 	/** The Watt. */
 	Watt, 
- /** The Power. */
- Power;
+	/** The Power. */
+	Power,
+	/** The Water. */
+	Water,
+	/** The Heating. */
+	Heating;
 }

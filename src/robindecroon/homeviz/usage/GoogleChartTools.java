@@ -20,7 +20,7 @@ public abstract class GoogleChartTools {
 	private final static String part1 = 
 		"<html>" +
 			"<head>" +
-				"<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>" +
+				"<script type=\"text/javascript\" src=\"file:///android_asset/jsapi.js\"></script>" +
 				"<script type=\"text/javascript\">" +
 					"google.load(\"visualization\", \"1\", {packages:[\"corechart\"]});" +
 					"google.setOnLoadCallback(drawChart);" +
@@ -79,7 +79,7 @@ public abstract class GoogleChartTools {
 	public static String getGoogleChartToolsHTML(String title, Context context, 
 			Map<String, Amount> map, int width, int height,	GoogleChartType type) {
 		String data = makeData(context, map);
-		return part1 + data + part2 + title + part3 + type + part4 + width + part5 + height + part6;
+		return part1 + data + part2 + title + part3 + type + part4 + (width - 10) + part5 + (height-70) + part6;
 	}
 
 	/**

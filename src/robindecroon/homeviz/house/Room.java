@@ -58,15 +58,6 @@ public class Room implements XMLSerializable{
 	}
 
 	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name) {
-		this.roomName = name;
-	}
-
-	/**
 	 * Gets the name.
 	 *
 	 * @return the name
@@ -377,7 +368,7 @@ public class Room implements XMLSerializable{
 	 */
 	 @Override
 	public String toXML() {
-		StringBuilder xml = new StringBuilder("<Room roomName=\"" + getName() + "\">");
+		StringBuilder xml = new StringBuilder("<Room name=\"" + getName() + "\">");
 		try {
 			for (Consumer light : getElectrics()) 
 				xml.append(light.toXML());

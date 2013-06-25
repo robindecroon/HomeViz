@@ -8,6 +8,7 @@ package robindecroon.homeviz.activities;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -44,25 +45,25 @@ public class HomeCreatorActivity extends Activity {
 
 	/** The light counter. */
 	private int lightCounter = 1;
-	
+
 	/** The appliances counter. */
 	private int appliancesCounter = 0;
-	
+
 	/** The multimedia counter. */
 	private int multimediaCounter = 0;
-	
+
 	/** The water counter. */
 	private int waterCounter = 1;
 
 	/** The lights picker. */
 	private NumberPicker lightsPicker;
-	
+
 	/** The appliances picker. */
 	private NumberPicker appliancesPicker;
-	
+
 	/** The multimedia picker. */
 	private NumberPicker multimediaPicker;
-	
+
 	/** The water picker. */
 	private NumberPicker waterPicker;
 
@@ -71,11 +72,13 @@ public class HomeCreatorActivity extends Activity {
 
 	/** The backup. */
 	private List<Room> backup;
-	
+
 	/** The demo multiplier. */
 	private int demoMultiplier;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -86,10 +89,12 @@ public class HomeCreatorActivity extends Activity {
 		setupActionBar();
 
 		app = (HomeVizApplication) getApplication();
-		backup = app.getRooms();
-		
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(app);
-		demoMultiplier = Integer.valueOf(sp.getString(Constants.DEMO_MULTIPLIER, "1"));
+		backup = new ArrayList<Room>(app.getRooms());
+
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(app);
+		demoMultiplier = Integer.valueOf(sp.getString(
+				Constants.DEMO_MULTIPLIER, "1"));
 
 		refreshRooms();
 
@@ -130,19 +135,21 @@ public class HomeCreatorActivity extends Activity {
 					int nbAppliances = appliancesPicker.getValue();
 					for (int l = 0; l < nbAppliances; l++) {
 						String name = getNextApplianceName();
-						room.addAppliance(new Appliance(name, 50, demoMultiplier));
+						room.addAppliance(new Appliance(name, 50,
+								demoMultiplier));
 					}
 
 					int nbMultimedias = multimediaPicker.getValue();
 					for (int l = 0; l < nbMultimedias; l++) {
 						String name = getNextMultimedia();
-						room.addHomeCinema(new HomeCinema(name, 50,demoMultiplier));
+						room.addHomeCinema(new HomeCinema(name, 50,
+								demoMultiplier));
 					}
 
 					int nbWaters = waterPicker.getValue();
 					for (int l = 0; l < nbWaters; l++) {
 						String name = getNextWater();
-						room.addWater(new Water(name,demoMultiplier));
+						room.addWater(new Water(name, demoMultiplier));
 					}
 
 					app.addRoom(room);
@@ -162,50 +169,46 @@ public class HomeCreatorActivity extends Activity {
 		Button doneButton = (Button) findViewById(R.id.home_creator_done_button);
 		doneButton.setOnClickListener(new OnClickListener() {
 
-			/* (non-Javadoc)
+			/*
+			 * (non-Javadoc)
+			 * 
 			 * @see android.view.View.OnClickListener#onClick(android.view.View)
 			 */
 			@Override
 			public void onClick(View arg0) {
-				if (app.getRooms().size() == 0) {
-					for (Room room : backup) {
-						app.addRoom(room);
-					}
-					onBackPressed();
-				} else {
-					StringBuilder xmlFileContent = new StringBuilder(
-							"<?xml version=\"1.0\" encoding=\"utf-8\"?><HomeViz>");
-					for (Room room : app.getRooms()) {
-						xmlFileContent.append(room.toXML());
-					}
-					xmlFileContent.append("</HomeViz>");
+				safetyCheck();
+				StringBuilder xmlFileContent = new StringBuilder(
+						"<?xml version=\"1.0\" encoding=\"utf-8\"?><HomeViz>");
+				for (Room room : app.getRooms()) {
+					xmlFileContent.append(room.toXML());
+				}
+				xmlFileContent.append("</HomeViz>");
 
-					String FILENAME = "PersonalXML.xml";
+				String FILENAME = "PersonalXML.xml";
 
-					try {
-						FileOutputStream fos = openFileOutput(FILENAME,
-								Context.MODE_PRIVATE);
-						fos.write(xmlFileContent.toString().getBytes());
-						fos.close();
+				try {
+					FileOutputStream fos = openFileOutput(FILENAME,
+							Context.MODE_PRIVATE);
+					fos.write(xmlFileContent.toString().getBytes());
+					fos.close();
 
-						SharedPreferences settings = PreferenceManager
-								.getDefaultSharedPreferences(HomeCreatorActivity.this);
-						SharedPreferences.Editor editor = settings.edit();
-						editor.putString(Constants.XML_FILE, FILENAME);
-						editor.commit();
+					SharedPreferences settings = PreferenceManager
+							.getDefaultSharedPreferences(HomeCreatorActivity.this);
+					SharedPreferences.Editor editor = settings.edit();
+					editor.putString(Constants.XML_FILE, FILENAME);
+					editor.commit();
 
-						Intent intent = new Intent(HomeCreatorActivity.this,
-								MainActivity.class);
-						intent.putExtra(Constants.CATEGORY,
-								MainActivity.lastCatergory);
-						intent.putExtra(Constants.SELECTION,
-								MainActivity.lastPosition);
-						startActivity(intent);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					Intent intent = new Intent(HomeCreatorActivity.this,
+							MainActivity.class);
+					intent.putExtra(Constants.CATEGORY,
+							MainActivity.lastCatergory);
+					intent.putExtra(Constants.SELECTION,
+							MainActivity.lastPosition);
+					startActivity(intent);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		});
@@ -282,7 +285,7 @@ public class HomeCreatorActivity extends Activity {
 
 	/**
 	 * Gets the next light.
-	 *
+	 * 
 	 * @return the next light
 	 */
 	private String getNextLight() {
@@ -318,7 +321,7 @@ public class HomeCreatorActivity extends Activity {
 
 	/**
 	 * Gets the next water device.
-	 *
+	 * 
 	 * @return the next water
 	 */
 	protected String getNextWater() {
@@ -332,7 +335,7 @@ public class HomeCreatorActivity extends Activity {
 
 	/**
 	 * Gets the next multimedia device.
-	 *
+	 * 
 	 * @return the next multimedia
 	 */
 	protected String getNextMultimedia() {
@@ -347,7 +350,7 @@ public class HomeCreatorActivity extends Activity {
 
 	/**
 	 * Gets the next appliance name.
-	 *
+	 * 
 	 * @return the next appliance name
 	 */
 	protected String getNextApplianceName() {
@@ -367,7 +370,9 @@ public class HomeCreatorActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
@@ -380,10 +385,22 @@ public class HomeCreatorActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onDestroy()
+	 */
+	@Override
+	protected void onDestroy() {
+		safetyCheck();
+		super.onDestroy();
+	}
+
 	/**
 	 * Clears the text input.
-	 *
-	 * @param edit the edittext
+	 * 
+	 * @param edit
+	 *            the edittext
 	 */
 	private void clearEdit(EditText edit) {
 		lightsPicker.setValue(0);

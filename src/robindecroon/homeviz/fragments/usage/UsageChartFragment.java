@@ -24,10 +24,11 @@ import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
@@ -93,12 +94,19 @@ public class UsageChartFragment extends OptionSpinnerFragment {
 		chart.getSettings().setJavaScriptEnabled(true);
 		chart.getSettings().setUseWideViewPort(true);
 		chart.getSettings().setLoadWithOverviewMode(true);
-		chart.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+//		chart.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		chart.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return true;
+			}
+		});
 		chart.getSettings().setSupportZoom(false);
-		chart.getSettings().setBuiltInZoomControls(false);
-		chart.getSettings().setDisplayZoomControls(false);
-		chart.setInitialScale(1);
-		
+//		chart.getSettings().setBuiltInZoomControls(false);
+//		chart.getSettings().setDisplayZoomControls(false);
+		chart.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+		chart.setInitialScale(1);		
 		content.addView(chart);
 	}
 

@@ -41,4 +41,9 @@ public class Water extends Consumer {
 	public double getPower() {
 		return 0;
 	}
+	
+	@Override
+	public double getLiter() {
+		return liter * MainActivity.currentPeriod.getMultiplier();
+	}
 }

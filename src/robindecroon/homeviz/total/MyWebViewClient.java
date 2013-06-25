@@ -66,6 +66,22 @@ public class MyWebViewClient extends WebViewClient {
 			consType = ConsumerType.HomeCinema;
 			treemapType = TreemapType.Power;
 			break;
+		case Constants.TREEMAP_WATER:
+			consType = ConsumerType.Water;
+			treemapType = TreemapType.Water;
+			break;
+		case Constants.TREEMAP_HEATING:
+			consType = ConsumerType.Heating;
+			treemapType = TreemapType.Heating;
+			break;
+		case Constants.TREEMAP_WATER + 10:
+			consType = ConsumerType.Water;
+			treemapType = TreemapType.Water;
+			break;
+		case Constants.TREEMAP_HEATING + 10:
+			consType = ConsumerType.Heating;
+			treemapType = TreemapType.Heating;
+			break;
 		}
 		this.json = "'"	+ gson.toJson(JsonObject.getWattJSON(rooms, consType, treemapType)) + "'";
 	}
